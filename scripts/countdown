@@ -2,7 +2,8 @@
 
 date1=$((`date +%s` + $1));
 while [ "$date1" -ge `date +%s` ]; do
-clear
-figlet -W "$(date -u --date @$(($date1 - `date +%s`)) +%M:%S)";
-sleep 1
+  clear
+  figlet -W "$(date -u --date @$(($date1 - `date +%s`)) +%M:%S)";
+  sleep 1
 done
+echo -ne '\007'
