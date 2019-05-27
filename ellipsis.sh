@@ -15,5 +15,8 @@ pkg.unlink() {
   hooks.unlink
 
   # Remove scipts
-  rm -R "$ELLIPSIS_HOME/scripts"
+  for file in $PKG_PATH/scripts/*; do
+    filename=$(basename "$file")
+    rm "$ELLIPSIS_HOME/scripts/$filename"
+  done
 }
