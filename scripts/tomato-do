@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+task=$1 
+
+tmux new -s $task \; \
+  rename-window 'Research' \; \
+  new-window -n 'Source' \; \
+  split-window -v \; \
+  split-window -h \; \
+  send-keys '. ./scripts/time.sh; tomato' C-m \; \
+  resize-pane -x 38 -y 7 \;

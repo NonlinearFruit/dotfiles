@@ -1,0 +1,12 @@
+d1=$(date -d now +%s)
+d2=$(date -d "$1" +%s)
+delta=$((d1 - d2))
+# echo $(( delta )) seconds
+# echo $(( delta / 60 )) minutes
+# echo $(( delta / (60*60) )) hours
+# echo $(( delta / (60*60*24) )) days
+# echo $(( delta / (60*60*24*7) )) weeks
+# echo $(( delta / (60*60*24*30) )) months
+# echo $(( delta / (60*60*24*365) )) years
+# echo $(( delta / (60*60*24*365*10) )) decades
+echo $(( delta / (60*60*24) ))

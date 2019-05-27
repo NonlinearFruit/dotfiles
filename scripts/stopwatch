@@ -1,0 +1,8 @@
+#!/bin/bash
+
+date1=`date +%s`;
+while true; do
+clear
+figlet -W "$(date -u --date @$((`date +%s` - $date1)) +%M:%S)";
+sleep 1
+done

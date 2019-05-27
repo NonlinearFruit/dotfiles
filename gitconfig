@@ -1,0 +1,5 @@
+[core]
+	editor = vim
+
+[alias]
+  personal = !git config user.name "NonlinearFruit" & git config user.email "1123benji5813@gmail.com"

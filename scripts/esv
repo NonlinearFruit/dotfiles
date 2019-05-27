@@ -1,0 +1,13 @@
+PREFERENCES="&include-passage-references=false&include-verse-numbers=false&include-footnotes=false";
+QUERY="/v3/passage/text/?q=";
+
+if [[ $# -eq 2 ]]; then
+  QUERY+="$1+$2"
+elif [[ $# -eq 1 ]]; then
+  QUERY+="$1"
+fi
+
+VERSES=$(curl -H "Authorization: Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" "https://api.esv.org$QUERY$PREFERENCES" 2> /dev/null | jq .passages[0])
+
+echo -e "$VERSES"
+echo;
