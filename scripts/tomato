@@ -1,3 +1,10 @@
 #!/bin/bash
 
+task=$1
+time=$(date +"%Y-%m-%d %T")
+file=~/tasklist.txt
+echo "$task @ $time" >> $file
+
 countdown $((25*60))
+
+echo "  full tomato" >> $file

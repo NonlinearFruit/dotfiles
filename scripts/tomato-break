@@ -1,0 +1,3 @@
+#!/bin/bash
+
+countdown $((5*60))

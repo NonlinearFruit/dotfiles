@@ -5,8 +5,10 @@ pkg.link() {
   # Add scipt links
   mkdir -p "$ELLIPSIS_HOME/scripts"
   for file in $PKG_PATH/scripts/*; do
-    filename=$(basename "$file")
-    fs.link_file $file "$ELLIPSIS_HOME/scripts/$filename"
+    if [ -f "$file" ]; then
+      filename=$(basename "$file")
+      fs.link_file $file "$ELLIPSIS_HOME/scripts/$filename"
+    fi
   done
 }
 
@@ -16,7 +18,9 @@ pkg.unlink() {
 
   # Remove scipts
   for file in $PKG_PATH/scripts/*; do
-    filename=$(basename "$file")
-    rm "$ELLIPSIS_HOME/scripts/$filename"
+    if [ -f "$file" ]; then
+      filename=$(basename "$file")
+      rm "$ELLIPSIS_HOME/scripts/$filename"
+    fi
   done
 }

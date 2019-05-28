@@ -1,15 +1,11 @@
 #!/usr/bin/env bash
 
 task=$1 
-time=$(date +"%Y-%m-%d %T")
-file=~/tasklist.txt
-
-echo "$task @ $time" >> $file
 
 tmux new -s $task \; \
   rename-window 'Research' \; \
   new-window -n 'Source' \; \
   split-window -v \; \
   split-window -h \; \
-  send-keys '~/scripts/tomato' C-m \; \
+  send-keys "~/scripts/tomato $task" C-m \; \
   resize-pane -x 40 -y 7 \;
