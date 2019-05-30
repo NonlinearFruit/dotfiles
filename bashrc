@@ -119,3 +119,5 @@ fi
 export ELLIPSIS_PREFIX="dot"
 export ELLIPSIS_USER="NonlinearFruit"
 export PATH=$PATH:~/.ellipsis/bin:~/scripts
+
+. /usr/share/autojump/autojump.sh
