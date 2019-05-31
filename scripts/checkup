@@ -1,0 +1,9 @@
+#!/bin/bash
+
+COLOR='\033[0;33m'
+NOCOLOR='\033[0m'
+for folder in ~/notes ~/junk ~/.ellipsis/packages/files ~/dabolenwiki; do
+  echo -e "\n${COLOR}${folder}${NOCOLOR}"
+  git -C $folder fetch origin
+  git -C $folder status --short
+done
