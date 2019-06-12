@@ -3,7 +3,7 @@
 COLOR='\033[0;33m'
 NOCOLOR='\033[0m'
 for folder in ~/notes ~/junk ~/.ellipsis/packages/files ~/dabolenwiki; do
-  branch=$(git rev-parse --abbrev-ref HEAD)
+  branch=$(git -C $folder rev-parse --abbrev-ref HEAD)
   echo -e "\n${COLOR}${folder}${NOCOLOR} (${branch})"
   git -C $folder fetch origin
   commits=$(git -C $folder log @{u}.. --oneline | wc -l)
