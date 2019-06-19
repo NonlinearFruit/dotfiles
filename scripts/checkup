@@ -1,10 +1,28 @@
 #!/bin/bash
 
+WARNINGCOLOR='\033[0;31m'
 COLOR='\033[0;33m'
 NOCOLOR='\033[0m'
-for folder in ~/notes ~/junk ~/.ellipsis/packages/files ~/dabolenwiki; do
-  branch=$(git -C $folder rev-parse --abbrev-ref HEAD)
-  echo -e "\n${COLOR}${folder}${NOCOLOR} (${branch})"
+folder=$1
+
+if [[ $# -eq 0 ]] ; then
+  echo -e 'Missing a folder. For example:\ncheckup ~/myproject';
+  exit;
+fi
+
+if ! [ -d $folder/.git ]; then
+  echo -e "\n${COLOR}${folder} ${WARNINGCOLOR}is not a git repo!${NOCOLOR}";
+  exit;
+fi
+
+branch=$(git -C $folder rev-parse --abbrev-ref HEAD 2>/dev/null);
+if [ $branch='HEAD' ]; then
+  branch='master';
+fi
+
+echo -e "\n${COLOR}${folder}${NOCOLOR} (${branch})"
+
+if [[ $(git -C $folder remote show) ]]; then
   git -C $folder fetch origin
   commits=$(git -C $folder log @{u}.. --oneline | wc -l)
   case "$commits" in
@@ -17,5 +35,8 @@ for folder in ~/notes ~/junk ~/.ellipsis/packages/files ~/dabolenwiki; do
       echo "${commits} unpushed commits"
       ;;
   esac
-  git -C $folder status --short
-done
+else
+  echo -e "${WARNINGCOLOR}No upstream origin!${NOCOLOR}"
+fi
+
+git -C $folder status --short

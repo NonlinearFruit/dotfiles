@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for folder in ~/notes ~/junk ~/.ellipsis/packages/files ~/dabolenwiki; do
+  checkup $folder
+done

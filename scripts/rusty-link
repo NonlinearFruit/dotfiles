@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ln -s ~/projects/rust/$1_cargo/target/debug/$1_cargo ~/scripts/$1
