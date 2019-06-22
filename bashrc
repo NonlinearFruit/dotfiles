@@ -116,8 +116,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Ellipsis
 export ELLIPSIS_PREFIX="dot"
 export ELLIPSIS_USER="NonlinearFruit"
-export PATH=$PATH:~/.ellipsis/bin:~/scripts
+export PATH=$PATH:~/.ellipsis/bin
 
+# Scripts
+export PATH=$PATH:~/scripts
+
+# Jump
 . /usr/share/autojump/autojump.sh
+
+# SSH
+eval $(ssh-agent -s) > /dev/null
+ssh-add ~/.ssh/id_rsa 2> /dev/null
