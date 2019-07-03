@@ -23,7 +23,7 @@ fi
 echo -e "\n${COLOR}${folder}${NOCOLOR} (${branch})"
 
 if [[ $(git -C $folder remote show) ]]; then
-  git -C $folder fetch origin
+  git -C $folder fetch
   commits=$(git -C $folder log @{u}.. --oneline | wc -l)
   case "$commits" in
     0) 

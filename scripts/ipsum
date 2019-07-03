@@ -10,7 +10,7 @@
   COUNT=1
   MAX_INT=16777216
   ENTROPY=false
-  ALL_NON_RANDOM_WORDS=/home/bbolen/scripts/words.txt # dictionary file
+  ALL_NON_RANDOM_WORDS=~/scripts/words.txt # dictionary file
   non_random_words=`cat $ALL_NON_RANDOM_WORDS | wc -l` # total # of words 
   proper_nouns=`cat $ALL_NON_RANDOM_WORDS | grep [A-Z].* | wc -l` # apprx # of proper nouns
   total_options=$((non_random_words - proper_nouns)) # apprx # of options
