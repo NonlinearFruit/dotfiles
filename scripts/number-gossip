@@ -1,0 +1,12 @@
+#!/bin/bash
+
+numberFile=~/scripts/numberProperties.txt
+
+case "$1" in
+  [0-9]*)
+    fileLine=$(sed "$1q;d" $numberFile)
+    echo $fileLine | tr , '\n'
+    ;;
+  *)
+    sed -i "$2 s/\$/$3/" $numberFile
+esac
