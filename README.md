@@ -1,22 +1,33 @@
 # Dotfiles
 
+A simple ellipsis package that elegantly manages my configs and scripts.
+
 ## Configs
 
-| Config      | Description   |
-| ---         | ---           |
-| vimrc       | Vim settings  |
-| bashrc      | Bash settings |
-| tmux.config | Tmux settings |
-| gitconfig   | Git settings  |
+| Config       | Description     |
+| ---          | ---             |
+| bash_aliases | All the aliases |
+| bashrc       | Bash settings   |
+| gitconfig    | Git settings    |
+| tmux.config  | Tmux settings   |
+| vimrc        | Vim settings    |
 
 ## Scripts
 
-| Script    | Description            |
-| ---       | ---                    |
-| countdown | Timer                  |
-| datediff  | # of days to past date |
-| esv       | Bible lookup tool      |
-| ipsum     | Random word generator  |
-| stopwatch | Indefinite timer       | 
-| tomato    | 25 minute timer        |
-| tomato-do | 25 minute tmux session |
+| Script           | Description                                         |
+| ---              | ---                                                 |
+| checkup          | Show status of given git folder                     |
+| checkup-personal | Show status of wiki, notes, ellipsis and junk       |
+| checkup-rust     | Show status of all rust projects                    |
+| countdown        | Timer                                               |
+| datediff         | # of days to past date                              |
+| esv              | Bible lookup tool                                   |
+| ipsum            | Random word generator                               |
+| look-alike       | Find words within edit distance 2 of the given word |
+| number-gossip    | Show special properties of the given number         |
+| rusty-link       | Symlink rust binary to ~/scripts folder             |
+| stopwatch        | Indefinite timer                                    |
+| tomato           | 25 minute timer                                     |
+| tomato-break     | Choose tomato spacing                               |
+| tomato-do        | 25 minute tmux session                              |
+| tomato-done      | End tmux tomato                                     |

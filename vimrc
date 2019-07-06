@@ -3,7 +3,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-surround'
 
 call plug#end()
 
