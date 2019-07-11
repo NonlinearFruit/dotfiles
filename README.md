@@ -25,6 +25,7 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | ipsum            | Random word generator                               |
 | look-alike       | Find words within edit distance 2 of the given word |
 | number-gossip    | Show special properties of the given number         |
+| present          | Run reveal.js on the given md file                  |
 | rusty-link       | Symlink rust binary to ~/scripts folder             |
 | stopwatch        | Indefinite timer                                    |
 | tomato           | 25 minute timer                                     |
