@@ -1,1 +1,2 @@
-alias paste.exe="powershell.exe Get-Clipboard | perl -p -e 's/\r\n$//'"
+alias paste.exe="powershell.exe Get-Clipboard"
+alias note="vim -c 'set spell | set syntax=markdown'"

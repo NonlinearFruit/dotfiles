@@ -39,3 +39,6 @@ vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
+
+" Standardize swap location
+:set directory=$HOME/.vim/swapfiles//

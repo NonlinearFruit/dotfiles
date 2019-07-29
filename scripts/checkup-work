@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for folder in /mnt/c/Projects/checkpro.api/ ~/projects/smi.checkpro.api.scripts ~/projects/intacctdocumentation; do
+  checkup $folder
+done
