@@ -15,8 +15,8 @@ if ! [ -d $folder/.git ]; then
   exit;
 fi
 
-branch=$(git -C $folder rev-parse --abbrev-ref HEAD 2>/dev/null);
-if [ $branch='HEAD' ]; then
+branch=$(git -C ${folder} rev-parse --abbrev-ref HEAD 2>/dev/null);
+if [ "$branch" == "HEAD" ]; then
   branch='master';
 fi
 
