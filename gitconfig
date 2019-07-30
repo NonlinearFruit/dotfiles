@@ -5,3 +5,6 @@
   personal = !git config user.email "1123benji5813@gmail.com" && git config user.name "NonlinearFruit"
   add-without-whitespace = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
   to-ssh = !git remote set-url origin $(git remote get-url origin | sed 's+https://github.com/+git@github.com:+')
+  top-committers = "!_() { \
+        git shortlog -sn --no-merges | head -n${1:-10}; \
+      }; _"
