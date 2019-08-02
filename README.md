@@ -25,6 +25,7 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | countdown            | Timer                                               |
 | datediff             | # of days to past date                              |
 | esv                  | Bible lookup tool                                   |
+| esv-search           | Bible search tool                                   |
 | ipsum                | Random word generator                               |
 | look-alike           | Find words within edit distance 2 of the given word |
 | number-gossip        | Show special properties of the given number         |

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PREFERENCES="&page-size=100";
+QUERY="/v3/passage/search/?q=$1";
+shift;
+
+for arg in "$@"; do
+  QUERY+="+$arg";
+done
+
+VERSES=$(curl -H "Authorization: Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" "https://api.esv.org$QUERY$PREFERENCES" 2> /dev/null | jq -r '.results[] | "\(.content)\n\(.reference)\n"')
+
+echo -e "$VERSES"
