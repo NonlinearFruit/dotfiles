@@ -3,6 +3,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-easy-align'
+Plug 'benmills/vimux'
 
 call plug#end()
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-tmux kill-server
+tmux kill-session -t $1
 
-echo "  finished" >> ~/tasklist.txt
+echo "  finished $1" >> ~/tasklist.txt
