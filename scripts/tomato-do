@@ -9,4 +9,5 @@ tmux new -s $task \; \
   split-window -h \; \
   send-keys "~/scripts/tomato $task" C-m \; \
   resize-pane -x 40 -y 7 \; \
-  select-pane -U \;
+  select-pane -R \; \
+  select-pane -U \; \
