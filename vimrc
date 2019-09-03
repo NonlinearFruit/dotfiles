@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-easy-align'
 Plug 'benmills/vimux'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
