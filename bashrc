@@ -130,3 +130,6 @@ export PATH=$PATH:~/scripts
 # SSH
 eval $(ssh-agent -s) > /dev/null
 ssh-add ~/.ssh/id_rsa 2> /dev/null
+
+# Pip package-y things
+export PATH=$PATH:~/.local/bin

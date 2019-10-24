@@ -1,5 +1,5 @@
 #!/bin/bash
 
-for folder in ~/projects/wolfram/NumberGossip; do
+for folder in ~/projects/heroscape ~/projects/wolfram/NumberGossip /mnt/c/Projects/ContractionContraption; do
   checkup $folder
 done
