@@ -1,4 +1,5 @@
 pkg.install() {
+  mkdir ~/.vim/swapfiles
   curl https://raw.githubusercontent.com/dwyl/english-words/master/words.txt | grep -e "^[a-z]\+$" > $ELLIPSIS_HOME/scripts/words.txt
 }
 
