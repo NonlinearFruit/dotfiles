@@ -44,3 +44,7 @@ vnoremap <Up> <Nop>
 
 " Standardize swap location
 :set directory=$HOME/.vim/swapfiles//
+
+" Persistant undo (even after closing file)
+set undofile
+set undodir=~/.vim/undofiles//

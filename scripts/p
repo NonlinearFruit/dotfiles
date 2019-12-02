@@ -1,0 +1,13 @@
+
+command=$1
+
+case "${command}" in
+  "get")
+    token=$(bw unlock --raw);
+    query=$2;
+    bw list items --search $query --session $token | jq 'map({name, username: .login.username, password: .login.password})';
+    ;;
+  "sync")
+    bw sync;
+    ;;
+esac
