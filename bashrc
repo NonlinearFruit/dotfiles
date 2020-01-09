@@ -116,20 +116,38 @@ if ! shopt -oq posix; then
   fi
 fi
 
+## Non-standard Stuffs ##
+
 # Ellipsis
-export ELLIPSIS_PREFIX="dot"
-export ELLIPSIS_USER="NonlinearFruit"
-export PATH=$PATH:~/.ellipsis/bin
+if [ -d ~/.ellipsis/bin ]; then
+    export ELLIPSIS_PREFIX="dot"
+    export ELLIPSIS_USER="NonlinearFruit"
+    export PATH=$PATH:~/.ellipsis/bin
+fi
 
 # Scripts
-export PATH=$PATH:~/scripts
+if [ -d ~/scripts ]; then
+    export PATH=$PATH:~/scripts
+fi
 
 # Jump
-. /usr/share/autojump/autojump.sh
+if [ -f /usr/share/autojump/autojump.sh ]; then
+    source /usr/share/autojump/autojump.sh
+fi
 
 # SSH
-eval $(ssh-agent -s) > /dev/null
-ssh-add ~/.ssh/id_rsa 2> /dev/null
+if [ -d ~/.ssh ]; then
+    eval $(ssh-agent -s) > /dev/null
+    ssh-add ~/.ssh/id_rsa 2> /dev/null
+fi
 
-# Pip package-y things
-export PATH=$PATH:~/.local/bin
+# Pip
+if [ -d ~/.local/bin ]; then
+    export PATH=$PATH:~/.local/bin
+fi
+
+# Sdkman
+if [ -d ~/.sdkman ]; then
+    export SDKMAN_DIR="/home/bbolen/.sdkman"
+    [[ -s "/home/bbolen/.sdkman/bin/sdkman-init.sh" ]] && source "/home/bbolen/.sdkman/bin/sdkman-init.sh"
+fi
