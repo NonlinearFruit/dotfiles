@@ -1,13 +1,31 @@
 
 command=$1
 
+set -e
+
 case "${command}" in
   "get")
     token=$(bw unlock --raw);
-    query=$2;
-    bw list items --search $query --session $token | jq 'map({name, username: .login.username, password: .login.password})';
+    query="${@:2}";
+    result=$(bw list items --search "${query}" --session ${token} | jq 'map({name, username: .login.username, password: .login.password})');
+    countOfResults=$(echo "${result}" | jq '. | length');
+    if [ "${countOfResults}" -eq "1" ]; then
+      echo "${result}" | jq '.[0] | .name';
+      echo "${result}" | jq --raw-output '.[0] | .username';
+      echo "${result}" | jq --raw-output '.[0] | .password' | clip.exe;
+      echo "Password copied!";
+    else
+      echo "${result}" | jq '.[] | .name';
+      echo "Be more specific";
+    fi
     ;;
   "sync")
     bw sync;
+    ;;
+  "login")
+    bw login;
+    ;;
+  "update")
+    bw update;
     ;;
 esac
