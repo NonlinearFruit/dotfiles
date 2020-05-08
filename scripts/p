@@ -1,3 +1,4 @@
+#!/bin/bash
 
 command=$1
 
@@ -19,8 +20,16 @@ case "${command}" in
       echo "Be more specific";
     fi
     ;;
+  "create")
+    token=$(bw unlock --raw);
+    name=$2;
+    user=$3;
+    password=$4;
+    bw get template item --session ${token} | jq ".login = $(bw get template item.login --session ${token}) | .name = \"${name}\" | .notes = \"\" | .login.username = \"${user}\" | .login.password = \"${password}\" | .login.totp = \"NONSPEAKERCUL\"" | bw encode | bw create item --session ${token};
+    ;;
   "sync")
-    bw sync;
+    token=$(bw unlock --raw);
+    bw sync --session ${token};
     ;;
   "login")
     bw login;

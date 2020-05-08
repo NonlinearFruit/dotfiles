@@ -2,9 +2,9 @@
 " https://vimawesome.com
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/vim-easy-align'
-Plug 'benmills/vimux'
-Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/vim-easy-align' " Aligning markdown tables
+Plug 'benmills/vimux'          " For tomoto-do and tmux
+Plug 'sheerun/vim-polyglot'    " For more language syntaxs
 
 call plug#end()
 
