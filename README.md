@@ -2,6 +2,11 @@
 
 A simple ellipsis package that elegantly manages my configs and scripts.
 
+## Setup on fresh OS
+
+- `curl https://ellipsis.sh | sh`
+- `~/.ellipsis/bin/ellipsis install https://github.com/NonlinearFruit/dotfiles`
+
 ## Configs
 
 | Config       | Description     |
