@@ -92,20 +92,6 @@
   while [[ "$X" -lt "$COUNT" ]]; do
       random_number=`echo "$(od -N3 -An -i /dev/urandom)*$non_random_words/$MAX_INT" | bc`
       WORD=$(sed `echo $random_number`"q;d" $ALL_NON_RANDOM_WORDS)
-      # Clean and Format
-      DEL="'s"
-      WORD=${WORD%$DEL}
-      DEL="'"
-      WORD=${WORD%$DEL}
-      # Clean out 'funny' words (ie proper nouns)
-      case ${WORD:0:1} in
-          [[:lower:]])
-                  # Lowercase indicates a common noun
-                  echo "$WORD"
-                  let "X = X + 1" 
-                  ;;
-          *)
-                  # Don't use whatever $WORD was
-                  ;;
-      esac
+      echo "$WORD"
+      let "X = X + 1" 
   done

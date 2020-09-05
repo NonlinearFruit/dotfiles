@@ -1,0 +1,12 @@
+ipsum $1 |
+while read -r word; do
+  echo "${word^}";
+done |
+tr '\n' '#' |
+sed 's/.$//' |
+{
+  read -r phrase;
+  echo "${phrase}";
+  echo -n "${phrase}" | clip.exe;
+  echo "Copied!";
+}
