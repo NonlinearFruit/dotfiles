@@ -2,6 +2,7 @@ pkg.install() {
   mkdir ~/.vim
   mkdir ~/.vim/swapfiles
   mkdir ~/.vim/undofiles
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir ~/scripts
   curl https://raw.githubusercontent.com/dwyl/english-words/master/words.txt | grep -e "^[a-z]\+$" > $ELLIPSIS_HOME/scripts/words.txt
 }

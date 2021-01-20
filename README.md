@@ -7,6 +7,12 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 - `curl https://ellipsis.sh | sh`
 - `~/.ellipsis/bin/ellipsis install https://github.com/NonlinearFruit/dotfiles`
 
+## Programs
+
+| Program  | Description             |
+| ---      | ---                     |
+| Vim Plug | Package manager for vim |
+
 ## Configs
 
 | Config       | Description     |
