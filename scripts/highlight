@@ -1,0 +1,4 @@
+#!/bin/bash
+
+local input="$([[ -p /dev/stdin ]] && cat -)"; 
+[[ -n "$input" ]] && echo "$input" | grep -E "^|$@";
