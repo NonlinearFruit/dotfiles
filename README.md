@@ -49,3 +49,8 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | tomato-break         | Choose tomato spacing                                |
 | tomato-do            | 25 minute tmux session                               |
 | tomato-done          | End tmux tomato                                      |
+
+## ToDo
+
+ - Windows Terminal Settings: `"C:\Users\bbolen\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"`
+ - IdeaVim Settings: `"C:\Users\bbolen\AppData\.ideavimrc"

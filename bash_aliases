@@ -1,5 +1,4 @@
 alias dotnet='dotnet.exe'
-alias note="vim -c 'set spell | set syntax=markdown'"
 alias paste.exe="powershell.exe Get-Clipboard"
 alias populars='history | sed -E "s/^[ ]+[0-9]+[ ]+//" | cut -d" " -f1 | sort | uniq -c --repeated | sort -r'
 alias rider='/mnt/c/Program\ Files/JetBrains/JetBrains\ Rider\ 2019.1.2/bin/rider64.exe'

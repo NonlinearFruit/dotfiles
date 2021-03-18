@@ -125,3 +125,8 @@ if [ -d ~/.sdkman ]; then
     export SDKMAN_DIR="/home/bbolen/.sdkman"
     [[ -s "/home/bbolen/.sdkman/bin/sdkman-init.sh" ]] && source "/home/bbolen/.sdkman/bin/sdkman-init.sh"
 fi
+
+# Rust
+if [ -d ~/.cargo/env ]; then
+    . ~/.cargo/env
+fi
