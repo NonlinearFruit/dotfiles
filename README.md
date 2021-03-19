@@ -48,6 +48,7 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | passphrase           | Generates a password of the form `Word#Word#Word`    |
 | rusty-link           | Symlink rust binary to ~/scripts folder              |
 | stopwatch            | Indefinite timer                                     |
+| sundays              | Number of Sundays until given birthdate turns 18     |
 | tomato               | 25 minute timer                                      |
 | tomato-break         | Choose tomato spacing                                |
 | tomato-do            | 25 minute tmux session                               |

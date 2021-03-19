@@ -1,0 +1,3 @@
+birthday=$*
+daysTill18=$(datediff $birthday +18 years)
+echo "-1 * ${daysTill18} / 7" | bc

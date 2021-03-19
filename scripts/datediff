@@ -1,5 +1,5 @@
 d1=$(date -d now +%s)
-d2=$(date -d "$1" +%s)
+d2=$(date -d "$*" +%s)
 delta=$((d1 - d2))
 # echo $(( delta )) seconds
 # echo $(( delta / 60 )) minutes
