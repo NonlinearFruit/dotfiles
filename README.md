@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon.png" alt="dotfiles icon" width="400" height="400"/>
+</p>
+
 # Dotfiles
 
 A simple ellipsis package that elegantly manages my configs and scripts.
