@@ -46,7 +46,6 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | look-alike           | Find words within edit distance 2 of the given word  |
 | number-gossip        | Show special properties of the given number          |
 | passphrase           | Generates a password of the form `Word#Word#Word`    |
-| present              | Run reveal.js on the given md file                   |
 | rusty-link           | Symlink rust binary to ~/scripts folder              |
 | stopwatch            | Indefinite timer                                     |
 | tomato               | 25 minute timer                                      |
@@ -57,4 +56,4 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 ## ToDo
 
  - Windows Terminal Settings: `"C:\Users\bbolen\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"`
- - IdeaVim Settings: `"C:\Users\bbolen\AppData\.ideavimrc"
+ - IdeaVim Settings: `"C:\Users\bbolen\AppData\.ideavimrc"`

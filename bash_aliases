@@ -1,3 +1,7 @@
+#!/bin/bash
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 alias dotnet='dotnet.exe'
 alias paste.exe="powershell.exe Get-Clipboard"
 alias populars='history | sed -E "s/^[ ]+[0-9]+[ ]+//" | cut -d" " -f1 | sort | uniq -c --repeated | sort -r'
