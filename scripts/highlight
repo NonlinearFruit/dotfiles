@@ -1,4 +1,4 @@
 #!/bin/bash
 
 input="$([[ -p /dev/stdin ]] && cat -)";
-[[ -n "$input" ]] && echo "$input" | grep -E "^|$@";
+[[ -n "$input" ]] && echo "$input" | grep --color -E "^|$@";
