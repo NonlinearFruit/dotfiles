@@ -29,10 +29,17 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 # Autocomplete
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+    source /etc/bash_completion
   fi
+fi
+
+# Editor
+if command -v vim > /dev/null; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
 fi
 
 # Ellipsis
@@ -49,7 +56,7 @@ fi
 
 # Aliases
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+    source ~/.bash_aliases
 fi
 
 # Jump
@@ -76,5 +83,5 @@ fi
 
 # Rust
 if [ -d ~/.cargo/env ]; then
-    . ~/.cargo/env
+    source ~/.cargo/env
 fi

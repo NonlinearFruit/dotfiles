@@ -1,6 +1,3 @@
-[core]
-	editor = vim
-
 [alias]
   personal = !git config user.email "1123benji5813@gmail.com" && git config user.name "NonlinearFruit"
   work = !git config user.email "ben.bolen@samaritanministries.org" && git config user.name "Ben Bolen"
