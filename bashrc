@@ -7,6 +7,11 @@ case $- in
       *) return;;
 esac
 
+# Use Tmux!
+if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
+  tmux
+fi
+
 # Update window size after each command
 shopt -s checkwinsize
 
