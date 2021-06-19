@@ -1,0 +1,12 @@
+" Vanilla Vim
+nnoremap g; :action JumpToNextChange<cr>
+nnoremap g, :action JumpToLastChange<cr>
+vnoremap = :action ReformatCode<cr>
+
+" Rider Rewrites
+nnoremap gi :action GotoImplementation<cr>
+inoremap <C-v> <esc>:action EditorPaste<cr>a
+nnoremap dt :action CloseAllEditorsButActive<cr>
+
+" Notes
+" - Reload rc :: :source ~/.ideavimrc

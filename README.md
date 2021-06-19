@@ -8,24 +8,48 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 
 ## Setup on fresh OS
 
+- `sudo apt install git`
 - `curl https://ellipsis.sh | sh`
 - `~/.ellipsis/bin/ellipsis install https://github.com/NonlinearFruit/dotfiles`
+
+## Configs
+
+| Config                | Description               |
+| ---                   | ---                       |
+| bash_aliases          | All the aliases           |
+| bashrc                | Bash settings             |
+| gitconfig             | Git settings              |
+| ideavimrc             | IdeaVim settings          |
+| newsboat/*            | Newsboat settings         |
+| tmux.config           | Tmux settings             |
+| vimrc                 | Vim settings              |
+| windows_terminal.json | Windows Terminal settings |
+
+## Manual Configs
+
+These are found in the `manual` directory and, as the name suggests, the symlinks need to be configured manually with a command like this:
+```
+ln -s ~/.ellipsis/packages/files/manual/$FILE /mnt/c/$DESTINATION
+```
+
+| Config | Path |
+| --- | --- |
+| windows_terminal.json | `/mnt/c/Users/bbolen/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json` |
+| ideavimrc | `/mnt/c/Users/bbolen/.ideavimrc` |
+
+## Directories
+
+| Directory | Description                             |
+| ---       | ---                                     |
+| manual    | Configs that need to be manually linked |
+| newsboat  | Newsboat settings                       |
+| scripts   | Bash scripts                            |
 
 ## Programs
 
 | Program  | Description             |
 | ---      | ---                     |
 | Vim Plug | Package manager for vim |
-
-## Configs
-
-| Config       | Description     |
-| ---          | ---             |
-| bash_aliases | All the aliases |
-| bashrc       | Bash settings   |
-| gitconfig    | Git settings    |
-| tmux.config  | Tmux settings   |
-| vimrc        | Vim settings    |
 
 ## Scripts
 
@@ -53,8 +77,3 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 | tomato-break         | Choose tomato spacing                                |
 | tomato-do            | 25 minute tmux session                               |
 | tomato-done          | End tmux tomato                                      |
-
-## ToDo
-
- - Windows Terminal Settings: `"C:\Users\bbolen\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"`
- - IdeaVim Settings: `"C:\Users\bbolen\AppData\.ideavimrc"`
