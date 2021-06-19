@@ -1,0 +1,11 @@
+https://www.congress.gov/rss/most-viewed-bills.xml "~Most Viewed Bills" us legislative
+https://www.congress.gov/rss/presented-to-president.xml "~Bills before President" us legislative
+https://www.congress.gov/rss/house-floor-today.xml "~Bills before House" us legislative
+https://www.congress.gov/rss/senate-floor-today.xml "~Bills before Senate" us legislative
+https://www.courtlistener.com/feed/court/scotus/ "~Supreme Court Decisions" scotus us judicial
+https://www.courtlistener.com/feed/court/wyo/ "~Wy Supreme Court Decisions" wy judicial
+https://www.courtlistener.com/feed/court/ill/ "~Il Supreme Court Decisions" il judicial
+https://www.theepochtimes.com/c-recipes/feed "~Recipes | Epoch" recipes
+https://www.theepochtimes.com/c-world/feed "~World | Epoch" news world
+https://www.theepochtimes.com/c-china/feed "~China | Epoch" news china
+https://www.theepochtimes.com/c-us/feed "~US | Epoch" news us
