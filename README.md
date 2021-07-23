@@ -14,16 +14,17 @@ A simple ellipsis package that elegantly manages my configs and scripts.
 
 ## Configs
 
-| Config                | Description               |
-| ---                   | ---                       |
-| bash_aliases          | All the aliases           |
-| bashrc                | Bash settings             |
-| gitconfig             | Git settings              |
-| ideavimrc             | IdeaVim settings          |
-| newsboat/*            | Newsboat settings         |
-| tmux.config           | Tmux settings             |
-| vimrc                 | Vim settings              |
-| windows_terminal.json | Windows Terminal settings |
+| Config                | Description                                  |
+| ---                   | ---                                          |
+| bash_aliases          | All the aliases                              |
+| bashrc                | Bash settings                                |
+| dijo.toml             | [Dijo][dijo] settings                        |
+| gitconfig             | [Git][git] settings                          |
+| ideavimrc             | [IdeaVim][ideavim] settings                  |
+| newsboat/*            | [Newsboat][newsboat] settings                |
+| tmux.config           | [Tmux][tmux] settings                        |
+| vimrc                 | [Vim][vim] settings                          |
+| windows_terminal.json | [Windows][windowsterminal] Terminal settings |
 
 ## Manual Configs
 
@@ -32,10 +33,11 @@ These are found in the `manual` directory and, as the name suggests, the symlink
 ln -s ~/.ellipsis/packages/files/manual/$FILE /mnt/c/$DESTINATION
 ```
 
-| Config | Path |
-| --- | --- |
+| Config                | Path                                                                                                                 |
+| ---                   | ---                                                                                                                  |
 | windows_terminal.json | `/mnt/c/Users/bbolen/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json` |
-| ideavimrc | `/mnt/c/Users/bbolen/.ideavimrc` |
+| ideavimrc             | `/mnt/c/Users/bbolen/.ideavimrc`                                                                                     |
+| dijo.toml             | `~/.config/dijo/config.toml`                                                                                         |
 
 ## Directories
 
@@ -77,3 +79,11 @@ ln -s ~/.ellipsis/packages/files/manual/$FILE /mnt/c/$DESTINATION
 | tomato-break         | Choose tomato spacing                                |
 | tomato-do            | 25 minute tmux session                               |
 | tomato-done          | End tmux tomato                                      |
+
+[dijo]: https://github.com/NerdyPepper/dijo
+[git]: https://git-scm.com/docs
+[ideavim]: https://github.com/JetBrains/ideavim
+[newsboat]: https://github.com/newsboat/newsboat
+[tmux]: https://github.com/tmux/tmux
+[vim]: https://github.com/vim/vim
+[windowsterminal]: https://github.com/microsoft/terminal
