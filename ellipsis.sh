@@ -5,7 +5,7 @@ pkg.install() {
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir ~/.newsboat
   mkdir ~/scripts
-  curl https://raw.githubusercontent.com/dwyl/english-words/master/words.txt | grep -e "^[a-z]\+$" > $ELLIPSIS_HOME/scripts/words.txt
+  curl https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt > $ELLIPSIS_HOME/scripts/words.txt
 }
 
 pkg.link() {
