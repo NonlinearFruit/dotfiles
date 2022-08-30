@@ -8,3 +8,5 @@
   top-committers = "!_() { \
         git shortlog -sn --no-merges | head -n${1:-10}; \
       }; _"
+[init]
+	defaultBranch = master
