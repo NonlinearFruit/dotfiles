@@ -59,6 +59,11 @@ if [ -d ~/scripts ]; then
     export PATH=$PATH:~/scripts
 fi
 
+# Private Configuration (Not source controlled)
+if [ -f ~/.bashrc_private ]; then
+    source ~/.bashrc_private
+fi
+
 # Aliases
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
@@ -89,4 +94,9 @@ fi
 # Rust
 if [ -d ~/.cargo/env ]; then
     source ~/.cargo/env
+fi
+
+# Go
+if [ -d /usr/local/go/bin ]; then
+    export PATH=$PATH:/usr/local/go/bin
 fi

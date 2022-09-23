@@ -35,12 +35,20 @@ nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Up> <Nop>
+nnoremap hh <Nop>
+nnoremap jj <Nop>
+nnoremap kk <Nop>
+nnoremap ll <Nop>
 
 " Remove newbie crutches in Visual Mode
 vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
+vnoremap hh <Nop>
+vnoremap jj <Nop>
+vnoremap kk <Nop>
+vnoremap ll <Nop>
 
 " Standardize swap location
 :set directory=$HOME/.vim/swapfiles//
@@ -48,3 +56,15 @@ vnoremap <Up> <Nop>
 " Persistant undo (even after closing file)
 set undofile
 set undodir=~/.vim/undofiles//
+
+" Vimux
+let g:VimuxResetSequence = ""
+map vd :call VimuxCloseRunner()<CR>
+map vp :call VimuxPromptCommand()<CR>
+map vz :call VimuxZoomRunner()<CR>
+if has("autocmd")
+  filetype on
+  autocmd FileType go map vr :call VimuxRunCommand("go run")<CR>
+  autocmd FileType go map vc :call VimuxRunCommand("go build")<CR>
+  autocmd FileType go map vu :call VimuxRunCommand("go test -v ./...")<CR>
+endif
