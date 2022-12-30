@@ -35,10 +35,10 @@ nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Up> <Nop>
-nnoremap hh <Nop>
-nnoremap jj <Nop>
-nnoremap kk <Nop>
-nnoremap ll <Nop>
+"nnoremap hh <Nop>
+"nnoremap jj <Nop>
+"nnoremap kk <Nop>
+"nnoremap ll <Nop>
 
 " Remove newbie crutches in Visual Mode
 vnoremap <Down> <Nop>
@@ -56,6 +56,9 @@ vnoremap ll <Nop>
 " Persistant undo (even after closing file)
 set undofile
 set undodir=~/.vim/undofiles//
+
+" Standardize temporary backup location
+set backupdir=~/.vim/backupfiles//
 
 " Vimux
 let g:VimuxResetSequence = ""
