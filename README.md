@@ -4,13 +4,19 @@
 
 # Dotfiles
 
-A simple ellipsis package that elegantly manages my configs and scripts.
+A simple repo that elegantly manages my configs and scripts using Git Map (see `gap.sh`)
 
 ## Setup on fresh OS
 
-- `sudo apt install git`
-- `curl https://ellipsis.sh | sh`
-- `~/.ellipsis/bin/ellipsis install https://github.com/NonlinearFruit/dotfiles`
+```sh
+sudo apt install git jq
+mkdir ~/projects
+cd ~/projects
+git clone https://github.com/NonlinearFruit/dotfiles
+cd dotfiles
+./init.sh
+./gap.sh
+```
 
 ## Configs
 

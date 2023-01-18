@@ -8,5 +8,8 @@ nnoremap gi :action GotoImplementation<cr>
 inoremap <C-v> <esc>:action EditorPaste<cr>a
 nnoremap dt :action CloseAllEditorsButActive<cr>
 
+" Rider Plugins
+nnoremap gl :action uk.co.ben_gibson.git.link.ui.actions.menu.CopyAction<cr>
+
 " Notes
 " - Reload rc :: :source ~/.ideavimrc
