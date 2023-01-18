@@ -1,12 +1,17 @@
 " Vanilla Vim
-nnoremap g; :action JumpToNextChange<cr>
 nnoremap g, :action JumpToLastChange<cr>
+nnoremap g; :action JumpToNextChange<cr>
 vnoremap = :action ReformatCode<cr>
 
+" Custom Vim
+nnoremap vb :action BuildSolutionAction<cr>
+nnoremap vu :action RiderUnitTestRunSolutionAction<cr>
+
 " Rider Rewrites
-nnoremap gi :action GotoImplementation<cr>
-inoremap <C-v> <esc>:action EditorPaste<cr>a
+inoremap <C-v> <esc>:action EditorPaste<cr>
 nnoremap dt :action CloseAllEditorsButActive<cr>
+nnoremap gb :action ReSharperGotoNextErrorInSolution<cr>
+nnoremap gi :action GotoImplementation<cr>
 
 " Rider Plugins
 nnoremap gl :action uk.co.ben_gibson.git.link.ui.actions.menu.CopyAction<cr>
