@@ -1,8 +1,9 @@
 [
-  ["vimrc", "~/.vimrc"],
-  ["bashrc", "~/.bashrc"],
   ["bash_aliases", "~/.bash_aliases"],
+  ["bashrc", "~/.bashrc"],
   ["gitconfig", "~/.gitconfig"],
+  ["scripts/*", "~/scripts"],
+  ["nvim/*", "~/.config/nvim"],
   ["tmux.conf", "~/.tmux.conf"],
-  ["scripts/*", "~/scripts"]
+  ["vimrc", "~/.vimrc"]
 ]
