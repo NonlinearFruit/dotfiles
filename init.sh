@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# Run this after cloning, then run `./gap.sh | sh` to link/cp out the configs
+
 mkdir ~/.vim
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undofiles
