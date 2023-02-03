@@ -1,5 +1,5 @@
 [
-  ["manual/windows_terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/)settings.json"],
-  ["manual/ideavimrc", "/mnt/c/Users/bbolen/.ideavimrc"],
+  ["windows_terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/)settings.json"],
+  ["ideavimrc", "/mnt/c/Users/bbolen/.ideavimrc"],
   ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/browser.html"]
 ]
