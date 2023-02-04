@@ -3,6 +3,7 @@ if vim.g.started_by_firenvim then
   vim.opt.showtabline = 0
   vim.opt.laststatus = 0
   vim.opt.guifont = "Operator Mono Lig Book:h14"
+  vim.cmd('au BufEnter *.txt set filetype=markdown')
 end
 
 local ignore = {

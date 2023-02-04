@@ -11,6 +11,8 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.api.nvim_command('hi LineNr guifg=grey')
+vim.api.nvim_command('hi LineNr ctermfg=grey')
 
 -- Backups
 vim.opt.swapfile = true
