@@ -16,6 +16,7 @@ vim.g.firenvim_config = {
     ['.*sourcegraph.com.*'] = ignore,
     ['.*regexr.com.*'] = ignore,
     ['.*teams.microsoft.com.*'] = ignore,
+    ['.*docs.google.com.*'] = ignore,
     ['.*outlook.office365.com/mail.*'] = {
       takeover = 'always',
       priority = 0,
