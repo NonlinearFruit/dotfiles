@@ -2,5 +2,5 @@
   ["windows_terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState)/settings.json"],
   ["ideavimrc", "$(echo /mnt/c/Users/*)/.ideavimrc"],
   ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/browser.html"],
-  ["vivaldi/*", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)"]
+  ["vivaldi-mods/*", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)"]
 ]
