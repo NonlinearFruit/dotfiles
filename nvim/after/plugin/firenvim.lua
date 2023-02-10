@@ -3,7 +3,8 @@ if vim.g.started_by_firenvim then
   vim.opt.showtabline = 0
   vim.opt.laststatus = 0
   vim.opt.guifont = "Operator Mono Lig Book:h14"
-  vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*.txt" }, command = "set filetype=markdown" })
+  local firenvimMappings = vim.api.nvim_create_augroup("FirenvimMappings")
+  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, command = "set filetype=markdown" })
 end
 
 local ignore = {
