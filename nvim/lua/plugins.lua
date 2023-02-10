@@ -13,6 +13,9 @@ return require('packer').startup(function(use)
     run = function() vim.fn['firenvim#install'](0) end
   }
 
+  -- C# LSP
+  use 'OmniSharp/omnisharp-vim'
+
   -- Fun CellularAutomaton make_it_rain && game_of_life
   use 'eandrju/cellular-automaton.nvim'
 
@@ -22,6 +25,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+  -- Game for practicing vim
   use 'ThePrimeagen/vim-be-good'
 
 end)
