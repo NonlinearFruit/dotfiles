@@ -12,4 +12,16 @@ return require('packer').startup(function(use)
     'glacambre/firenvim',
     run = function() vim.fn['firenvim#install'](0) end
   }
+
+  -- Fun CellularAutomaton make_it_rain && game_of_life
+  use 'eandrju/cellular-automaton.nvim'
+
+  -- To support CellularAutomaton
+  use {
+    'nvim-treesitter/nvim-treesitter', 
+    run = ':TSUpdate'
+  }
+
+  use 'ThePrimeagen/vim-be-good'
+
 end)

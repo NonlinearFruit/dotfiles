@@ -11,16 +11,16 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.api.nvim_command('hi LineNr guifg=grey')
-vim.api.nvim_command('hi LineNr ctermfg=grey')
+vim.api.nvim_command('hi LineNr guifg=grey ctermfg=grey')
+vim.api.nvim_command('hi Pmenu guifg=black ctermfg=black') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
 
 -- Backups
 vim.opt.swapfile = true
-vim.opt.directory = os.getenv("HOME") .. "/.vim/swapfiles"
+vim.opt.directory = os.getenv("HOME") .. "/.nvim/swapfiles"
 vim.opt.backup = true
-vim.opt.backupdir = os.getenv("HOME") .. "/.vim/backupfiles"
+vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undofiles"
+vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undofiles"
 
 -- Use the Windows clipboard
 vim.g.clipboard = {

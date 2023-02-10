@@ -3,7 +3,7 @@ if vim.g.started_by_firenvim then
   vim.opt.showtabline = 0
   vim.opt.laststatus = 0
   vim.opt.guifont = "Operator Mono Lig Book:h14"
-  vim.cmd('au BufEnter *.txt set filetype=markdown')
+  vim.api.nvim_create_autocmd("BufEnter", { pattern = { "*.txt" }, command = "set filetype=markdown" })
 end
 
 local ignore = {
@@ -28,3 +28,6 @@ vim.g.firenvim_config = {
     }
   }
 }
+
+-- NOTES
+-- Slack :: Preference > Advanced > Use Markup editor
