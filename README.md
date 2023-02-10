@@ -8,12 +8,12 @@ A simple repo that elegantly manages my configs and scripts using Git Map (see `
 
 ## Setup on fresh OS
 
+Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't install
+
 ```sh
 sudo apt install git jq
-mkdir ~/projects
-cd ~/projects
-git clone https://github.com/NonlinearFruit/dotfiles
-cd dotfiles
+git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
+cd ~/projects/dotfiles
 ./init.sh
 ./gap.sh
 ```
