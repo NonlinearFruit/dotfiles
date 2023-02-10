@@ -11,11 +11,11 @@ A simple repo that elegantly manages my configs and scripts using Git Map (see `
 Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't install
 
 ```sh
-sudo apt install git jq
+sudo apt install git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh
-./gap.sh
+./gap.sh | sh
 ```
 
 ## Configs
