@@ -2,6 +2,7 @@
 * Advanced Panels (a mod for Vivaldi)
 * Written by LonM
 * No Copyright Reserved
+* Original: https://github.com/LonMcGregor/VivaldiMods/blob/master/mods/advancedPanels.css
 */
 .panel[advancedpanel="true"] header .toolbar .back, /* hide the web panel back/reload buttons */
 .panel[advancedpanel="true"] header .toolbar .forward,

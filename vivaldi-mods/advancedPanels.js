@@ -9,6 +9,7 @@
 * jp by @nkay1005
 * pt-br by @oinconquistado
 * pl-pl by @supra107
+* Original: https://github.com/LonMcGregor/VivaldiMods/blob/master/mods/advancedPanels.js
 */
 
 (function advancedPanels(){
