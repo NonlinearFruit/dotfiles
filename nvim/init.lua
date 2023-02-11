@@ -12,7 +12,7 @@ vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.api.nvim_command('hi LineNr guifg=grey ctermfg=grey')
-vim.api.nvim_command('hi Pmenu guifg=black ctermfg=black') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
+vim.api.nvim_command('hi Pmenu guibg=black ctermbg=black') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
 
 -- Backups
 vim.opt.swapfile = true
