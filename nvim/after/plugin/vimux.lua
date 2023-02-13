@@ -6,16 +6,38 @@ vim.keymap.set("n", "<leader>vp", "<cmd>VimuxPromptCommand<cr>") -- [V]imux [P]r
 vim.keymap.set("n", "<leader>vz", "<cmd>VimuxZoomRunner<cr>") -- [V]imux [Z]oom
 
 local cSharpTmux = vim.api.nvim_create_augroup("CSharpTmux", {clear = true})
-local function keymap(key, shellCommand)
+local function keymap(key, cmd)
   vim.api.nvim_create_autocmd("BufEnter", {
     group = cSharpTmux,
     pattern = { "*.cs" },
-    callback = function() vim.keymap.set("n", "<leader>"..key, "<cmd>VimuxRunCommand('"..shellCommand.."')<cr>") end
+    callback = function() vim.keymap.set("n", "<leader>"..key, "<cmd>"..cmd.."<cr>") end
   })
 end
+local function vimuxkeymap(key, shellCommand)
+  keymap(key, "VimuxRunCommand('"..shellCommand.."')")
+end
 
-keymap("at", "dotnet test") -- [A]ll [T]ests
-keymap("bc", "dotnet build") -- [B]uild/[C]ompile
+keymap("fi", "OmniSharpFixUsings") -- [F]ix [I]mports
+keymap("rr", "OmniSharpRename") -- [R]efactor [R]ename
+keymap("rf", "OmniSharpCodeFormat") -- [R]efactor [F]ormat
+keymap("gi", "OmniSharpFindImplementations") -- [G]oto [I]plementations
+keymap("gd", "OmniSharpGotoDefinition") -- [G]oto [D]efinition
+keymap("fu", "OmniSharpFindUsages") -- [F]ind [U]sages
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = cSharpTmux,
+  pattern = { "*.cs" },
+  callback = function() vim.keymap.set("n", "gd", "<cmd>OmniSharpGotoDefinition<cr>") end
+})
+vimuxkeymap("at", "dotnet test") -- [A]ll [T]ests
+vimuxkeymap("bc", "dotnet build") -- [B]uild/[C]ompile
+vimuxkeymap("er", "dotnet run") -- [E]xecute [R]un
 
--- :OmniSharpFixUsings
--- :OmniSharpGotoDefinition [{cmd}]
+-- keymap("", "OmniSharpGetCodeActions") -- [] []
+-- keymap("", "OmniSharpGlobalCodeCheck") -- [] []
+-- keymap("", "OmniSharpNavigateDown") -- [] []
+-- keymap("", "OmniSharpNavigateUp") -- [] []
+-- keymap("", "OmniSharpPreviewDefinition") -- [] []
+-- keymap("", "OmniSharpPreviewImplementation") -- [] []
+-- keymap("", "OmniSharpReloadProject [{project}]") -- [] []
+-- keymap("", "OmniSharpRepeatCodeAction") -- [] []
+-- keymap("", "OmniSharpTypeLookup") -- [] []
