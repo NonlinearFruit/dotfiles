@@ -1,10 +1,15 @@
 if vim.g.started_by_firenvim then
   -- turn off some visual clutter
-  vim.opt.showtabline = 0
-  vim.opt.laststatus = 0
   vim.opt.guifont = "Operator Mono Lig Book:h14"
+  vim.opt.laststatus = 0
+  vim.opt.ruler = false
+  vim.opt.showcmd = false
+  vim.opt.showtabline = 0
+  vim.opt.signcolumn = 'no'
+  vim.bo.filetype = 'markdown'
+  vim.go.lines = 5
   local firenvimMappings = vim.api.nvim_create_augroup("FirenvimMappings", {clear = true})
-  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, command = "set filetype=markdown" })
+  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() vim.go.lines = 5 end})
 end
 
 local ignore = {
@@ -22,6 +27,10 @@ vim.g.firenvim_config = {
       takeover = 'always',
       priority = 0,
       selector = '#ReadingPaneContainerId [aria-label="Message body, press Alt+F10 to exit"]'
+    },
+    [".*slack.com.*"] = {
+      takeover = 'once',
+      priority = 0
     },
     [".*"] = {
       takeover = 'always',
