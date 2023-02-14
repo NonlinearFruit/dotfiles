@@ -7,9 +7,8 @@ if vim.g.started_by_firenvim then
   vim.opt.showtabline = 0
   vim.opt.signcolumn = 'no'
   vim.bo.filetype = 'markdown'
-  vim.go.lines = 5
   local firenvimMappings = vim.api.nvim_create_augroup("FirenvimMappings", {clear = true})
-  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() vim.go.lines = 5 end})
+  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() if vim.go.lines < 5 then vim.go.lines = 5 end end})
 end
 
 local ignore = {
