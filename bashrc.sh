@@ -7,6 +7,16 @@ case $- in
       *) return;;
 esac
 
+function is_termux()
+{
+  command -v termux-setup-storage > /dev/null
+}
+
+function is_wsl()
+{
+  command -v wslpath > /dev/null
+}
+
 # If no tmux sessions, make a new. Otherwise make a new one (targetting the old) with a new window in the currect directory
 if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
   tmux ls 2> /dev/null > /dev/null && tmux new -t $(tmux ls -F '#{session_id}' | sed 's/\$//' | head -1)\; new-window -c "$(pwd)" || tmux
