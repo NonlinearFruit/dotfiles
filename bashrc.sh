@@ -41,17 +41,12 @@ if ! shopt -oq posix; then
 fi
 
 # Editor
-if command -v vim > /dev/null; then
+if command -v nvim > /dev/null; then
+  export EDITOR=nvim
+elif command -v vim > /dev/null; then
   export EDITOR=vim
 else
   export EDITOR=vi
-fi
-
-# Ellipsis
-if [ -d ~/.ellipsis/bin ]; then
-    export ELLIPSIS_PREFIX="dot"
-    export ELLIPSIS_USER="NonlinearFruit"
-    export PATH=$PATH:~/.ellipsis/bin
 fi
 
 # Scripts
@@ -102,4 +97,6 @@ if [ -d /usr/local/go/bin ]; then
 fi
 
 # Fuzzy Find (fzf)
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+fi
