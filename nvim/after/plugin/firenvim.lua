@@ -1,14 +1,28 @@
 local SetupBuffer = function()
+  local bufferName = vim.api.nvim_buf_get_name(0)
+  local bufferLines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+
   -- At least 5 lines big
   if vim.go.lines < 5 then vim.go.lines = 5 end
+
+  -- Occassionally helpful generic maps
   vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
   vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
-  local bufferName = vim.api.nvim_buf_get_name(0)
+
+  -- Start in insert mode if we're an empty buffer
+  if bufferName ~= "" and bufferLines[1] == "" then
+    vim.cmd([[startinsert]])
+  end
+
+  -- Maps to send messages
   if string.find(bufferName, "slack") then
     vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
   elseif  string.find(bufferName, "linodeusercontent") then
     vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll(".rc-input__icon-svg--send")[0].dispatchEvent( new Event( "click", { bubbles: true } ) )') | q<cr>]])
+  else
+    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#press_keys("<LT>C-CR>") | q<cr>]])
   end
+
 end
 
 if vim.g.started_by_firenvim then
