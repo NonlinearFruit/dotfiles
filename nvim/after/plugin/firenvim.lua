@@ -15,6 +15,7 @@ if vim.g.started_by_firenvim then
   vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() if vim.go.lines < 5 then vim.go.lines = 5 end end})
   vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
   vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
+  vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
 end
 
 local ignore = {
