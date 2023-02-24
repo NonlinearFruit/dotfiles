@@ -34,7 +34,7 @@ shopt -s histappend # Append history
 HISTSIZE=100000 # Store 100k commands in history
 HISTFILESIZE=-1 # Ignore history file size
 
-# Prompt
+# Prompt (https://unix.stackexchange.com/a/124409/194972)
 restore_color='\[\033[0m\]'
 light_cyan='\[\033[01;36m\]'
 light_gray='\[\033[00;37m\]'
