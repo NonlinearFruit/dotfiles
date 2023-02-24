@@ -35,11 +35,20 @@ HISTSIZE=100000 # Store 100k commands in history
 HISTFILESIZE=-1 # Ignore history file size
 
 # Prompt
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+restore_color='\[\033[0m\]'
+light_cyan='\[\033[01;36m\]'
+light_gray='\[\033[00;37m\]'
+dark_gray='\[\033[01;30m\]'
+machine_context='\u@\h'
+machine="${dark_gray}$machine_context${restore_color}"
+location_context='\w'
+location="${light_gray}$location_context${restore_color}"
+if command -v git prompt > /dev/null; then
+  extra_context='$(git prompt)'
 fi
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \033[1;36m$(git prompt)\033[0m\n \$ '
+extra="${light_cyan}$extra_context${restore_color}"
+prompt=" \$ "
+PS1="$machine:$location $extra\n$prompt"
 
 # Autocomplete
 if ! shopt -oq posix; then
