@@ -1,3 +1,16 @@
+local SetupBuffer = function()
+  -- At least 5 lines big
+  if vim.go.lines < 5 then vim.go.lines = 5 end
+  vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
+  vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
+  local bufferName = vim.api.nvim_buf_get_name(0)
+  if string.find(bufferName, "slack") then
+    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
+  elseif  string.find(bufferName, "linodeusercontent") then
+    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll(".rc-input__icon-svg--send")[0].dispatchEvent( new Event( "click", { bubbles: true } ) )') | q<cr>]])
+  end
+end
+
 if vim.g.started_by_firenvim then
   -- turn off some visual clutter
   vim.opt.guifont = "Operator Mono Lig Book:h14"
@@ -11,11 +24,7 @@ if vim.g.started_by_firenvim then
   vim.bo.filetype = 'markdown'
 
   local firenvimMappings = vim.api.nvim_create_augroup("FirenvimMappings", {clear = true})
-  -- at least 5 lines
-  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() if vim.go.lines < 5 then vim.go.lines = 5 end end})
-  vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
-  vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
-  vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
+  vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, callback = SetupBuffer})
 end
 
 local ignore = {
