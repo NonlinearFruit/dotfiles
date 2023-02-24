@@ -18,4 +18,3 @@ mkdir -p ~/.config/nvim
 
 # Scripts
 mkdir ~/scripts
-curl https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt > ~/scripts/words.txt

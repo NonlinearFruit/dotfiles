@@ -1,6 +1,6 @@
 [
-  ["windows-terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState)/settings.json"],
-  ["ideavimrc", "/mnt/c/Users/$USER/.ideavimrc"],
-  ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/browser.html"],
-  ["vivaldi-mods/*", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)"]
+  ["windows-terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState)/settings.json", "cp"],
+  ["ideavimrc", "/mnt/c/Users/$USER/.ideavimrc", "cp"],
+  ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/browser.html", "cp"],
+  ["vivaldi-mods/*", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)", "cp"]
 ]
