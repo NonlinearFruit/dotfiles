@@ -48,7 +48,7 @@ if command -v git prompt > /dev/null; then
 fi
 extra="${light_cyan}$extra_context${restore_color}"
 prompt=" \$ "
-PS1="$machine:$location $extra\n$prompt"
+PS1="\n$machine:$location $extra\n$prompt"
 
 # Autocomplete
 if ! shopt -oq posix; then
