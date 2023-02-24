@@ -6,9 +6,15 @@ if vim.g.started_by_firenvim then
   vim.opt.showcmd = false
   vim.opt.showtabline = 0
   vim.opt.signcolumn = 'no'
+  vim.opt.wrap = true
+  vim.opt.spell = true
   vim.bo.filetype = 'markdown'
+
   local firenvimMappings = vim.api.nvim_create_augroup("FirenvimMappings", {clear = true})
+  -- at least 5 lines
   vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, pattern = { "*.txt" }, callback = function() if vim.go.lines < 5 then vim.go.lines = 5 end end})
+  vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
+  vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
 end
 
 local ignore = {
@@ -27,9 +33,10 @@ vim.g.firenvim_config = {
       priority = 0,
       selector = '#ReadingPaneContainerId [aria-label="Message body, press Alt+F10 to exit"]'
     },
-    [".*slack.com.*"] = {
-      takeover = 'once',
-      priority = 0
+    ['.*outlook.office365.com/calendar.*'] = {
+      takeover = 'always',
+      priority = 0,
+      selector = ':not(.EditorClass)[role="textbox"] '
     },
     [".*"] = {
       takeover = 'always',

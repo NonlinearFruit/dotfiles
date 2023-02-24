@@ -36,6 +36,9 @@ vim.g.clipboard = {
       cache_enabled = 0
 }
 
+-- Remove obnoxious bindings
+vim.keymap.set({"n", "i"}, "<f1>", "<nop>") -- Way to close to escape and :help xyz is the right way to do it
+
 -- Remove newbie crutches!
 vim.keymap.set({"n", "i", "v", "c"}, "<bs>", "<nop>")
 vim.keymap.set({"n", "i", "v", "c"}, "<del>", "<nop>")
