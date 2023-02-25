@@ -7,7 +7,7 @@ local SetupBuffer = function()
 
   -- Occassionally helpful generic maps
   vim.keymap.set("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>")
-  vim.keymap.set("n", "<c-z>", ":call firenvim#hide_frame()<cr>")
+  vim.keymap.set({"n", "i"}, "<c-z>", ":call firenvim#hide_frame()<cr>")
 
   -- Start in insert mode if we're an empty buffer
   if bufferName ~= "" and bufferLines[1] == "" then
