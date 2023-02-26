@@ -20,7 +20,7 @@ local SetupBuffer = function()
   elseif  string.find(bufferName, "linodeusercontent") then
     vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll(".rc-input__icon-svg--send")[0].dispatchEvent( new Event( "click", { bubbles: true } ) )') | q<cr>]])
   else
-    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#press_keys("<LT>C-CR>") | q<cr>]])
+    vim.keymap.set({"n", "i"}, "<s-cr>", "<esc><cmd>wq<cr>")
   end
 
 end
