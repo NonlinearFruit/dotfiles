@@ -16,7 +16,8 @@ local SetupBuffer = function()
 
   -- Maps to send messages
   if string.find(bufferName, "slack") then
-    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
+    vim.keymap.set({"n"}, "=", [[<cmd>%s#<p><br></p>#\r#ge | %s#</p>\(<p>\)\?#\r#ge | %s#<p>##e<cr>]])
+    vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>%s#\n#</p><p>#ge | 1s#^#<p>#e | $s#<p>$## | w | call firenvim#eval_js('document.querySelectorAll("button.c-wysiwyg_container__button--send:not(.c-wysiwyg_container__button--disabled)")[0].click()') | q<cr>]])
   elseif  string.find(bufferName, "linodeusercontent") then
     vim.keymap.set({"n", "i"}, "<s-cr>", [[<esc><cmd>w | call firenvim#eval_js('document.querySelectorAll(".rc-input__icon-svg--send")[0].dispatchEvent( new Event( "click", { bubbles: true } ) )') | q<cr>]])
   else
@@ -43,7 +44,7 @@ end
 
 local ignore = {
   takeover = 'never',
-  priority = 1
+  priority = 2
 }
 
 vim.g.firenvim_config = {
@@ -54,13 +55,18 @@ vim.g.firenvim_config = {
     ['.*docs.google.com.*'] = ignore,
     ['.*outlook.office365.com/mail.*'] = {
       takeover = 'always',
-      priority = 0,
+      priority = 1,
       selector = '#ReadingPaneContainerId [aria-label="Message body, press Alt+F10 to exit"]'
     },
     ['.*outlook.office365.com/calendar.*'] = {
       takeover = 'always',
-      priority = 0,
+      priority = 1,
       selector = ':not(.EditorClass)[role="textbox"] '
+    },
+    [".*slack.*"] = {
+      takeover = 'always',
+      priority = 1,
+      content = 'html'
     },
     [".*"] = {
       takeover = 'always',
