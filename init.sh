@@ -1,20 +1,14 @@
 #!/usr/bin/env sh
 
-# Run this after cloning, then run `./gap.sh | sh` to link/cp out the configs
+# Run this with `./init.sh | sh` after cloning, then run `./gap.sh | sh` to link/cp out the configs
 
-# Gap
-sudo apt install -y jq
+setup_to_run="setups/$1.sh"
+default_setup="setups/common.sh"
 
-# Vim
-mkdir -p ~/.vim/swapfiles
-mkdir -p ~/.vim/undofiles
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ -f "$default_setup" ]; then
+  cat $default_setup
+fi
 
-# Neovim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-mkdir -p ~/.nvim/swapfiles
-mkdir -p ~/.nvim/undofiles
-mkdir -p ~/.config/nvim
-
-# Scripts
-mkdir ~/scripts
+if [ -f "$setup_to_run" ]; then
+  cat $setup_to_run
+fi

@@ -14,9 +14,19 @@ Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't i
 sudo apt install git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
-./init.sh
+./init.sh | sh
 ./gap.sh | sh
 ```
+
+### OS Specific Setup and Mappings
+
+For configuration specific to a particular OS (or a particular environment), create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
+```sh
+./init.sh termux | sh
+./gap.sh wsl | sh
+```
+
+> NOTE: The `setups/common.sh` and the `mappings/common.json` are always included (if they exist)
 
 ## Configs
 
