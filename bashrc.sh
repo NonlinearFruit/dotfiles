@@ -119,3 +119,8 @@ fi
 if [ -f ~/.fzf.bash ]; then
   source ~/.fzf.bash
 fi
+
+# Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
+if is_wsl ; then
+  export PATH="$(echo $PATH | sed 's#:/mnt/c/Program Files/nodejs/##g')"
+fi
