@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#  Requires: pip3 install croniter
+
+crontab -l | python3 -c "
+from croniter import croniter
+from datetime import datetime
+from sys import stdin
+
+commandThatShouldHaveRanMostRecently = 'echo No most recent job found'
+mostRecentRun = datetime(2000, 1, 1)
+base = datetime.now()
+
+for line in stdin:
+  items = line.strip().split()
+  if len(items) < 5: continue
+  cronyBits = ' '.join(items[0:5])
+  if not croniter.is_valid(cronyBits): continue
+  otherBits = ' '.join(items[5:])
+  lastRun = croniter(cronyBits, base, datetime).get_prev()
+  if lastRun > mostRecentRun:
+    mostRecentRun = lastRun
+    commandThatShouldHaveRanMostRecently = otherBits
+
+print(commandThatShouldHaveRanMostRecently)
+"
+
