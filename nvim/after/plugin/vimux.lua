@@ -3,7 +3,7 @@ vim.g.mapleader = ' '
 vim.g.VimuxResetSequence = ""
 vim.keymap.set("n", "<leader>vd", "<cmd>VimuxCloseRunner<cr>") -- [V]imux [D]elete
 vim.keymap.set("n", "<leader>vp", "<cmd>VimuxPromptCommand<cr>") -- [V]imux [P]rompt
-vim.keymap.set("n", "<leader>vz", "<cmd>VimuxZoomRunner<cr>") -- [V]imux [Z]oom
+vim.keymap.set("n", "<leader>vz", "<cmd>VimuxZoomRunner<cr>") -- [V]imux [Z]oom (tmux <leader>-z to toggle https://superuser.com/a/576505/468052)
 
 local cSharpTmux = vim.api.nvim_create_augroup("CSharpTmux", {clear = true})
 local function keymap(key, cmd)
