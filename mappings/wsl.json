@@ -1,8 +1,9 @@
 [
-  ["windows-terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState)/settings.json", "cp"],
-  ["ideavimrc", "/mnt/c/Users/$USER/.ideavimrc", "cp"],
-  ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/browser.html", "cp"],
-  ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/advancedPanels.js", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/advancePanels.js", "curl"],
   ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/advancedPanels.css", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/advancePanels.css", "curl"],
-  ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/keyboard_machine.js", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/keyboard-machine-WIP.js", "curl"]
+  ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/advancedPanels.js", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/advancePanels.js", "curl"],
+  ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/keyboard_machine.js", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi)/keyboard-machine-WIP.js", "curl"],
+  ["ideavimrc", "/mnt/c/Users/$USER/.ideavimrc", "cp"],
+  ["vivaldi.html", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)/browser.html", "cp"],
+  ["vivaldi/*", "$(echo /mnt/c/Users/*/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)", "cp"],
+  ["windows-terminal.json", "$(echo /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState)/settings.json", "cp"]
 ]
