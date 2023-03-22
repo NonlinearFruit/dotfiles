@@ -6,6 +6,7 @@
 
 -- Use the better faster newer server
 vim.g.OmniSharp_server_stdio = 1
+
 -- .Net 6, booya
 vim.g.OmniSharp_server_use_net6 = 1
 

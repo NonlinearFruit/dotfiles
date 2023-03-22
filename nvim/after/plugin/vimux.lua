@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-
 vim.g.VimuxResetSequence = ""
 vim.keymap.set("n", "<leader>vd", "<cmd>VimuxCloseRunner<cr>") -- [V]imux [D]elete
 vim.keymap.set("n", "<leader>vp", "<cmd>VimuxPromptCommand<cr>") -- [V]imux [P]rompt

@@ -1,5 +1,8 @@
 require('plugins')
 
+-- Leader Key
+vim.g.mapleader = ' '
+
 -- Indentaion should be two spaces. Tabs shouldn't exist
 vim.opt.tabstop = 2
 vim.opt.softtabstop  = 2
