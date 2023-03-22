@@ -1,3 +1,7 @@
+if not packer_plugins["firenvim"] or not packer_plugins["firenvim"].loaded then
+  return
+end
+
 local SetupBuffer = function()
   local bufferName = vim.api.nvim_buf_get_name(0)
   local bufferLines = vim.api.nvim_buf_get_lines(0, 0, -1, true)

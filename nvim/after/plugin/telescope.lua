@@ -1,5 +1,3 @@
--- :checkhealth telescope
-
 -- Requires
   -- sudo apt-get install ripgrep
   -- sudo apt install fd-find
@@ -9,17 +7,17 @@ if not status_ok then
   return
 end
 
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
 
-local prefix = "<leader>t"
-vim.api.nvim_set_keymap("n", prefix.."a", "<cmd>Telescope builtins<cr>", { desc = "[T]elescope [A]ll" })
-vim.api.nvim_set_keymap("n", prefix.."b", "<cmd>Telescope buffers<cr>", { desc = "[T]elescope [B]uffers" })
-vim.api.nvim_set_keymap("n", prefix.."c", "<cmd>Telescope commands<cr>", { desc = "[T]elescope [C]ommands" })
-vim.api.nvim_set_keymap("n", prefix.."f", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "[T]elescope [F]uzzy Find" })
-vim.api.nvim_set_keymap("n", prefix.."h", "<cmd>Telescope help_tags<cr>", { desc = "[T]elescope [H]elp" })
-vim.api.nvim_set_keymap("n", prefix.."k", "<cmd>Telescope keymaps<cr>", { desc = "[T]elescope [K]eymaps" })
-vim.api.nvim_set_keymap("n", prefix.."r", "<cmd>Telescope registers<cr>", { desc = "[T]elescope [R]egisters" })
-vim.api.nvim_set_keymap("n", prefix.."s", "<cmd>Telescope spell_suggest<cr>", { desc = "[T]elescope [S]pell" })
+local prefix = "<leader>/"
+vim.keymap.set("n", prefix.."a", require('telescope.builtin').builtin, { desc = "[/] Search [A]ll" })
+vim.keymap.set("n", prefix.."b", require('telescope.builtin').buffers, { desc = "[/] Search [B]uffers" })
+vim.keymap.set("n", prefix.."c", require('telescope.builtin').commands, { desc = "[/] Search [C]ommands" })
+vim.keymap.set("n", prefix.."f", require('telescope.builtin').current_buffer_fuzzy_find, { desc = "[/] Search [F]uzzy Find" })
+vim.keymap.set("n", prefix.."h", require('telescope.builtin').help_tags, { desc = "[/] Search [H]elp" })
+vim.keymap.set("n", prefix.."k", require('telescope.builtin').keymaps, { desc = "[/] Search [K]eymaps" })
+vim.keymap.set("n", prefix.."r", require('telescope.builtin').registers, { desc = "[/] Search [R]egisters" })
+vim.keymap.set("n", prefix.."s", require('telescope.builtin').spell_suggest, { desc = "[/] Search [S]pell" })
 
 -- Telescope commands to map
   -- git_branches

@@ -1,3 +1,5 @@
+-- :checkhealth
+
 require('plugins')
 
 -- Leader Key
