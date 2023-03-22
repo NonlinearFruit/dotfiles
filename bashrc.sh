@@ -101,8 +101,8 @@ fi
 
 # Sdkman
 if [ -d ~/.sdkman ]; then
-    export SDKMAN_DIR="/home/bbolen/.sdkman"
-    [[ -s "/home/bbolen/.sdkman/bin/sdkman-init.sh" ]] && source "/home/bbolen/.sdkman/bin/sdkman-init.sh"
+    export SDKMAN_DIR="$HOME/.sdkman"
+    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
 # Rust
@@ -112,12 +112,30 @@ fi
 
 # Go
 if [ -d /usr/local/go/bin ]; then
-    export PATH=$PATH:/usr/local/go/bin
+    export PATH="$PATH:/usr/local/go/bin"
 fi
 
 # Fuzzy Find (fzf)
-if [ -f ~/.fzf.bash ]; then
-  source ~/.fzf.bash
+if command -v fzf > /dev/null; then
+  # Setup fzf
+  # ---------
+  if [[ ! "$PATH" == */.fzf/bin* ]]; then
+    PATH="$PATH:$HOME/.fzf/bin"
+  fi
+
+  # Auto-completion
+  # ---------------
+  [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.bash" 2> /dev/null
+
+  # Key bindings
+  # ------------
+  source "$HOME/.fzf/shell/key-bindings.bash"
+
+  # Use fd (rust find)
+  if command -v fd > /dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
