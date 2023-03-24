@@ -138,7 +138,12 @@ if command -v fzf > /dev/null; then
   fi
 fi
 
+# Fast Node Manager (fnm)
+if command -v fnm > /dev/null; then
+  eval "$(fnm env)"
+fi
+
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
 if is_wsl ; then
-  export PATH="$(echo $PATH | sed 's#:/mnt/c/Program Files/nodejs/##g')"
+  export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
 fi
