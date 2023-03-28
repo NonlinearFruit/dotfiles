@@ -1,0 +1,10 @@
+<leader>d [D]etach
+<leader>? [?] List all bindings
+<leader>v [V]ertical split (vim style)
+<leader>s [S]plit (vim style)
+<leader>c [C]reate window
+<leader>n [N]ext window
+<leader>p [P]revious window
+<leader>x [x] Kill pane
+<leader>z [Z]oom pane (toggle)
+<leader>: [:] Prompt
