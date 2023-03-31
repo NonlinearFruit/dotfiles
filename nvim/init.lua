@@ -12,12 +12,14 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
--- Other
+-- Display
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.api.nvim_command('hi LineNr guifg=grey ctermfg=grey')
 vim.api.nvim_command('hi Pmenu guibg=black ctermbg=black guifg=white ctermfg=white') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
+vim.cmd.colorscheme('habamax')
+vim.cmd([[ highlight clear SignColumn ]])
 
 -- Backups
 vim.opt.swapfile = true

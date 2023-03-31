@@ -24,8 +24,9 @@ vim.keymap.set("n", prefix.."m", require('telescope.builtin').marks, { desc = "[
 vim.keymap.set("n", prefix.."r", require('telescope.builtin').registers, { desc = "[/] Search [R]egisters" })
 vim.keymap.set("n", prefix.."s", require('telescope.builtin').spell_suggest, { desc = "[/] Search [S]pell" })
 vim.keymap.set("n", prefix.."y", require('telescope.builtin').git_branches, { desc = "[/] Search Git Branches [Y] (looks like branching)" })
+vim.keymap.set("n", prefix.."w", require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = "[/] Search [W]orkspace Symbols" })
 
--- Telescope builtins
+-- Unused Telescope builtins
   -- autocommands
   -- colorscheme
   -- command_history
@@ -44,7 +45,6 @@ vim.keymap.set("n", prefix.."y", require('telescope.builtin').git_branches, { de
   -- loclist
   -- lsp_definitions
   -- lsp_document_symbols
-  -- lsp_dynamic_workspace_symbols
   -- lsp_implementations
   -- lsp_incoming_calls
   -- lsp_outgoing_calls

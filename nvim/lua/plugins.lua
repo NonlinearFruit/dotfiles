@@ -19,7 +19,7 @@ return require('packer').startup(function(use)
 
   -- To support CellularAutomaton
   use {
-    'nvim-treesitter/nvim-treesitter', 
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
 
