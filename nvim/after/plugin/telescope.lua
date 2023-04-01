@@ -23,8 +23,9 @@ vim.keymap.set("n", prefix.."l", require('telescope.builtin').git_files, {desc =
 vim.keymap.set("n", prefix.."m", require('telescope.builtin').marks, { desc = "[/] Search [M]arks" })
 vim.keymap.set("n", prefix.."r", require('telescope.builtin').registers, { desc = "[/] Search [R]egisters" })
 vim.keymap.set("n", prefix.."s", require('telescope.builtin').spell_suggest, { desc = "[/] Search [S]pell" })
-vim.keymap.set("n", prefix.."y", require('telescope.builtin').git_branches, { desc = "[/] Search Git Branches [Y] (looks like branching)" })
+vim.keymap.set("n", prefix.."t", function () require('telescope.builtin').live_grep({cwd = "~/projects/dotfiles/cheatsheets", disable_coordinates = true}) end, { desc = "[/] Search [T]LDR style notes" })
 vim.keymap.set("n", prefix.."w", require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = "[/] Search [W]orkspace Symbols" })
+vim.keymap.set("n", prefix.."y", require('telescope.builtin').git_branches, { desc = "[/] Search Git Branches [Y] (looks like branching)" })
 
 -- Unused Telescope builtins
   -- autocommands
