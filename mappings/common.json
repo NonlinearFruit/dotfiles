@@ -1,7 +1,7 @@
 [
   ["bash-aliases.sh", "~/.bash_aliases"],
   ["bashrc.sh", "~/.bashrc"],
-  ["gitconfig", "~/.gitconfig"],
+  ["gitconfig.ini", "~/.gitconfig"],
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
   ["tmux.conf", "~/.tmux.conf"],
