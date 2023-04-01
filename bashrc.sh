@@ -141,6 +141,7 @@ fi
 # Fast Node Manager (fnm)
 if command -v fnm > /dev/null; then
   eval "$(fnm env)"
+  fnm use 18
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
