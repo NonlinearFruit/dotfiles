@@ -140,6 +140,8 @@ fi
 
 # Fast Node Manager (fnm)
 if command -v fnm > /dev/null; then
+if [ -d ~/.local/share/fnm ]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
   fnm use 18
 fi
