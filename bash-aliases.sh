@@ -20,4 +20,5 @@ if is_wsl ; then
   alias npp='notepad++.exe'
   alias paste="powershell.exe Get-Clipboard"
   alias podman="podman.exe"
+  alias pair="powershell.exe runas /user:pair 'C:\\Users\\pair\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe'"
 fi
