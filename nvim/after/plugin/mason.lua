@@ -20,7 +20,7 @@ mason.setup({
 })
 
 mason_lsp_config.setup({
-  ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "bashls" }
+  automatic_installation = true
 })
 
 local function on_attach(client, bufnr)
