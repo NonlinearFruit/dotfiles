@@ -1,0 +1,2 @@
+lsb_release -a Show OS info
+sudo apt install ./package.deb Manually install debian package
