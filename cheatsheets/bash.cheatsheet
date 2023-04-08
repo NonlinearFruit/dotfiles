@@ -1,2 +1,15 @@
 lsb_release -a Show OS info
 sudo apt install ./package.deb Manually install debian package
+<c-x><c-e> Edit current command in $EDITOR (nvim)
+<c-r> Search command history (with fzf)
+<c-o> Quit history search
+<c-a> Move to beginning of line
+<c-e> Move to [e]nd of line
+<c-l> C[l]ear screen
+<c-s> [S]top command output
+<c-z> Suspend current command and move it to background (`fg` to bring to foreground)
+<c-q> Resume suspended command
+<c-c> Kill
+<c-d> Close current terminal
+!! Runs last command
+!x Run most recent command that starts with `x`
