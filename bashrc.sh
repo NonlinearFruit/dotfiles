@@ -106,7 +106,7 @@ if [ -d ~/.sdkman ]; then
 fi
 
 # Rust
-if [ -d ~/.cargo/env ]; then
+if [ -d ~/.cargo ]; then
     source ~/.cargo/env
 fi
 
@@ -116,7 +116,7 @@ if [ -d /usr/local/go/bin ]; then
 fi
 
 # Fuzzy Find (fzf)
-if command -v fzf > /dev/null; then
+if [ -d "$HOME/.fzf/bin" ]; then
   # Setup fzf
   # ---------
   if [[ ! "$PATH" == */.fzf/bin* ]]; then
@@ -140,9 +140,10 @@ fi
 
 # Fast Node Manager (fnm)
 if [ -d ~/.local/share/fnm ]; then
+  DEFAULT_NODE="18"
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
-  fnm use 18
+  fnm use $DEFAULT_NODE > /dev/null
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
