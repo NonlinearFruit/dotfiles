@@ -1,0 +1,3 @@
+podman system connection default <machine-name> Sets the default machine podman will use (kinda)
+podman pull <image> Clones a docker image
+podman start -ia <container-name> Attach interactively to a running container
