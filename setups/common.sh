@@ -3,7 +3,7 @@
 # Install Nerd Font? (https://www.nerdfonts.com/font-downloads)
 
 # Gap
-sudo apt install -y jq
+sudo apt install -y jq curl
 
 # Vim
 mkdir -p ~/.vim/swapfiles

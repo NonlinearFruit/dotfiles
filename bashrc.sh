@@ -59,6 +59,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Neovim Manager (bob)
+if [ -d ~/.local/share/bob/nvim-bin/ ]; then
+  export PATH="$PATH:$HOME/.local/share/bob/nvim-bin/"
+fi
+
 # Editor
 if command -v nvim > /dev/null; then
   export EDITOR=nvim
