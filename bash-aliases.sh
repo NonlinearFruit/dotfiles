@@ -16,9 +16,11 @@ fi
 
 if is_wsl ; then
   alias copy="clip.exe"
-  alias dotnet='dotnet.exe'
   alias npp='notepad++.exe'
   alias paste="powershell.exe Get-Clipboard"
   alias podman="podman.exe"
   alias pair="powershell.exe runas /user:pair 'C:\\Users\\pair\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe'"
+  if ! command -v dotnet > /dev/null ; then
+    alias dotnet='dotnet.exe'
+  fi
 fi
