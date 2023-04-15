@@ -24,8 +24,6 @@ if packer_plugins["omnisharp-vim"] and packer_plugins["omnisharp-vim"].loaded th
   keymap("rr", "OmniSharpRename", "[R]efactor [R]ename")
   keymap("rf", "OmniSharpCodeFormat", "[R]efactor [F]ormat")
   keymap("gi", "OmniSharpFindImplementations", "[G]oto [I]plementations")
-  keymap("gd", "OmniSharpGotoDefinition", "[G]oto [D]efinition")
-  keymap("fu", "OmniSharpFindUsages", "[F]ind [U]sages")
   -- keymap("", "OmniSharpGetCodeActions") -- [] []
   -- keymap("", "OmniSharpGlobalCodeCheck") -- [] []
   -- keymap("", "OmniSharpNavigateDown") -- [] []
@@ -35,10 +33,5 @@ if packer_plugins["omnisharp-vim"] and packer_plugins["omnisharp-vim"].loaded th
   -- keymap("", "OmniSharpReloadProject [{project}]") -- [] []
   -- keymap("", "OmniSharpRepeatCodeAction") -- [] []
   -- keymap("", "OmniSharpTypeLookup") -- [] []
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = csharp,
-    pattern = { "*.cs" },
-    callback = function() vim.keymap.set("n", "gd", "<cmd>OmniSharpGotoDefinition<cr>", { desc = "[G]oto [D]efinition" }) end
-  })
 end
 

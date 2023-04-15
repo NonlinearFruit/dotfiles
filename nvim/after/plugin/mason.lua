@@ -97,4 +97,10 @@ lsp_config.bashls.setup({
   on_attach = on_attach
 })
 
+lsp_config.omnisharp.setup({
+  on_attach = on_attach,
+  --capabilities = capabilities,
+  root_dir = lsp_config.util.root_pattern(".sln", ".csproj", ".git"),
+})
+
 vim.keymap.set('n', '<leader>lsp', '<cmd>Mason<cr>', { desc = '[LSP] Manage language server installs' })
