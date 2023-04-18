@@ -43,17 +43,21 @@ vim.g.clipboard = {
       cache_enabled = 0
 }
 
+local function map(mode, key, cmd, description)
+  vim.keymap.set(mode, key, cmd, { desc = description })
+end
+
 -- Remove obnoxious bindings
-vim.keymap.set({"n", "i"}, "<f1>", "<nop>") -- Way to close to escape and :help xyz is the right way to do it
+map({"n", "i"}, "<f1>", "<nop>", "This does nothing: Too close to Esc")
 
 -- Remove newbie crutches!
-vim.keymap.set({"n", "i", "v", "c"}, "<bs>", "<nop>")
-vim.keymap.set({"n", "i", "v", "c"}, "<del>", "<nop>")
-vim.keymap.set({"n", "i", "v", "c"}, "<down>", "<nop>")
-vim.keymap.set({"n", "i", "v", "c"}, "<left>", "<nop>")
-vim.keymap.set({"n", "i", "v", "c"}, "<right>", "<nop>")
-vim.keymap.set({"n", "i", "v", "c"}, "<up>", "<nop>")
--- vim.keymap.set({"n", "i", "v", "c"}, "hh", "<nop>")
--- vim.keymap.set({"n", "i", "v", "c"}, "jj", "<nop>")
--- vim.keymap.set({"n", "i", "v", "c"}, "kk", "<nop>")
--- vim.keymap.set({"n", "i", "v", "c"}, "ll", "<nop>")
+map({"n", "i", "v", "c"}, "<bs>", "<nop>", "This does nothing: Edit in normal mode")
+map({"n", "i", "v", "c"}, "<del>", "<nop>", "This does nothing: Edit in normal mode")
+map({"n", "i", "v", "c"}, "<down>", "<nop>", "This does nothing: Move in normal mode")
+map({"n", "i", "v", "c"}, "<left>", "<nop>", "This does nothing: Move in normal mode")
+map({"n", "i", "v", "c"}, "<right>", "<nop>", "This does nothing: Move in normal mode")
+map({"n", "i", "v", "c"}, "<up>", "<nop>", "This does nothing: Move in normal mode")
+-- map({"n", "v", "c"}, "hh", "<nop>", "This does nothing: Use relative jumps")
+-- map({"n", "v", "c"}, "jj", "<nop>", "This does nothing: Use relative jumps")
+-- map({"n", "v", "c"}, "kk", "<nop>", "This does nothing: Use relative jumps")
+-- map({"n", "v", "c"}, "ll", "<nop>", "This does nothing: Use relative jumps")
