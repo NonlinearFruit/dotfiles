@@ -8,8 +8,6 @@ nnoremap vb :action BuildSolutionAction<cr>
 nnoremap vu :action RiderUnitTestRunSolutionAction<cr>
 
 " Rider Rewrites
-inoremap <C-v> <esc>:action EditorPaste<cr>
-nnoremap dt :action CloseAllEditorsButActive<cr>
 nnoremap gb :action ReSharperGotoNextErrorInSolution<cr>
 nnoremap gi :action GotoImplementation<cr>
 
