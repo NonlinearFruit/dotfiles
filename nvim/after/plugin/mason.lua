@@ -41,7 +41,7 @@ local function on_attach(client, bufnr)
   vim.keymap.set({"n", "i", "v"}, "<c-k>", function() vim.diagnostic.open_float() end, {buffer = bufnr, remap = false, desc = "[K]now what is wrong"})
   vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, {buffer = bufnr, remap = false, desc = "[[] Next [d]iagnostic"})
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, {buffer = bufnr, remap = false, desc = "[]] Previous [d]iagnostic"})
-  vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, {buffer = bufnr, remap = false, desc = "[C]ode [A]ctions"})
+  vim.keymap.set({"n", "v"}, "<leader>ca", function() vim.lsp.buf.code_action() end, {buffer = bufnr, remap = false, desc = "[C]ode [A]ctions"})
 
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, {buffer = bufnr, remap = false})
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, {buffer = bufnr, remap = false})
