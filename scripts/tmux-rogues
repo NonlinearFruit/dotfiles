@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SESSION_NAME=$1
+NUMBER_OF_CLIENTS_IN_OTHER_SESSIONS=$(tmux list-clients -F '#{session_name}' | grep -cv "^$SESSION_NAME$")
+SINGULAR="rogue"
+PLURAL="rogues"
+SUFFIX=" "
+case "$NUMBER_OF_CLIENTS_IN_OTHER_SESSIONS" in
+"0")
+    ;;
+"1")
+    echo "$NUMBER_OF_CLIENTS_IN_OTHER_SESSIONS $SINGULAR $SUFFIX"
+    ;;
+*)
+    echo "$NUMBER_OF_CLIENTS_IN_OTHER_SESSIONS $PLURAL $SUFFIX"
+    ;;
+esac

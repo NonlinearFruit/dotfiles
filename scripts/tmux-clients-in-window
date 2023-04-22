@@ -1,0 +1,37 @@
+#!/bin/bash
+
+CLIENT_PID=$1
+WINDOW_ID=$2
+NUMBER_OF_OTHER_CLIENTS_IN_WINDOW=$(tmux list-clients -F '#{window_id} #{client_pid}' | grep "^${WINDOW_ID} " | grep -cv " ${CLIENT_PID}$")
+case "$NUMBER_OF_OTHER_CLIENTS_IN_WINDOW" in
+  "0")
+    echo " "
+    ;;
+  "1")
+    echo "⢀"
+    ;;
+  "2")
+    echo "⣀"
+    ;;
+  "3")
+    echo "⣠"
+    ;;
+  "4")
+    echo "⣤"
+    ;;
+  "5")
+    echo "⣴"
+    ;;
+  "6")
+    echo "⣶"
+    ;;
+  "7")
+    echo "⣾"
+    ;;
+  "8")
+    echo "⣿"
+    ;;
+  *)
+    echo "+"
+    ;;
+esac
