@@ -88,9 +88,9 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
-# Jump
-if [ -f /usr/share/autojump/autojump.sh ]; then
-    source /usr/share/autojump/autojump.sh
+# Zoxide
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init bash)"
 fi
 
 # SSH
