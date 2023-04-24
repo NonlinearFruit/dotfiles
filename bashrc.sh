@@ -88,11 +88,6 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
-# Zoxide
-if command -v zoxide > /dev/null; then
-  eval "$(zoxide init bash)"
-fi
-
 # SSH
 if [ -d ~/.ssh ]; then
     eval $(ssh-agent -s) > /dev/null
@@ -149,6 +144,11 @@ if [ -d ~/.local/share/fnm ]; then
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
   fnm use $DEFAULT_NODE > /dev/null
+fi
+
+# Zoxide
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init bash)"
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
