@@ -15,7 +15,7 @@ vim.opt.smartindent = true
 -- Display
 vim.opt.wrap = false
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.api.nvim_command('hi LineNr guifg=grey ctermfg=grey')
 vim.api.nvim_command('hi Pmenu guibg=black ctermbg=black guifg=white ctermfg=white') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
 vim.cmd.colorscheme('habamax')
