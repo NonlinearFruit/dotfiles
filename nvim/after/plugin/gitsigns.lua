@@ -19,8 +19,8 @@ gitsigns.setup({
     end
 
     -- Navigation
-    simple_map('n', ']c', gs.next_hunk, "[]] Jump to next [c]hange")
-    simple_map('n', '[c', gs.prev_hunk, "[[] Jump to previous [c]hange")
+    simple_map('n', ']h', gs.next_hunk, "[]] Jump to next [h]unk")
+    simple_map('n', '[h', gs.prev_hunk, "[[] Jump to previous [h]unk")
 
     -- Actions
     simple_map({'n', 'v'}, '<leader>hs', gs.stage_hunk, "[h]unk [s]tage")
