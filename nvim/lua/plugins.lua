@@ -13,8 +13,8 @@ return require('packer').startup(function(use)
     -- Linters and
     -- Formatters
   use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "williamboman/mason.nvim", -- Tool to install LSP/DAP/linter/formatters
+    "williamboman/mason-lspconfig.nvim", -- Easier to configure mason
     "neovim/nvim-lspconfig", -- Configure LSPs
     --"nvim-dap", -- Configure DAPs
     "jose-elias-alvarez/null-ls.nvim", -- Configure Linters and Formatters
@@ -51,4 +51,9 @@ return require('packer').startup(function(use)
 
   -- Basic git tooling
   use 'lewis6991/gitsigns.nvim'
+
+  -- Autocomplete and Snippets
+  use 'hrsh7th/nvim-cmp' -- ??
+  use 'hrsh7th/cmp-nvim-lsp' -- get completions from lsp
+  use 'L3MON4D3/LuaSnip' -- snippet engine
 end)

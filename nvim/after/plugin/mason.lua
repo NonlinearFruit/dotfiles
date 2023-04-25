@@ -32,6 +32,7 @@ vim.diagnostic.config({
   signs = false
 })
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local function on_attach(client, bufnr)
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
@@ -72,6 +73,7 @@ end
 
 lsp_config.lua_ls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -95,19 +97,23 @@ lsp_config.lua_ls.setup {
 }
 
 lsp_config.tsserver.setup({
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities
 })
 
 lsp_config.rust_analyzer.setup({
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities
 })
 
 lsp_config.bashls.setup({
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities
 })
 
 lsp_config.dockerls.setup({
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities
 })
 
 lsp_config.omnisharp.setup({
