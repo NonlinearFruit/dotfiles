@@ -131,8 +131,10 @@ lsp_config.omnisharp.setup({
     end
     on_attach(client, bufnr)
   end,
-  --capabilities = capabilities,
-  root_dir = lsp_config.util.root_pattern(".sln", ".csproj", ".git"),
+  capabilities = capabilities,
+  handers = {
+    ["textDocument/definition"] = require('omnisharp_extended').handler
+  }
 })
 
 vim.keymap.set('n', '<leader>lsp', '<cmd>Mason<cr>', { desc = '[LSP] Manage language server installs' })
