@@ -149,6 +149,7 @@ fi
 # Zoxide
 if command -v zoxide > /dev/null; then
   eval "$(zoxide init bash)"
+  alias cd='echo -e "use z and try again, n00b"'
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
