@@ -34,8 +34,11 @@ vim.diagnostic.config({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local function on_attach(client, bufnr)
-
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
+  if client == 'omnisharp' then
+    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
+  else
+    vim.keymap.set("n", "gd", require('omnisharp_extended').lsp_definitions, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
+  end
   vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
   vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, {buffer = bufnr, remap = false, desc = "[G]oto [R]eferences"})
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, {buffer = bufnr, remap = false, desc = "[K]now what this is"})
