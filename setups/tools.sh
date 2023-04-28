@@ -1,10 +1,9 @@
-# autojump: changing directory (requires .bashrc sourcing)
 # dos2unix: converts files from dos and unix and back again
 # figlet: ascii font
 # tmux: Terminal multiplexing
 # jq: json query
 # curl: http requests
-sudo apt install -y autojump curl dos2unix figlet jq tmux
+sudo apt install -y curl dos2unix figlet jq tmux
 
 # bat: better cat https://github.com/sharkdp/bat
 cargo install bat
@@ -15,7 +14,7 @@ cargo install bob-nvim
 # fd: better find https://github.com/sharkdp/fd
 cargo install fd-find
 
-# fnm: npde versioning https://github.com/Schniz/fnm
+# fnm: node versioning https://github.com/Schniz/fnm
 cargo install fnm
 
 # htmlq: jq for html using css selectors https://github.com/mgdm/htmlq
