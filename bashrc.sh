@@ -62,6 +62,9 @@ fi
 # Neovim Manager (bob)
 if [ -d ~/.local/share/bob/nvim-bin/ ]; then
   export PATH="$PATH:$HOME/.local/share/bob/nvim-bin/"
+  if ! command -v nvim > /dev/null; then
+    bob use stable
+  fi
 fi
 
 # Editor
@@ -139,11 +142,14 @@ if [ -d "$HOME/.fzf/bin" ]; then
 fi
 
 # Fast Node Manager (fnm)
-if [ -d ~/.local/share/fnm ]; then
+if command -v fnm > /dev/null; then
   DEFAULT_NODE="18"
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
-  fnm use $DEFAULT_NODE > /dev/null
+  if ! fnm use $DEFAULT_NODE > /dev/null 2> /dev/null; then
+    fnm install $DEFAULT_NODE > /dev/null
+    fnm use $DEFAULT_NODE > /dev/null
+  fi
 fi
 
 # Zoxide

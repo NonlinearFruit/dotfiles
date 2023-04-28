@@ -3,7 +3,8 @@
 # tmux: Terminal multiplexing
 # jq: json query
 # curl: http requests
-sudo apt install -y curl dos2unix figlet jq tmux
+# unzip: extract zips (required by omnisharp)
+sudo apt install -y curl dos2unix figlet jq tmux unzip
 
 # bat: better cat https://github.com/sharkdp/bat
 cargo install bat
