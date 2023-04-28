@@ -1,3 +1,7 @@
+# fzf: Fuzzy find stuff
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 # dos2unix: converts files from dos and unix and back again
 # figlet: ascii font
 # tmux: Terminal multiplexing
