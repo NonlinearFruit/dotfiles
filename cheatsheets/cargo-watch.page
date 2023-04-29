@@ -1,0 +1,4 @@
+
+
+- Auto run tests when file changes
+    `cargo watch -x test`

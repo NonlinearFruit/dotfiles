@@ -31,6 +31,9 @@ cargo install ripgrep
 # tldr: examples of using different commands https://github.com/dbrgn/tealdeer
 cargo install tealdeer
 
+# watch: automatically run tests and things when files change `cargo watch -x test`
+cargo install cargo-watch
+
 # z: better autojump https://github.com/ajeetdsouza/zoxide
 cargo install zoxide
 
