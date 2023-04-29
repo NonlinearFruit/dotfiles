@@ -23,7 +23,7 @@ mason_lsp_config.setup({
   automatic_installation = true
 })
 
--- vim.lsp.set_log_level('debug')
+--vim.lsp.set_log_level('debug')
 
 -- How diagnostics show up
 vim.diagnostic.config({
@@ -34,11 +34,7 @@ vim.diagnostic.config({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local function on_attach(client, bufnr)
-  if client == 'omnisharp' then
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
-  else
-    vim.keymap.set("n", "gd", require('omnisharp_extended').lsp_definitions, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
-  end
+  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
   vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, {buffer = bufnr, remap = false, desc = "[G]oto [D]efinition"})
   vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, {buffer = bufnr, remap = false, desc = "[G]oto [R]eferences"})
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, {buffer = bufnr, remap = false, desc = "[K]now what this is"})
@@ -139,7 +135,7 @@ lsp_config.omnisharp.setup({
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
-  handers = {
+  handlers = {
     ["textDocument/definition"] = require('omnisharp_extended').handler
   }
 })
