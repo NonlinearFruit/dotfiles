@@ -61,3 +61,13 @@ map({"n", "i", "v", "c"}, "<up>", "<nop>", "This does nothing: Move in normal mo
 -- map({"n", "v", "c"}, "jj", "<nop>", "This does nothing: Use relative jumps")
 -- map({"n", "v", "c"}, "kk", "<nop>", "This does nothing: Use relative jumps")
 -- map({"n", "v", "c"}, "ll", "<nop>", "This does nothing: Use relative jumps")
+
+--
+local fileTypeMappings = vim.api.nvim_create_augroup("FileTypeMappings", {clear = true})
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = fileTypeMappings,
+  pattern = { '*.page' },
+  callback = function ()
+    vim.bo.filetype = 'markdown'
+  end
+})
