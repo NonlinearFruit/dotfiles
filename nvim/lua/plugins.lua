@@ -57,4 +57,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp' -- ??
   use 'hrsh7th/cmp-nvim-lsp' -- get completions from lsp
   use 'L3MON4D3/LuaSnip' -- snippet engine
+
+  -- jq play
+  use 'phelipetls/vim-jqplay'
 end)
