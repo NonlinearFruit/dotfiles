@@ -61,6 +61,7 @@ vim.g.firenvim_config = {
     ['.*regexr.com.*'] = ignore,
     ['.*teams.microsoft.com.*'] = ignore,
     ['.*docs.google.com.*'] = ignore,
+    ['.*github.*blob.*'] = ignore,
     ['.*outlook.office365.com/mail.*'] = {
       takeover = 'always',
       priority = 1,
