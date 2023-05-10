@@ -1,0 +1,4 @@
+
+
+- Format stuff in a folder
+    `dotnet format`
