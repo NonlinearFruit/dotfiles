@@ -23,6 +23,7 @@ nnoremap [d :action ReSharperGotoPreviousErrorInSolution<cr>
 noremap <leader>// :action Find<cr>
 nnoremap <leader>bc :action BuildSolutionAction<cr>
 nnoremap <leader>at :action RiderUnitTestRunSolutionAction<cr>
+nnoremap <leader>vp :action ActivateTerminalToolWindow<cr>
 
 " Rider Rewrites
 nnoremap gi :action GotoImplementation<cr>
