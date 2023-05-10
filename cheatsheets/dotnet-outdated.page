@@ -1,0 +1,7 @@
+
+
+- View packages that are out of date
+    `dotnet outdated`
+
+- Upgrade all nuget packages
+    `dotnet outdated --upgrade`
