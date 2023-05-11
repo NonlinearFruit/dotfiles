@@ -5,7 +5,7 @@ end
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
-    ['<c-o>'] = cmp.mapping.complete(),
+    ['<c-space>'] = cmp.mapping.complete(),
     ['<esc>'] = cmp.mapping.abort(),
     ['<tab>'] = cmp.mapping.confirm({ select = true })
   }),
