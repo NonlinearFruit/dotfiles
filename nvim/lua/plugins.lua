@@ -60,4 +60,12 @@ return require('packer').startup(function(use)
 
   -- jq play
   use 'phelipetls/vim-jqplay'
+
+  -- Commenting
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
 end)
