@@ -16,10 +16,10 @@ return require('packer').startup(function(use)
     "williamboman/mason.nvim", -- Tool to install LSP/DAP/linter/formatters
     "williamboman/mason-lspconfig.nvim", -- Easier to configure mason
     "neovim/nvim-lspconfig", -- Configure LSPs
-    --"nvim-dap", -- Configure DAPs
     "jose-elias-alvarez/null-ls.nvim", -- Configure Linters and Formatters
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} } -- Configure DAPs
 
   -- Neovim in the browser
   use {
