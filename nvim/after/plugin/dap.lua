@@ -81,47 +81,17 @@ dapui.setup({
     }
   })
 
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
 
-  dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
-  end
-  dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-  end
-  dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-  end
-
-  dap.adapters.coreclr = {
-    type = 'executable',
-    command = require("mason-core.package"):get_install_path()..'/netcoredbg/netcoredbg',
-    args = {'--interpreter=vscode'}
-  }
-
-  dap.configurations.cs = {
-    {
-      type = "coreclr",
-      name = "launch - netcoredbg",
-      request = "launch",
-      program = function()
-        local cwd = vim.fn.getcwd()
-        local d = vim.fn.fnamemodify(cwd, ":t")
-        return vim.fn.input('Path to dll: ', cwd .. '/bin/Debug/net7.0/' .. d .. '.dll', 'file')
-      end,
-    },
-    {
-      type = "coreclr",
-      name = "attach - netcoredbg",
-      request = "attach",
-      processId = function()
-        local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
-        vim.fn.setenv('NETCOREDBG_ATTACH_PID', pid)
-        return tonumber(pgrep)
-      end,
-    }
-  }
-
-  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 
 local function keymap(key, cmd, description)
   vim.keymap.set({"n", "v"}, "<leader>"..key, "<cmd>"..cmd.."<cr>", { desc = description })
@@ -135,3 +105,85 @@ keymap("<f9>", "lua require('dap').toggle_breakpoint()", "Toggle breakpoint")
 keymap("<f10>", "lua require('dap').step_over()", "Step over")
 keymap("<f11>", "lua require('dap').step_into()", "Step into")
 keymap("<f12>", "lua require('dap').step_out()", "Step out")
+
+dap.adapters.coreclr = {
+  type = 'executable',
+  command = 'netcoredbg',
+  args = {'--interpreter=vscode'}
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+      local cwd = vim.fn.getcwd()
+      local d = vim.fn.fnamemodify(cwd, ":t")
+      return vim.fn.input('Path to dll: ', cwd .. '/bin/Debug/net7.0/' .. d .. '.dll', 'file')
+    end,
+  },
+  {
+    type = "coreclr",
+    name = "attach - netcoredbg",
+    request = "attach",
+    processId = function()
+      local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
+      vim.fn.setenv('NETCOREDBG_ATTACH_PID', pid)
+      return tonumber(pgrep)
+    end,
+  }
+}
+
+dap.adapters.codelldb = {
+  type = 'executable',
+  command = require("mason-core.package"):get_install_path()..'/codelldb/codelldb',
+  args = {'--interpreter=vscode'}
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+      local cwd = vim.fn.getcwd()
+      local d = vim.fn.fnamemodify(cwd, ":t")
+      return vim.fn.input('Path to dll: ', cwd .. '/bin/Debug/net7.0/' .. d .. '.dll', 'file')
+    end,
+  },
+  {
+    type = "coreclr",
+    name = "attach - netcoredbg",
+    request = "attach",
+    processId = function()
+      local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
+      vim.fn.setenv('NETCOREDBG_ATTACH_PID', pid)
+      return tonumber(pgrep)
+    end,
+  }
+}
+
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = "codelldb",
+    args = { "--port", "${port}" },
+  }
+}
+
+dap.configurations.rust = {
+  {
+    type = "codelldb",
+    request = "launch",
+    name = "launch - codelldb",
+    program = function()
+      local metadata_json = vim.fn.system "cargo metadata --format-version 1 --no-deps"
+      local metadata = vim.fn.json_decode(metadata_json)
+      local target_name = metadata.packages[1].targets[1].name
+      local target_dir = metadata.target_directory
+      return target_dir .. "/debug/" .. target_name
+    end
+  }
+}
