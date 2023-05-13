@@ -1,6 +1,6 @@
--- Requires
-  -- sudo apt-get install ripgrep
-  -- sudo apt install fd-find
+-- Requires: (install with `./init.sh tools`)
+  -- cargo install ripgrep
+  -- cargo install fd-find
 
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
