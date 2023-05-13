@@ -7,6 +7,15 @@ if not dapui_ok then
   return
 end
 
+local INSTALL_THESE = {
+  -- Debug Adapter Protocol (DAP) implementations,
+  "codelldb",   -- Rust
+  "netcoredbg", -- C#
+}
+for _, pkg in ipairs(INSTALL_THESE) do
+  if not require("mason-registry").is_installed(pkg) then require("mason.api.command").MasonInstall { pkg } end
+end
+
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
   mappings = {
