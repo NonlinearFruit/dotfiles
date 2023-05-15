@@ -1,3 +1,8 @@
+-- Resources:
+  -- https://github.com/mfussenegger/nvim-dap
+  -- https://github.com/rcarriga/nvim-dap-ui
+  -- https://aaronbos.dev/posts/debugging-csharp-neovim-nvim-dap
+
 local dap_ok, dap = pcall(require, 'dap')
 if not dap_ok then
   return
@@ -13,7 +18,9 @@ local INSTALL_THESE = {
   "netcoredbg", -- C#
 }
 for _, pkg in ipairs(INSTALL_THESE) do
-  if not require("mason-registry").is_installed(pkg) then require("mason.api.command").MasonInstall { pkg } end
+  if not require("mason-registry").is_installed(pkg) then
+    require("mason.api.command").MasonInstall { pkg }
+  end
 end
 
 dapui.setup({
