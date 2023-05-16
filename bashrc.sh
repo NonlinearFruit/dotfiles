@@ -110,7 +110,11 @@ fi
 
 # Rust
 if [ -d ~/.cargo ]; then
+  if [ -f ~/.cargo/env ]; then
     source ~/.cargo/env
+  else
+    export PATH="$PATH:$HOME/.cargo/bin"
+  fi
 fi
 
 # Go
