@@ -13,3 +13,6 @@ sudo apt install ./package.deb Manually install debian package
 <c-d> Close current terminal
 !! Runs last command
 !x Run most recent command that starts with `x`
+
+- For loop
+    `for x in {a,b,c}; do echo $x; done`
