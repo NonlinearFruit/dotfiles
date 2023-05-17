@@ -1,13 +1,3 @@
-local mason_ok, mason = pcall(require, 'mason')
-if not mason_ok then
-  return
-end
-
-local mason_lsp_ok, mason_lsp_config = pcall(require, 'mason-lspconfig')
-if not mason_lsp_ok then
-  return
-end
-
 local lsp_ok, lsp_config = pcall(require, 'lspconfig')
 if not lsp_ok then
   return
@@ -76,6 +66,7 @@ lsp_config.lua_ls.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
