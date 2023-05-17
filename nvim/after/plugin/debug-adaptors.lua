@@ -114,8 +114,8 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapStopped', {text='🔸', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', {text='🛑'})
+vim.fn.sign_define('DapStopped', {text='🔸'})
 
 local function keymap(key, cmd, description)
   vim.keymap.set({"n", "v"}, "<leader>"..key, "<cmd>"..cmd.."<cr>", { desc = description })
