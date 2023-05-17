@@ -12,6 +12,7 @@ config.keys = {
   { key = "v", mods = "CTRL|SHIFT", action = action.PasteFrom("Clipboard") },
   { key = "p", mods = "CTRL|SHIFT", action = action.ActivateCommandPalette },
 }
-config.font_size = 24
+config.font = wezterm.font('JetBrainsMono Nerd Font Mono')
+config.font_size = 14
 config.enable_scroll_bar = false
 return config
