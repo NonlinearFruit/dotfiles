@@ -1,0 +1,4 @@
+
+
+ - Mongo find
+     `db.<collection>.find({<field>: <value>})`
