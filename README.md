@@ -32,13 +32,20 @@ For configuration specific to a particular OS (or a particular environment), cre
 
 | Config                | Description                                  |
 | ---                   | ---                                          |
-| bash_aliases          | All the aliases                              |
-| bashrc                | Bash settings                                |
-| gitconfig             | [Git][git] settings                          |
-| ideavimrc             | [IdeaVim][ideavim] settings                  |
-| tmux.config           | [Tmux][tmux] settings                        |
-| vimrc                 | [Vim][vim] settings                          |
-| windows_terminal.json | [Windows][windowsterminal] Terminal settings |
+| `bash-aliases.sh` |  |
+| `bashrc.sh` | [Bash][bash] |
+| `cheatsheets/` | [TLDR][tldr] extensions |
+| `gitconfig.ini` | [Git][git |
+| `mappings/` | Available mappings |
+| `nvim/` | [Neovim][nvim] |
+| `scripts/` | Helpful scripts |
+| `setups/` | Available setups |
+| `tmux.conf` | [Tmux][tmux] |
+| `vimrc.vim` | [Vim][vim] + [IdeaVim][ideavim] |
+| `vivaldi/` | [Vivaldi mods][vivaldi-mods] |
+| `vivaldi.html` | [Vivaldi][vivaldi] |
+| `wezterm/` | [Wezterm][wezterm] |
+| `windows-terminal.json` | [Windows Terminal][windowsterminal] |
 
 ## Scripts
 
@@ -67,8 +74,14 @@ For configuration specific to a particular OS (or a particular environment), cre
 | tomato-do            | 25 minute tmux session                               |
 | tomato-done          | End tmux tomato                                      |
 
+[bash]: https://savannah.gnu.org/projects/bash/
 [git]: https://git-scm.com/docs
 [ideavim]: https://github.com/JetBrains/ideavim
+[nvim]: https://github.com/neovim/neovim
+[tldr]: https://github.com/dbrgn/tealdeer
 [tmux]: https://github.com/tmux/tmux
 [vim]: https://github.com/vim/vim
+[vivaldi]: https://vivaldi.com
+[vivaldi-mods]: https://forum.vivaldi.net/category/52/modifications
+[wezterm]: https://github.com/wez/wezterm
 [windowsterminal]: https://github.com/microsoft/terminal
