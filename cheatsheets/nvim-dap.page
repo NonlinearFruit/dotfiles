@@ -1,0 +1,4 @@
+
+
+- Kill process left running
+    `htop > F4 > (fileter) > Enter > Arrow to processes > F9 > SIGTERM > Enter`
