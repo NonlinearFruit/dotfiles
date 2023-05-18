@@ -82,6 +82,17 @@ vim.g.firenvim_config = {
       takeover = 'always',
       priority = 0
     }
+  },
+  globalSettings = {
+    ignoreKeys = {
+      all = {
+        '<C-W>',
+        '<F2>',
+        '<F5>',
+        '<F12>',
+        '<SC-P>',
+      }
+    }
   }
 }
 
