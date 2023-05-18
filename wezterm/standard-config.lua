@@ -2,6 +2,10 @@ WEZTERM = require('wezterm')
 ACTION = WEZTERM.action
 OPACITY_EVENT = 'toggle-opacity'
 
+WEZTERM.on('window-config-reloaded', function(window, pane)
+  window:toast_notification('dotfiles', 'Configuration Reloaded!', nil, 1000)
+end)
+
 WEZTERM.on(OPACITY_EVENT, function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if overrides.window_background_opacity == 0 then
