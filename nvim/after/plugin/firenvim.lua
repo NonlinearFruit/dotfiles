@@ -9,9 +9,9 @@ local SetupBuffer = function()
   -- At least 5 lines big
   if vim.go.lines < 5 then vim.go.lines = 5 end
 
-local function map(mode, key, cmd, description)
-  vim.keymap.set(mode, key, cmd, { desc = description })
-end
+  local function map(mode, key, cmd, description)
+    vim.keymap.set(mode, key, cmd, { desc = description })
+  end
 
   -- Occassionally helpful generic maps
   map("n", "<esc><esc><esc>", ":call firenvim#focus_page()<cr>", "Focus webpage")
@@ -57,23 +57,23 @@ local ignore = {
 }
 vim.g.firenvim_config = {
   localSettings = {
-    ['.*sourcegraph.com.*'] = ignore,
-    ['.*regexr.com.*'] = ignore,
-    ['.*teams.microsoft.com.*'] = ignore,
-    ['.*docs.google.com.*'] = ignore,
-    ['.*github.*blob.*'] = ignore,
-    ['.*outlook.office365.com/mail.*'] = {
+    ['sourcegraph.com'] = ignore,
+    ['regexr.com'] = ignore,
+    ['teams.microsoft.com'] = ignore,
+    ['docs.google.com'] = ignore,
+    ['github.*blob'] = ignore,
+    ['outlook.office365.com/mail'] = {
       takeover = 'always',
       priority = 1,
       selector = '#ReadingPaneContainerId [aria-label="Message body, press Alt+F10 to exit"]'
     },
-    ['.*outlook.office365.com/calendar.*'] = {
+    ['outlook.office365.com/calendar'] = {
       takeover = 'always',
       priority = 1,
       selector = ':not(.EditorClass)[role="textbox"] '
     },
 
-    [".*slack.*"] = {
+    ["slack.com"] = {
       takeover = 'always',
       priority = 1,
       content = 'html'
