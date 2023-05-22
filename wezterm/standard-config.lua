@@ -2,10 +2,6 @@ WEZTERM = require('wezterm')
 ACTION = WEZTERM.action
 OPACITY_EVENT = 'toggle-opacity'
 
-WEZTERM.on('window-config-reloaded', function(window, pane)
-  window:toast_notification('dotfiles', 'Configuration Reloaded!', nil, 1000)
-end)
-
 WEZTERM.on(OPACITY_EVENT, function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if overrides.window_background_opacity == 0 then
@@ -14,6 +10,31 @@ WEZTERM.on(OPACITY_EVENT, function(window, pane)
     overrides.window_background_opacity = (overrides.window_background_opacity or 1) - 0.25
   end
   window:set_config_overrides(overrides)
+end)
+
+SCHEMES = require('colorschemes')
+WEZTERM.on("new-scheme", function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  local currentScheme = overrides.color_scheme or SCHEMES[1]
+  local function indexOf(array, value)
+      for i, v in ipairs(array) do
+          if v == value then
+              return i
+          end
+      end
+      return nil
+  end
+  local maxIndex = #SCHEMES
+  local currentIndex = indexOf(SCHEMES, currentScheme)
+  local nextIndex = currentIndex + 1
+  if nextIndex > maxIndex then
+    nextIndex = 1
+  end
+  local newScheme = SCHEMES[nextIndex]
+  WEZTERM.log_info(currentIndex..' == '..currentScheme..' -> '..nextIndex..' == '..newScheme)
+  overrides.color_scheme = newScheme
+  window:set_config_overrides(overrides)
+  window:toast_notification('dotfiles', 'Color Scheme #'..nextIndex..': '..newScheme, nil, 500)
 end)
 
 local function getDefaultConfig()
@@ -36,6 +57,8 @@ local function bindKeys(config)
     { key = "v", mods = "CTRL|SHIFT", action = ACTION.PasteFrom("Clipboard") },
     { key = "p", mods = "CTRL|SHIFT", action = ACTION.ActivateCommandPalette },
     { key = 'o', mods = 'CTRL|SHIFT', action = ACTION.EmitEvent(OPACITY_EVENT)},
+    { key = 's', mods = 'CTRL|SHIFT', action = ACTION.EmitEvent("new-scheme")},
+    { key = 'k', mods = 'ALT', action = WEZTERM.action_callback(function(window, pane) pane:send_text 'pd_day.sh' end) },
   }
   return config
 end
