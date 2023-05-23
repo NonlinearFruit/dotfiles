@@ -7,7 +7,8 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<c-space>'] = cmp.mapping.complete(),
     ['<esc>'] = cmp.mapping.abort(),
-    ['<tab>'] = cmp.mapping.confirm({ select = true })
+    ['<tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<cr>'] = cmp.mapping.confirm({ select = true })
   }),
   sources = cmp.config.sources({
       { name = 'nvim_lsp' },
