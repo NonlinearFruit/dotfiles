@@ -12,7 +12,7 @@ WEZTERM.on(OPACITY_EVENT, function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
-SCHEMES = require('colorschemes')
+SCHEMES = require('colorschemes').dark
 WEZTERM.on("new-scheme", function(window, pane)
   local overrides = window:get_config_overrides() or {}
   local currentScheme = overrides.color_scheme or SCHEMES[1]
