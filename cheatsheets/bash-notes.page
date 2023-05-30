@@ -15,4 +15,13 @@ sudo apt install ./package.deb Manually install debian package
 !x Run most recent command that starts with `x`
 
 - For loop
-    `for x in {a,b,c}; do echo $x; done`
+`for x in {a,b,c}; do echo $x; done`
+
+- Pipe to while loop
+```
+ls | 
+{
+while read i; do echo $i; done
+...do other things using $i here...
+}
+```
