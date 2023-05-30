@@ -87,7 +87,10 @@ vim.g.firenvim_config = {
     ignoreKeys = {
       all = {
         '<C-W>',
+        '<F1>',
         '<F2>',
+        '<F3>',
+        '<F4>',
         '<F5>',
         '<F12>',
         '<SC-P>',
