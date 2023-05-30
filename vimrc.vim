@@ -14,11 +14,13 @@ nnoremap g; :action JumpToNextChange<cr>
 vnoremap = :action ReformatCode<cr>
 
 " Mimic Custom Vim
+noremap gcc :action CommentByBlockComment<cr>
+noremap gcb :action CommentByLineComment<cr>
 noremap ]h :action VcsShowNextChangeMarker<cr>
 noremap [h :action VcsShowPrevChangeMarker<cr>
 
-nnoremap ]d :action ReSharperGotoNextErrorInSolution<cr>
-nnoremap [d :action ReSharperGotoPreviousErrorInSolution<cr>
+noremap ]d :action ReSharperGotoNextErrorInSolution<cr>
+noremap [d :action ReSharperGotoPreviousErrorInSolution<cr>
 
 nnoremap <leader>// :action Find<cr>
 nnoremap <leader>/g :action FindInPath<cr>
