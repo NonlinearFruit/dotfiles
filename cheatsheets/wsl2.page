@@ -1,0 +1,7 @@
+# WSL2
+
+> Windows Subsystem for Linux
+> More information: <https://learn.microsoft.com/en-us/windows/wsl/install>
+
+- Reach localhost on the Windows side (https://stackoverflow.com/a/69407064/4769802)
+ `ping "$(hostname).local"`
