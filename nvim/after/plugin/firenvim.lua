@@ -51,38 +51,14 @@ if vim.g.started_by_firenvim then
   vim.api.nvim_create_autocmd("BufEnter", { group = firenvimMappings, callback = SetupBuffer})
 end
 
-local ignore = {
-  takeover = 'never',
-  priority = 2
-}
-vim.g.firenvim_config = {
-  localSettings = {
-    ['sourcegraph.com'] = ignore,
-    ['regexr.com'] = ignore,
-    ['teams.microsoft.com'] = ignore,
-    ['docs.google.com'] = ignore,
-    ['github.*blob'] = ignore,
-    ['outlook.office365.com/mail'] = {
-      takeover = 'always',
-      priority = 1,
-      selector = '#ReadingPaneContainerId [aria-label="Message body, press Alt+F10 to exit"]'
-    },
-    ['outlook.office365.com/calendar'] = {
-      takeover = 'always',
-      priority = 1,
-      selector = ':not(.EditorClass)[role="textbox"] '
-    },
+local nf_ok, nf = pcall(require, 'nonlinearfruit')
+local localSettings = {}
+if nf_ok then
+  localSettings = nf.firenvim_localSettings
+end
 
-    ["slack.com"] = {
-      takeover = 'always',
-      priority = 1,
-      content = 'html'
-    },
-    [".*"] = {
-      takeover = 'always',
-      priority = 0
-    }
-  },
+vim.g.firenvim_config = {
+  localSettings = localSettings,
   globalSettings = {
     ignoreKeys = {
       all = {
