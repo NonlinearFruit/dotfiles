@@ -1,3 +1,4 @@
 scripts/words.txt
+nvim/lua/nonlinearfruit.lua
 .luarc.json
 todo.md
