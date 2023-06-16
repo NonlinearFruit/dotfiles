@@ -122,6 +122,11 @@ if [ -d /usr/local/go/bin ]; then
     export PATH="$PATH:/usr/local/go/bin"
 fi
 
+# PDM
+if [ -d ~/.local/bin ]; then
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+
 # Fuzzy Find (fzf)
 if [ -d "$HOME/.fzf/bin" ]; then
   # Setup fzf
