@@ -85,6 +85,11 @@ lsp_config.tsserver.setup({
   capabilities = capabilities
 })
 
+lsp_config.pylyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+
 lsp_config.rust_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities
