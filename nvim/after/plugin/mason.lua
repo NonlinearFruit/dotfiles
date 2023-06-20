@@ -8,11 +8,6 @@ if not mason_lsp_ok then
   return
 end
 
-local lsp_ok, lsp_config = pcall(require, 'lspconfig')
-if not lsp_ok then
-  return
-end
-
 mason.setup({
   ui = {
     border = 'rounded'
