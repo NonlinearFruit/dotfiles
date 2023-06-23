@@ -12,7 +12,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Neovim
 sudo apt install -y build-essential # for Telescope FZF extension
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 mkdir -p ~/.nvim/swapfiles
 mkdir -p ~/.nvim/undofiles
 mkdir -p ~/.config/nvim
