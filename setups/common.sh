@@ -18,3 +18,9 @@ mkdir -p ~/.config/nvim
 
 # Scripts
 mkdir ~/scripts
+
+# Tealdear
+mkdir -p ~/.local/share/tealdeer/pages
+
+# Wezterm
+mkdir -p  ~/.config/wezterm/

@@ -9,5 +9,6 @@
   ["vimrc.vim", "~/.vimrc"],
   ["gap.sh", "~/projects/privatefiles/gap.sh"],
   ["init.sh", "~/projects/privatefiles/init.sh"],
-  ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"]
+  ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"],
+  ["wezterm/*", "~/.config/wezterm"]
 ]

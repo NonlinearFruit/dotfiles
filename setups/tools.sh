@@ -8,7 +8,14 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # jq: json query
 # curl: http requests
 # unzip: extract zips (required by omnisharp)
-sudo apt install -y curl dos2unix figlet jq tmux unzip
+MANAGER=apt
+if command -v yum > /dev/null; then
+  MANAGER=yum
+fi
+sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip
+
+# Load cargo into current shell
+source ~/.bashrc
 
 # bat: better cat https://github.com/sharkdp/bat
 cargo install bat

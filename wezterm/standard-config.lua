@@ -65,7 +65,6 @@ end
 
 local function configureDisplay(config)
   config.color_scheme = SCHEMES[0]
-  config.font = WEZTERM.font('JetBrainsMono Nerd Font Mono')
   config.font_size = 14
   return config
 end
@@ -75,7 +74,7 @@ local function configureIfWindows(config)
     return  string.find(WEZTERM.target_triple, 'windows')
   end
   if not isWindows() then
-    return
+    return config
   end
   config.default_prog = { "wsl.exe", "~"}
   return config
