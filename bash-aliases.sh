@@ -24,3 +24,8 @@ if is_wsl ; then
     alias dotnet='dotnet.exe'
   fi
 fi
+
+if is_linux ; then
+  alias copy="xclip -sel clip"
+  alias paste="xclip -sel clip -o"
+fi
