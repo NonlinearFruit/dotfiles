@@ -17,6 +17,14 @@ function is_wsl()
   command -v wslpath > /dev/null
 }
 
+function is_linux()
+{
+  if is_termux || is_wsl ; then
+    return 1
+  fi
+  return 0
+}
+
 # If no tmux sessions, make a new. Otherwise make a new one (targetting the old) with a new window in the currect directory
 if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
   tmux ls 2> /dev/null > /dev/null && tmux new -t $(tmux ls -F '#{session_id}' | sed 's/\$//' | head -1)\; new-window -c "$(pwd)" || tmux

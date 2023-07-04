@@ -8,11 +8,12 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # jq: json query
 # curl: http requests
 # unzip: extract zips (required by omnisharp)
+# xclip: copy/paste from clipboard
 MANAGER=apt
 if command -v yum > /dev/null; then
   MANAGER=yum
 fi
-sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip
+sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip xclip
 
 # Load cargo into current shell
 source ~/.bashrc
