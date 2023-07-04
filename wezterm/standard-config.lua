@@ -1,6 +1,7 @@
 WEZTERM = require('wezterm')
 ACTION = WEZTERM.action
 OPACITY_EVENT = 'toggle-opacity'
+SCHEMES = require('colorschemes').dark
 
 WEZTERM.on(OPACITY_EVENT, function(window, pane)
   local overrides = window:get_config_overrides() or {}
@@ -12,7 +13,6 @@ WEZTERM.on(OPACITY_EVENT, function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
-SCHEMES = require('colorschemes').dark
 WEZTERM.on("new-scheme", function(window, pane)
   local overrides = window:get_config_overrides() or {}
   local currentScheme = overrides.color_scheme or SCHEMES[1]
@@ -64,14 +64,26 @@ local function bindKeys(config)
 end
 
 local function configureDisplay(config)
-  config.color_scheme = 'Black Metal (base16)'
+  config.color_scheme = SCHEMES[0]
   config.font = WEZTERM.font('JetBrainsMono Nerd Font Mono')
   config.font_size = 14
   return config
 end
 
-return configureDisplay(
+local function configureIfWindows(config)
+  local function isWindows()
+    return  string.find(WEZTERM.target_triple, 'windows')
+  end
+  if not isWindows() then
+    return
+  end
+  config.default_prog = { "wsl.exe", "~"}
+  return config
+end
+
+return configureIfWindows(
+  configureDisplay(
   bindKeys(
   disableUnwantedFeatures(
-  getDefaultConfig())))
+  getDefaultConfig()))))
 
