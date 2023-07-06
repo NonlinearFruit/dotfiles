@@ -19,7 +19,7 @@ local INSTALL_THESE = {
 }
 for _, pkg in ipairs(INSTALL_THESE) do
   if not require("mason-registry").is_installed(pkg) then
-    require("mason.api.command").MasonInstall { pkg }
+    require("mason.api.command").MasonInstall({ pkg })
   end
 end
 

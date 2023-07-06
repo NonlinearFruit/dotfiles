@@ -19,3 +19,4 @@ mason_lsp_config.setup({
 })
 
 require('language-servers')
+require('debug-adaptors')
