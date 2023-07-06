@@ -29,19 +29,33 @@ vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undofiles"
 
--- Use the Windows clipboard
-vim.g.clipboard = {
-      name = 'WslClipboard',
-      copy= {
-            ['+'] = 'clip.exe',
-            ['*'] = 'clip.exe',
-      },
-      paste = {
-            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      },
-      cache_enabled = 0
-}
+if vim.loop.os_uname().sysname == 'Linux' then
+  vim.g.clipboard = {
+        name = 'LinuxClipboard',
+        copy= {
+              ['+'] = 'xclip -sel clip',
+              ['*'] = 'xclip -sel clip',
+        },
+        paste = {
+              ['+'] = 'xclip -sel clip -o',
+              ['*'] = 'xclip -sel clip -o',
+        },
+        cache_enabled = 0
+  }
+else
+  vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy= {
+              ['+'] = 'clip.exe',
+              ['*'] = 'clip.exe',
+        },
+        paste = {
+              ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+              ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0
+  }
+end
 
 local function map(mode, key, cmd, description)
   vim.keymap.set(mode, key, cmd, { desc = description })
