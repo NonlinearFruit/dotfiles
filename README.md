@@ -14,7 +14,7 @@ Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't i
 sudo apt install git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
-./init.sh | sh
+./init.sh common | sh
 ./gap.sh | sh
 ```
 
