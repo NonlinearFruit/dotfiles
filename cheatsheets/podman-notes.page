@@ -11,16 +11,5 @@
 - Attach interactively to a running container
 `podman start -ia <container-name>`
 
-- Sql Server
-```
-podman run 
-    --name=mssqlserver 
-    --hostname=mssql-server 
-    --user=mssql -e 'ACCEPT_EULA=Y' 
-    -e 'MSSQL_SA_PASSWORD=<your-password>' 
-    -p 1433:1433 
-    -v D:/Volumes/mssqlserver/data:/var/opt/mssql/data 
-    -v D:/Volumes/mssqlserver/log:/var/opt/mssql/log 
-    -v D:/Volumes/mssqlserver/secrets:/var/opt/mssql/secrets 
-    -d mcr.microsoft.com/mssql/server:2022-latest
-```
+- Publish port
+`podman run -p [hostport]:[containerport]`
