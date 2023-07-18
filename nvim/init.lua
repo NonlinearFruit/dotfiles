@@ -29,20 +29,7 @@ vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undofiles"
 
-if vim.loop.os_uname().sysname == 'Linux' then
-  vim.g.clipboard = {
-        name = 'LinuxClipboard',
-        copy= {
-              ['+'] = 'xclip -sel clip',
-              ['*'] = 'xclip -sel clip',
-        },
-        paste = {
-              ['+'] = 'xclip -sel clip -o',
-              ['*'] = 'xclip -sel clip -o',
-        },
-        cache_enabled = 0
-  }
-else
+if string.find(vim.loop.os_uname().release, 'microsoft') then
   vim.g.clipboard = {
         name = 'WslClipboard',
         copy= {
@@ -52,6 +39,19 @@ else
         paste = {
               ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
               ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0
+  }
+else
+  vim.g.clipboard = {
+        name = 'LinuxClipboard',
+        copy= {
+              ['+'] = 'xclip -sel clip',
+              ['*'] = 'xclip -sel clip',
+        },
+        paste = {
+              ['+'] = 'xclip -sel clip -o',
+              ['*'] = 'xclip -sel clip -o',
         },
         cache_enabled = 0
   }
