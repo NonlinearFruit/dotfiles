@@ -82,6 +82,14 @@ return require('packer').startup(function(use)
     end
   }
 
+  use {
+    'glepnir/dashboard-nvim',
+    config = function()
+      require('my-dashboard')
+    end,
+    requires = {'nvim-tree/nvim-web-devicons'}
+  }
+
   if packer_bootstrap then
     require('packer').sync()
   end
