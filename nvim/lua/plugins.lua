@@ -53,6 +53,9 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+  -- Viewing diffs and conflicts
+  use "sindrets/diffview.nvim"
+
   -- Game for practicing vim
   use 'ThePrimeagen/vim-be-good'
 
@@ -82,6 +85,7 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Dashboard
   use {
     'glepnir/dashboard-nvim',
     config = function()
