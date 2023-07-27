@@ -8,6 +8,16 @@ local function keymap(key, cmd, description)
   })
 end
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = csharp,
+  pattern = { "*.cs" },
+  callback = function()
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop  = 4
+    vim.opt.shiftwidth = 4
+  end
+})
+
 if packer_plugins["vimux"] and packer_plugins["vimux"].loaded then
   local function vimuxkeymap(key, shellCommand, description)
     keymap(key, "VimuxRunCommand('"..shellCommand.."')", description)
