@@ -10,11 +10,12 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # unzip: extract zips (required by omnisharp)
 # xclip: copy/paste from clipboard
 # gcc-c++: c++ compiler (required by treesitter)
+# gcc: c compiler (required by rust)
 MANAGER=apt
 if command -v dnf > /dev/null; then
   MANAGER=dnf
 fi
-sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip xclip gcc-c++
+sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip xclip gcc-c++ gcc
 
 # Load cargo into current shell
 source ~/.bashrc

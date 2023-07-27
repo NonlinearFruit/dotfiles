@@ -8,6 +8,7 @@ if command -v dnf > /dev/null; then
   MANAGER=dnf
 fi
 sudo $MANAGER install -y jq curl
+mkdir -p ~/projects/privatefiles
 
 # Vim
 mkdir -p ~/.vim/swapfiles

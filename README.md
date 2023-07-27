@@ -26,7 +26,7 @@ For configuration specific to a particular OS (or a particular environment), cre
 ./gap.sh wsl | sh
 ```
 
-> NOTE: The `setups/common.sh` and the `mappings/common.json` are always included (if they exist)
+> NOTE: The `mappings/common.json` is always included (if it exists)
 
 ## Configs
 
