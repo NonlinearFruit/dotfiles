@@ -1,9 +1,9 @@
 -- :checkhealth
 
-require('plugins')
+require("plugins")
 
 -- Leader Key
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 -- Indentaion should be two spaces. Tabs shouldn't exist
 vim.opt.tabstop = 2
@@ -16,10 +16,15 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = false
-vim.api.nvim_command('hi LineNr guifg=grey ctermfg=grey')
-vim.api.nvim_command('hi Pmenu guibg=black ctermbg=black guifg=white ctermfg=white') -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
-vim.cmd.colorscheme('habamax')
-vim.cmd([[ highlight clear SignColumn ]])
+vim.api.nvim_command("hi LineNr guifg=grey ctermfg=grey")
+vim.api.nvim_command("hi Pmenu guibg=black ctermbg=black guifg=white ctermfg=white") -- Make popup windows not pink (https://vi.stackexchange.com/a/12665/11897)
+vim.cmd.colorscheme("habamax")
+vim.cmd("highlight clear SignColumn")
+
+-- Netrw
+vim.g.netrw_banner=0 -- Hide banner
+vim.g.netrw_liststyle=3 -- Tree view
+vim.g.netrw_preview=0 -- Preview below
 
 -- Backups
 vim.opt.swapfile = true

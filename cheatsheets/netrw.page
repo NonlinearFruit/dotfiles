@@ -1,0 +1,11 @@
+# Vim
+> Terminal editor
+
+- Toggle file explorer 
+   `:Lexplore`
+
+- Preview file
+   `p`
+
+- Close preview file
+   `<c-w>z`
