@@ -94,6 +94,15 @@ return require('packer').startup(function(use)
     requires = {'nvim-tree/nvim-web-devicons'}
   }
 
+  use({
+    "nvim-neotest/neotest",
+    requires = {
+      {
+        "Issafalcon/neotest-dotnet",
+      },
+    }
+  })
+
   if packer_bootstrap then
     require('packer').sync()
   end

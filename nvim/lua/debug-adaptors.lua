@@ -118,8 +118,7 @@ vim.fn.sign_define('DapBreakpoint', {text='🛑'})
 vim.fn.sign_define('DapStopped', {text='💥'})
 
 local function keymap(key, cmd, description)
-  vim.keymap.set({"n", "v"}, "<leader>"..key, "<cmd>"..cmd.."<cr>", { desc = description })
-  vim.keymap.set("i", key, "<cmd>"..cmd.."<cr>", { desc = description })
+  vim.keymap.set({"n", "i", "v"}, key, "<cmd>"..cmd.."<cr>", { desc = description })
 end
 
 keymap("<f3>", "lua require('dap').run_last()", "Run last")
@@ -130,7 +129,7 @@ keymap("<f10>", "lua require('dap').step_over()", "Step over")
 keymap("<f11>", "lua require('dap').step_into()", "Step into")
 keymap("<f12>", "lua require('dap').step_out()", "Step out")
 
-dap.adapters.coreclr = {
+dap.adapters.netcoredbg = {
   type = 'executable',
   command = 'netcoredbg',
   args = {'--interpreter=vscode'}
@@ -138,7 +137,7 @@ dap.adapters.coreclr = {
 
 dap.configurations.cs = {
   {
-    type = "coreclr",
+    type = "netcoredbg",
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
@@ -148,7 +147,7 @@ dap.configurations.cs = {
     end,
   },
   {
-    type = "coreclr",
+    type = "netcoredbg",
     name = "attach - netcoredbg",
     request = "attach",
     processId = function()
@@ -163,29 +162,6 @@ dap.adapters.codelldb = {
   type = 'executable',
   command = require("mason-core.package"):get_install_path()..'/codelldb/codelldb',
   args = {'--interpreter=vscode'}
-}
-
-dap.configurations.cs = {
-  {
-    type = "coreclr",
-    name = "launch - netcoredbg",
-    request = "launch",
-    program = function()
-      local cwd = vim.fn.getcwd()
-      local d = vim.fn.fnamemodify(cwd, ":t")
-      return vim.fn.input('Path to dll: ', cwd .. '/bin/Debug/net7.0/' .. d .. '.dll', 'file')
-    end,
-  },
-  {
-    type = "coreclr",
-    name = "attach - netcoredbg",
-    request = "attach",
-    processId = function()
-      local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
-      vim.fn.setenv('NETCOREDBG_ATTACH_PID', pid)
-      return tonumber(pgrep)
-    end,
-  }
 }
 
 dap.adapters.codelldb = {

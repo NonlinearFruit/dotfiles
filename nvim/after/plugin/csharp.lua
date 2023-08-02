@@ -31,7 +31,7 @@ end
 
 if packer_plugins["omnisharp-vim"] and packer_plugins["omnisharp-vim"].loaded then
   keymap("fi", "OmniSharpFixUsings", "[F]ix [I]mports")
-  keymap("rr", "OmniSharpRename", "[R]efactor [R]ename")
+  -- keymap("rr", "OmniSharpRename", "[R]efactor [R]ename")
   keymap("rf", "OmniSharpCodeFormat", "[R]efactor [F]ormat")
   keymap("gi", "OmniSharpFindImplementations", "[G]oto [I]plementations")
   -- keymap("", "OmniSharpGetCodeActions") -- [] []

@@ -1,0 +1,19 @@
+# Neotest
+
+> An extensible framework for interacting with tests within NeoVim
+> More info <https://github.com/nvim-neotest/neotest>
+
+- Run the current file
+  `lua require('neotest').run.run(vim.fn.expand('%'))`
+
+- Debug the current file with nvim-dap
+  `lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})`
+
+- Run the nearest test
+  `lua require('neotest').run.run()`
+
+- Debug the nearest test
+  `lua require('neotest').run.run({strategy = 'dap'})`
+
+- Toggle summary window
+   `lua require("neotest").summary.toggle()`
