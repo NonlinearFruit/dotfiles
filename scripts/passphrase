@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ipsum $1 |
 while read -r word; do
   echo "${word^}";
@@ -7,6 +9,6 @@ sed 's/.$//' |
 {
   read -r phrase;
   echo "${phrase}";
-  echo -n "${phrase}" | clip.exe;
+  echo -n "${phrase}" | clip copy;
   echo "Copied!";
 }

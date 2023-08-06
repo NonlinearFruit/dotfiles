@@ -1,97 +1,95 @@
 #!/bin/bash
-  # Random Word Generator 
-  # Inspired by:
-  #      - https://linuxconfig.org/random-word-generator
-  #      - http://stackoverflow.com/a/14203146/4769802
-  #      - http://www.unix.com/shell-programming-and-scripting/156551-check-whether-string-begin-uppercase-lowercase-digit.html 
+# Random Word Generator
+# Inspired by:
+#      - https://linuxconfig.org/random-word-generator
+#      - http://stackoverflow.com/a/14203146/4769802
+#      - http://www.unix.com/shell-programming-and-scripting/156551-check-whether-string-begin-uppercase-lowercase-digit.html
 
-#-----------------------------------------------------------------Constants 
-  X=0
-  COUNT=1
-  MAX_INT=16777216
-  ENTROPY=false
-  ALL_NON_RANDOM_WORDS=~/scripts/words.txt # dictionary file
-  non_random_words=`cat $ALL_NON_RANDOM_WORDS | wc -l` # total # of words 
-  proper_nouns=`cat $ALL_NON_RANDOM_WORDS | grep [A-Z].* | wc -l` # apprx # of proper nouns
-  total_options=$((non_random_words - proper_nouns)) # apprx # of options
+#-----------------------------------------------------------------Constants
+X=0
+COUNT=1
+MAX_INT=16777216
+ENTROPY=false
+ALL_NON_RANDOM_WORDS=~/scripts/words.txt # dictionary file
+non_random_words="$(cat $ALL_NON_RANDOM_WORDS | wc -l)" # total # of words
+proper_nouns="$(cat $ALL_NON_RANDOM_WORDS | grep [A-Z].* | wc -l)" # apprx # of proper nouns
+total_options="$((non_random_words - proper_nouns))" # apprx # of options
 
 #-----------------------------------------------------------------Handle Flags w. Params
-  while [[ $# -gt 1 ]]
-  do
-      key="$1"
-      case $key in
-          -e|--entropy)
-                  # print the entropy
-                  ENTROPY=true
-                  ;;
-          *)
-                  echo "Unrecognized argument: try 'ipsum --help'"
-                  exit
-                  ;;
+while [[ $# -gt 1 ]]
+do
+  key="$1"
+  case $key in
+    -e|--entropy)
+      # print the entropy
+      ENTROPY=true
+      ;;
+    *)
+      echo "Unrecognized argument: try 'ipsum --help'"
+      exit
+      ;;
   esac
   shift # past argument or value
-  done
+done
 
 #-----------------------------------------------------------------Handle Main Param
-  if [[ -n $1 ]]; then
-      case $1 in
-          -a|--about)
-                  # Give a description of self
-                  echo "Ipsum is a minimalist random word generator"
-                  echo "with several notable features:"
-                  echo "       - Off-line: uses local dictionary so"
-                  echo "                   no internet is needed"
-                  echo "       - Random: uses '/dev/urandom' which is a CSPRNG"
-                  echo "       - Entropy: calculates entropy of requested word combo"
-                  echo ""
-                  exit
-                  ;;
-          -h|--help)
-                  # Show some examples
-                  echo ""
-                  echo "Example Usage: ipsum"
-                  echo "               ipsum 12"
-                  echo "               ipsum --entropy 12"
-                  echo "               ipsum -e 12"
-                  echo ""
-                  exit
-                  ;;
-          -i|--info)
-                  # Show information about numbers and such
-                  echo ""
-                  echo "Dictionary Location: $ALL_NON_RANDOM_WORDS"
-                  echo "Dictionary Size:     $non_random_words"
-                  echo "Proper Nouns:        $proper_nouns"
-                  echo "Usable Words:        $total_options"
-                  echo ""
-                  exit
-                  ;;
-          [0-9]*)
-                  # It is probably a number, so work normally
-                  COUNT="$1"
-                  ;;
-          *)
-                  echo "Unrecognized argument: try 'ipsum --help'"
-                  exit
-                  ;;
-      esac
+if [[ -n $1 ]]; then
+  case $1 in
+    -a|--about)
+      # Give a description of self
+      echo "Ipsum is a minimalist random word generator"
+      echo "with several notable features:"
+      echo "       - Off-line: uses local dictionary so"
+      echo "                   no internet is needed"
+      echo "       - Random: uses '/dev/urandom' which is a CSPRNG"
+      echo "       - Entropy: calculates entropy of requested word combo"
+      echo ""
+      exit
+      ;;
+    -h|--help)
+      # Show some examples
+      echo ""
+      echo "Example Usage: ipsum"
+      echo "               ipsum 12"
+      echo "               ipsum --entropy 12"
+      echo "               ipsum -e 12"
+      echo ""
+      exit
+      ;;
+    -i|--info)
+      # Show information about numbers and such
+      echo ""
+      echo "Dictionary Location: $ALL_NON_RANDOM_WORDS"
+      echo "Dictionary Size:     $non_random_words"
+      echo ""
+      exit
+      ;;
+    [0-9]*)
+      # It is probably a number, so work normally
+      COUNT="$1"
+      ;;
+    *)
+      echo "Unrecognized argument: try 'ipsum --help'"
+      exit
+      ;;
+  esac
 
-  fi
+fi
 
 #-----------------------------------------------------------------Calculate Entrophy
-  if [ "$ENTROPY" = true ]; then
-      # Equation = log_2( #_of_options ) * #_of_words
-      log_base_2=`echo "l($total_options)/l(2)" | bc -l` # log base 2 of options
-      entropy_bits=`printf "%.*f\n" 2 $log_base_2` # bits of entropy per word
-      total_entropy=$(echo "$entropy_bits * $COUNT" | bc)
-      echo "$COUNT word(s) out of $total_options produces $total_entropy bits of entropy."
-      echo ""
-  fi
+if [ "$ENTROPY" = true ]; then
+  # Equation = log_2( #_of_options ) * #_of_words
+  log_base_2=`echo "l($total_options)/l(2)" | bc -l` # log base 2 of options
+  entropy_bits=`printf "%.*f\n" 2 $log_base_2` # bits of entropy per word
+  total_entropy=$(echo "$entropy_bits * $COUNT" | bc)
+  echo "$COUNT word(s) out of $total_options produces $total_entropy bits of entropy."
+  echo ""
+fi
 
 #-----------------------------------------------------------------Make $COUNT Random Words
-  while [[ "$X" -lt "$COUNT" ]]; do
-      random_number=`echo "$(od -N3 -An -i /dev/urandom)*$non_random_words/$MAX_INT" | bc`
-      WORD=$(sed `echo $random_number`"q;d" $ALL_NON_RANDOM_WORDS)
-      echo "$WORD"
-      let "X = X + 1" 
-  done
+while [[ "$X" -lt "$COUNT" ]]; do
+  random_number=`echo "$(od -N3 -An -i /dev/urandom)*$total_options/$MAX_INT" | bc`
+  WORD=$(sed "$(echo $random_number)q;d" $ALL_NON_RANDOM_WORDS)
+  echo "$WORD"
+  let "X = X + 1"
+done
