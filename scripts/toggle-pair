@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PAIR_FILE="$HOME/.pair-nice-with-the-other-kids"
+if [ -f $PAIR_FILE ]; then
+  rm $PAIR_FILE
+else
+  touch $PAIR_FILE
+fi

@@ -1,39 +1,32 @@
 #!/bin/bash
 # Executed by bash(1) for non-login shells.
 
+# Scripts
+if [ -d ~/scripts ]; then
+    export PATH=$PATH:~/scripts
+fi
+
 # Exit if this shell should not be interative
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-function is_termux()
-{
-  command -v termux-setup-storage > /dev/null
-}
-
-function is_wsl()
-{
-  command -v wslpath > /dev/null
-}
-
-function is_linux()
-{
-  if is_termux || is_wsl ; then
-    return 1
+# Terminal multiplexing
+if is lonely; then                                       # Pairs should manually decide how to attach/create tmux sessions
+  if command -v tmux > /dev/null && [ -z "$TMUX" ]; then # If tmux exists && we're not in a tmux session
+    if tmux ls 2> /dev/null > /dev/null; then            # If tmux sessions already exist
+      tmux new -t $(tmux ls -F '#{session_id}' | sed 's/\$//' | head -1)\; new-window -c "$(pwd)" # attach
+    else
+      tmux                                                                                        # new
+    fi
   fi
-  return 0
-}
-
-# If no tmux sessions, make a new. Otherwise make a new one (targetting the old) with a new window in the currect directory
-if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
-  tmux ls 2> /dev/null > /dev/null && tmux new -t $(tmux ls -F '#{session_id}' | sed 's/\$//' | head -1)\; new-window -c "$(pwd)" || tmux
 fi
 
 # Update window size after each command
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # History
@@ -84,11 +77,6 @@ else
   export EDITOR=vi
 fi
 
-# Scripts
-if [ -d ~/scripts ]; then
-    export PATH=$PATH:~/scripts
-fi
-
 # Private Configuration (Not source controlled)
 if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
@@ -105,9 +93,9 @@ if [ -d ~/.ssh ]; then
     ssh-add ~/.ssh/id_rsa 2> /dev/null
 fi
 
-# Pip
+# Pip && Python Dependency Manager (pdm)
 if [ -d ~/.local/bin ]; then
-    export PATH=$PATH:~/.local/bin
+    export PATH="$PATH:$HOME/.local/bin"
 fi
 
 # Sdkman
@@ -128,11 +116,6 @@ fi
 # Go
 if [ -d /usr/local/go/bin ]; then
     export PATH="$PATH:/usr/local/go/bin"
-fi
-
-# PDM
-if [ -d ~/.local/bin ]; then
-    export PATH="$PATH:$HOME/.local/bin"
 fi
 
 # Fuzzy Find (fzf)
@@ -160,7 +143,7 @@ fi
 
 # Fast Node Manager (fnm)
 if command -v fnm > /dev/null; then
-  DEFAULT_NODE="18"
+  export DEFAULT_NODE="18"
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
   if ! fnm use $DEFAULT_NODE > /dev/null 2> /dev/null; then
@@ -172,11 +155,13 @@ fi
 # Zoxide
 if command -v zoxide > /dev/null; then
   eval "$(zoxide init bash)"
-  alias cd='echo -e "use z and try again, n00b" #'
-  alias j='echo -e "I like the spunk, but use z instead" #'
+  if is lonely; then
+    alias cd='echo -e "use z and try again, n00b" #'
+    alias j='echo -e "I like the spunk, but use z instead" #'
+  fi
 fi
 
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
-if is_wsl ; then
+if is wsl ; then
   export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
 fi

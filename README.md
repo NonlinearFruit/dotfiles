@@ -69,10 +69,6 @@ For configuration specific to a particular OS (or a particular environment), cre
 | rusty-link           | Symlink rust binary to ~/scripts folder              |
 | stopwatch            | Indefinite timer                                     |
 | sundays              | Number of Sundays until given birthdate turns 18     |
-| tomato               | 25 minute timer                                      |
-| tomato-break         | Choose tomato spacing                                |
-| tomato-do            | 25 minute tmux session                               |
-| tomato-done          | End tmux tomato                                      |
 
 [bash]: https://savannah.gnu.org/projects/bash/
 [git]: https://git-scm.com/docs

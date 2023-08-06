@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [[ "$1" == "copy" ]]; then
+  if is termux ; then
+    termux-clipboard-set
+  fi
+
+  if is wsl ; then
+    clip.exe
+  fi
+
+  if is linux ; then
+    xclip -sel clip
+  fi
+else
+  if is termux ; then
+    termux-clipboard-get
+  fi
+
+  if is wsl ; then
+    powershell.exe Get-Clipboard
+  fi
+
+  if is linux ; then
+    xclip -sel clip -o
+  fi
+fi

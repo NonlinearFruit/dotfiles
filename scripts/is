@@ -1,0 +1,58 @@
+#!/bin/bash
+
+set -e
+
+function is_termux()
+{
+  command -v termux-setup-storage > /dev/null
+}
+
+function is_wsl()
+{
+  command -v wslpath > /dev/null
+}
+
+function is_linux()
+{
+  if is_termux || is_wsl ; then
+    return 1
+  fi
+  return 0
+}
+
+function is_pair_friendly()
+{
+  if [ -f ~/.pair-nice-with-the-other-kids ]; then
+    return 0
+  fi
+  return 1
+}
+
+function is_lonely()
+{
+  ! is_pair_friendly fail
+}
+
+for parameter do
+  case $parameter in
+    termux)
+      is_termux
+      ;;
+
+    wsl)
+      is_wsl
+      ;;
+
+    linux)
+      is_linux
+      ;;
+
+    pair_friendly)
+      is_pair_friendly
+      ;;
+
+    lonely)
+      is_lonely
+      ;;
+  esac
+done

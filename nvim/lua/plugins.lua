@@ -33,6 +33,8 @@ return require('packer').startup(function(use)
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} } -- Configure DAPs
+  -- C# LSP with extra sugar
+  use 'Hoffs/omnisharp-extended-lsp.nvim'
 
   -- Neovim in the browser
   use {
@@ -40,34 +42,24 @@ return require('packer').startup(function(use)
     run = function() vim.fn['firenvim#install'](0) end
   }
 
-  -- C# LSP with extra sugar
---  use 'OmniSharp/omnisharp-vim'
-  use 'Hoffs/omnisharp-extended-lsp.nvim'
-
-  -- Fun CellularAutomaton make_it_rain && game_of_life
-  use 'eandrju/cellular-automaton.nvim'
-
-  -- To support CellularAutomaton
+  -- Good syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
 
-  -- Viewing diffs and conflicts
-  use "sindrets/diffview.nvim"
-
-  -- Game for practicing vim
-  use 'ThePrimeagen/vim-be-good'
-
   -- Telescope for searching things
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
   }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Basic git tooling
   use 'lewis6991/gitsigns.nvim'
+
+  -- Viewing diffs and conflicts
+  use "sindrets/diffview.nvim"
 
   -- Autocomplete and Snippets
   use 'hrsh7th/nvim-cmp' -- ??
@@ -94,6 +86,7 @@ return require('packer').startup(function(use)
     requires = {'nvim-tree/nvim-web-devicons'}
   }
 
+  -- Running tests
   use({
     "nvim-neotest/neotest",
     requires = {
@@ -102,6 +95,15 @@ return require('packer').startup(function(use)
       },
     }
   })
+
+  -- Fun CellularAutomaton make_it_rain && game_of_life
+  use {
+    'eandrju/cellular-automaton.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+
+  -- Game for practicing vim
+  use 'ThePrimeagen/vim-be-good'
 
   if packer_bootstrap then
     require('packer').sync()

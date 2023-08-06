@@ -1,6 +1,0 @@
-#!/bin/bash
-
-numberOfTomatosToday=$(cat ~/tasklist.txt | grep "^\w" | grep "$(date +%Y-%m-%d)" | wc -l)
-breakMinutes=$([ $(($numberOfTomatosToday%4)) -eq 0 ] && echo 15 || echo 5)
-
-countdown $(($breakMinutes*60))

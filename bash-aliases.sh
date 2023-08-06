@@ -9,23 +9,11 @@ alias vi="$EDITOR"
 alias vim="$EDITOR"
 alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 
-if is_termux ; then
-  alias copy='termux-clipboard-set'
-  alias paste='termux-clipboard-get'
-fi
-
-if is_wsl ; then
-  alias copy="clip.exe"
+if is wsl ; then
   alias npp='notepad++.exe'
-  alias paste="powershell.exe Get-Clipboard"
   alias podman="podman.exe"
   alias pair="powershell.exe runas /user:pair 'C:\\Users\\pair\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe'"
   if ! command -v dotnet > /dev/null ; then
     alias dotnet='dotnet.exe'
   fi
-fi
-
-if is_linux ; then
-  alias copy="xclip -sel clip"
-  alias paste="xclip -sel clip -o"
 fi

@@ -34,52 +34,35 @@ vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undofiles"
 
-if string.find(vim.loop.os_uname().release, 'microsoft') then
-  vim.g.clipboard = {
-        name = 'WslClipboard',
-        copy= {
-              ['+'] = 'clip.exe',
-              ['*'] = 'clip.exe',
-        },
-        paste = {
-              ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-              ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = 0
-  }
-else
-  vim.g.clipboard = {
-        name = 'LinuxClipboard',
-        copy= {
-              ['+'] = 'xclip -sel clip',
-              ['*'] = 'xclip -sel clip',
-        },
-        paste = {
-              ['+'] = 'xclip -sel clip -o',
-              ['*'] = 'xclip -sel clip -o',
-        },
-        cache_enabled = 0
-  }
+vim.g.clipboard = {
+      name = 'Universal Clipboard',
+      copy= {
+            ['+'] = 'clip copy',
+            ['*'] = 'clip copy',
+      },
+      paste = {
+            ['+'] = 'clip paste',
+            ['*'] = 'clip paste',
+      },
+      cache_enabled = 0
+}
+
+if os.execute('is lonely') == 0 then
+  local function map(mode, key, cmd, description)
+    vim.keymap.set(mode, key, cmd, { desc = description })
+  end
+
+  -- Remove obnoxious bindings
+  map({"n", "i"}, "<f1>", "<nop>", "This does nothing: Too close to Esc")
+
+  -- Remove newbie crutches!
+  map({"n", "i", "v", "c"}, "<bs>", "<nop>", "This does nothing: Edit in normal mode")
+  map({"n", "i", "v", "c"}, "<del>", "<nop>", "This does nothing: Edit in normal mode")
+  map({"n", "i", "v", "c"}, "<down>", "<nop>", "This does nothing: Move in normal mode")
+  map({"n", "i", "v", "c"}, "<left>", "<nop>", "This does nothing: Move in normal mode")
+  map({"n", "i", "v", "c"}, "<right>", "<nop>", "This does nothing: Move in normal mode")
+  map({"n", "i", "v", "c"}, "<up>", "<nop>", "This does nothing: Move in normal mode")
 end
-
-local function map(mode, key, cmd, description)
-  vim.keymap.set(mode, key, cmd, { desc = description })
-end
-
--- Remove obnoxious bindings
-map({"n", "i"}, "<f1>", "<nop>", "This does nothing: Too close to Esc")
-
--- Remove newbie crutches!
-map({"n", "i", "v", "c"}, "<bs>", "<nop>", "This does nothing: Edit in normal mode")
-map({"n", "i", "v", "c"}, "<del>", "<nop>", "This does nothing: Edit in normal mode")
-map({"n", "i", "v", "c"}, "<down>", "<nop>", "This does nothing: Move in normal mode")
-map({"n", "i", "v", "c"}, "<left>", "<nop>", "This does nothing: Move in normal mode")
-map({"n", "i", "v", "c"}, "<right>", "<nop>", "This does nothing: Move in normal mode")
-map({"n", "i", "v", "c"}, "<up>", "<nop>", "This does nothing: Move in normal mode")
--- map({"n", "v", "c"}, "hh", "<nop>", "This does nothing: Use relative jumps")
--- map({"n", "v", "c"}, "jj", "<nop>", "This does nothing: Use relative jumps")
--- map({"n", "v", "c"}, "kk", "<nop>", "This does nothing: Use relative jumps")
--- map({"n", "v", "c"}, "ll", "<nop>", "This does nothing: Use relative jumps")
 
 -- File type mappings
 local fileTypeMappings = vim.api.nvim_create_augroup("FileTypeMappings", {clear = true})
