@@ -7,7 +7,7 @@
   ["nvim/*", "~/.config/nvim"],
   ["tmux.conf", "~/.tmux.conf"],
   ["vimrc.vim", "~/.vimrc"],
-  ["gap.sh", "~/projects/privatefiles/gap.sh"],
+  ["map.sh", "~/projects/privatefiles/map.sh"],
   ["init.sh", "~/projects/privatefiles/init.sh"],
   ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"],
   ["https://raw.githubusercontent.com/rxi/json.lua/master/json.lua", "~/.config/nvim/lua/json.lua", "curl"],

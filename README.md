@@ -4,7 +4,7 @@
 
 # Dotfiles
 
-A simple repo that elegantly manages my configs and scripts using Git Map (see `gap.sh`)
+A simple repo that elegantly manages my configs and scripts using Git Map (see `map.sh`)
 
 ## Setup on fresh OS
 
@@ -15,7 +15,7 @@ sudo apt install git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
-./gap.sh | sh
+./map.sh | sh
 ```
 
 ### OS Specific Setup and Mappings
@@ -23,7 +23,7 @@ cd ~/projects/dotfiles
 For configuration specific to a particular OS (or a particular environment), create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
 ```sh
 ./init.sh termux | sh
-./gap.sh wsl | sh
+./map.sh wsl | sh
 ```
 
 > NOTE: The `mappings/common.json` is always included (if it exists)
