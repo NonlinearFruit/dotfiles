@@ -36,6 +36,7 @@ For configuration specific to a particular OS (or a particular environment), cre
 | `bashrc.sh` | [Bash][bash] |
 | `cheatsheets/` | [TLDR][tldr] extensions |
 | `gitconfig.ini` | [Git][git |
+| `glaze-wm.yaml` | [Glaze Window Manager][glaze] |
 | `mappings/` | Available mappings |
 | `nvim/` | [Neovim][nvim] |
 | `scripts/` | Helpful scripts |
@@ -72,6 +73,7 @@ For configuration specific to a particular OS (or a particular environment), cre
 
 [bash]: https://savannah.gnu.org/projects/bash/
 [git]: https://git-scm.com/docs
+[glaze]: https://github.com/lars-berger/GlazeWM/releases
 [ideavim]: https://github.com/JetBrains/ideavim
 [nvim]: https://github.com/neovim/neovim
 [tldr]: https://github.com/dbrgn/tealdeer

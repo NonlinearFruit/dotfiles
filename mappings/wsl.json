@@ -1,4 +1,5 @@
 [
+  ["glaze-wm.yaml", "$(echo /mnt/c/Users/$USER/.glaze-wm)/config.yaml", "cp"],
   ["https://raw.githubusercontent.com/LonMcGregor/VivaldiMods/master/mods/keyboard_machine.js", "$(echo /mnt/c/Users/$USER/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)/keyboard-machine-WIP.js", "curl"],
   ["vimrc.vim", "/mnt/c/Users/$USER/.ideavimrc", "cp"],
   ["vivaldi.html", "$(echo /mnt/c/Users/$USER/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)/browser.html", "cp"],
