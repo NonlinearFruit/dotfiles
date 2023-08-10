@@ -86,6 +86,12 @@ return require('packer').startup(function(use)
     requires = {'nvim-tree/nvim-web-devicons'}
   }
 
+  -- File browsing
+  use {
+    'stevearc/oil.nvim',
+    config = function() require('oil').setup() end
+  }
+
   -- Running tests
   use({
     "nvim-neotest/neotest",
