@@ -26,6 +26,7 @@ local function on_attach(client, bufnr)
 
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, {buffer = bufnr, remap = false})
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, {buffer = bufnr, remap = false})
+  vim.keymap.set("n", "=", function() vim.lsp.buf.format() end, {buffer = bufnr, remap = false, desc = "[=] Format file"})
 end
 
 -- Unused vim.lsp.buf.*
