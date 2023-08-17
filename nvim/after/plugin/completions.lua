@@ -3,6 +3,8 @@ if not cmp_ok then
   return
 end
 
+require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/snippets/' })
+
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<c-space>'] = cmp.mapping.complete(),
