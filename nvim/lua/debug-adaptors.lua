@@ -17,9 +17,11 @@ local INSTALL_THESE = {
   "codelldb",   -- Rust
   "netcoredbg", -- C#
 }
-for _, pkg in ipairs(INSTALL_THESE) do
-  if not require("mason-registry").is_installed(pkg) then
-    require("mason.api.command").MasonInstall({ pkg })
+if os.execute('is termux') ~= 0 then
+  for _, pkg in ipairs(INSTALL_THESE) do
+    if not require("mason-registry").is_installed(pkg) then
+      require("mason.api.command").MasonInstall({ pkg })
+    end
   end
 end
 
