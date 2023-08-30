@@ -3,8 +3,7 @@ gaps:
   outer_gap: 10
 
 general:
-  # Whether to show floating windows as always on top.
-  show_floating_on_top: false
+  show_floating_on_top: true
 
 bar:
   height: "30px"
@@ -58,6 +57,10 @@ window_rules:
   # the WM as admin.
   - command: "ignore"
     match_process_name: "Taskmgr"
+
+  # Vivaldi's video pop out
+  - command: "set floating"
+    match_title: "Picture in picture"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
