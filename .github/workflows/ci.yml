@@ -1,0 +1,11 @@
+name: Dry Run
+
+on: [push, pull_request]
+
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Initialize
+        run: ./init.sh common | sh
