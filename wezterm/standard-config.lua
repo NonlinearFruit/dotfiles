@@ -73,10 +73,9 @@ local function configureIfWindows(config)
   local function isWindows()
     return  string.find(WEZTERM.target_triple, 'windows')
   end
-  if not isWindows() then
-    return config
+  if isWindows() then
+    config.default_prog = { "wsl.exe", "~"}
   end
-  config.default_prog = { "wsl.exe", "~"}
   return config
 end
 
