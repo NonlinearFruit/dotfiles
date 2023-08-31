@@ -9,3 +9,13 @@ jobs:
       - uses: actions/checkout@v3
       - name: Initialize
         run: ./init.sh common | sh
+
+  Lua:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: JohnnyMorganz/stylua-action@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .

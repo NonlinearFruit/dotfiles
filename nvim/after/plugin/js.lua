@@ -1,16 +1,18 @@
-local js = vim.api.nvim_create_augroup("JS", {clear = true})
+local js = vim.api.nvim_create_augroup("JS", { clear = true })
 
 local function keymap(key, cmd, description)
   vim.api.nvim_create_autocmd("BufEnter", {
     group = js,
     pattern = { "*.js", "*.ts" },
-    callback = function() vim.keymap.set("n", "<leader>"..key, "<cmd>"..cmd.."<cr>", { desc = description }) end
+    callback = function()
+      vim.keymap.set("n", "<leader>" .. key, "<cmd>" .. cmd .. "<cr>", { desc = description })
+    end,
   })
 end
 
 if packer_plugins["vimux"] and packer_plugins["vimux"].loaded then
   local function vimuxkeymap(key, shellCommand, description)
-    keymap(key, "VimuxRunCommand('"..shellCommand.."')", description)
+    keymap(key, "VimuxRunCommand('" .. shellCommand .. "')", description)
   end
 
   vimuxkeymap("at", "npm test", "[A]ll [T]ests")

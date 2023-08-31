@@ -21,38 +21,38 @@ local conds = require("luasnip.extras.conditions")
 local conds_expand = require("luasnip.extras.conditions.expand")
 
 return {
-    snippet(
-        "fact",
-        fmt(
-            [[
+  snippet(
+    "fact",
+    fmt(
+      [[
                 [Fact]
                 public void test()
                 {{
                     {}
                 }}
             ]],
-            { i(0) }
-        )
-     ),
-    snippet(
-        "prop",
-        fmt(
-            [[
+      { i(0) }
+    )
+  ),
+  snippet(
+    "prop",
+    fmt(
+      [[
                 public {type} {name} {{ get; set; }}
             ]],
-            { type = i(1, "Type"), name = i(2, "Name") }
-        )
-     ),
-		snippet("print_str", {
-			t('print("'),
-			i(1, "desrc"),
-			t('")'),
-		}),
-		snippet("print_var1", {
-			t('print("'),
-			i(1, "desrc"),
-			t(': " .. '),
-			i(2, "the_variable"),
-			t(")"),
-		}),
+      { type = i(1, "Type"), name = i(2, "Name") }
+    )
+  ),
+  snippet("print_str", {
+    t('print("'),
+    i(1, "desrc"),
+    t('")'),
+  }),
+  snippet("print_var1", {
+    t('print("'),
+    i(1, "desrc"),
+    t(': " .. '),
+    i(2, "the_variable"),
+    t(")"),
+  }),
 }

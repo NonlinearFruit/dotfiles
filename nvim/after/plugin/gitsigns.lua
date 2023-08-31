@@ -1,4 +1,4 @@
-local status_git_signs, gitsigns = pcall(require, 'gitsigns')
+local status_git_signs, gitsigns = pcall(require, "gitsigns")
 if not status_git_signs then
   return
 end
@@ -19,15 +19,15 @@ gitsigns.setup({
     end
 
     -- Navigation
-    simple_map('n', ']h', gs.next_hunk, "[]] Jump to next [h]unk")
-    simple_map('n', '[h', gs.prev_hunk, "[[] Jump to previous [h]unk")
+    simple_map("n", "]h", gs.next_hunk, "[]] Jump to next [h]unk")
+    simple_map("n", "[h", gs.prev_hunk, "[[] Jump to previous [h]unk")
 
     -- Actions
-    simple_map({'n', 'v'}, '<leader>hs', gs.stage_hunk, "[h]unk [s]tage")
-    simple_map({'n', 'v'}, '<leader>hr', gs.reset_hunk, "[h]unk [r]eset")
-    simple_map('n', '<leader>hS', gs.stage_buffer, "[h]unk [S]tage buffer")
-    simple_map('n', '<leader>hR', gs.reset_buffer, "[h]unk [R]eset buffer")
-    simple_map('n', '<leader>hp', gs.preview_hunk, "[h]unk [p]review")
+    simple_map({ "n", "v" }, "<leader>hs", gs.stage_hunk, "[h]unk [s]tage")
+    simple_map({ "n", "v" }, "<leader>hr", gs.reset_hunk, "[h]unk [r]eset")
+    simple_map("n", "<leader>hS", gs.stage_buffer, "[h]unk [S]tage buffer")
+    simple_map("n", "<leader>hR", gs.reset_buffer, "[h]unk [R]eset buffer")
+    simple_map("n", "<leader>hp", gs.preview_hunk, "[h]unk [p]review")
     --simple_map('n', '<leader>hu', gs.undo_stage_hunk)
     --simple_map('n', '<leader>hb', function() gs.blame_line{full=true} end)
     --simple_map('n', '<leader>tb', gs.toggle_current_line_blame)
@@ -36,6 +36,6 @@ gitsigns.setup({
     --simple_map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object
-    simple_map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[i]nner [h]unk')
-  end
+    simple_map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "[i]nner [h]unk")
+  end,
 })

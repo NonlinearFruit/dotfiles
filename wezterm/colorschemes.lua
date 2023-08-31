@@ -242,5 +242,5 @@ return {
     "WildCherry",
     "Floraverse",
     "Framer (base16)",
-  }
+  },
 }

@@ -71,6 +71,12 @@ For configuration specific to a particular OS (or a particular environment), cre
 | stopwatch            | Indefinite timer                                     |
 | sundays              | Number of Sundays until given birthdate turns 18     |
 
+## Formatting
+
+```sh
+~/.local/share/nvim/mason/bin/stylua --verify . # Lua
+```
+
 [bash]: https://savannah.gnu.org/projects/bash/
 [git]: https://git-scm.com/docs
 [glaze]: https://github.com/lars-berger/GlazeWM/releases

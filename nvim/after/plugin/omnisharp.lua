@@ -2,7 +2,7 @@ if not packer_plugins["omnisharp-vim"] or not packer_plugins["omnisharp-vim"].lo
   return
 end
 
--- HOW TO 
+-- HOW TO
 -- 1. Install package with :PackerSync
 -- 2. Install omnisharp server :OmniSharpInstall
 -- 3. Manually start with :OmniSharpStartServer

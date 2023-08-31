@@ -1,2 +1,2 @@
-local config = require('standard-config')
+local config = require("standard-config")
 return config

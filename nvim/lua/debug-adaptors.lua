@@ -1,23 +1,23 @@
 -- Resources:
-  -- https://github.com/mfussenegger/nvim-dap
-  -- https://github.com/rcarriga/nvim-dap-ui
-  -- https://aaronbos.dev/posts/debugging-csharp-neovim-nvim-dap
+-- https://github.com/mfussenegger/nvim-dap
+-- https://github.com/rcarriga/nvim-dap-ui
+-- https://aaronbos.dev/posts/debugging-csharp-neovim-nvim-dap
 
-local dap_ok, dap = pcall(require, 'dap')
+local dap_ok, dap = pcall(require, "dap")
 if not dap_ok then
   return
 end
-local dapui_ok, dapui = pcall(require, 'dapui')
+local dapui_ok, dapui = pcall(require, "dapui")
 if not dapui_ok then
   return
 end
 
 local INSTALL_THESE = {
   -- Debug Adapter Protocol (DAP) implementations,
-  "codelldb",   -- Rust
+  "codelldb", -- Rust
   "netcoredbg", -- C#
 }
-if os.execute('is termux') ~= 0 then
+if os.execute("is termux") ~= 0 then
   for _, pkg in ipairs(INSTALL_THESE) do
     if not require("mason-registry").is_installed(pkg) then
       require("mason.api.command").MasonInstall({ pkg })
@@ -38,8 +38,8 @@ dapui.setup({
   },
   -- Use this to override mappings for specific elements
   element_mappings = {
-  -- Example:
-  -- stacks = {
+    -- Example:
+    -- stacks = {
     --   open = "<CR>",
     --   expand = "o",
     -- }
@@ -103,7 +103,7 @@ dapui.setup({
   render = {
     max_type_length = nil, -- Can be integer or nil.
     max_value_lines = 100, -- Can be integer or nil.
-  }
+  },
 })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -116,11 +116,11 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑'})
-vim.fn.sign_define('DapStopped', {text='💥'})
+vim.fn.sign_define("DapBreakpoint", { text = "🛑" })
+vim.fn.sign_define("DapStopped", { text = "💥" })
 
 local function keymap(key, cmd, description)
-  vim.keymap.set({"n", "i", "v"}, key, "<cmd>"..cmd.."<cr>", { desc = description })
+  vim.keymap.set({ "n", "i", "v" }, key, "<cmd>" .. cmd .. "<cr>", { desc = description })
 end
 
 keymap("<f3>", "lua require('dap').run_last()", "Run last")
@@ -132,9 +132,9 @@ keymap("<f11>", "lua require('dap').step_into()", "Step into")
 keymap("<f12>", "lua require('dap').step_out()", "Step out")
 
 dap.adapters.netcoredbg = {
-  type = 'executable',
-  command = 'netcoredbg',
-  args = {'--interpreter=vscode'}
+  type = "executable",
+  command = "netcoredbg",
+  args = { "--interpreter=vscode" },
 }
 
 dap.configurations.cs = {
@@ -145,7 +145,7 @@ dap.configurations.cs = {
     program = function()
       local cwd = vim.fn.getcwd()
       local d = vim.fn.fnamemodify(cwd, ":t")
-      return vim.fn.input('Path to dll: ', cwd .. '/bin/Debug/net7.0/' .. d .. '.dll', 'file')
+      return vim.fn.input("Path to dll: ", cwd .. "/bin/Debug/net7.0/" .. d .. ".dll", "file")
     end,
   },
   {
@@ -154,16 +154,16 @@ dap.configurations.cs = {
     request = "attach",
     processId = function()
       local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
-      vim.fn.setenv('NETCOREDBG_ATTACH_PID', pid)
+      vim.fn.setenv("NETCOREDBG_ATTACH_PID", pid)
       return tonumber(pgrep)
     end,
-  }
+  },
 }
 
 dap.adapters.codelldb = {
-  type = 'executable',
-  command = require("mason-core.package"):get_install_path()..'/codelldb/codelldb',
-  args = {'--interpreter=vscode'}
+  type = "executable",
+  command = require("mason-core.package"):get_install_path() .. "/codelldb/codelldb",
+  args = { "--interpreter=vscode" },
 }
 
 dap.adapters.codelldb = {
@@ -172,7 +172,7 @@ dap.adapters.codelldb = {
   executable = {
     command = "codelldb",
     args = { "--port", "${port}" },
-  }
+  },
 }
 
 dap.configurations.rust = {
@@ -181,11 +181,11 @@ dap.configurations.rust = {
     request = "launch",
     name = "launch - codelldb",
     program = function()
-      local metadata_json = vim.fn.system "cargo metadata --format-version 1 --no-deps"
+      local metadata_json = vim.fn.system("cargo metadata --format-version 1 --no-deps")
       local metadata = vim.fn.json_decode(metadata_json)
       local target_name = metadata.packages[1].targets[1].name
       local target_dir = metadata.target_directory
       return target_dir .. "/debug/" .. target_name
-    end
-  }
+    end,
+  },
 }

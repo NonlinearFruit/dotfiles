@@ -1,4 +1,4 @@
-local status_null_ls_ok, null_ls = pcall(require, 'null-ls')
+local status_null_ls_ok, null_ls = pcall(require, "null-ls")
 if not status_null_ls_ok then
   return
 end
@@ -6,14 +6,14 @@ end
 local INSTALL_THESE = {
   -- Linters
   -- { name = "selene", should_install = true },      -- Lua (GLIBC_2.32 not found)
-  { name = "golangci-lint", should_install = true },  -- Go
+  { name = "golangci-lint", should_install = true }, -- Go
   -- Formatters
-  { name = "stylua", should_install = os.execute('is termux') ~= 0 },         -- Lua
-  { name = "yamlfmt", should_install = true },        -- YAML
+  { name = "stylua", should_install = os.execute("is termux") ~= 0 }, -- Lua
+  { name = "yamlfmt", should_install = true }, -- YAML
 }
 for _, pkg in ipairs(INSTALL_THESE) do
   if pkg.should_install and not require("mason-registry").is_installed(pkg.name) then
-    require("mason.api.command").MasonInstall { pkg.name}
+    require("mason.api.command").MasonInstall({ pkg.name })
   end
 end
 
@@ -26,6 +26,6 @@ null_ls.setup({
     formatting.stylua,
     formatting.yamlfmt,
     -- diagnostics.selene,
-    diagnostics.golangci_lint
-  }
+    diagnostics.golangci_lint,
+  },
 })
