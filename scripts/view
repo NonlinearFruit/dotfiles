@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if is termux ; then
+  echo "No termux support"
+fi
+
+if is wsl ; then
+  echo "No wsl support"
+fi
+
+if is linux ; then
+  xdg-open "$@"
+fi
