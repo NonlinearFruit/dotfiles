@@ -1,0 +1,9 @@
+#!/bin/bash
+
+items="$(ls -d1 ~/.config/nvim* | xargs -n 1 basename)"
+config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+if [[ -z $config ]]; then
+  echo "NoVim"
+else
+  NVIM_APPNAME=$config nvim $@
+fi
