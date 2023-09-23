@@ -60,21 +60,21 @@ db.setup({
     header = header,
     center = {
       {
-        icon = " ",
+        icon = " ",
         desc = "Find Files",
         key = "f",
         key_hl = "LineNr",
         action = "Telescope find_files",
       },
       {
-        icon = " ",
+        icon = "󰓦 ",
         desc = "Update Packages",
         key = "u",
         key_hl = "LineNr",
         action = "PackerSync",
       },
       {
-        icon = " ",
+        icon = " ",
         desc = "Update Mason Stuff",
         key = "m",
         key_hl = "LineNr",
@@ -88,7 +88,7 @@ db.setup({
         action = "Telescope find_files cwd=~/projects/dotfiles",
       },
       {
-        icon = " ",
+        icon = "󰩈 ",
         desc = "Quit",
         key = "q",
         key_hl = "LineNr",
