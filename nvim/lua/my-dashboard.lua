@@ -67,6 +67,13 @@ db.setup({
         action = "Telescope find_files",
       },
       {
+        icon = " ",
+        desc = "Browser File Tree",
+        key = "b",
+        key_hl = "LineNr",
+        action = "Oil",
+      },
+      {
         icon = "󰓦 ",
         desc = "Update Packages",
         key = "u",
