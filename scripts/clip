@@ -18,7 +18,7 @@ else
   fi
 
   if is wsl ; then
-    powershell.exe Get-Clipboard
+    powershell.exe Get-Clipboard | dos2unix
   fi
 
   if is linux ; then
