@@ -15,18 +15,16 @@ sudo apt install git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
-./map.sh | sh
+./map.sh common | sh
 ```
 
 ### OS Specific Setup and Mappings
 
 For configuration specific to a particular OS (or a particular environment), create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
 ```sh
-./init.sh termux | sh
-./map.sh wsl | sh
+./init.sh common termux | sh
+./map.sh common wsl | sh
 ```
-
-> NOTE: The `mappings/common.json` is always included (if it exists)
 
 ## Configs
 
