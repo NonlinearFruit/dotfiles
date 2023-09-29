@@ -15,7 +15,7 @@ MANAGER=apt
 if command -v dnf > /dev/null; then
   MANAGER=dnf
 fi
-sudo $MANAGER install -y curl dos2unix figlet jq tmux unzip xclip gcc-c++ gcc g++
+sudo $MANAGER install -y curl figlet jq tmux unzip xclip gcc-c++ gcc g++
 
 # Load cargo into current shell
 source ~/.bashrc

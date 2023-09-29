@@ -1,1 +1,1 @@
-apt install dos2unix
+apt install -y dos2unix
