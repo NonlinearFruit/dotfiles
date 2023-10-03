@@ -11,7 +11,8 @@ A simple repo that elegantly manages my configs and scripts using Git Map (see `
 Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't install
 
 ```sh
-sudo apt install git
+sudo apt update
+sudo apt install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
