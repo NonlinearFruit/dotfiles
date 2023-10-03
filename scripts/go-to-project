@@ -1,0 +1,21 @@
+#!/bin/bash
+
+local projects="$(ls -d ~/projects/* /mnt/c/Users/$USER/Projects/*)"
+local project="$(echo "$projects" \
+  | fzf \
+    --prompt="  Find Project " \
+    --height=~50% \
+    --layout=reverse \
+    --border \
+    --query="$@" \
+    --preview-label="Files" \
+    --preview="ls --color=always {}" \
+    --delimiter / \
+    --nth -1,.. \
+    --exit-0)"
+
+if [[ -z $project ]]; then
+  echo "No Project"
+else
+  cd "$project"
+fi
