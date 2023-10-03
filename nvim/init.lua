@@ -81,3 +81,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.bo.filetype = "crontab"
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = fileTypeMappings,
+  pattern = { "*.xaml", "*.csproj", "*.sln" },
+  callback = function()
+    vim.bo.filetype = "xml"
+  end,
+})
