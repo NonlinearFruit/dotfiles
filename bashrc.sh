@@ -117,6 +117,9 @@ fi
 if [ -d /usr/local/go/bin ]; then
     export PATH="$PATH:/usr/local/go/bin"
 fi
+if [ -d ~/go/bin ]; then
+    export PATH="$PATH:~/go/bin"
+fi
 
 # Fuzzy Find (fzf)
 if [ -d "$HOME/.fzf/bin" ]; then

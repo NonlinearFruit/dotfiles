@@ -1,5 +1,10 @@
 # Install a fixed version of golang: https://go.dev/doc/install
-FILE='go1.20.4.linux-amd64.tar.gz'
-curl https://go.dev/dl/$FILE
+VERSION='1.21.2'
+FILE="go$VERSION.linux-amd64.tar.gz"
+curl "https://dl.google.com/go/$FILE" -o "$FILE"
 sudo rm -rf /usr/local/go 
-sudo tar -C /usr/local -xzf $FILE
+sudo tar -C /usr/local -xzf "$FILE"
+rm "$FILE"
+
+# usql - universal sql cli
+# go install -tags most github.com/xo/usql@latest
