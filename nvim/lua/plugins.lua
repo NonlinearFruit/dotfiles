@@ -50,6 +50,13 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   })
 
+  use({
+    "LhKipp/nvim-nu",
+    config = function()
+      require("nu").setup()
+    end,
+  })
+
   -- Telescope for searching things
   use({
     "nvim-telescope/telescope.nvim",
