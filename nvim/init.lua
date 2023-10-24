@@ -89,3 +89,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.bo.filetype = "xml"
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = fileTypeMappings,
+  pattern = { "/tmp/bash-fc*" },
+  callback = function()
+    vim.bo.filetype = "bash"
+  end,
+})
