@@ -164,6 +164,11 @@ if command -v zoxide > /dev/null; then
   fi
 fi
 
+# Haskell
+if command -v cabal > /dev/null; then
+  export PATH="$HOME/.cabal/bin:$PATH"
+fi
+
 # Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
 if is wsl ; then
   export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
