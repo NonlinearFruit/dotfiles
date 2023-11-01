@@ -4,4 +4,8 @@ if command -v dnf > /dev/null; then
 else
   sudo apt install -y cabal-install
 fi
+cabal update
 
+# patat: cli slideshow (https://github.com/jaspervdj/patat?tab=readme-ov-file#from-source)
+# Install pandoc & happy
+cabal install patat
