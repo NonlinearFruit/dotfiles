@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 if packer_plugins["vimux"] and packer_plugins["vimux"].loaded then
   local function vimuxkeymap(key, shellCommand, description)
-    keymap(key, "VimuxRunCommand('" .. shellCommand .. "')", description)
+    keymap(key, "wa | VimuxRunCommand('" .. shellCommand .. "')", description)
   end
 
   vimuxkeymap("at", "dotnet test", "[A]ll [T]ests")
