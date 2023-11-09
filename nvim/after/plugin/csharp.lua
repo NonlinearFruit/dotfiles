@@ -20,6 +20,30 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+if os.execute("command -v rg > /dev/null") == 0 then
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = csharp,
+    pattern = { "*.cs" },
+    callback = function()
+      vim.keymap.set("n", "<leader>gt", function()
+        local currentFile = vim.api.nvim_buf_get_name(0)
+        local currentFileName = currentFile:match("[^/]+$")
+        local testFileName = currentFileName:gsub("%.cs", "Tests.cs")
+        vim.fn.jobstart("rg --files | rg "..testFileName, {
+          stdout_buffered = true,
+          on_stdout = function(_, data)
+            if data and data[1] and data[1] ~= "" then
+              vim.cmd("tab drop "..data[1])
+            else
+              print("No test file found")
+            end
+          end
+        })
+      end, { desc = "[g]o to [t]est file" })
+    end,
+  })
+end
+
 if packer_plugins["vimux"] and packer_plugins["vimux"].loaded then
   local function vimuxkeymap(key, shellCommand, description)
     keymap(key, "wa | VimuxRunCommand('" .. shellCommand .. "')", description)
