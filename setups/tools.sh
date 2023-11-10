@@ -47,6 +47,9 @@ cargo install cargo-watch
 # z: better autojump https://github.com/ajeetdsouza/zoxide
 cargo install zoxide
 
+# agg: aciinema cast to gif
+cargo install --git https://github.com/asciinema/agg
+
 # speedtest-cli: collect up/down network data
 # pip install speedtest-cli
 # PATH="${PATH}:${HOME}/.local/bin"
