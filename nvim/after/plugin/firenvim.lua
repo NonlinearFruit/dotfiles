@@ -3,8 +3,9 @@ if not packer_plugins["firenvim"] or not packer_plugins["firenvim"].loaded then
 end
 
 local SetupBuffer = function()
-  local bufferName = vim.api.nvim_buf_get_name(0)
-  local bufferLines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+  local bufId = 0
+  local bufferName = vim.api.nvim_buf_get_name(bufId)
+  local bufferLines = vim.api.nvim_buf_get_lines(bufId, 0, -1, true)
 
   -- At least 5 lines big
   if vim.go.lines < 5 then
@@ -21,6 +22,9 @@ local SetupBuffer = function()
 
   -- Start in insert mode if we're an empty buffer
   if bufferName ~= "" and bufferLines[1] == "" then
+    vim.cmd([[startinsert]])
+  elseif bufferLines[1] == "<p><br></p>" then
+    vim.api.nvim_buf_set_lines(bufId, 0, -1, false, { "" })
     vim.cmd([[startinsert]])
   end
 
