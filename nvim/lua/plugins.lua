@@ -67,17 +67,11 @@ return require("packer").startup(function(use)
   -- Basic git tooling
   use("lewis6991/gitsigns.nvim")
 
-  -- Viewing diffs and conflicts
-  use("sindrets/diffview.nvim")
-
   -- Autocomplete and Snippets
   use("hrsh7th/nvim-cmp") -- ??
   use("hrsh7th/cmp-nvim-lsp") -- get completions from lsp
   use("L3MON4D3/LuaSnip") -- snippet engine
   use("saadparwaiz1/cmp_luasnip") -- integrate luasnip and cmp(?)
-
-  -- jq play
-  use("phelipetls/vim-jqplay")
 
   -- Commenting
   use({
