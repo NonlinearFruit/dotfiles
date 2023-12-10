@@ -1,0 +1,10 @@
+
+
+- Rust compiler version
+    `rustc --version`
+
+- Cargo version
+    `cargo --version`
+
+- Upgrade Rust (https://stackoverflow.com/a/51687419)
+    `rustup update stable`
