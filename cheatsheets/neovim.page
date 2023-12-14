@@ -1,0 +1,5 @@
+# Neovim
+
+
+- E576: Error while reading ShaDa file: there is an item at position 270498 that must not be there: Missing itemsare for internal uses only (https://github.com/neovim/neovim/issues/6875#issuecomment-1263970879)
+    `rm -r ~/.local/state/nvim/shada`
