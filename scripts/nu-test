@@ -1,0 +1,24 @@
+#!/bin/env nu
+
+let logfile = "time.log"
+
+let results = []
+
+1..10
+| each {
+  rm --force $logfile
+  nvim --startuptime $logfile -c q
+  open $logfile | lines
+}
+| flatten
+| print
+
+
+# | lines 
+# | skip 6 
+# | each {{ 
+#   description: ($in | str substring 18..) 
+#   duration: ($in | str substring 9..16 | into float) 
+# }} 
+# | sort-by -r duration 
+# | take 10
