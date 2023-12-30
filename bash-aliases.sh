@@ -11,7 +11,6 @@ alias vim="$EDITOR"
 if is wsl ; then
   alias npp='notepad++.exe'
   alias podman="podman.exe"
-  alias pair="powershell.exe runas /user:pair 'C:\\Users\\pair\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe'"
   if ! command -v dotnet > /dev/null ; then
     alias dotnet='dotnet.exe'
   fi
