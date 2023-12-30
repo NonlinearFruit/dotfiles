@@ -4,7 +4,9 @@
 
 # Dotfiles
 
-A simple repo that elegantly manages my configs and scripts using Git Map (see `map.sh`)
+<img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/NonlinearFruit/dotfiles/ci.yml">
+
+A simple repo that elegantly manages my configs and scripts using `init.sh` and `map.sh`
 
 ## Setup on fresh OS
 
@@ -29,23 +31,23 @@ For configuration specific to a particular OS (or a particular environment), cre
 
 ## Configs
 
-| Config                | Description                                  |
-| ---                   | ---                                          |
-| `bash-aliases.sh` |  |
-| `bashrc.sh` | [Bash][bash] |
-| `cheatsheets/` | [TLDR][tldr] extensions |
-| `gitconfig.ini` | [Git][git |
-| `glaze-wm.yaml` | [Glaze Window Manager][glaze] |
-| `mappings/` | Available mappings |
-| `nvim/` | [Neovim][nvim] |
-| `scripts/` | Helpful scripts |
-| `setups/` | Available setups |
-| `tmux.conf` | [Tmux][tmux] |
-| `vimrc.vim` | [Vim][vim] + [IdeaVim][ideavim] |
-| `vivaldi/` | [Vivaldi mods][vivaldi-mods] |
-| `vivaldi.html` | [Vivaldi][vivaldi] |
-| `wezterm/` | [Wezterm][wezterm] |
-| `windows-terminal.json` | [Windows Terminal][windowsterminal] |
+| Config                  | Description                                  |
+| ---                     | ---                                          |
+| `bash-aliases.sh`       |                                              |
+| `bashrc.sh`             | [Bash][bash]                                 |
+| `cheatsheets/`          | [TLDR][tldr] extensions                      |
+| `gitconfig.ini`         | [Git][git]                                   |
+| `glaze-wm.yaml`         | [Glaze Window Manager][glaze]                |
+| `mappings/`             | Available mappings                           |
+| `nvim/`                 | [Neovim][nvim]                               |
+| `scripts/`              | Helpful scripts                              |
+| `setups/`               | Available setups                             |
+| `tmux.conf`             | [Tmux][tmux]                                 |
+| `vimrc.vim`             | [Vim][vim] + [IdeaVim][ideavim]              |
+| `vivaldi/`              | [Vivaldi mods][vivaldi-mods]                 |
+| `vivaldi.html`          | [Vivaldi][vivaldi]                           |
+| `wezterm/`              | [Wezterm][wezterm]                           |
+| `windows-terminal.json` | [Windows Terminal][windowsterminal]          |
 
 ## Scripts
 
