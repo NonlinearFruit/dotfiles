@@ -1,14 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env nu
 
-ipsum $1 |
-while read -r word; do
-  echo "${word^}";
-done |
-tr '\n' '#' |
-sed 's/.$//' |
-{
-  read -r phrase;
-  echo "${phrase}";
-  echo -n "${phrase}" | clip copy;
-  echo "Copied!";
+def main [number_of_words?] {
+  let passphrase = ipsum --as-json ($number_of_words | default 1)
+    | from json
+    | str join '#'
+
+  print $passphrase
+  echo $passphrase | clip copy
+  print "Copied!"
 }
