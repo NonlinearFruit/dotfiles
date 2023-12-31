@@ -1,11 +1,42 @@
 #!/usr/bin/env nu
 
-def main [number_of_words?] {
-  let passphrase = ipsum --as-json ($number_of_words | default 1)
-    | from json
-    | str join '#'
+def main [
+  --with-entropy           # Print the entropy of the passphrase
+  --number-of-numbers: int # Number of single digit numbers in passphrase
+  number_of_words?         # Number of words in passphrase
+  ] {
+  if $with_entropy {
+    let ipsum_structure = ipsum --with-entropy --as-json ($number_of_words | default 1)
+      | from json
+    let numbers = 1..($number_of_numbers | default 0) | each { random-number } | str join ''
+    let number_entropy = (10 | math log 2 | $in * ($number_of_numbers | default 0))
+    let passphrase = $ipsum_structure.words
+      | append $numbers
+      | str join '#'
 
-  print $passphrase
-  echo $passphrase | clip copy
-  print "Copied!"
+    print ({
+      passphrase: $passphrase
+      entropy: ($ipsum_structure.entropy + ($number_of_numbers | default 0))
+    })
+    echo $passphrase | clip copy
+    print "Copied!"
+  } else {
+    let numbers = 1..($number_of_numbers | default 0) | each { random-number } | str join ''
+    let passphrase = ipsum --as-json ($number_of_words | default 1)
+      | from json
+      | append $numbers
+      | str join '#'
+
+    print $passphrase
+    echo $passphrase | clip copy
+    print "Copied!"
+  }
+}
+
+def random-number [] {
+    let max_int = 16777216
+    od -N3 -An -i /dev/urandom
+    | into int
+    | $in * 10 / $max_int
+    | math round
 }
