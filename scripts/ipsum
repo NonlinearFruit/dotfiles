@@ -5,17 +5,17 @@
 #      - http://stackoverflow.com/a/14203146/4769802
 #      - http://www.unix.com/shell-programming-and-scripting/156551-check-whether-string-begin-uppercase-lowercase-digit.html
 
+# Outputs random (cryptographically secure) words from ~/scripts/words.txt
 def main [
-    --with-entropy        # Include the entropy of the generated words
-    --as-json              # Print as json
-    number_of_words?: int  # Number of words to generate (default: 1)
+    --with-entropy            # Include the entropy of the generated words
+    --as-json                 # Print as json
+    number_of_words?: int = 1 # Number of words to generate
   ] {
-  let count = $number_of_words | default 1
   let max_int = 16777216
   let all_non_random_words = open "~/scripts/words.txt" | lines
   let total_options = ($all_non_random_words | length) # apprx # of options
 
-  let words = 1..$count
+  let words = 1..$number_of_words
     | each {|x|
       od -N3 -An -i /dev/urandom 
       | into int 
@@ -28,7 +28,7 @@ def main [
     }
 
   if $with_entropy {
-    let entropy = $total_options | math log 2 | $in * $count | math round --precision 3
+    let entropy = $total_options | math log 2 | $in * $number_of_words | math round --precision 3
     if $as_json {
       {
         entropy: $entropy
@@ -36,12 +36,15 @@ def main [
       }
       | to json
     } else {
-      echo $"($count) word\(s) out of ($total_options) produces ($entropy) bits of entropy."
+      echo $"($number_of_words) word\(s) out of ($total_options) produces ($entropy) bits of entropy."
       $words | str join (char newline)
     }
   } else {
     if $as_json {
-      $words | to json
+      {
+        words: $words
+      }
+      | to json
     } else {
       $words | str join (char newline)
     }
