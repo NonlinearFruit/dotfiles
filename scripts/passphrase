@@ -8,21 +8,56 @@ def main [
   ] {
   let ipsum_structure = ipsum --with-entropy=$with_entropy --as-json $number_of_words
     | from json
-  let numbers = 1..$number_of_numbers | each { random-number } | str join ''
-  let passphrase = $ipsum_structure
+  let numbers = if $number_of_numbers > 0 {
+      1..$number_of_numbers
+      | each {
+        {
+          position: ((random-number ($number_of_words * 2 - 1)) * 2)
+          value: (random-number 9 | into string)
+        }
+      }
+    } else {
+      []
+    }
+  let words = $ipsum_structure
     | get words
-    | append $numbers
-    | str join '#'
+    | enumerate
+    | each {|thing|
+      {
+        position: ($thing.index * 4 + 1)
+        value: $'(ansi cyan)($thing.item)(ansi reset)'
+      }
+    }
+  let separators = if $number_of_words > 1 {
+      0..($number_of_words - 2)
+      | each {|index|
+        {
+          position: ($index * 4 + 3)
+          value: $'(ansi grey)#(ansi reset)'
+        }
+      }
+    } else {
+      []
+    }
+  let passphrase = $separators ++ $words ++ $numbers
+    | sort-by position
+    | get value
+    | str join
   if $with_entropy {
+    let word_entropy = $ipsum_structure.entropy
     let number_entropy = (10 | math log 2 | $in * $number_of_numbers)
+    let number_position_entropy = if $number_of_words > 0 { $number_of_words * 2 | math log 2 | $in * $number_of_numbers } else { 0 }
     print ({
       passphrase: $passphrase
-      entropy: ($ipsum_structure.entropy + $number_of_numbers)
+      word_entropy: $word_entropy
+      number_entropy: $number_entropy
+      number_position_entropy: $number_position_entropy
+      total_entropy: ($word_entropy + $number_entropy + $number_position_entropy)
     })
   } else {
     print $passphrase
   }
-  echo $passphrase | clip copy
+  $passphrase | ansi strip | clip copy
   print "Copied!"
 }
 

@@ -15,16 +15,20 @@ def main [
   let all_non_random_words = open "~/scripts/words.txt" | lines
   let total_options = ($all_non_random_words | length) # apprx # of options
 
-  let words = 1..$number_of_words
-    | each {|x|
-      od -N3 -An -i /dev/urandom 
-      | into int 
-      | $in * $total_options / $max_int 
-      | math round
-    }
-    | each {|index|
-      $all_non_random_words
-      | get $index
+  let words = if $number_of_words > 0 {
+      1..$number_of_words
+      | each {|x|
+        od -N3 -An -i /dev/urandom
+        | into int
+        | $in * $total_options / $max_int
+        | math round
+      }
+      | each {|index|
+        $all_non_random_words
+        | get $index
+      }
+    } else {
+      []
     }
 
   if $with_entropy {
