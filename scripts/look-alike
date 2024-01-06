@@ -1,14 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env nu
 
-word=$1
-length=${#word}
-firstLetters=${word:0:1}
+# Find look alikes for a word
+def main [
+  word           # Word to impersonate
+  --margin = 3   # Lower = more similar, higher = less similar
+] {
+  let letters = $word | split chars
+  let length = $letters | length
+  let firstLetters = $letters | first
 
-cat ~/scripts/words.txt | \
-sed -n "/^${firstLetters}.*/p" | \
-awk "{ if (length(\$0) < ${length} + 3 && length(\$0) > ${length} - 3) print }" | \
-while IFS= read -r line; do 
-  if (($(levenshtein $line $word) < 3)); then 
-    echo "$line"; 
-  fi 
-done
+  open ~/scripts/words.txt
+  | lines
+  | where (str starts-with $firstLetters)
+  | where ($it | split chars | length | $in < ($length + $margin) and $in > ($length - $margin))
+  | each {
+    {
+      word: $in
+      distance: ($in | str distance $word)
+    }
+  }
+  | where distance < $margin
+  | sort-by distance
+}
