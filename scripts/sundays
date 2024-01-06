@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
 
+# Number of Sundays left until someone turns 18
 def main [
   birthdate: string # Someone's birthday
 ] {

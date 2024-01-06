@@ -1,21 +1,26 @@
 #!/usr/bin/env nu
 
+# Show the difference between now and some date
 def main [
-  date: string    # Date to harken back to
-  --seconds # Diff in seconds
-  --minutes # Diff in minutes
-  --hours   # Diff in hours
-  --days = true   # Diff in days
-  --weeks   # Diff in weeks
-  --years   # Diff in years
+  date: string  # Date to harken back to
+  --seconds     # Diff in seconds
+  --minutes     # Diff in minutes
+  --hours       # Diff in hours
+  --days        # Diff in days
+  --weeks       # Diff in weeks
+  --years       # Diff in years
 ] {
-  let then = $date | into datetime
   let denominator = match [$seconds $minutes $hours $days $weeks] {
     [true _ _ _ _] => 1sec,
     [_ true _ _ _] => 1min,
     [_ _ true _ _] => 1hr,
     [_ _ _ true _] => 1day,
     [_ _ _ _ true] => 1wk,
+    _ => 1day,
   }
-  ((date now) - $then) / $denominator | math round --precision 3
+
+  $date
+  | into datetime
+  | ((date now) - $in) / $denominator
+  | math round --precision 3
 }
