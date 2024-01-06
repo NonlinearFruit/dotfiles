@@ -1,3 +1,16 @@
-birthday=$*
-daysTill18=$(datediff $birthday +18 years)
-echo "-1 * ${daysTill18} / 7" | bc
+#!/usr/bin/env nu
+
+def main [
+  birthdate: string # Someone's birthday
+] {
+  $birthdate
+  | date to-record
+  | update year {$in + 18}
+  | $"($in.month)-($in.day)-($in.year)"
+  | into datetime
+  | datediff $in --weeks 
+  | into float
+  | $in / 7
+  | math abs
+  | math floor
+}

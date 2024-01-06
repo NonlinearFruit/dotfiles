@@ -1,12 +1,21 @@
-d1=$(date -d now +%s)
-d2=$(date -d "$*" +%s)
-delta=$((d1 - d2))
-# echo $(( delta )) seconds
-# echo $(( delta / 60 )) minutes
-# echo $(( delta / (60*60) )) hours
-# echo $(( delta / (60*60*24) )) days
-# echo $(( delta / (60*60*24*7) )) weeks
-# echo $(( delta / (60*60*24*30) )) months
-# echo $(( delta / (60*60*24*365) )) years
-# echo $(( delta / (60*60*24*365*10) )) decades
-echo $(( delta / (60*60*24) ))
+#!/usr/bin/env nu
+
+def main [
+  date: string    # Date to harken back to
+  --seconds # Diff in seconds
+  --minutes # Diff in minutes
+  --hours   # Diff in hours
+  --days = true   # Diff in days
+  --weeks   # Diff in weeks
+  --years   # Diff in years
+] {
+  let then = $date | into datetime
+  let denominator = match [$seconds $minutes $hours $days $weeks] {
+    [true _ _ _ _] => 1sec,
+    [_ true _ _ _] => 1min,
+    [_ _ true _ _] => 1hr,
+    [_ _ _ true _] => 1day,
+    [_ _ _ _ true] => 1wk,
+  }
+  ((date now) - $then) / $denominator | math round --precision 3
+}
