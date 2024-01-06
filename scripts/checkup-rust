@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for folder in ~/projects/rust/*; do
-  checkup $folder
-done

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for folder in /mnt/c/Projects/checkpro.api/ ~/projects/smi.checkpro.api.scripts ~/projects/intacctdocumentation /mnt/c/Projects/paymentprocessor; do
-  checkup $folder
-done

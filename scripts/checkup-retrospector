@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for folder in /mnt/c/Projects/Retrospector /mnt/c/Projects/Retrospector-Core /mnt/c/Users/bbolen/Documents/NetBeansProjects/Retrospector-Hsqldb /mnt/c/Users/bbolen/Documents/NetBeansProjects/Retrospector-JavaFx; do
-  checkup $folder
-done
