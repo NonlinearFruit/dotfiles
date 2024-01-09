@@ -1,13 +1,25 @@
-#!/bin/bash
+#!/bin/env nu
 
-PREFERENCES="&include-passage-references=false&include-verse-numbers=false&include-footnotes=false&include-headings=false";
-QUERY="/v3/passage/text/?q=$1";
-shift;
+# Lookup passage from the ESV Bible
+def main [
+  --include-passage-references # Show passage references
+  --include-verse-numbers      # Show verse numbers
+  --include-footnotes          # Show the footnotes
+  --include-headings           # Show the passage headings
+  ...passage: string           # Bible passage to lookup
+] {
+  let headers = ["Authorization" "Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b"]
 
-for arg in "$@"; do
-  QUERY+="+$arg";
-done
-
-VERSES=$(curl -H "Authorization: Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" "https://api.esv.org$QUERY$PREFERENCES" 2> /dev/null | jq -r .passages[0])
-
-echo -e "$VERSES"
+  {
+    include-passage-references: ($include_passage_references | into string)
+    include-verse-numbers: ($include_verse_numbers | into string)
+    include-footnotes: ($include_footnotes | into string)
+    include-headings: ($include_headings | into string)
+    q: ($passage | str join " ")
+  }
+  | url build-query
+  | $"https://api.esv.org/v3/passage/text/?($in)"
+  | http get $in --headers $headers
+  | get passages
+  | first
+}

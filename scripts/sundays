@@ -11,7 +11,6 @@ def main [
   | into datetime
   | datediff $in --weeks 
   | into float
-  | $in / 7
   | math abs
   | math floor
 }
