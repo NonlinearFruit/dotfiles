@@ -114,9 +114,6 @@ return require("packer").startup(function(use)
     requires = { "nvim-treesitter/nvim-treesitter" },
   })
 
-  -- Game for practicing vim
-  use("ThePrimeagen/vim-be-good")
-
   if packer_bootstrap then
     require("packer").sync()
   end
