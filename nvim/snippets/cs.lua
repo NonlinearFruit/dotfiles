@@ -43,16 +43,4 @@ return {
       { type = i(1, "Type"), name = i(2, "Name") }
     )
   ),
-  snippet("print_str", {
-    t('print("'),
-    i(1, "desrc"),
-    t('")'),
-  }),
-  snippet("print_var1", {
-    t('print("'),
-    i(1, "desrc"),
-    t(': " .. '),
-    i(2, "the_variable"),
-    t(")"),
-  }),
 }
