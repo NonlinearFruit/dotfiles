@@ -33,13 +33,13 @@ local function on_attach(buffer)
 end
 
 local function configure()
-  require('gitsigns').setup({
+  require("gitsigns").setup({
     signcolumn = true,
-    on_attach = on_attach
+    on_attach = on_attach,
   })
 end
 
 return {
   "lewis6991/gitsigns.nvim",
-  config = configure
+  config = configure,
 }

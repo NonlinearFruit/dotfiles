@@ -19,16 +19,16 @@ local function configure()
   keymap("<leader>tsr", "lua require('neotest').run.run({suite = true})", "[t]est [s]uite [r]un")
   keymap("<leader>tsd", "lua require('neotest').run.run({suite = true, strategy = 'dap'})", "[t]est [s]uite [d]ebug")
   keymap("<leader>tw", "lua require('neotest').summary.toggle()", "[t]est [w]indow")
--- local adapters = {}
--- if packer_plugins["neotest-dotnet"] and packer_plugins["neotest-dotnet"].loaded then
---   table.insert(adapters, require("neotest-dotnet"))
--- end
--- neotest.setup({
---   adapters = adapters,
---   diagnostic = {
---     enabled = true,
---   },
--- })
+  -- local adapters = {}
+  -- if packer_plugins["neotest-dotnet"] and packer_plugins["neotest-dotnet"].loaded then
+  --   table.insert(adapters, require("neotest-dotnet"))
+  -- end
+  -- neotest.setup({
+  --   adapters = adapters,
+  --   diagnostic = {
+  --     enabled = true,
+  --   },
+  -- })
 end
 
 return {
@@ -36,9 +36,8 @@ return {
   opts = {
     diagnostic = {
       enabled = true,
-    }
+    },
   },
   config = configure,
   dependencies = { "Issafalcon/neotest-dotnet" },
 }
-

@@ -48,7 +48,7 @@ local function setPlugins()
     })
   end
   vim.opt.rtp:prepend(lazypath)
-  require("lazy").setup('plugins')
+  require("lazy").setup("plugins")
 end
 
 local function setClipboard()

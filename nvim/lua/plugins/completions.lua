@@ -35,5 +35,5 @@ return {
     "hrsh7th/cmp-nvim-lsp", -- get completions from lsp
     "L3MON4D3/LuaSnip", -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- integrate luasnip and cmp(?)
-  }
+  },
 }
