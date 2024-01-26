@@ -10,7 +10,6 @@
   ["map.sh", "~/projects/privatefiles/map.sh"],
   ["init.sh", "~/projects/privatefiles/init.sh"],
   ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"],
-  ["https://raw.githubusercontent.com/rxi/json.lua/master/json.lua", "~/.config/nvim/lua/json.lua", "curl"],
   ["https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_shorter_catechism.json", "~/scripts/westminster_shorter_catechism.json", "curl"],
   ["wezterm/*", "~/.config/wezterm"]
 ]

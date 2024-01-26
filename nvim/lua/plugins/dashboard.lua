@@ -1,6 +1,5 @@
 local function configure()
   local db = require("dashboard")
-  local json = require("json")
   local io = require("io")
 
   local function read_file(path)
@@ -13,7 +12,7 @@ local function configure()
     return content
   end
   local file_contents = read_file(os.getenv("HOME") .. "/scripts/westminster_shorter_catechism.json")
-  local wsc = json.decode(file_contents)
+  local wsc = vim.json.decode(file_contents)
   math.randomseed(os.time())
   local number = math.random(1, 107)
   local question = wsc.Data[number].Question
@@ -75,15 +74,15 @@ local function configure()
           action = "Oil",
         },
         {
-          icon = "󰓦 ",
-          desc = "Update Packages",
-          key = "u",
+          icon = "󰒲 ",
+          desc = "Lazy",
+          key = "l",
           key_hl = "LineNr",
-          action = "PackerSync",
+          action = "Lazy",
         },
         {
           icon = " ",
-          desc = "Update Mason Stuff",
+          desc = "Update Mason Registries",
           key = "m",
           key_hl = "LineNr",
           action = "MasonUpdate",
@@ -110,6 +109,7 @@ end
 
 return {
   "glepnir/dashboard-nvim",
+  event = "VimEnter",
   config = configure,
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }

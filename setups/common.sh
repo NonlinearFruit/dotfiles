@@ -13,7 +13,6 @@ mkdir -p ~/projects/privatefiles
 # Vim
 mkdir -p ~/.vim/swapfiles
 mkdir -p ~/.vim/undofiles
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Neovim
 sudo $MANAGER install -y build-essential # for Telescope FZF extension
