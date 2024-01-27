@@ -16,7 +16,7 @@ end
 M.run = function(cmd)
   local runner = M.getId()
   if runner == "" then
-    os.execute("tmux split-window -p 40 -h")
+    os.execute("tmux split-window -l 40% -h")
     os.execute("tmux last-pane")
     runner = M.getId()
     if runner == "" then

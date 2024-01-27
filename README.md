@@ -78,6 +78,13 @@ For configuration specific to a particular OS (or a particular environment), cre
 ~/.local/share/nvim/mason/bin/stylua --verify . # Lua
 ```
 
+## Restarting
+
+- Throw away current nvim config
+    ```
+    rm ~/{.local/share,.config}/nvim/* -rf
+    ```
+
 [bash]: https://savannah.gnu.org/projects/bash/
 [git]: https://git-scm.com/docs
 [glaze]: https://github.com/lars-berger/GlazeWM/releases
