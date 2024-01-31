@@ -83,14 +83,12 @@ local function Run_jq(cmd)
   local opts = {
     stdin = "null",
     on_stdout = function(_, msg)
-      local output = table.concat(msg, "\n")
       vim.fn.appendbufline(out_buf, "$", msg)
     end,
     on_stderr = function(_, msg)
       if msg[1] == "" then
         return
       end
-      local output = table.concat(msg, "\n")
       vim.fn.appendbufline(out_buf, "$", "// " .. msg)
       vim.fn.appendbufline(out_buf, "$", "// " .. jq_cmd)
     end,

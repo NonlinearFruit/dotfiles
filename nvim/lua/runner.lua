@@ -13,15 +13,33 @@ M.prompt = function()
   M.run(cmd)
 end
 
-M.run = function(cmd)
+M.createIfNoRunner = function()
   local runner = M.getId()
   if runner == "" then
-    os.execute("tmux split-window -l 40% -h")
+    local job = vim.fn.jobstart("tmux -V", {
+      stdout_buffered = true,
+      on_stdout = function(_, data)
+        local version = data[1]
+        print(version)
+        print(string.sub(version, 6, 8))
+        if string.sub(version, 6, 8) == "3.0" then
+          os.execute("tmux split-window -p 40 -h")
+        else
+          os.execute("tmux split-window -l 40% -h")
+        end
+      end,
+    })
+    vim.fn.jobwait({ job })
     os.execute("tmux last-pane")
     runner = M.getId()
-    if runner == "" then
-      return
-    end
+  end
+  return runner
+end
+
+M.run = function(cmd)
+  local runner = M.createIfNoRunner()
+  if runner == "" then
+    return
   end
   os.execute("tmux send-keys -t " .. runner .. " '" .. cmd .. "' ENTER")
 end
