@@ -24,7 +24,7 @@ local function configure()
 end
 
 return {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = configure,
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = configure,
 }

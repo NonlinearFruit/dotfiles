@@ -81,7 +81,7 @@ For configuration specific to a particular OS (or a particular environment), cre
 ## Restarting
 
 - Throw away current nvim config
-    ```
+    ```sh
     rm ~/{.local/share,.config}/nvim/* -rf
     ```
 
