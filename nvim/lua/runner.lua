@@ -38,7 +38,7 @@ end
 
 M.run = function(cmd)
   local runner = M.createIfNoRunner()
-  if runner == "" then
+  if runner == "" or cmd == "" then
     return
   end
   os.execute("tmux send-keys -t " .. runner .. " '" .. cmd .. "' ENTER")
