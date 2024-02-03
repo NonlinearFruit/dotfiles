@@ -83,44 +83,8 @@ local function setBacholerLife()
   map({ "n", "i", "v", "c" }, "<up>", "<nop>", "This does nothing: Move in normal mode")
 end
 
-local function setCustomFiletypes()
-  local fileTypeMappings = vim.api.nvim_create_augroup("FileTypeMappings", { clear = true })
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = fileTypeMappings,
-    pattern = { "*.page" },
-    callback = function()
-      vim.bo.filetype = "markdown"
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = fileTypeMappings,
-    pattern = { "*.crontab" },
-    callback = function()
-      vim.bo.filetype = "crontab"
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = fileTypeMappings,
-    pattern = { "*.xaml", "*.csproj", "*.sln" },
-    callback = function()
-      vim.bo.filetype = "xml"
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = fileTypeMappings,
-    pattern = { "/tmp/bash-fc*" },
-    callback = function()
-      vim.bo.filetype = "bash"
-    end,
-  })
-end
-
 setBackups()
 setClipboard()
-setCustomFiletypes()
 setIndentation()
 setLeader()
 setPlugins()
