@@ -81,7 +81,8 @@ local function is_job_running(id)
   return vim.fn.jobwait({ id }, 0)[0] == -1
 end
 
-local function run_command(cmd)
+local function update_output_buffer()
+  local cmd = defaults.cmd
   vim.fn.deletebufline(defaults.out.buf, 1, "$")
 
   if vim.fn.exists(defaults.job_id) and is_job_running(defaults.job_id) then
@@ -116,31 +117,19 @@ local function run_command(cmd)
   end
 end
 
-local function filter_changed(_)
+local function update_filter_buffer()
   vim.fn.writefile(vim.fn.getbufline(defaults.filter.buf, 1, "$"), defaults.filter.file)
-  run_command(defaults.cmd)
+  update_output_buffer()
 end
 
-local function on_filter_changed()
-  if defaults.filter.changedtick == vim.fn.getbufvar(defaults.filter.buf, "changedtick") then
+local function on_buffer_changed(defaultsSection, update_function)
+  if defaultsSection.changedtick == vim.fn.getbufvar(defaultsSection.buf, "changedtick") then
     return
   end
 
-  defaults.filter.changedtick = vim.fn.getbufvar(defaults.filter.buf, "changedtick")
-  vim.fn.timer_stop(defaults.filter.timer)
-  defaults.filter.timer = vim.fn.timer_start(defaults.delay, filter_changed)
-end
-
-local function on_input_changed()
-  if defaults.inn.changedtick == vim.fn.getbufvar(defaults.inn.buf, "changedtick") then
-    return
-  end
-
-  defaults.inn.changedtick = vim.fn.getbufvar(defaults.inn.buf, "changedtick")
-  vim.fn.timer_stop(defaults.inn.timer)
-  defaults.inn.timer = vim.fn.timer_start(defaults.delay, function(_)
-    run_command(defaults.cmd)
-  end)
+  defaultsSection.changedtick = vim.fn.getbufvar(defaultsSection.buf, "changedtick")
+  vim.fn.timer_stop(defaultsSection.timer)
+  defaultsSection.timer = vim.fn.timer_start(defaults.delay, update_function)
 end
 
 local function stop(arg)
@@ -234,7 +223,7 @@ M.start = function()
     group = nuplay,
     buffer = defaults.filter.buf,
     callback = function()
-      on_filter_changed()
+      on_buffer_changed(defaults.filter, update_filter_buffer)
     end,
   })
 
@@ -243,7 +232,7 @@ M.start = function()
       group = nuplay,
       buffer = vim.fn.bufnr(),
       callback = function()
-        on_input_changed()
+        on_buffer_changed(defaults.inn, update_output_buffer)
       end,
     })
   end
