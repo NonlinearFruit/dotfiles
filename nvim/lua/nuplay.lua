@@ -82,7 +82,6 @@ local function is_job_running(id)
 end
 
 local function update_output_buffer()
-  local cmd = defaults.cmd
   vim.fn.deletebufline(defaults.out.buf, 1, "$")
 
   if vim.fn.exists(defaults.job_id) and is_job_running(defaults.job_id) then
@@ -108,7 +107,7 @@ local function update_output_buffer()
     opts.stdin = "pipe"
   end
 
-  defaults.job_id = vim.fn.jobstart(cmd, opts)
+  defaults.job_id = vim.fn.jobstart(defaults.cmd, opts)
 
   if is_session_running_with_input_buffer() then
     local input = vim.fn.getbufline(defaults.inn.buf, 1, "$")
@@ -132,33 +131,18 @@ local function on_buffer_changed(defaultsSection, update_function)
   defaultsSection.timer = vim.fn.timer_start(defaults.delay, update_function)
 end
 
-local function stop(arg)
-  arg = arg or "term"
-  if is_job_running(defaults.job_id) == "run" then
-    vim.fn.job_stop(defaults.job_id, arg)
-  end
-end
-
-local function close(bang)
+local function close()
   if not defaults.is_running and not (vim.fn.exists("#nuplay#BufDelete") or vim.fn.exists("#nuplay#BufWipeout")) then
     return
   end
 
-  stop()
-  vim.api.nvim_clear_autocmds({ group = "nuplay" })
-
-  if bang then
-    vim.fn.execute("bwipeout" .. defaults.filter.buf)
-    vim.fn.execute("bwipeout" .. defaults.out.buf)
-    if is_session_running_with_input_buffer() and vim.fn.getbufvar(defaults.inn.buf, "&buftype") == "nofile" then
-      vim.fn.execute("bwipeout" .. defaults.inn.buf)
-    end
+  if is_job_running(defaults.job_id) then
+    vim.fn.job_stop(defaults.job_id, "term")
   end
-
+  vim.api.nvim_clear_autocmds({ group = "nuplay" })
   defaults.is_running = false
 end
 
--- When 'in_buffer' is set to -1, no input buffer is passed to nu
 M.start = function()
   if defaults.is_running then
     return
@@ -175,13 +159,9 @@ M.start = function()
   local filter_name = in_buffer == -1 and "nu-filter://" or "nu-filter://" .. vim.fn.bufname(in_buffer)
   defaults.filter.buf = new_scratch_buffer(filter_name, defaults.filter.ft, false, "botright")
 
-  -- Temporary file where nu filter buffer is written to
-  defaults.filter.file = vim.fn.tempname()
-
   defaults.inn.changedtick = vim.fn.getbufvar(in_buffer, "changedtick", -1)
   defaults.filter.changedtick = vim.fn.getbufvar(defaults.filter.buf, "changedtick")
-  defaults.inn.timer = 0
-  defaults.filter.timer = 0
+  defaults.filter.file = vim.fn.tempname()
   defaults.cmd = generate_command(defaults.exe, defaults.opts, defaults.filter.file)
 
   -- When input, output or filter buffer are deleted/wiped out, close the
@@ -190,25 +170,19 @@ M.start = function()
   vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
     group = nuplay,
     buffer = defaults.out.buf,
-    callback = function()
-      close(false)
-    end,
+    callback = close,
   })
   vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
     group = nuplay,
     buffer = defaults.filter.buf,
-    callback = function()
-      close(false)
-    end,
+    callback = close,
   })
 
   if is_session_running_with_input_buffer() then
     vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
       group = nuplay,
       buffer = defaults.inn.buf,
-      callback = function()
-        close(false)
-      end,
+      callback = close,
     })
   end
 
