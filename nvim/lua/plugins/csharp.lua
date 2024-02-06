@@ -22,7 +22,12 @@ local function configure()
   end
 
   local function runner_keymap(key, shellCommand, description)
-    vim.keymap.set("n", "<leader>" .. key, "<cmd>wa | lua require('runner').run('" .. shellCommand .. "')<cr>", { desc = description })
+    vim.keymap.set(
+      "n",
+      "<leader>" .. key,
+      "<cmd>wa | lua require('runner').run('" .. shellCommand .. "')<cr>",
+      { desc = description }
+    )
   end
 
   runner_keymap("at", "dotnet test", "[A]ll [T]ests")
