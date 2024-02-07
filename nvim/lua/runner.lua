@@ -36,18 +36,23 @@ M.createIfNoRunner = function()
   return runner
 end
 
+local function toHexadecimal(str)
+  local output = ""
+  for i = 1, #str do
+    local char = string.sub(str, i, i)
+    output = string.format("%s %02x", output, string.byte(char))
+  end
+  return output
+end
+
 M.run = function(cmd)
   local runner = M.createIfNoRunner()
   if runner == "" or cmd == "" then
     return
   end
-  local quote = '"'
-  if string.find(cmd, quote) then
-    quote = "'"
-  end
-  os.execute(
-    "tmux send-keys -t " .. runner .. " -l '' " .. quote .. cmd .. quote .. " \\; send-keys -t " .. runner .. " ENTER"
-  )
+  local hex_escape = toHexadecimal(cmd)
+  os.execute("tmux send-keys -t " .. runner .. " -H " .. hex_escape)
+  os.execute("tmux send-keys -t " .. runner .. " ENTER")
 end
 
 M.zoom = function()
