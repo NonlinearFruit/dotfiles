@@ -41,7 +41,13 @@ M.run = function(cmd)
   if runner == "" or cmd == "" then
     return
   end
-  os.execute("tmux send-keys -t " .. runner .. " '" .. cmd .. "' ENTER")
+  local quote = '"'
+  if string.find(cmd, quote) then
+    quote = "'"
+  end
+  os.execute(
+    "tmux send-keys -t " .. runner .. " -l '' " .. quote .. cmd .. quote .. " \\; send-keys -t " .. runner .. " ENTER"
+  )
 end
 
 M.zoom = function()
