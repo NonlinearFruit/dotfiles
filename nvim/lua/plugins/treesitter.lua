@@ -1,25 +1,23 @@
 local function configure()
   require("nvim-treesitter.configs").setup({
-    -- A list of parser names, or "all" (the four listed parsers should always be installed)
+    -- A list of parser names, or "all"
     ensure_installed = {
+      "bash",
       "c_sharp",
-      "lua",
-      "vim",
-      "python",
+      "javascript",
       "jq",
-      "rust",
-      "yaml",
-      "toml",
+      "json",
+      "latex",
+      "lua",
       "markdown",
       "markdown_inline",
-      "latex",
-      "json",
-      "javascript",
-      "bash",
+      "python",
+      "rust",
+      "toml",
+      "vim",
+      "vimdoc",
+      "yaml",
     },
-    sync_install = false,
-    highlight = { enable = true },
-    indent = { enable = true },
   })
 end
 
