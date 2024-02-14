@@ -20,8 +20,6 @@ M.createIfNoRunner = function()
       stdout_buffered = true,
       on_stdout = function(_, data)
         local version = data[1]
-        print(version)
-        print(string.sub(version, 6, 8))
         if string.sub(version, 6, 8) == "3.0" then
           os.execute("tmux split-window -p 40 -h")
         else
