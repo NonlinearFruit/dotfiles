@@ -41,6 +41,14 @@ function is_ssh()
   return 0
 }
 
+function is_tmux()
+{
+  if command -v tmux > /dev/null && [ -z "${TMUX+x}" ]; then
+    return 1
+  fi
+  return 0
+}
+
 for parameter do
   case $parameter in
     termux)
@@ -65,6 +73,10 @@ for parameter do
 
     ssh)
       is_ssh
+      ;;
+
+    tmux)
+      is_tmux
       ;;
   esac
 done
