@@ -33,6 +33,14 @@ function is_lonely()
   ! is_pair_friendly fail
 }
 
+function is_ssh()
+{
+  if [ -z "${SSH_CLIENT+x}" ]; then
+    return 1
+  fi
+  return 0
+}
+
 for parameter do
   case $parameter in
     termux)
@@ -53,6 +61,10 @@ for parameter do
 
     lonely)
       is_lonely
+      ;;
+
+    ssh)
+      is_ssh
       ;;
   esac
 done
