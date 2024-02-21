@@ -35,12 +35,17 @@ return {
     )
   ),
   snippet(
-    "prop",
+    "theory",
     fmt(
       [[
-                public {type} {name} {{ get; set; }}
+                [Theory]
+                [InlineData({})]
+                public void theory({})
+                {{
+                    {}
+                }}
             ]],
-      { type = i(1, "Type"), name = i(2, "Name") }
+      { i(0), i(1), i(2) }
     )
   ),
 }
