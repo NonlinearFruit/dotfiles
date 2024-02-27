@@ -6,15 +6,10 @@ def --wrapped main [
   verb
   --raw
   --json
-  --check-health
   ...rest
 ] {
   if (which dotnet | is-empty) {
     log error "`dotnet` not on path"
-    return
-  }
-  if $check_health {
-    check-health
     return
   }
   
@@ -47,37 +42,40 @@ def build [
   | group-by project
   | transpose project messages
   | join --outer $projects project
-  | each {|project| print-project $project}
-
-  null
+  | each {|project| project-to-string $project}
+  | flatten
+  | str join (char newline)
 }
 
-def print-project [project] {
-  print $project.project
+def project-to-string [project] {
   $project.messages?
   | group-by level
   | transpose level messages
-  | each {|level| print-level $level}
+  | each {|level| level-to-string $level}
+  | prepend $project.project
+  | flatten
 }
 
-def print-level [level] {
+def level-to-string [level] {
   let count = $level.messages | length
-  print $"  ($count) ($level.level)"
   $level.messages
   | group-by message
   | transpose code messages
-  | each {|code| print-code $code}
+  | each {|code| code-to-string $code}
+  | prepend $"  ($count) ($level.level)"
+  | flatten
 }
 
-def print-code [code] {
+def code-to-string [code] {
   let count = $code.messages | length
-  print $"    ($count) ($code.code)"
   $code.messages
-  | each {|message| print-message $message}
+  | each {|message| message-to-string $message}
+  | prepend $"    ($count) ($code.code)"
+  | flatten
 }
 
-def print-message [message] {
-  print $"      ($message.path)\(($message.line),($message.column))"
+def message-to-string [message] {
+  $"      ($message.path)\(($message.line),($message.column))"
 }
 
 def find-base-directory [directory] {
@@ -101,16 +99,4 @@ def up-a-directory [directory] {
 
 def is-base-directory [directory] {
   $directory | append .git | path join | path exists
-}
-
-export def check-health [] {
-  use std assert
-  def "dotnet build" [] {
-"MSBuild version 17.8.3+195e7f5a3 for .NET
-  Determining projects to restore...
-  Restored /home/podo/projects/Budget/Budget/Budget.csproj (in 645 ms).
-/home/podo/projects/Budget/Budget/Retrospector/FactoidCatalogue.razor(65,34): warning CS8618: Non-nullable field '_factoids' must contain a non-null value when exiting constructor. Consider declaring the field as nullable. [/home/podo/projects/Budget/Budget/Budget.csproj]
-  Budget -> /home/podo/projects/Budget/Budget/bin/Debug/net8.0/Budget.dll"
-  }
-  assert equal null (build false false "")
 }
