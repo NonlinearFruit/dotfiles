@@ -1,0 +1,111 @@
+#!/bin/env nu
+
+use std log
+
+def --wrapped main [
+  verb
+  --raw
+  --json
+  --check-health
+  ...rest
+] {
+  if (which dotnet | is-empty) {
+    log error "`dotnet` not on path"
+    return
+  }
+  if $check_health {
+    check-health
+    return
+  }
+  
+  match $verb {
+    "build" => { build $raw $json $rest }
+    _ => { dotnet $verb $rest }
+  }
+}
+
+def build [
+  raw
+  json
+  rest
+] {
+  let input = dotnet build $rest | lines | uniq
+  print $input
+  let base_directory = find-base-directory (pwd)
+  let projects = $input
+  | parse "  {name} -> {dll}"
+  | get name
+  let messages = $input
+  | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
+  | update path {|it| $it.path | path relative-to $base_directory }
+  | update project {|it| $it.project | path basename | parse "{name}.csproj" | get 0.name }
+  $messages
+  | group-by project
+  | transpose project messages
+  | each {|project| print-project $project}
+
+  null
+}
+
+def print-project [project] {
+  print $project.project
+  $project.messages
+  | group-by level
+  | transpose level messages
+  | each {|level| print-level $level}
+}
+
+def print-level [level] {
+  let count = $level.messages | length
+  print $"  ($count) ($level.level)"
+  $level.messages
+  | group-by message
+  | transpose code messages
+  | each {|code| print-code $code}
+}
+
+def print-code [code] {
+  let count = $code.messages | length
+  print $"    ($count) ($code.code)"
+  $code.messages
+  | each {|message| print-message $message}
+}
+
+def print-message [message] {
+  print $"      ($message.path)\(($message.line),($message.column))"
+}
+
+def find-base-directory [directory] {
+  generate $directory {|dir|
+    let parent = up-a-directory $dir
+    if $dir == $parent {
+      { out: $dir }
+    } else {
+      { out: $parent, next: $parent }
+    }
+  }
+  | prepend $directory
+  | skip while {|dir| not (is-base-directory $dir)}
+  | get -i 0
+  | default "/"
+}
+
+def up-a-directory [directory] {
+  $directory | append ".." | path join | path expand
+}
+
+def is-base-directory [directory] {
+  $directory | append .git | path join | path exists
+}
+
+export def check-health [] {
+  use std assert
+  def "dotnet build" [] {
+"MSBuild version 17.8.3+195e7f5a3 for .NET
+  Determining projects to restore...
+  Restored /home/podo/projects/Budget/Budget/Budget.csproj (in 645 ms).
+/home/podo/projects/Budget/Budget/Retrospector/FactoidCatalogue.razor(65,34): warning CS8618: Non-nullable field '_factoids' must contain a non-null value when exiting constructor. Consider declaring the field as nullable. [/home/podo/projects/Budget/Budget/Budget.csproj]
+  Budget -> /home/podo/projects/Budget/Budget/bin/Debug/net8.0/Budget.dll"
+  }
+  assert equal null (build false false "")
+}
