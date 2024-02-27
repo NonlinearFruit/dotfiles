@@ -30,11 +30,15 @@ def build [
   rest
 ] {
   let input = dotnet build $rest | lines | uniq
-  print $input
   let base_directory = find-base-directory (pwd)
   let projects = $input
   | parse "  {name} -> {dll}"
-  | get name
+  | each {|project|
+    {
+      project: $project.name
+    }
+  }
+  
   let messages = $input
   | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
   | update path {|it| $it.path | path relative-to $base_directory }
@@ -42,6 +46,7 @@ def build [
   $messages
   | group-by project
   | transpose project messages
+  | join --outer $projects project
   | each {|project| print-project $project}
 
   null
@@ -49,7 +54,7 @@ def build [
 
 def print-project [project] {
   print $project.project
-  $project.messages
+  $project.messages?
   | group-by level
   | transpose level messages
   | each {|level| print-level $level}
