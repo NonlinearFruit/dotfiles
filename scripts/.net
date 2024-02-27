@@ -24,9 +24,13 @@ def build [
   json
   rest
 ] {
-  let input = dotnet build $rest | lines | uniq
+  let input = dotnet build $rest
+  if ($raw) {
+    return $input
+  }
+  let results =  $input | lines | uniq
   let base_directory = find-base-directory (pwd)
-  let projects = $input
+  let projects = $results
   | parse "  {name} -> {dll}"
   | each {|project|
     {
@@ -34,7 +38,7 @@ def build [
     }
   }
   
-  let messages = $input
+  let messages = $results
   | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
   | update path {|it| $it.path | path relative-to $base_directory }
   | update project {|it| $it.project | path basename | parse "{name}.csproj" | get 0.name }
@@ -42,9 +46,13 @@ def build [
   | group-by project
   | transpose project messages
   | join --outer $projects project
-  | each {|project| project-to-string $project}
-  | flatten
-  | str join (char newline)
+  | if ($json) {
+    to json
+  } else {
+    each {|project| project-to-string $project}
+    | flatten
+    | str join (char newline)
+  }
 }
 
 def project-to-string [project] {
