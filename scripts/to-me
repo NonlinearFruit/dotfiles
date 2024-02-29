@@ -1,10 +1,14 @@
 #!/bin/env nu
 
 # Summon all tmux clients to your window
-def main [] {
+def main [client?] {
   print "Avengers assemble!"
   let window_id = get-my-window-id
-  get-clients
+  if $client != null {
+    [$client]
+  } else {
+    get-clients
+  }
   | each {|client|
     print $"  ($client)"
     move-to-window $client $window_id
