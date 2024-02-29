@@ -1,21 +1,18 @@
 #!/bin/env nu
 
 # Summon all tmux clients to your window
-def main [client?] {
+def main [session_filter = ''] {
   print "Avengers assemble!"
   let window_id = get-my-window-id
-  if $client != null {
-    [$client]
-  } else {
-    get-clients
-  }
+  get-clients-with-session
+  | where ($it.session | str contains $session_filter)
   | each {|client|
-    print $"  ($client)"
+    print $"  ($client.session)"
     move-to-window $client $window_id
     $client
   }
   | each {|client|
-    update-status-line $client
+    update-status-line $client.id
   }
   null
 }
@@ -25,15 +22,14 @@ def get-my-window-id [] {
   | str trim
 }
 
-def get-clients [] {
+export def get-clients-with-session [] {
   tmux list-clients
   | lines
-  | parse "{client}: {rest}"
-  | get client
+  | parse "{id}: {session} {rest}"
 }
 
 def move-to-window [client window] {
-  tmux switch-client -c $client -t $window
+  tmux switch-client -c $client.id -t $"($client.session):($window)"
 }
 
 def update-status-line [client] {
