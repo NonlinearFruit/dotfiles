@@ -1,0 +1,37 @@
+#!/bin/env nu
+
+# Summon all tmux clients to your window
+def main [] {
+  print "Avengers assemble!"
+  let window_id = get-my-window-id
+  get-clients
+  | each {|client|
+    print $"  ($client)"
+    move-to-window $client $window_id
+    $client
+  }
+  | each {|client|
+    update-status-line $client
+  }
+  null
+}
+
+def get-my-window-id [] {
+  tmux display-message -p '#{window_id}'
+  | str trim
+}
+
+def get-clients [] {
+  tmux list-clients
+  | lines
+  | parse "{client}: {rest}"
+  | get client
+}
+
+def move-to-window [client window] {
+  tmux switch-client -c $client -t $window
+}
+
+def update-status-line [client] {
+  tmux refresh-client -t $client -S
+}
