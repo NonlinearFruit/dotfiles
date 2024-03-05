@@ -15,7 +15,7 @@ def --wrapped main [
   
   match $verb {
     "build" => { build $raw $json $rest }
-    _ => { dotnet $verb $rest }
+    _ => { dotnet $verb ...$rest }
   }
 }
 
@@ -24,7 +24,7 @@ def build [
   json
   rest
 ] {
-  let input = dotnet build $rest
+  let input = dotnet build ...$rest
   if ($raw) {
     return $input
   }
