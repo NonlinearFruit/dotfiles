@@ -18,6 +18,9 @@ local function configure()
       "vimdoc",
       "yaml",
     },
+    highlight = {
+      enable = true,
+    },
   })
 end
 
