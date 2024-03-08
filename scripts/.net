@@ -40,8 +40,15 @@ def build [
   
   let messages = $results
   | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
-  | update path {|it| $it.path | path relative-to $base_directory }
-  | update project {|it| $it.project | path basename | parse "{name}.csproj" | get 0.name }
+  | update path {|it|
+    $it.path
+    | if ($in | str starts-with $base_directory) {
+      path relative-to $base_directory
+    } else {
+      $in
+    }
+  }
+  | update project {|it| $it.project | path basename | parse "{name}.{language}proj" | get 0.name }
   $messages
   | group-by project
   | transpose project messages
