@@ -83,61 +83,42 @@ For configuration specific to a particular OS, create setup and mappings for it.
 ./map.sh common wsl | sh
 ```
 
-## Configs
+## Features
 
-| Config                  | Description                                  |
-| ---                     | ---                                          |
-| `bash-aliases.sh`       |                                              |
-| `bashrc.sh`             | [Bash][bash]                                 |
-| `cheatsheets/`          | [TLDR][tldr] extensions                      |
-| `gitconfig.ini`         | [Git][git]                                   |
-| `glaze-wm.yaml`         | [Glaze Window Manager][glaze]                |
-| `mappings/`             | Available mappings                           |
-| `nvim/`                 | [Neovim][nvim]                               |
-| `scripts/`              | Helpful scripts                              |
-| `setups/`               | Available setups                             |
-| `tmux.conf`             | [Tmux][tmux]                                 |
-| `vimrc.vim`             | [Vim][vim] + [IdeaVim][ideavim]              |
-| `vivaldi/`              | [Vivaldi mods][vivaldi-mods]                 |
-| `vivaldi.html`          | [Vivaldi][vivaldi]                           |
-| `wezterm/`              | [Wezterm][wezterm]                           |
-| `windows-terminal.json` | [Windows Terminal][windowsterminal]          |
+<details><summary>Configs</summary>
 
-[bash]: https://savannah.gnu.org/projects/bash/
-[git]: https://git-scm.com/docs
-[glaze]: https://github.com/lars-berger/GlazeWM/releases
-[ideavim]: https://github.com/JetBrains/ideavim
-[nvim]: https://github.com/neovim/neovim
-[tldr]: https://github.com/dbrgn/tealdeer
-[tmux]: https://github.com/tmux/tmux
-[vim]: https://github.com/vim/vim
-[vivaldi]: https://vivaldi.com
-[vivaldi-mods]: https://forum.vivaldi.net/category/52/modifications
-[wezterm]: https://github.com/wez/wezterm
-[windowsterminal]: https://github.com/microsoft/terminal
+The actual dotfiles for various tools
 
-## Scripts
+(get-configs | each { { Config: $in } } | to md)
+</details>
 
-| Script               | Description                                          |
-| ---                  | ---                                                  |
-| checkup              | Show status of given git folder                      |
-| checkup-personal     | Show status of wiki, notes, ellipsis and junk        |
-| checkup-rust         | Show status of all rust projects                     |
-| checkup-work         | Show status of work projects                         |
-| checkup-retrospector | Show status of retrospector projects                 |
-| checkup-fun          | Show status of fun projects                          |
-| countdown            | Timer                                                |
-| datediff             | # of days to past date                               |
-| esv                  | Bible lookup tool                                    |
-| esv-search           | Bible search tool                                    |
-| highlight            | Highlights matches to the given regex                |
-| ipsum                | Random word generator                                |
-| look-alike           | Find words within edit distance 2 of the given word  |
-| number-gossip        | Show special properties of the given number          |
-| passphrase           | Generates a password of the form `Word#Word#Word`    |
-| rusty-link           | Symlink rust binary to ~/scripts folder              |
-| stopwatch            | Indefinite timer                                     |
-| sundays              | Number of Sundays until given birthdate turns 18     |
+<details><summary>Scripts</summary>
+
+Helpful automation for various tasks
+
+(get-scripts | each { { Script: $in } } | to md)
+</details>
+
+<details><summary>Setups</summary>
+
+Automation for initializing a fresh OS
+
+(get-setups | each { { Setup: $in } } | to md)
+</details>
+
+<details><summary>Mappings</summary>
+
+Symlink any config file to any location
+
+(get-mappings | each { { Mapping: $in } } | to md)
+</details>
+
+<details><summary>Cheatsheets</summary>
+
+Custom TLDR pages
+
+(get-cheatsheets | each { { Cheatsheet: $in } } | to md)
+</details>
 
 ## Formatting
 
@@ -153,4 +134,48 @@ For configuration specific to a particular OS, create setup and mappings for it.
     ```
 '
   | save -f README.md
+}
+
+def get-configs [] {
+  let not_configs = [
+    README, toolkit
+    cheatsheets, scripts
+    init, setups
+    map, mappings
+  ]
+  ls
+  | get name
+  | path parse
+  | where stem not-in $not_configs
+  | get stem
+  | uniq
+}
+
+def get-scripts [] {
+  ls scripts
+  | get name
+  | path parse
+  | where ($it.extension | is-empty)
+  | get stem
+}
+
+def get-mappings [] {
+  ls mappings
+  | get name
+  | path parse
+  | get stem
+}
+
+def get-setups [] {
+  ls setups
+  | get name
+  | path parse
+  | get stem
+}
+
+def get-cheatsheets [] {
+  ls cheatsheets
+  | get name
+  | path parse
+  | get stem
 }

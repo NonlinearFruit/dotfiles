@@ -30,61 +30,117 @@ For configuration specific to a particular OS, create setup and mappings for it.
 ./map.sh common wsl | sh
 ```
 
-## Configs
+## Features
 
-| Config                  | Description                                  |
-| ---                     | ---                                          |
-| `bash-aliases.sh`       |                                              |
-| `bashrc.sh`             | [Bash][bash]                                 |
-| `cheatsheets/`          | [TLDR][tldr] extensions                      |
-| `gitconfig.ini`         | [Git][git]                                   |
-| `glaze-wm.yaml`         | [Glaze Window Manager][glaze]                |
-| `mappings/`             | Available mappings                           |
-| `nvim/`                 | [Neovim][nvim]                               |
-| `scripts/`              | Helpful scripts                              |
-| `setups/`               | Available setups                             |
-| `tmux.conf`             | [Tmux][tmux]                                 |
-| `vimrc.vim`             | [Vim][vim] + [IdeaVim][ideavim]              |
-| `vivaldi/`              | [Vivaldi mods][vivaldi-mods]                 |
-| `vivaldi.html`          | [Vivaldi][vivaldi]                           |
-| `wezterm/`              | [Wezterm][wezterm]                           |
-| `windows-terminal.json` | [Windows Terminal][windowsterminal]          |
+<details><summary>Configs</summary>
 
-[bash]: https://savannah.gnu.org/projects/bash/
-[git]: https://git-scm.com/docs
-[glaze]: https://github.com/lars-berger/GlazeWM/releases
-[ideavim]: https://github.com/JetBrains/ideavim
-[nvim]: https://github.com/neovim/neovim
-[tldr]: https://github.com/dbrgn/tealdeer
-[tmux]: https://github.com/tmux/tmux
-[vim]: https://github.com/vim/vim
-[vivaldi]: https://vivaldi.com
-[vivaldi-mods]: https://forum.vivaldi.net/category/52/modifications
-[wezterm]: https://github.com/wez/wezterm
-[windowsterminal]: https://github.com/microsoft/terminal
+The actual dotfiles for various tools
 
-## Scripts
+|Config|
+|-|
+|bash-aliases|
+|bashrc|
+|gitconfig|
+|nvim|
+|termux|
+|tmux|
+|vimrc|
+|vivaldi|
+|wezterm|
+</details>
 
-| Script               | Description                                          |
-| ---                  | ---                                                  |
-| checkup              | Show status of given git folder                      |
-| checkup-personal     | Show status of wiki, notes, ellipsis and junk        |
-| checkup-rust         | Show status of all rust projects                     |
-| checkup-work         | Show status of work projects                         |
-| checkup-retrospector | Show status of retrospector projects                 |
-| checkup-fun          | Show status of fun projects                          |
-| countdown            | Timer                                                |
-| datediff             | # of days to past date                               |
-| esv                  | Bible lookup tool                                    |
-| esv-search           | Bible search tool                                    |
-| highlight            | Highlights matches to the given regex                |
-| ipsum                | Random word generator                                |
-| look-alike           | Find words within edit distance 2 of the given word  |
-| number-gossip        | Show special properties of the given number          |
-| passphrase           | Generates a password of the form `Word#Word#Word`    |
-| rusty-link           | Symlink rust binary to ~/scripts folder              |
-| stopwatch            | Indefinite timer                                     |
-| sundays              | Number of Sundays until given birthdate turns 18     |
+<details><summary>Scripts</summary>
+
+Helpful automation for various tasks
+
+|Script|
+|-|
+|backup-repo|
+|checkup|
+|clip|
+|countdown|
+|datediff|
+|esv|
+|esv-search|
+|highlight|
+|ipsum|
+|is|
+|last-cron|
+|look-alike|
+|nu-test|
+|number-gossip|
+|nvims|
+|passphrase|
+|precisionvim|
+|rusty-link|
+|ssh|
+|stopwatch|
+|sundays|
+|tmux-clients-in-window|
+|tmux-clones|
+|tmux-rogues|
+|to-me|
+|toggle-pair|
+|view|
+</details>
+
+<details><summary>Setups</summary>
+
+Automation for initializing a fresh OS
+
+|Setup|
+|-|
+|common|
+|csharp|
+|go|
+|haskell|
+|nvims|
+|openscad|
+|podman|
+|rust|
+|termux|
+|tools|
+|wsl|
+</details>
+
+<details><summary>Mappings</summary>
+
+Symlink any config file to any location
+
+|Mapping|
+|-|
+|common|
+|termux|
+|wsl|
+</details>
+
+<details><summary>Cheatsheets</summary>
+
+Custom TLDR pages
+
+|Cheatsheet|
+|-|
+|bash-notes|
+|cargo-watch|
+|dbeaver-mongo|
+|dotnet-format|
+|dotnet-outdated|
+|fzf-notes|
+|neotest|
+|neovim|
+|nerd-font-symbols|
+|nerd-fonts|
+|netrw|
+|null-ls|
+|nvim-dap|
+|podman-notes|
+|rust-notes|
+|telescope|
+|tmux-notes|
+|wezterm|
+|winget|
+|wsl2|
+</details>
 
 ## Formatting
 
