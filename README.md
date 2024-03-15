@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src=".icon.png" alt="dotfiles icon" width="400" height="400"/>
 </p>
@@ -10,7 +11,7 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ## Setup on fresh OS
 
-Might need to `sudo apt update && sudo apt upgrade` if some dependencies can't install
+Might need to `sudo apt update && sudo apt upgrade` if some dependencies can not install
 
 ```sh
 sudo apt update
@@ -23,7 +24,7 @@ cd ~/projects/dotfiles
 
 ### OS Specific Setup and Mappings
 
-For configuration specific to a particular OS (or a particular environment), create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
+For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
 ```sh
 ./init.sh common termux | sh
 ./map.sh common wsl | sh
@@ -49,6 +50,19 @@ For configuration specific to a particular OS (or a particular environment), cre
 | `wezterm/`              | [Wezterm][wezterm]                           |
 | `windows-terminal.json` | [Windows Terminal][windowsterminal]          |
 
+[bash]: https://savannah.gnu.org/projects/bash/
+[git]: https://git-scm.com/docs
+[glaze]: https://github.com/lars-berger/GlazeWM/releases
+[ideavim]: https://github.com/JetBrains/ideavim
+[nvim]: https://github.com/neovim/neovim
+[tldr]: https://github.com/dbrgn/tealdeer
+[tmux]: https://github.com/tmux/tmux
+[vim]: https://github.com/vim/vim
+[vivaldi]: https://vivaldi.com
+[vivaldi-mods]: https://forum.vivaldi.net/category/52/modifications
+[wezterm]: https://github.com/wez/wezterm
+[windowsterminal]: https://github.com/microsoft/terminal
+
 ## Scripts
 
 | Script               | Description                                          |
@@ -63,7 +77,7 @@ For configuration specific to a particular OS (or a particular environment), cre
 | datediff             | # of days to past date                               |
 | esv                  | Bible lookup tool                                    |
 | esv-search           | Bible search tool                                    |
-| highlight            | Highlights matches to the given regex (no filtering) |
+| highlight            | Highlights matches to the given regex                |
 | ipsum                | Random word generator                                |
 | look-alike           | Find words within edit distance 2 of the given word  |
 | number-gossip        | Show special properties of the given number          |
@@ -84,16 +98,3 @@ For configuration specific to a particular OS (or a particular environment), cre
     ```sh
     rm ~/{.local/share,.config}/nvim/* -rf
     ```
-
-[bash]: https://savannah.gnu.org/projects/bash/
-[git]: https://git-scm.com/docs
-[glaze]: https://github.com/lars-berger/GlazeWM/releases
-[ideavim]: https://github.com/JetBrains/ideavim
-[nvim]: https://github.com/neovim/neovim
-[tldr]: https://github.com/dbrgn/tealdeer
-[tmux]: https://github.com/tmux/tmux
-[vim]: https://github.com/vim/vim
-[vivaldi]: https://vivaldi.com
-[vivaldi-mods]: https://forum.vivaldi.net/category/52/modifications
-[wezterm]: https://github.com/wez/wezterm
-[windowsterminal]: https://github.com/microsoft/terminal
