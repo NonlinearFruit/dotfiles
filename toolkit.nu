@@ -41,7 +41,9 @@ export def install-go [version = 1.22.0] {
     print "Needs admin rights to install!"
     return
   }
-  print $"Old go version: (^/usr/local/go/bin/go version | parse 'go version go{version} {os}' | get 0.version)"
+  if ("/usr/local/go/bin/go" | path exists) {
+    print $"Old go version: (^/usr/local/go/bin/go version | parse 'go version go{version} {os}' | get 0.version)"
+  }
   let file = $"go($version).linux-amd64.tar.gz"
   http get $"https://dl.google.com/go/($file)" | save -f $file
   rm -rf /usr/local/go 
