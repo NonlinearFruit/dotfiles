@@ -15,6 +15,7 @@ def --wrapped main [
   
   match $verb {
     "build" => { build $raw $json $rest }
+    "test" => { test $raw $json $rest }
     _ => { dotnet $verb ($rest | str join ' ') }
   }
 }
@@ -34,6 +35,35 @@ def build [
     to json
   } else {
     each {|project| project-to-string $project}
+    | flatten
+    | str join (char newline)
+  }
+}
+
+def test [
+  raw
+  json
+  rest
+] {
+  let input = dotnet test ($rest | str join ' ')
+  if ($raw) {
+    return $input
+  }
+
+  let structure = parse-into-structure $input
+  let tests = parse-into-tests $input
+
+  if ($json) {
+    $structure
+    | append $tests
+    | to json
+  } else {
+    $structure
+    | each {|project| project-to-string $project}
+    | append (
+      $tests
+      | each {|tests| tests-to-string $tests}
+    )
     | flatten
     | str join (char newline)
   }
@@ -67,6 +97,23 @@ def parse-into-structure [output] {
   | join --outer $projects project
 }
 
+def parse-into-tests [output] {
+  $output
+  | lines
+  | parse "{beginning}Failed:{fails}, Passed:{passes}, Skipped:{skips}, Total:{total}, Duration:{duration} - {dll} ({runtime})"
+  | update fails {into int}
+  | update passes {into int}
+  | update skips {into int}
+  | update total {into int}
+  | update duration {|it|
+    $it.duration
+    | str replace ' ms' 'ms'
+    | str replace ' s' 'sec'
+    | into duration
+  }
+  | reject beginning
+}
+
 def project-to-string [project] {
   $project.messages?
   | group-by level
@@ -74,6 +121,19 @@ def project-to-string [project] {
   | each {|level| level-to-string $level}
   | prepend $"(colorize ($in | length))($project.project)(ansi reset)"
   | flatten
+}
+
+def tests-to-string [tests] {
+  $tests
+  | each {|test|
+    ""
+    | append $"Passed:  ($test.passes)"
+    | append $"Failed:  ($test.fails)"
+    | append $"Skipped: ($test.fails)"
+    | append $"-------------"
+    | append $"Total:   ($test.total)"
+    | str join (char newline)
+  }
 }
 
 def level-to-string [level] {
