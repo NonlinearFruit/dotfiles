@@ -15,7 +15,7 @@ def --wrapped main [
   
   match $verb {
     "build" => { build $raw $json $rest }
-    _ => { dotnet $verb ...$rest }
+    _ => { dotnet $verb ($rest | str join ' ') }
   }
 }
 
@@ -24,35 +24,12 @@ def build [
   json
   rest
 ] {
-  let input = dotnet build ...$rest
+  let input = dotnet build ($rest | str join ' ')
   if ($raw) {
     return $input
   }
-  let results =  $input | lines | uniq
-  let base_directory = find-base-directory (pwd)
-  let projects = $results
-  | parse "  {name} -> {dll}"
-  | each {|project|
-    {
-      project: $project.name
-    }
-  }
-  
-  let messages = $results
-  | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
-  | update path {|it|
-    $it.path
-    | if ($in | str starts-with $base_directory) {
-      path relative-to $base_directory
-    } else {
-      $in
-    }
-  }
-  | update project {|it| $it.project | path basename | parse "{name}.{language}proj" | get 0.name }
-  $messages
-  | group-by project
-  | transpose project messages
-  | join --outer $projects project
+
+  parse-into-structure $input
   | if ($json) {
     to json
   } else {
@@ -62,12 +39,40 @@ def build [
   }
 }
 
+def parse-into-structure [output] {
+  let results =  $output | lines | uniq
+  let base_directory = find-base-directory (pwd)
+  let projects = $results
+  | parse "  {name} -> {dll}"
+  | each {|project|
+    {
+      project: $project.name
+    }
+  }
+  
+  $results
+  | parse "{path}({line},{column}): {level} {code}: {message} [{project}]"
+  | update path {|it|
+    $it.path
+    | if ($in | str starts-with $base_directory) {
+      path relative-to $base_directory
+    } else {
+      $in
+    }
+  }
+  | update message {|it| $it.message | str trim }
+  | update project {|it| $it.project | path basename | parse "{name}.{language}proj" | get 0.name }
+  | group-by project
+  | transpose project messages
+  | join --outer $projects project
+}
+
 def project-to-string [project] {
   $project.messages?
   | group-by level
   | transpose level messages
   | each {|level| level-to-string $level}
-  | prepend $project.project
+  | prepend $"(colorize ($in | length))($project.project)(ansi reset)"
   | flatten
 }
 
@@ -77,7 +82,7 @@ def level-to-string [level] {
   | group-by message
   | transpose code messages
   | each {|code| code-to-string $code}
-  | prepend $"  ($count) ($level.level)"
+  | prepend $"  (colorize $level.level)($count) ($level.level)(ansi reset)"
   | flatten
 }
 
@@ -114,4 +119,13 @@ def up-a-directory [directory] {
 
 def is-base-directory [directory] {
   $directory | append .git | path join | path exists
+}
+
+def colorize [input] {
+  match $input {
+    "warning" => (ansi yellow)
+    "error" => (ansi red)
+    0 => (ansi green)
+    _ => (ansi reset)
+  }
 }
