@@ -16,9 +16,9 @@ esac
 if is lonely; then                                       # Pairs should manually decide how to attach/create tmux sessions
   if command -v tmux > /dev/null && [ -z "$TMUX" ]; then # If tmux exists && we're not in a tmux session
     if tmux ls 2> /dev/null > /dev/null; then            # If tmux sessions already exist
-      tmux new -t $(tmux ls -F '#{session_id}' | sed 's/\$//' | head -1)\; new-window -c "$(pwd)" # attach
+      tmux new -t nonlinearfruit \; new-window -c "$(pwd)" # attach
     else
-      tmux                                                                                        # new
+      tmux new -s nonlinearfruit                           # new
     fi
   fi
 fi
@@ -35,7 +35,7 @@ shopt -s histappend # Append history
 HISTSIZE=100000 # Store 100k commands in history
 HISTFILESIZE=-1 # Ignore history file size
 
-# Prompt (https://unix.stackexchange.com/a/124409/194972)
+# Prompt <https://unix.stackexchange.com/a/124409/194972>
 restore_color='\[\033[0m\]'
 light_cyan='\[\033[01;36m\]'
 light_gray='\[\033[00;37m\]'
@@ -48,7 +48,7 @@ if command -v git prompt > /dev/null; then
   extra_context='$(git prompt)'
 fi
 extra="${light_cyan}$extra_context${restore_color}"
-prompt=" \$ "
+prompt=' $ '
 PS1="\n$machine:$location $extra\n$prompt"
 
 # Autocomplete
@@ -123,18 +123,10 @@ fi
 
 # Fuzzy Find (fzf)
 if [ -d "$HOME/.fzf/bin" ]; then
-  # Setup fzf
-  # ---------
   if [[ ! "$PATH" == */.fzf/bin* ]]; then
     PATH="$PATH:$HOME/.fzf/bin"
   fi
-
-  # Auto-completion
-  # ---------------
-  [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.bash" 2> /dev/null
-
-  # Key bindings
-  # ------------
+  source "$HOME/.fzf/shell/completion.bash" 2> /dev/null
   source "$HOME/.fzf/shell/key-bindings.bash"
 
   # Use fd (rust find)
@@ -169,7 +161,7 @@ if command -v cabal > /dev/null; then
   export PATH="$HOME/.cabal/bin:$PATH"
 fi
 
-# Remove Windows npm (https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151)
+# Remove Windows npm <https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151>
 if is wsl ; then
   export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
 fi
