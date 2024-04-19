@@ -1,24 +1,45 @@
 #!/bin/env nu
 
-let logfile = "time.log"
-
-let results = []
-
-1..10
-| each {
-  rm --force $logfile
-  nvim --startuptime $logfile -c q
-  open $logfile | lines
+def main [] {
+  [
+    nvim-baseline
+    nvim
+  ]
+  | each {|vim|
+    run-multiple-profiles $vim
+  }
 }
-| flatten
-| print
 
+def run-multiple-profiles [vim] {
+  1..10
+  | each {
+    profile-a-lazy-nvim $vim
+  }
+  | insert lazytime {|run| $run.times.LazyDone - $run.times.LazyStart}
+  | {
+    vim: $vim
+    total_plugins: $in.0.count
+    loaded_plugins: $in.0.loaded
+    sample_size: ($in | length)
+    avg: ($in.lazytime | math avg)
+    dev: ($in.lazytime | math stddev)
+    max: ($in.lazytime | math max)
+    min: ($in.lazytime | math min)
+    median: ($in.lazytime | math median)
+  }
+}
 
-# | lines 
-# | skip 6 
-# | each {{ 
-#   description: ($in | str substring 18..) 
-#   duration: ($in | str substring 9..16 | into float) 
-# }} 
-# | sort-by -r duration 
-# | take 10
+def profile-a-lazy-nvim [vim] {
+  with-env [NVIM_APPNAME $vim] {
+    do {
+      ^nvim --headless +'lua =require("lazy.stats").stats()' +q
+    }
+    | complete
+  }
+  | get stderr
+  | lines
+  | where $it !~ ^\w
+  | str join (char newline)
+  | str replace --all ' =' ':'
+  | from nuon
+}
