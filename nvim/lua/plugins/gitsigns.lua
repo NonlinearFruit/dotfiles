@@ -32,14 +32,10 @@ local function on_attach(buffer)
   simple_map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "[i]nner [h]unk")
 end
 
-local function configure()
-  require("gitsigns").setup({
-    signcolumn = true,
-    on_attach = on_attach,
-  })
-end
-
 return {
   "lewis6991/gitsigns.nvim",
-  config = configure,
+  opts = {
+    signcolumn = true,
+    on_attach = on_attach,
+  },
 }
