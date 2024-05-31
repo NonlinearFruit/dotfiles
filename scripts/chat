@@ -1,0 +1,49 @@
+#!/usr/bin/env nu
+
+# Send and read chats
+def main [
+  ...msg: string # Message to send
+  --user: string # User for message
+  --read         # Read most recent
+] {
+  if $read {
+    read-most-recent-message
+  } else {
+    post-message $msg $user
+  }
+}
+
+def read-most-recent-message [] {
+  read-file
+  | last
+  | $"($in.message) -($in.user)"
+}
+
+def post-message [msg user] {
+  if $msg == null or ($msg | is-empty) {
+    print $"(ansi red)No message provided(ansi reset)"
+    exit 1
+  }
+
+  read-file
+  | append {
+    message: ($msg | str join (char space))
+    user: $user
+    time: (date now)
+  }
+  | save-file
+}
+
+def read-file [] {
+  let file = "~/.chat-history"
+  touch $file
+  open $file
+  | from yaml
+  | sort-by time
+}
+
+def save-file [] {
+  to yaml
+  | save -f "~/.chat-history"
+}
+
