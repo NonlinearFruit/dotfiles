@@ -20,7 +20,9 @@ export def install-nushell [version = latest] {
   | http get -H $in $"https://api.github.com/repos/nushell/nushell/releases/($url_ending)"
   | get assets_url
   | http get $in
-  | where name =~ 'x86_64-linux-gnu-full'
+  | where name =~ x86_64
+  | where name =~ linux
+  | where name =~ gnu
   | first
   | each {|asset|
     $asset
