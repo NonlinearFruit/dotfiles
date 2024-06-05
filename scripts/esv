@@ -22,4 +22,7 @@ def main [
   | http get $in --headers $headers
   | get passages
   | first
+  | str replace --all '“' '"'
+  | str replace --all '”' '"'
+  | str replace --all "’" "'"
 }
