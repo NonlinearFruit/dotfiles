@@ -2,20 +2,22 @@
 
 # Send and read chats
 def main [
-  ...msg: string # Message to send
-  --user: string # User for message
-  --read         # Read most recent
+  ...msg: string  # Message to send
+  --user: string  # User for message
+  --read          # Read most recent
+  --age: duration = 2hr
 ] {
   if $read {
-    read-most-recent-message $user
+    read-most-recent-message $user $age
   } else {
     post-message $msg $user
   }
 }
 
-def read-most-recent-message [user] {
+def read-most-recent-message [user age] {
   read-file
   | where $it.user == $user
+  | where (date now) - $it.time < $age
   | if ($in | is-empty) {
     ""
   } else {
@@ -47,10 +49,11 @@ def read-file [] {
   touch $file
   open $file
   | from yaml
-  | if ($in | is-empty) {
+  | if $in == null {
     []
   } else {
-    sort-by time
+    update time { into datetime }
+    | sort-by time
   }
 }
 
