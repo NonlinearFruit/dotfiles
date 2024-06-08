@@ -7,22 +7,30 @@ def main [
   --read         # Read most recent
 ] {
   if $read {
-    read-most-recent-message
+    read-most-recent-message $user
   } else {
     post-message $msg $user
   }
 }
 
-def read-most-recent-message [] {
+def read-most-recent-message [user] {
   read-file
-  | last
-  | $"($in.message) -($in.user)"
+  | where $it.user == $user
+  | if ($in | is-empty) {
+    ""
+  } else {
+    last
+    | if $in.user != null {
+      $"($in.message) -($in.user)"
+    } else {
+      $in.message
+    }
+  }
 }
 
 def post-message [msg user] {
   if $msg == null or ($msg | is-empty) {
-    print $"(ansi red)No message provided(ansi reset)"
-    exit 1
+    error "No message provided"
   }
 
   read-file
@@ -35,15 +43,28 @@ def post-message [msg user] {
 }
 
 def read-file [] {
-  let file = "~/.chat-history"
+  let file = (filepath)
   touch $file
   open $file
   | from yaml
-  | sort-by time
+  | if ($in | is-empty) {
+    []
+  } else {
+    sort-by time
+  }
 }
 
 def save-file [] {
   to yaml
-  | save -f "~/.chat-history"
+  | save -f (filepath)
 }
 
+def filepath [] {
+  "~/.chat-history"
+  | path expand
+}
+
+def error [msg] {
+  print $"(ansi red)($msg)(ansi reset)"
+  exit 1
+}
