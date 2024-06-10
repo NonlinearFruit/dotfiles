@@ -16,7 +16,7 @@ def main [
 
 def read-most-recent-message [user age] {
   read-file
-  | where $it.user == $user
+  | where $user == null or $it.user == $user
   | where (date now) - $it.time < $age
   | if ($in | is-empty) {
     ""
