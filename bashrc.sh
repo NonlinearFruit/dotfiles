@@ -3,7 +3,7 @@
 
 # Scripts
 if [ -d ~/scripts ]; then
-    export PATH="~/scripts:$PATH"
+    export PATH=$PATH:~/scripts
 fi
 
 # Exit if this shell should not be interative
