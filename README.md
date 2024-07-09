@@ -44,6 +44,7 @@ The actual dotfiles for various tools
 |nvim|
 |termux|
 |tmux|
+|todo|
 |vimrc|
 |vivaldi|
 |wezterm|
@@ -56,6 +57,7 @@ Helpful automation for various tasks
 |Script|
 |-|
 |backup-repo|
+|chat|
 |checkup|
 |clip|
 |countdown|
@@ -71,6 +73,7 @@ Helpful automation for various tasks
 |number-gossip|
 |nvims|
 |passphrase|
+|pomodoro|
 |precisionvim|
 |rusty-link|
 |ssh|

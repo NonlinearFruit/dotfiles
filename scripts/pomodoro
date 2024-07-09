@@ -1,0 +1,56 @@
+#!/usr/bin/env nu
+
+# Start and view status of tomato timers
+def main [
+  -t
+  -l
+  -b
+  -s
+] {
+ if $t {
+   start-tomato
+ } else if $b {
+   start-short-break
+ } else if $l {
+   start-long-break
+ }
+ if $s {
+   time-left
+ }
+}
+
+def start-tomato [] {
+  (date now) + 25min
+  | save -f (filepath)
+}
+
+def start-short-break [] {
+  (date now) + 5min
+  | save -f (filepath)
+}
+
+def start-long-break [] {
+  (date now) + 15min
+  | save -f (filepath)
+}
+
+def time-left [] {
+  open (filepath)
+  | into datetime
+  | $in - (date now)
+  | if $in < 0min {
+    "Done"
+  } else {
+    format duration min
+  }
+}
+
+def filepath [] {
+  "~/.pomodoro"
+  | path expand
+}
+
+def error [msg] {
+  print $"(ansi red)($msg)(ansi reset)"
+  exit 1
+}

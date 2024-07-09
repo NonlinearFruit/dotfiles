@@ -153,6 +153,7 @@ def get-configs [] {
   | where stem not-in $not_configs
   | get stem
   | uniq
+  | sort
 }
 
 def get-scripts [] {
@@ -161,6 +162,7 @@ def get-scripts [] {
   | path parse
   | where ($it.extension | is-empty)
   | get stem
+  | sort
 }
 
 def get-mappings [] {
@@ -168,6 +170,7 @@ def get-mappings [] {
   | get name
   | path parse
   | get stem
+  | sort
 }
 
 def get-setups [] {
@@ -175,6 +178,7 @@ def get-setups [] {
   | get name
   | path parse
   | get stem
+  | sort
 }
 
 def get-cheatsheets [] {
@@ -182,4 +186,5 @@ def get-cheatsheets [] {
   | get name
   | path parse
   | get stem
+  | sort
 }
