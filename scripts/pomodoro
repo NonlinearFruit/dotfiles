@@ -41,7 +41,7 @@ def time-left [] {
   | if $in < 0min {
     "Done"
   } else {
-    format duration min
+    $in / 1min | math round | $"($in) min"
   }
 }
 
