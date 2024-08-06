@@ -93,6 +93,11 @@ if [ -d ~/.ssh ]; then
     ssh-add ~/.ssh/id_rsa 2> /dev/null
 fi
 
+# Nix Home Manager
+if [ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then
+  source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
+
 # Pip && Python Dependency Manager (pdm)
 if [ -d ~/.local/bin ]; then
     export PATH="$PATH:$HOME/.local/bin"
