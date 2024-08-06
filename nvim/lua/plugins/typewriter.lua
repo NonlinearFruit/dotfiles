@@ -27,8 +27,8 @@ local function disable_typewriter_mode()
 end
 
 local function configure()
-	api.nvim_create_user_command("TWEnable", enable_typewriter_mode, {})
-	api.nvim_create_user_command("TWDisable", disable_typewriter_mode, {})
+	api.nvim_create_user_command("TypewriterEnable", enable_typewriter_mode, {})
+	api.nvim_create_user_command("TyperwriterDisable", disable_typewriter_mode, {})
 end
 
 return {
