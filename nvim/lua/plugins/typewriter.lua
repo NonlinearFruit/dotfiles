@@ -1,3 +1,4 @@
+-- Inspiration: https://github.com/joshuadanpeterson/typewriter.nvim
 local api = vim.api
 local typewriter_active = false
 

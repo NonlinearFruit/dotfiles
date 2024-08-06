@@ -1,3 +1,4 @@
+-- Inspiration: https://github.com/preservim/vimux
 local M = {}
 
 M.close = function()

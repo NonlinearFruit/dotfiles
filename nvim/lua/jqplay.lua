@@ -1,3 +1,4 @@
+-- Inspiration: https://github.com/bfrg/vim-jqplay
 local M = {}
 local is_running = false -- true if jqplay session running, false otherwise
 local in_buf = -1 -- input buffer number (optional)

@@ -1,3 +1,4 @@
+-- Inspiration: https://github.com/fouladi/toggle-overlength.nvim
 local api = vim.api
 local overlength_active = false
 local config = {
