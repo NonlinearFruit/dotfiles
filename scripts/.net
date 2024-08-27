@@ -25,12 +25,12 @@ def build [
   json
   rest
 ] {
-  let input = dotnet build ($rest | str join ' ')
+  let input = dotnet build ($rest | str join ' ') | complete
   if ($raw) {
-    return $input
+    return $input.stdout
   }
 
-  parse-into-structure $input
+  parse-into-structure $input.stdout
   | if ($json) {
     to json
   } else {
@@ -45,13 +45,17 @@ def test [
   json
   rest
 ] {
-  let input = dotnet test ($rest | str join ' ')
+  let input = dotnet test ($rest | str join ' ') | complete
+  if ($input.exit_code != 0) {
+    log error $input.stderr
+    exit $input.exit_code
+  }
   if ($raw) {
-    return $input
+    return $input.stdout
   }
 
-  let structure = parse-into-structure $input
-  let tests = parse-into-tests $input
+  let structure = parse-into-structure $input.stdout
+  let tests = parse-into-tests $input.stdout
 
   if ($json) {
     $structure
