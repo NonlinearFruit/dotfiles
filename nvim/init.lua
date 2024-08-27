@@ -2,6 +2,10 @@ local function setLeader()
   vim.g.mapleader = " "
 end
 
+local function disableMouse()
+  vim.opt.mouse = ""
+end
+
 local function setIndentation()
   vim.opt.tabstop = 2
   vim.opt.softtabstop = 2
@@ -77,3 +81,4 @@ setLeader()
 setPlugins()
 tweakDisplay()
 tweakNetrw()
+disableMouse()
