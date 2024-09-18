@@ -1,0 +1,17 @@
+# <https://github.com/arkenfox/user.js/blob/master/user.js>
+devtools:
+  chrome:
+    enabled = true
+  debugger:
+    remote-enabled = true
+
+browser:
+  aboutConfig:
+    showWarning: false
+
+extensions:
+  pocket:
+    enabled: false
+
+signon:
+  rememberSignons: false
