@@ -60,3 +60,5 @@ cargo install --git https://github.com/asciinema/agg
 # wolfram engine + wolfram script
 ## https://www.wolfram.com/wolframscript/?source=nav
 ## activation key how to: https://mathematica.stackexchange.com/a/215202
+
+# cargo binstall <https://crates.io/crates/cargo-binstall>
