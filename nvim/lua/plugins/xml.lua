@@ -5,6 +5,6 @@ end
 return {
   "local/xml",
   config = configure,
-  event = {"BufEnter *.xaml,*.props,*.csproj"},
+  event = { "BufEnter *.xaml,*.props,*.csproj" },
   dev = true,
 }

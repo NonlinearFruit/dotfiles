@@ -2,9 +2,9 @@
 local api = vim.api
 local overlength_active = false
 local config = {
-    column_length = 120,  -- Default column length
-    terminal_background = "darkgrey", -- Default background color for terminal
-    gui_background = "#592929",    -- Default background color for GUI
+  column_length = 120, -- Default column length
+  terminal_background = "darkgrey", -- Default background color for terminal
+  gui_background = "#592929", -- Default background color for GUI
 }
 
 local function enable_overlength_mode()
@@ -21,8 +21,8 @@ local function disable_overlength_mode()
 end
 
 local function configure()
-	api.nvim_create_user_command("OverlengthEnable", enable_overlength_mode, {})
-	api.nvim_create_user_command("OverlengthDisable", disable_overlength_mode, {})
+  api.nvim_create_user_command("OverlengthEnable", enable_overlength_mode, {})
+  api.nvim_create_user_command("OverlengthDisable", disable_overlength_mode, {})
 end
 
 return {

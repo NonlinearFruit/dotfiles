@@ -4,7 +4,7 @@ local M = {}
 local hidden_cursor = {
   name = "hidden cursor",
   start = function()
-    vim.cmd [[set guicursor=n-v:hor01-Normal]]
+    vim.cmd([[set guicursor=n-v:hor01-Normal]])
     vim.opt.cursorline = false
     vim.opt.relativenumber = false
     vim.opt.number = false
@@ -19,12 +19,12 @@ local invisiline = {
   start = function()
     vim.opt.cursorline = true
     vim.opt.list = false
-    vim.cmd [[set guicursor=n-v:ver10-Error]]
-    vim.cmd [[highlight CursorLine guibg=#111111 guifg=#111111]]
+    vim.cmd([[set guicursor=n-v:ver10-Error]])
+    vim.cmd([[highlight CursorLine guibg=#111111 guifg=#111111]])
   end,
   stop = function()
     vim.opt.list = true
-    vim.cmd.hi "CursorLine guifg=none guibg=#2b2b2b"
+    vim.cmd.hi("CursorLine guifg=none guibg=#2b2b2b")
     vim.opt.guicursor = { "n-v-c-sm:block", "i-ci-ve:ver25", "r-cr-o:hor20" }
   end,
 }
@@ -38,14 +38,14 @@ local random_theme = {
     end, colorschemes)
 
     local random_colorscheme = colorschemes[math.random(#colorschemes)]
-    vim.cmd.hi "clear"
+    vim.cmd.hi("clear")
     vim.cmd.colorscheme(random_colorscheme)
 
     self.state.colorscheme = random_colorscheme
   end,
   done = function()
-    vim.cmd.hi "clear"
-    vim.cmd.colorscheme "gruvbuddy"
+    vim.cmd.hi("clear")
+    vim.cmd.colorscheme("gruvbuddy")
   end,
 }
 
