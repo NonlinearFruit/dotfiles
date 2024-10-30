@@ -1,3 +1,7 @@
+def --wrapped main [...rest] {
+  nu -c $'use toolkit.nu; toolkit ($rest | str join " ")'
+}
+
 export def install-nushell [version = latest] {
   if not (is-admin) {
     print "Needs admin rights to install!"
