@@ -56,8 +56,8 @@ return {
   opts = {
     defaults = {
       path_display = {
-        "smart"
-      }
+        "smart",
+      },
     },
   },
   dependencies = {

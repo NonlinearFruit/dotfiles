@@ -23,11 +23,14 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 return {
   snippet(
     "main",
-    fmt([[
+    fmt(
+      [[
         def --wrapped main [...rest] {{
           nu -c $'use toolkit.nu; toolkit ($rest | str join " ")'
         }}
 
-    ]], {})
+    ]],
+      {}
+    )
   ),
 }
