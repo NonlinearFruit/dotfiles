@@ -4,6 +4,6 @@ return {
   opts = {
     background = "#1c1c1c",
     foreground = "#87afaf",
-    saturation = "low",
+    saturation = "medium",
   },
 }

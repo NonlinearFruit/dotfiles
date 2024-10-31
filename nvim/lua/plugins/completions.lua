@@ -9,7 +9,7 @@ local function configure()
   cmp.setup({
     mapping = cmp.mapping.preset.insert({
       ["<c-space>"] = cmp.mapping.complete(),
-      ["<esc>"] = cmp.mapping.abort(),
+      ["<c-e>"] = cmp.mapping.abort(),
       ["<tab>"] = cmp.mapping.confirm({ select = true }),
       ["<cr>"] = cmp.mapping.confirm({ select = true }),
     }),
