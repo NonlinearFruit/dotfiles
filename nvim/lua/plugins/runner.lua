@@ -5,7 +5,7 @@ local function configure()
 
   vim.keymap.set("n", "<leader>vr", function()
     runner.run("!!")
-  end, { desc = "[v]imux [r]erun the last command" })
+  end, { desc = "[v]imux [r]epeat the last command" })
 
   vim.keymap.set(
     "n",

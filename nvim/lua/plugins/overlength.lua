@@ -2,7 +2,7 @@
 local api = vim.api
 local overlength_active = false
 local config = {
-  column_length = 120, -- Default column length
+  column_length = 80, -- Default column length
   terminal_background = "darkgrey", -- Default background color for terminal
   gui_background = "#592929", -- Default background color for GUI
 }
