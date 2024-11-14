@@ -29,6 +29,7 @@ nnoremap <leader>at :action RiderUnitTestRunSolutionAction<cr>
 nnoremap <leader>vp :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>ca :action ShowIntentionActions<cr>
 nnoremap <leader>hr :action Vcs.RollbackChangedLines<cr>
+nnoremap <leader>tr :action RiderUnitTestRunContextAction<cr>
 
 " Rider Rewrites
 nnoremap gi :action GotoImplementation<cr>
