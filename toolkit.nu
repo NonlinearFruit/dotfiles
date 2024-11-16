@@ -5,12 +5,21 @@ def --wrapped main [...rest] {
 export def install-nushell [version = latest] {
   if not (is-admin) {
     print "Needs admin rights to install!"
-    return
+    exit 1
   }
   print $"Old nushell version: ($env.NU_VERSION)"
 
-  let tar_file = "nushell.tar.gz"
-  let bin_directory = "/usr/local/bin"
+  get-asset-metadata $version
+  | each {|asset|
+    let tar_file = download-tarball $asset.browser_download_url
+    extract-tarball $tar_file
+    let folder = $asset.name | parse '{name}.tar.{type}' | get 0.name
+    put-nushell-on-path $folder
+  }
+  null
+}
+
+def get-asset-metadata [version] {
   let url_ending = if $version == latest {
     $version
   } else {
@@ -28,17 +37,38 @@ export def install-nushell [version = latest] {
   | where name =~ linux
   | where name =~ gnu
   | first
-  | each {|asset|
-    $asset
-    | get browser_download_url
-    | http get $in
-    | save -f $tar_file
-    tar xf $tar_file --directory=.
-    let folder = $asset.name | parse '{name}.tar.{type}' | get 0.name
-    mv $"($folder)/nu" $bin_directory
-    rm $tar_file
-    rm -rf $folder
+}
+
+def download-tarball [url] {
+  let tar_file = "nushell.tar.gz"
+  http get $url
+  | save -f $tar_file
+  print "  Saved tarball"
+  $tar_file
+}
+
+def extract-tarball [tarball] {
+  ^tar xf $tarball --directory=.
+  | complete
+  | get exit_code
+  | if $in != 0 {
+    print $"  Extraction failed: `tar xf ($tarball) --directory=.`"
+    exit $in
   }
+  rm $tarball
+  print "  Extracted files"
+}
+
+def put-nushell-on-path [folder] {
+  let bin_directory = "/usr/local/bin"
+  ^mv $"($folder)/nu" $bin_directory
+  | complete
+  | get exit_code
+  | if $in != 0 {
+    print $"  Moving binary failed: `mv ($folder)/nu ($bin_directory)`"
+    exit $in
+  }
+  rm -rf $folder
   print $"Installed nushell version: (^$'($bin_directory)/nu' -v)"
 }
 
