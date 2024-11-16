@@ -222,3 +222,7 @@ def get-cheatsheets [] {
   | get stem
   | sort
 }
+
+export def format [] {
+  ^~/.local/share/nvim/mason/bin/stylua --verify . # Lua
+}
