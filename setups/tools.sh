@@ -33,7 +33,7 @@ cargo install fd-find
 cargo install fnm
 
 # htmlq: jq for html using css selectors https://github.com/mgdm/htmlq
-cargo install htmlq
+# cargo install htmlq
 
 # ripgrep: better grep https://github.com/BurntSushi/ripgrep
 cargo install ripgrep
@@ -42,13 +42,13 @@ cargo install ripgrep
 cargo install tealdeer
 
 # watch: automatically run tests and things when files change `cargo watch -x test`
-cargo install cargo-watch
+# cargo install cargo-watch
 
 # z: better autojump https://github.com/ajeetdsouza/zoxide
 cargo install zoxide
 
 # agg: aciinema cast to gif
-cargo install --git https://github.com/asciinema/agg
+# cargo install --git https://github.com/asciinema/agg
 
 # speedtest-cli: collect up/down network data
 # pip install speedtest-cli

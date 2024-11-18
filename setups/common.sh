@@ -28,3 +28,6 @@ mkdir -p ~/.local/share/tealdeer/pages
 
 # Wezterm
 mkdir -p  ~/.config/wezterm/
+
+# Keys
+ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""

@@ -12,7 +12,4 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = configure,
-  dependencies = {
-    { "nushell/tree-sitter-nu" },
-  },
 }
