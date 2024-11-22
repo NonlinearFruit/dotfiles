@@ -82,11 +82,6 @@ if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
 fi
 
-# Aliases
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
-fi
-
 # SSH
 if [ -d ~/.ssh ]; then
     eval $(ssh-agent -s) > /dev/null
@@ -169,4 +164,15 @@ fi
 # Remove Windows npm <https://github.com/microsoft/WSL/issues/3882#issuecomment-543833151>
 if is wsl ; then
   export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
+fi
+
+# Dotnet
+if [ -d "$HOME/.dotnet" ]; then
+  export PATH="$HOME/.dotnet:$PATH"
+  export PATH="$HOME/.dotnet/tools:$PATH"
+fi
+
+# Aliases
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
 fi
