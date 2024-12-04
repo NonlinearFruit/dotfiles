@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  Requires: pip3 install croniter
+#  Requires: pip3 install croniter --break-system-packages
 
 crontab -l | python3 -c "
 from croniter import croniter
