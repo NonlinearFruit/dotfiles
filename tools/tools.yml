@@ -1,0 +1,83 @@
+- cmd: bat
+  description: better cat
+  url: https://github.com/sharkdp/bat
+  manager: cargo
+
+- cmd: bob 
+  id: bob-nvim
+  description: nvim version manager
+  url: https://github.com/MordechaiHadad/bob
+  manager: cargo
+
+- cmd: fd
+  description: better find
+  url: https://github.com/sharkdp/fd
+  manager: cargo
+  id: fd-find
+
+- cmd: fnm
+  description: node versioning
+  url: https://github.com/Schniz/fnm
+  manager: cargo
+  id: fnm
+
+- cmd: htmlq
+  description: jq for html using css selectors
+  url: https://github.com/mgdm/htmlq
+  manager: cargo
+  id: htmlq
+
+- cmd: ripgrep
+  description: better grep
+  url: https://github.com/BurntSushi/ripgrep
+  manager: cargo
+  id: ripgrep
+
+- cmd: tldr
+  description: examples of using different commands
+  url: https://github.com/dbrgn/tealdeer
+  manager: cargo
+  id: tealdeer
+
+- cmd: cargo watch
+  description: automatically run tests and things when files change `cargo watch -x test`
+  manager: cargo
+  id: cargo-watch
+
+- cmd: z
+  description: better autojump
+  url: https://github.com/ajeetdsouza/zoxide
+  manager: cargo
+  id: zoxide
+
+- cmd: agg
+  description: aciinema cast to
+  url: gif
+  manager: cargo
+  id: --git https://github.com/asciinema/agg
+
+# cargo binstall <https://crates.io/crates/cargo-binstall>
+
+- cmd: dotnet outdated
+  description: check for out of date nugets and update them
+  url: https://github.com/dotnet-outdated/dotnet-outdated
+  manager: dotnet
+  id: dotnet-outdated-tool
+
+- cmd: usql
+  description: universal sql cli
+  url: https://github.com/xo/usql
+  manager: go
+  id: --tags most github.com/xo/usql@latest
+
+- cmd: glab
+  description: gitlab cli
+  url: https://gitlab.com/gitlab-org/cli/cmd/glab
+  manager: go
+  id: gitlab.com/gitlab-org/cli/cmd/glab@main
+
+- cmd: packwiz
+  description: minecraft modpack manager
+  url: https://github.com/packwiz/packwiz
+  manager: go
+  id: github.com/packwiz/packwiz@latest
