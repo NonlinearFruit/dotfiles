@@ -12,6 +12,11 @@ case $- in
       *) return;;
 esac
 
+# Exit if Rider 2024.3 opened the shell
+if is rider; then
+  return
+fi
+
 # Terminal multiplexing
 if is lonely; then                                       # Pairs should manually decide how to attach/create tmux sessions
   if command -v tmux > /dev/null && [ -z "$TMUX" ]; then # If tmux exists && we're not in a tmux session

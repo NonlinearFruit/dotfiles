@@ -49,6 +49,14 @@ function is_tmux()
   return 0
 }
 
+function is_rider()
+{
+  if [[ "$(pwd)" == /tmp/* ]]; then
+    return 0
+  fi
+  return 1
+}
+
 for parameter do
   case $parameter in
     termux)
@@ -77,6 +85,10 @@ for parameter do
 
     tmux)
       is_tmux
+      ;;
+
+    rider)
+      is_rider
       ;;
   esac
 done
