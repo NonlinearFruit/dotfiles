@@ -57,6 +57,7 @@
   id: --git https://github.com/asciinema/agg
 
 # cargo binstall <https://crates.io/crates/cargo-binstall>
+# podman <https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md>
 
 - cmd: dotnet outdated
   description: check for out of date nugets and update them
