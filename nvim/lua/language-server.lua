@@ -4,7 +4,7 @@ if not cmp_ok then
   capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
-local on_attach = function (client, bufnr)
+local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gd", function()
     vim.lsp.buf.definition()
   end, { buffer = bufnr, remap = false, desc = "[g]oto [d]efinition" })
@@ -68,5 +68,5 @@ end
 
 return {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
 }
