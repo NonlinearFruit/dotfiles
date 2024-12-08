@@ -121,27 +121,6 @@ local function configure()
     })
   end
 
-  lsp_config.omnisharp.setup({
-    on_attach = function(client, bufnr)
-      -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
-      local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
-      for i, v in ipairs(tokenModifiers) do
-        local tmp = string.gsub(v, " ", "_")
-        tokenModifiers[i] = string.gsub(tmp, "-_", "")
-      end
-      local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
-      for i, v in ipairs(tokenTypes) do
-        local tmp = string.gsub(v, " ", "_")
-        tokenTypes[i] = string.gsub(tmp, "-_", "")
-      end
-      on_attach(client, bufnr)
-    end,
-    capabilities = capabilities,
-    handlers = {
-      ["textDocument/definition"] = require("omnisharp_extended").handler,
-    },
-  })
-
   vim.keymap.set("n", "<leader>lsp", "<cmd>Mason<cr>", { desc = "[LSP] Manage language server installs" })
 
   -- Resources:
@@ -161,7 +140,6 @@ local function configure()
   local INSTALL_THESE = {
     -- Debug Adapter Protocol (DAP) implementations,
     "codelldb", -- Rust
-    "netcoredbg", -- C#
   }
   if os.execute("is termux") ~= 0 then
     for _, pkg in ipairs(INSTALL_THESE) do
@@ -277,35 +255,6 @@ local function configure()
   keymap("<f11>", "lua require('dap').step_into()", "Step into")
   keymap("<f12>", "lua require('dap').step_out()", "Step out")
 
-  dap.adapters.netcoredbg = {
-    type = "executable",
-    command = "netcoredbg",
-    args = { "--interpreter=vscode" },
-  }
-
-  dap.configurations.cs = {
-    {
-      type = "netcoredbg",
-      name = "launch - netcoredbg",
-      request = "launch",
-      program = function()
-        local cwd = vim.fn.getcwd()
-        local d = vim.fn.fnamemodify(cwd, ":t")
-        return vim.fn.input("Path to dll: ", cwd .. "/bin/Debug/net7.0/" .. d .. ".dll", "file")
-      end,
-    },
-    {
-      type = "netcoredbg",
-      name = "attach - netcoredbg",
-      request = "attach",
-      processId = function()
-        local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
-        vim.fn.setenv("NETCOREDBG_ATTACH_PID", pid)
-        return tonumber(pgrep)
-      end,
-    },
-  }
-
   dap.adapters.codelldb = {
     type = "executable",
     command = require("mason-core.package"):get_install_path() .. "/codelldb/codelldb",
@@ -340,9 +289,8 @@ end
 return {
   "williamboman/mason.nvim", -- Tool to install LSP/DAP/linter/formatters
   dependencies = {
-    "williamboman/mason-lspconfig.nvim", -- Easier to configure mason
-    "neovim/nvim-lspconfig", -- Configure LSPs
-    "Hoffs/omnisharp-extended-lsp.nvim", -- Improve C# lsp
+    "williamboman/mason-lspconfig.nvim", -- easier to configure mason
+    "neovim/nvim-lspconfig", -- configure lsps
   },
   config = configure,
 }
