@@ -137,18 +137,6 @@ local function configure()
     return
   end
 
-  local INSTALL_THESE = {
-    -- Debug Adapter Protocol (DAP) implementations,
-    "codelldb", -- Rust
-  }
-  if os.execute("is termux") ~= 0 then
-    for _, pkg in ipairs(INSTALL_THESE) do
-      if not require("mason-registry").is_installed(pkg) then
-        require("mason.api.command").MasonInstall({ pkg })
-      end
-    end
-  end
-
   dapui.setup({
     icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
     mappings = {
@@ -254,36 +242,6 @@ local function configure()
   keymap("<f10>", "lua require('dap').step_over()", "Step over")
   keymap("<f11>", "lua require('dap').step_into()", "Step into")
   keymap("<f12>", "lua require('dap').step_out()", "Step out")
-
-  dap.adapters.codelldb = {
-    type = "executable",
-    command = require("mason-core.package"):get_install_path() .. "/codelldb/codelldb",
-    args = { "--interpreter=vscode" },
-  }
-
-  dap.adapters.codelldb = {
-    type = "server",
-    port = "${port}",
-    executable = {
-      command = "codelldb",
-      args = { "--port", "${port}" },
-    },
-  }
-
-  dap.configurations.rust = {
-    {
-      type = "codelldb",
-      request = "launch",
-      name = "launch - codelldb",
-      program = function()
-        local metadata_json = vim.fn.system("cargo metadata --format-version 1 --no-deps")
-        local metadata = vim.fn.json_decode(metadata_json)
-        local target_name = metadata.packages[1].targets[1].name
-        local target_dir = metadata.target_directory
-        return target_dir .. "/debug/" .. target_name
-      end,
-    },
-  }
 end
 
 return {
