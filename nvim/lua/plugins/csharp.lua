@@ -1,8 +1,10 @@
-local function configure()
+local function non_standard_options()
   vim.opt.tabstop = 4
   vim.opt.softtabstop = 4
   vim.opt.shiftwidth = 4
+end
 
+local function go_to_test_file_key_mapping()
   if os.execute("command -v rg > /dev/null") == 0 then
     vim.keymap.set("n", "<leader>gt", function()
       local currentFile = vim.api.nvim_buf_get_name(0)
@@ -20,7 +22,9 @@ local function configure()
       })
     end, { desc = "[g]o to [t]est file" })
   end
+end
 
+local function runner_key_mappings()
   local function runner_keymap(key, shellCommand, description)
     vim.keymap.set(
       "n",
@@ -33,6 +37,12 @@ local function configure()
   runner_keymap("at", "dotnet test", "[A]ll [T]ests")
   runner_keymap("bc", "dotnet build", "[B]uild/[C]ompile")
   runner_keymap("er", "dotnet run", "[E]xecute [R]un")
+end
+
+local function configure()
+  non_standard_options()
+  go_to_test_file_key_mapping()
+  runner_key_mappings()
 end
 
 return {
