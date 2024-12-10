@@ -56,6 +56,12 @@
   manager: cargo
   id: --git https://github.com/asciinema/agg
 
+- cmd: treesitter-cli
+  description: Used by nvim treesitter to dynamically install parsers
+  url: https://github.com/tree-sitter/tree-sitter
+  manager: cargo
+  id: tree-sitter-cli
+
 # cargo binstall <https://crates.io/crates/cargo-binstall>
 # podman <https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md>
 
