@@ -38,17 +38,19 @@ noremap <leader>ca :action ShowIntentionActions<cr>
 " [r]efactor [a]ctions
 noremap <leader>ra :action Refactorings.QuickListPopupAction<cr>
 " [r]efactor [r]ename
-noremap <Space>rr :action RenameElement<cr>
+noremap <leader>rr :action RenameElement<cr>
 " [r]efactor [i]nline
-noremap <Space>ri :action Inline<cr>
+noremap <leader>ri :action Inline<cr>
+" [r]efactor [m]ethod
+noremap <leader>rm :action ExtractMethod<cr>
+" [r]efactor [v]ariable
+noremap <leader>rv :action IntroduceVariable<cr>
 " noremap <Space>mv :action Move<CR>
 " noremap <Space>ms :action MakeStatic<CR>
 " noremap <Space>ci :action ConvertToInstanceMethod<CR>
-" noremap <Space>em :action ExtractMethod<CR>
 " noremap <Space>ei :action ExtractInterface<CR>
 " noremap <Space>ef :action EncapsulateFields<CR>
 " noremap <Space>rmo :action ReplaceMethodWithMethodObject<CR>
-" noremap <Space>iv :action IntroduceVariable<CR>
 " noremap <Space>ic :action IntroduceConstant<CR>
 " noremap <Space>ip :action IntroduceParameter<CR>
 " noremap <Space>if :action IntroduceField<CR>
