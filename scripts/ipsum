@@ -12,7 +12,7 @@ def main [
     number_of_words?: int = 1 # Number of words to generate
   ] {
   let max_int = 16777216
-  let all_non_random_words = open "~/scripts/words.txt" | lines
+  let all_non_random_words = "~/scripts/words.txt" | path expand | open $in | lines
   let total_options = ($all_non_random_words | length) # apprx # of options
 
   let words = if $number_of_words > 0 {
