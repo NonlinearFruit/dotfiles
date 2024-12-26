@@ -109,7 +109,7 @@ end
 
 return {
   "glepnir/dashboard-nvim",
-  event = "VimEnter",
+  lazy=false,
   config = configure,
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
