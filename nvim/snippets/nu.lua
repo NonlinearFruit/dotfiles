@@ -33,4 +33,14 @@ return {
       {}
     )
   ),
+  snippet(
+    "shebang",
+    fmt(
+      [[
+        #!/usr/bin/env nu
+
+    ]],
+      {}
+    )
+  ),
 }
