@@ -31,3 +31,6 @@ mkdir -p  ~/.config/wezterm/
 
 # Keys
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
+
+# Nushell
+mkdir -p ~/.config/nushell/scripts
