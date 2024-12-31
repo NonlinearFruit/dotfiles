@@ -57,11 +57,6 @@ local function configure()
       capabilities = capabilities,
     })
 
-    lsp_config.nushell.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-
     lsp_config.dockerls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
