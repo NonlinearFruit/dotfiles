@@ -30,6 +30,6 @@ end
 return {
   "local/javascript",
   config = configure,
-  ft = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+  ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   virtual = true,
 }
