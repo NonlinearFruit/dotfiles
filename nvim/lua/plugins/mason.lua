@@ -76,19 +76,6 @@ local function configure()
       on_attach = on_attach,
       capabilities = capabilities,
     })
-
-    lsp_config.yamlls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        yaml = {
-          schemas = {
-            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-            ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
-          },
-        },
-      },
-    })
   end
 end
 
