@@ -6,5 +6,5 @@ return {
   "local/crontab",
   config = configure,
   event = "BufEnter *.crontab",
-  dev = true,
+  virtual = true,
 }

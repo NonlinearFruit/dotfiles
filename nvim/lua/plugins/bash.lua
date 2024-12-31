@@ -6,5 +6,5 @@ return {
   "local/bash",
   config = configure,
   event = "BufEnter /tmp/bash-fc*",
-  dev = true,
+  virtual = true,
 }

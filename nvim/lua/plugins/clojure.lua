@@ -44,5 +44,5 @@ return {
   "local/clojure",
   config = configure,
   ft = "clojure",
-  dev = true,
+  virtual = true,
 }

@@ -21,5 +21,5 @@ return {
     return os.execute("is lonely") == 0
   end,
   config = configure,
-  dev = true,
+  virtual = true,
 }

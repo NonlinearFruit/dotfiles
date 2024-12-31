@@ -30,5 +30,5 @@ return {
     return vim.fn.executable("tmux") == 1
   end,
   config = configure,
-  dev = true,
+  virtual = true,
 }

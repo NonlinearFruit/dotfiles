@@ -6,5 +6,5 @@ return {
   "local/markdown",
   config = configure,
   event = "BufEnter *.page",
-  dev = true,
+  virtual = true,
 }

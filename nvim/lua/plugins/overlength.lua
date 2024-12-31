@@ -28,5 +28,5 @@ end
 return {
   "prototypes/overlength",
   config = configure,
-  dev = true,
+  virtual = true,
 }

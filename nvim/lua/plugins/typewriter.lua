@@ -35,5 +35,5 @@ end
 return {
   "prototypes/typewriter",
   config = configure,
-  dev = true,
+  virtual = true,
 }

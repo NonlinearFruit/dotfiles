@@ -129,7 +129,7 @@ return {
   "local/csharp",
   config = configure,
   ft = "cs",
-  dev = true,
+  virtual = true,
   dependencies = {
     "hoffs/omnisharp-extended-lsp.nvim", -- improve c# lsp
   },
