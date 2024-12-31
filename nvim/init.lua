@@ -56,23 +56,7 @@ local function setPlugins()
   })
 end
 
-local function setClipboard()
-  vim.g.clipboard = {
-    name = "Universal Clipboard",
-    copy = {
-      ["+"] = "clip copy",
-      ["*"] = "clip copy",
-    },
-    paste = {
-      ["+"] = "clip paste",
-      ["*"] = "clip paste",
-    },
-    cache_enabled = 0,
-  }
-end
-
 setBackups()
-setClipboard()
 setIndentation()
 setLeader()
 setPlugins()
