@@ -37,11 +37,6 @@ local function configure()
   end
 
   if os.execute("is termux") ~= 0 then
-    lsp_config.rust_analyzer.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-
     lsp_config.bashls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
