@@ -1,7 +1,6 @@
 local function configure()
   require("nvim-treesitter.configs").setup({
-    -- A list of parser names, or "all"
-    ensure_installed = "all",
+    auto_install = true,
     highlight = {
       enable = true,
     },
