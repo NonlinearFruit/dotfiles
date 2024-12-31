@@ -27,21 +27,6 @@ local function configure()
     underline = true,
     signs = false,
   })
-
-  local lsp = require("language-server")
-  local capabilities = lsp.capabilities
-  local on_attach = lsp.on_attach
-  local lsp_config_ok, lsp_config = pcall(require, "lspconfig")
-  if not lsp_config_ok then
-    return
-  end
-
-  if os.execute("is termux") ~= 0 then
-    lsp_config.openscad_lsp.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-  end
 end
 
 return {
