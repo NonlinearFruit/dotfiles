@@ -6,7 +6,6 @@ local function configure()
     -- { name = "selene", should_install = true },      -- Lua (GLIBC_2.32 not found)
     { name = "golangci-lint", should_install = true }, -- Go
     -- Formatters
-    { name = "stylua", should_install = os.execute("is termux") ~= 0 }, -- Lua
   }
   for _, pkg in ipairs(INSTALL_THESE) do
     if pkg.should_install and not require("mason-registry").is_installed(pkg.name) then
