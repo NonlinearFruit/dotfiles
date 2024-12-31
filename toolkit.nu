@@ -207,6 +207,11 @@ def get-cheatsheets [] {
   | sort
 }
 
+# https://github.com/folke/lazy.nvim/discussions/1034#discussioncomment-7034355
+export def update-nvim-packages [] {
+  ^nvim --headless "+Lazy! sync" +qa
+}
+
 export def format [] {
   ^~/.local/share/nvim/mason/bin/stylua --verify . # Lua
 }
