@@ -1,0 +1,77 @@
+#!/bin/env nu
+
+def main [] {
+  let baselineProfile = 'nvim-baseline'
+  try-create-baseline-nvim $baselineProfile
+  [
+    $baselineProfile
+    nvim
+  ]
+  | each {|vim|
+    run-multiple-profiles $vim
+  }
+}
+
+def try-create-baseline-nvim [profile] {
+  let directory = $'~/.config/($profile)' | path expand
+  $directory
+  | path exists
+  | if not $in {
+    create-baseline-nvim $directory
+  }
+}
+
+def create-baseline-nvim [directory] {
+  mkdir $directory
+  let init = $directory | path join init.lua
+
+  "~/.local/share/nvim/lazy/lazy.nvim"
+  | path expand
+  | $"vim.opt.rtp:prepend\('($in)')
+  require\('lazy').setup\({})"
+  | save -f $init
+}
+
+def run-multiple-profiles [vim] {
+  let output_file = "output.txt"
+  1..10
+  | each {
+    run-vim-profile $vim $output_file
+  }
+
+  parse-output-file $output_file
+  | {
+    vim: $vim
+    total_plugins: $in.0.count
+    loaded_plugins: $in.0.loaded
+    sample_size: ($in | length)
+    avg: ($in.startuptime | math avg)
+    dev: ($in.startuptime | math stddev)
+    max: ($in.startuptime | math max)
+    min: ($in.startuptime | math min)
+    median: ($in.startuptime | math median)
+  }
+}
+
+def run-vim-profile [vim output_file] {
+  with-env {NVIM_APPNAME: $vim} {
+    $":redir >> ($output_file)
+    :lua =require\('lazy.stats').stats\()
+    ZQ"
+    | ^nvim -s - /dev/null
+  }
+}
+
+def parse-output-file [output_file] {
+  let results = open $output_file
+  rm $output_file
+
+  $results
+  | lines
+  | where $it !~ ^\w
+  | prepend '['
+  | append ']'
+  | str join (char newline)
+  | str replace --all ' =' ':'
+  | from nuon
+}
