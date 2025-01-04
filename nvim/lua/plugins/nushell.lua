@@ -14,6 +14,7 @@ end
 local function configure()
   -- lsp comes with nushell out-of-the-box
   configure_lsp()
+  vim.bo.commentstring = "# %s"
 end
 
 return {
