@@ -5,6 +5,7 @@ export def installed-version [package] {
 }
 
 export def install [package] {
+  ^go get $package
 }
 
 export def "self install" [version = 1.22.0] {
