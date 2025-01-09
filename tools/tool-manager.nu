@@ -17,6 +17,8 @@ export def install-tool [] {
 def select-manager [] {
   open tools/tools.yml
   | get manager
+  | append nu
+  | sort
   | uniq
   | input list --fuzzy
 }
@@ -25,6 +27,7 @@ def select-tool [] {
   let tools = open tools/tools.yml
   let package = $tools
   | each { $"($in.cmd): ($in.description)" }
+  | sort
   | input list --fuzzy
   | parse "{cmd}: {description}"
   | get 0.cmd
@@ -37,8 +40,9 @@ def select-tool [] {
 def run [manager command parameter] {
   let alias = match $manager {
     cargo => { "bargo" },
+    dotnet => { "botnet" },
     go => { "bo" },
-    dotnet => { "botnet" }
+    nu => { "bu" }
   }
   nu -c $'use tools/($alias).nu; ($alias) ($command) ($parameter)'
 }
