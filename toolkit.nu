@@ -1,5 +1,7 @@
 def --wrapped main [...rest] {
-  nu -c $'use toolkit.nu; toolkit ($rest | str join " ")'
+  const pathToSelf = path self
+  let nameOfSelf = $pathToSelf | path parse | get stem
+  nu -c $'use ($pathToSelf); ($nameOfSelf) ($rest | str join (" "))'
 }
 
 export def update-readme [] {
