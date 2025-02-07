@@ -72,10 +72,8 @@ Helpful automation for various tasks
 |number-gossip|
 |nvims|
 |passphrase|
-|pomodoro|
 |precisionvim|
 |profile-nvim|
-|rusty-link|
 |ssh|
 |stopwatch|
 |sundays|
