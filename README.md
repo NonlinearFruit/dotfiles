@@ -45,7 +45,6 @@ The actual dotfiles for various tools
 |nvim|
 |termux|
 |tmux|
-|todo|
 |tools|
 |vimrc|
 |vivaldi|
@@ -59,7 +58,6 @@ Helpful automation for various tasks
 |Script|
 |-|
 |backup-repo|
-|chat|
 |checkup|
 |clip|
 |countdown|
@@ -96,7 +94,6 @@ Automation for initializing a fresh OS
 |Setup|
 |-|
 |common|
-|csharp|
 |haskell|
 |nvims|
 |openscad|

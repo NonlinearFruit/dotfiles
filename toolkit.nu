@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 def --wrapped main [...rest] {
   const pathToSelf = path self
   let nameOfSelf = $pathToSelf | path parse | get stem
