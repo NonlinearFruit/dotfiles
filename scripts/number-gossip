@@ -1,12 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env nu
 
-numberFile=~/scripts/numberProperties.txt
+def main [number: int] {
+  open ~/scripts/numbergossip.txt
+  | lines
+  | get $number
+  | str replace --all ',' (char newline)
+}
 
-case "$1" in
-  [0-9]*)
-    fileLine=$(sed "$1q;d" $numberFile)
-    echo $fileLine | tr , '\n'
-    ;;
-  *)
-    sed -i "$2 s/\$/$3/" $numberFile
-esac
