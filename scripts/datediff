@@ -9,6 +9,7 @@ def main [
   --days        # Diff in days
   --weeks       # Diff in weeks
   --years       # Diff in years
+  --truncated   # Truncate to an integer
 ] {
   let denominator = match [$seconds $minutes $hours $days $weeks] {
     [true _ _ _ _] => 1sec,
@@ -22,5 +23,9 @@ def main [
   $date
   | into datetime
   | ((date now) - $in) / $denominator
-  | math round --precision 3
+  | if $truncated {
+    math floor
+  } else {
+    math round --precision 3
+  }
 }

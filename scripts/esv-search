@@ -1,13 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env nu
 
-preferences="&page-size=100";
-query="/v3/passage/search/?q=$1";
-shift;
-
-for arg in "$@"; do
-  query+="+$arg";
-done
-
-verses=$(curl -H "Authorization: Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" "https://api.esv.org$query$preferences" 2> /dev/null | jq -r '.results[] | "\(.content)\n\(.reference)\n"')
-
-echo -e "$verses"
+def main [
+  query            # Text to search for
+  --highlight (-l) # Hightlight query in search results
+] {
+  {
+    scheme: https
+    host: api.esv.org
+    path: v3/passage/search/
+    params: {
+      q: ($query | url encode)
+      page-size: 100
+    }
+  }
+  | url join
+  | http get -H { Authorization: $"Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" } $in
+  | get results
+  | if $highlight {
+    update content { str replace --all --regex $"\(?i)\(($query))" $'(ansi red)$1(ansi reset)' }
+  } else {
+    $in
+  }
+}
