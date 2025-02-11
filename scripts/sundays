@@ -2,10 +2,10 @@
 
 # Number of Sundays left until someone turns 18
 def main [
-  birthdate: string # Someone's birthday
+  birthdate: datetime # Someone's birthday
 ] {
   $birthdate
-  | date to-record
+  | into record
   | update year {$in + 18}
   | $"($in.month)-($in.day)-($in.year)"
   | into datetime

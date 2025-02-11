@@ -3,7 +3,7 @@
 def main [number: int] {
   open ~/scripts/numbergossip.txt
   | lines
-  | get $number
-  | str replace --all ',' (char newline)
+  | get ($number - 1)
+  | str replace --all ' ' (char newline)
 }
 
