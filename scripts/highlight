@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env -S nu --stdin
 
-input="$([[ -p /dev/stdin ]] && cat -)";
-[[ -n "$input" ]] && echo "$input" | grep --color -E "^|$@";
+def main [regexToHighlight] {
+  str replace --all --regex $"\(($regexToHighlight))" $"(ansi red)$1(ansi reset)"
+}
