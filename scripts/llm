@@ -1,0 +1,78 @@
+#!/bin/env -S nu --stdin
+
+def main [
+  query: string
+  --command (-c): string
+  --dry-run
+] {
+  collect-reference-material $command
+  | build-technical-prompt $command $query $in
+  | if $dry_run {
+    print
+  } else {
+    ask-the-llama $in
+  }
+}
+
+def build-technical-prompt [command query reference] {
+  $"
+    Here is some reference material and then a question.
+    Give a succinct answer. The answer should only be a code snippet.
+    Do not include any explanation. Just an example code snippet.
+    Do not include backticks around the code snippet.
+
+    ### Reference
+    ($reference)
+
+    ### Question
+    With regards to ($command), ($query)
+  "
+}
+
+def collect-reference-material [command] {
+  [
+    (get-material 'man' $command)
+    (get-material $command '--help')
+    (get-material $command '-h')
+    (get-material 'tldr' $command)
+  ]
+  | where ($it | is-not-empty)
+  | first
+  | lines
+  | each {
+    str replace --all --regex '\s+' ' '
+  }
+  | uniq
+  | to text
+}
+
+def ask-the-llama [prompt] {
+  let ollama_server = "http://localhost:11434"
+  {
+    model: example
+    stream: false
+    messages: [
+      {
+        role: user
+        content: $prompt
+      }
+    ]
+  }
+  | http post --content-type application/json http://localhost:11434/api/chat $in
+  | get message
+  | get content
+}
+
+def get-material [command arg] {
+  if (which $command | is-not-empty) {
+    ^$command $arg
+    | complete
+    | if $in.exit_code == 0 {
+      $in.stdout
+    } else {
+      ""
+    }
+  } else {
+    ""
+  }
+}
