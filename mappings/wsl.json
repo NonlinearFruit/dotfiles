@@ -4,4 +4,5 @@
   ["vivaldi.html", "$(echo /mnt/c/Users/$USER/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)/browser.html", "cp"],
   ["vivaldi/*", "$(echo /mnt/c/Users/$USER/AppData/Local/Vivaldi/Application/*/resources/vivaldi | sed 's/ /\\n/g' | tail -1)", "cp"],
   ["wezterm/*", "$(echo /mnt/c/Users/$USER/.config/wezterm)", "cp"],
+  ["wsl.ini", "/etc/wsl.conf"],
 ]
