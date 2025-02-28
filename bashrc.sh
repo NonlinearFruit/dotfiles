@@ -181,3 +181,8 @@ fi
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
+
+# GritQL
+if [ -f "$HOME/.grit/bin/env" ]; then
+  source "$HOME/.grit/bin/env"
+fi
