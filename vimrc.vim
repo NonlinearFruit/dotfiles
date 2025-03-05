@@ -16,8 +16,7 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
   " Mimic Custom Vim
 
   " Comment
-  noremap gcc :action CommentByBlockComment<cr>
-  noremap gcb :action CommentByLineComment<cr>
+  noremap gcc :action CommentByLineComment<cr>
 
   " Hunks
   noremap ]h :action VcsShowNextChangeMarker<cr>
@@ -31,6 +30,7 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
   " Search
   nnoremap <leader>// :action Find<cr>
   nnoremap <leader>/g :action FindInPath<cr>
+  nnoremap <leader>/f :action GotoFile<cr>
 
   " Code Actions
   " [c]ode [a]ctions
