@@ -1,0 +1,9 @@
+#!/usr/bin/env -S nu --stdin
+
+# Neovim sED
+# sed: echo hi | sed s/hi/hello/
+# ned: echo hi | ned +s/hi/hello
+def --wrapped main [...rest] {
+  ^nvim ($rest | str join ' ') -E '+%print' '+q!' -
+}
+
