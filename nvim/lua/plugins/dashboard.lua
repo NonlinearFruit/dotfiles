@@ -3,7 +3,7 @@ local function configure()
   local io = require("io")
 
   local function read_file(path)
-    local file = io.open(path, "r") -- r read mode and b binary mode
+    local file = io.open(path, "r") -- r read mode
     if not file then
       return nil
     end
@@ -95,6 +95,13 @@ local function configure()
           action = "Telescope find_files cwd=~/projects/dotfiles",
         },
         {
+          icon = " ",
+          desc = "Catechism",
+          key = "c",
+          key_hl = "LineNr",
+          action = "lua vim.ui.open('https://www.youtube.com/watch?v=+&list=PLDTpYNNVdp--3o7UpYj0EtfYFshewR2R3&index="..(number-1).."')",
+        },
+        {
           icon = "󰩈 ",
           desc = "Quit",
           key = "q",
@@ -108,7 +115,7 @@ local function configure()
 end
 
 return {
-  "glepnir/dashboard-nvim",
+  "nvimdev/dashboard-nvim",
   lazy = false,
   config = configure,
   dependencies = { "nvim-tree/nvim-web-devicons" },
