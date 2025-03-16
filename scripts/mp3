@@ -1,0 +1,13 @@
+#!/usr/bin/env nu
+
+def --wrapped main [...rest] {
+  const pathToSelf = path self
+  let nameOfSelf = $pathToSelf | path parse | get stem
+  nu -c $'use ($pathToSelf); ($nameOfSelf) ($rest | str join (" "))'
+}
+
+export def get-metadata [file] {
+  ^ffprobe -v error -output_format json -show_format $file
+  | from json
+  | get format
+}
