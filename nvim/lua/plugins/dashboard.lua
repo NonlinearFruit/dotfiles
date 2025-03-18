@@ -99,7 +99,9 @@ local function configure()
           desc = "Catechism",
           key = "c",
           key_hl = "LineNr",
-          action = "lua vim.ui.open('https://www.youtube.com/watch?v=+&list=PLDTpYNNVdp--3o7UpYj0EtfYFshewR2R3&index="..(number-1).."')",
+          action = "lua vim.ui.open('https://www.youtube.com/watch?v=+&list=PLDTpYNNVdp--3o7UpYj0EtfYFshewR2R3&index="
+            .. (number - 1)
+            .. "')",
         },
         {
           icon = "󰩈 ",
