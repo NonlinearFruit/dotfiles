@@ -1,15 +1,17 @@
 #!/usr/bin/env nu
 
 def main [
-  query            # Text to search for
+  ...query         # Text to search for
   --highlight (-l) # Hightlight query in search results
 ] {
-  {
+  let actualQuery = $query | str join " "
+  $actualQuery
+  | {
     scheme: https
     host: api.esv.org
     path: v3/passage/search/
     params: {
-      q: ($query | url encode)
+      q: $in
       page-size: 100
     }
   }
@@ -17,7 +19,7 @@ def main [
   | http get -H { Authorization: $"Token 7bf823cec4289f8fbce0b802be2cdeb22fd79c5b" } $in
   | get results
   | if $highlight {
-    update content { str replace --all --regex $"\(?i)\(($query))" $'(ansi red)$1(ansi reset)' }
+    update content { str replace --all --regex $"\(?i)\(($actualQuery))" $'(ansi red)$1(ansi reset)' }
   } else {
     $in
   }
