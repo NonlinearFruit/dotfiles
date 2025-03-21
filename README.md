@@ -43,12 +43,14 @@ The actual dotfiles for various tools
 |firefox|
 |gitconfig|
 |nvim|
+|ollama|
 |termux|
 |tmux|
 |tools|
 |vimrc|
 |vivaldi|
 |wezterm|
+|wsl|
 </details>
 
 <details><summary>Scripts</summary>
@@ -58,7 +60,6 @@ Helpful automation for various tasks
 |Script|
 |-|
 |backup-repo|
-|checkup|
 |clip|
 |countdown|
 |datediff|
@@ -68,8 +69,11 @@ Helpful automation for various tasks
 |ipsum|
 |is|
 |last-cron|
+|llm|
 |look-alike|
+|ned|
 |number-gossip|
+|nvim-plugins|
 |nvims|
 |passphrase|
 |precisionvim|
