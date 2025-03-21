@@ -3,7 +3,21 @@
 # Neovim sED
 # sed: echo hi | sed s/hi/hello/
 # ned: echo hi | ned +s/hi/hello
-def --wrapped main [...rest] {
-  ^nvim ($rest | str join ' ') -E '+%print' '+q!' -
+def --wrapped main [
+  ...rest                 # Params for nvim
+  --file (-f):string = "" # Read from file instead of stdin
+  --in-place (-i)         # Modify file in place
+] {
+  if $file == "" {
+    ^nvim --clean ($rest | str join ' ') -E '+%print' '+q!' -
+  } else if $in_place {
+    ^nvim --clean --headless ($rest | str join ' ') -E '+wq' $file
+  } else {
+    let temp = mktemp --suffix .txt
+    ^nvim --clean --headless ($rest | str join ' ') -E $'+w! ($temp)' '+q!' $file | complete
+    let output = open $temp | str trim
+    rm $temp
+    $output
+  }
 }
 
