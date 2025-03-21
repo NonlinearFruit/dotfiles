@@ -5,7 +5,7 @@ if is termux ; then
 fi
 
 if is wsl ; then
-  echo "No wsl support"
+  wslview "$@"
 fi
 
 if is linux ; then
