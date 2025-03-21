@@ -30,4 +30,6 @@ print(vim.json.encode(plugins))
 | complete
 | get stderr
 | from json
-| where author != local
+| where author not-in [local, prototypes]
+| sort-by author name
+| select author name handle url
