@@ -11,3 +11,28 @@ export def get-metadata [file] {
   | from json
   | get format
 }
+
+export def set-metadata [
+  file
+  --track = 0
+  --disc = 0
+  --suffix = mp3
+] {
+  let temp = mktemp --suffix $".($suffix)"
+  [
+    -metadata
+    $'track=($track)'
+    # -metadata
+    # $'disc=($disc | fill --width 2 --character '0' --alignment right)'
+    # -metadata
+    # $'title=($track | fill --width 2 --character '0' --alignment right)'
+  ]
+  | ^ffmpeg -y -i $file ...$in -c copy $temp
+  | complete
+  | if $in.exit_code != 0 {
+    print $in.stderr
+    exit 1
+  }
+  mv $temp $file
+  get-metadata $file
+}
