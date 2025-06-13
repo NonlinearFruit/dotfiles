@@ -13,7 +13,7 @@ export def install [package] {
 export def "self install" [version = "9.0"] {
   ^wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
   ^chmod +x ./dotnet-install.sh
-  ^./dotnet-install.sh --version latest
+  ^./dotnet-install.sh --channel $version
   ^rm ./dotnet-install.sh
 }
 

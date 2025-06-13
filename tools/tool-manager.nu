@@ -38,11 +38,5 @@ def select-tool [] {
 }
 
 def run [manager command parameter] {
-  let alias = match $manager {
-    cargo => { "bargo" },
-    dotnet => { "botnet" },
-    go => { "bo" },
-    nu => { "bu" }
-  }
-  nu -c $'use tools/($alias).nu; ($alias) ($command) ($parameter)'
+  nu -c $'use tools/($manager).nu; ($manager) ($command) ($parameter)'
 }
