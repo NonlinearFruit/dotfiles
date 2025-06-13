@@ -1,0 +1,10 @@
+#!/bin/env nu
+
+tmux list-clients
+| parse "{a}: {session} [{width}x{height} {b}"
+| update width { into int }
+| update height { into int }
+| {
+  min_width: ($in | sort-by width | first | get session)
+  min_height: ($in | sort-by height | first | get session)
+}
