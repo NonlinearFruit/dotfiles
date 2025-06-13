@@ -1,11 +1,18 @@
 #!/bin/env nu
 
 # Summon all tmux clients to your window
-def main [session_filter = ''] {
-  print "Avengers assemble!"
+def main [
+  session_filter = ''
+  --prompt(-p)
+] {
   let window_id = get-my-window-id
   get-clients-with-session
-  | where ($it.session | str contains $session_filter)
+  | if $prompt {
+    input list --multi 'Select avengers' --display session
+  } else {
+    where ($it.session | str contains $session_filter)
+  }
+  | do {|it| print "Avengers assemble!"; $it} $in
   | each {|client|
     print $"  ($client.session)"
     move-to-window $client $window_id
@@ -22,7 +29,7 @@ def get-my-window-id [] {
   | str trim
 }
 
-export def get-clients-with-session [] {
+def get-clients-with-session [] {
   tmux list-clients
   | lines
   | parse "{id}: {session} {rest}"
