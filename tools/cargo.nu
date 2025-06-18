@@ -23,6 +23,7 @@ export def install [package] {
 export def "self install" [version] {
   ^curl https://sh.rustup.rs -sSf | sh -s -- -y
   # rustup update stable
+  # dnf install gcc
 }
 
 export def "self installed-version" [] {
@@ -32,5 +33,10 @@ export def "self installed-version" [] {
 }
 
 export def "self latest-version" [] {
-  ^rustup check
+  which rustup
+  | if ($in | is-empty) {
+    0
+  } else {
+    ^rustup check
+  }
 }

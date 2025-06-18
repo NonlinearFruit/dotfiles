@@ -127,12 +127,11 @@ if [ -d ~/go/bin ]; then
 fi
 
 # Fuzzy Find (fzf)
-if [ -d "$HOME/.fzf/bin" ]; then
+if command -v fzf > /dev/null; then
   if [[ ! "$PATH" == */.fzf/bin* ]]; then
     PATH="$PATH:$HOME/.fzf/bin"
   fi
-  source "$HOME/.fzf/shell/completion.bash" 2> /dev/null
-  source "$HOME/.fzf/shell/key-bindings.bash"
+  eval "$(fzf --bash)"
 
   # Use fd (rust find)
   if command -v fd > /dev/null; then

@@ -1,8 +1,8 @@
 #!/usr/bin/env nu
 
-export def install-manager [] {
-  let manager = select-manager
-  let version = run $manager "self latest-version" ""
+export def install-manager [manager = ""] {
+  let mng = if $manager == "" { select-manager } else { $manager }
+  let version = run $mng "self latest-version" ""
   run $manager "self install" $version
 }
 

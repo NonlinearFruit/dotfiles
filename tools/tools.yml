@@ -83,6 +83,12 @@
   manager: go
   id: gitlab.com/gitlab-org/cli/cmd/glab@main
 
+- cmd: fzf
+  description: fuzzy finder
+  url: https://github.com/junegunn/fzf
+  manager: go
+  id: github.com/junegunn/fzf
+
 - cmd: packwiz
   description: minecraft modpack manager
   url: https://github.com/packwiz/packwiz

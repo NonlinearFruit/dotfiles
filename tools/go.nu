@@ -4,8 +4,8 @@ export def latest-version [package] {
 export def installed-version [package] {
 }
 
-export def install [package] {
-  ^go get $package
+export def install [package version = latest] {
+  ^go install $"($package)@($version)"
 }
 
 export def "self install" [version = 1.22.0] {
