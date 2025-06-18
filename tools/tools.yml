@@ -94,3 +94,46 @@
   url: https://github.com/packwiz/packwiz
   manager: go
   id: github.com/packwiz/packwiz@latest
+
+- cmd: curl
+  description: http client
+  manager: dnf
+
+- cmd: jq
+  description: json query and manipulation tool
+  manager: dnf
+
+- cmd: figlet
+  description: ascii font
+  manager: dnf
+
+- cmd: tmux
+  description: terminal multiplexer
+  manager: dnf
+
+- cmd: unzip
+  description: extract zips
+  note: required by mason.nvim
+  manager: dnf
+
+- cmd: xclip
+  description: copy/paste from clipboard
+  manager: dnf
+
+- cmd: gcc
+  description: GNU compiler collection
+  note: required by cargo
+  manager: dnf
+
+- cmd: gcc-c++
+  description: C++ support for gcc
+  note: required by treesitter
+  manager: dnf
+
+- cmd: dos2unix
+  description: Removes Windows specific characters from files
+  manager: dnf
+
+- cmd: podman
+  description: Container host
+  manager: dnf
