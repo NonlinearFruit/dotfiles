@@ -16,7 +16,7 @@ local function configure()
 end
 
 return {
-  "local/bacholer-life",
+  "local/bacheler-life",
   cond = function()
     return os.execute("is lonely") == 0
   end,
