@@ -21,9 +21,12 @@ export def install [package] {
 }
 
 export def "self install" [version] {
-  ^curl https://sh.rustup.rs -sSf | sh -s -- -y
-  # rustup update stable
-  # dnf install gcc
+  if (which "rustup" | is-empty) {
+    ^curl https://sh.rustup.rs -sSf | sh -s -- -y
+    # dnf install gcc
+  } else {
+    rustup update stable
+  }
 }
 
 export def "self installed-version" [] {

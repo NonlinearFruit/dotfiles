@@ -3,10 +3,17 @@
   url: https://github.com/sharkdp/bat
   manager: cargo
 
-- cmd: bob 
+- cmd: bob
   id: bob-nvim
+  note: cargo install --locked bob-nvim fixes dependency error
   description: nvim version manager
   url: https://github.com/MordechaiHadad/bob
+  manager: cargo
+
+- cmd: binstall
+  id: cargo-binstall
+  description: install cargo packages via binary
+  url: https://github.com/cargo-bins/cargo-binstall
   manager: cargo
 
 - cmd: fd
