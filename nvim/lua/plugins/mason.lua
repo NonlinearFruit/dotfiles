@@ -30,10 +30,10 @@ local function configure()
 end
 
 return {
-  "williamboman/mason.nvim", -- Tool to install LSP/DAP/linter/formatters
+  "mason-org/mason-lspconfig.nvim", -- easier to configure mason
   dependencies = {
-    "williamboman/mason-lspconfig.nvim", -- easier to configure mason
-    "neovim/nvim-lspconfig", -- configure lsps
+      "mason-org/mason.nvim", -- tool to install lsp/dap/linter/formatters
+      "neovim/nvim-lspconfig", -- configure lsps
   },
   config = configure,
 }

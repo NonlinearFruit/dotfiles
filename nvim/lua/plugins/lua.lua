@@ -17,8 +17,8 @@ local function configure_lsp()
   end
 
   lsp_config.lua_ls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+    on_attach = lsp.on_attach,
+    capabilities = lsp.capabilities,
   })
 end
 
