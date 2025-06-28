@@ -9,19 +9,6 @@ local function install_lsp_and_dap_if_needed()
   end
 end
 
-local function configure_lsp()
-  local lsp = require("language-server")
-  local lsp_config_ok, lsp_config = pcall(require, "lspconfig")
-  if not lsp_config_ok then
-    return
-  end
-
-  lsp_config.lua_ls.setup({
-    on_attach = lsp.on_attach,
-    capabilities = lsp.capabilities,
-  })
-end
-
 local function configure_lazydev()
   require("lazydev").setup({
     library = {
@@ -34,7 +21,7 @@ end
 
 local function configure()
   install_lsp_and_dap_if_needed()
-  configure_lsp()
+  -- vim.lsp.enable("stylua")
   configure_lazydev()
 end
 

@@ -52,13 +52,23 @@ local function install_lsp_and_dap_if_needed()
 end
 
 local function configure_lsp()
-  local lsp = require("language-server")
+  local lsp = require("plugins.language-server")
   local lsp_config_ok, lsp_config = pcall(require, "lspconfig")
   if not lsp_config_ok then
     return
   end
 
   lsp_config.omnisharp.setup({
+    cmd = {
+      vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',
+      '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
+      '--hostPID',
+      tostring(vim.fn.getpid()),
+      'DotNet:enablePackageRestore=false',
+      '--encoding',
+      'utf-8',
+      '--languageserver',
+    },
     on_attach = function(client, bufnr)
       -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
       local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
@@ -73,11 +83,11 @@ local function configure_lsp()
       end
       lsp.on_attach(client, bufnr)
     end,
-    capabilities = lsp.capabilities,
     handlers = {
       ["textDocument/definition"] = require("omnisharp_extended").handler,
     },
   })
+  vim.lsp.enable("omnisharp")
 end
 
 local function configure_dap()

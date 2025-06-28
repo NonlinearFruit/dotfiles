@@ -66,7 +66,17 @@ end
 -- server_ready
 -- type_definition
 
+local function configure()
+  vim.lsp.config("*", {
+    on_attach = on_attach,
+    capabilities = capabilities
+  })
+end
+
 return {
-  capabilities = capabilities,
-  on_attach = on_attach,
+  "local/language-server",
+  config = configure,
+  lazy = false,
+  virtual = true,
+  on_attach = on_attach -- For other plugins to use
 }
