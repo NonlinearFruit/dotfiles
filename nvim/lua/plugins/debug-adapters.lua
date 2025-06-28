@@ -131,5 +131,8 @@ end
 return {
   "rcarriga/nvim-dap-ui",
   config = configure,
-  dependencies = { "mfussenegger/nvim-dap" },
+  dependencies = {
+    "mfussenegger/nvim-dap",
+    "nvim-neotest/nvim-nio",
+  },
 }
