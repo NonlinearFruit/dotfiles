@@ -11,7 +11,7 @@ local function install_lsp_and_dap_if_needed()
 end
 
 local function configure_lsp()
-  vim.lsp.config["yamlls"] = {
+  vim.lsp.config("yamlls", {
     settings = {
       yaml = {
         schemas = {
@@ -20,7 +20,7 @@ local function configure_lsp()
         },
       },
     },
-  }
+  })
 end
 
 local function configure()

@@ -53,12 +53,8 @@ end
 
 local function configure_lsp()
   local lsp = require("plugins.language-server")
-  local lsp_config_ok, lsp_config = pcall(require, "lspconfig")
-  if not lsp_config_ok then
-    return
-  end
 
-  lsp_config.omnisharp.setup({
+  vim.lsp.config("omnisharp", {
     cmd = {
       vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',
       '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
@@ -110,7 +106,7 @@ local function configure_dap()
       program = function()
         local cwd = vim.fn.getcwd()
         local d = vim.fn.fnamemodify(cwd, ":t")
-        return vim.fn.input("Path to dll: ", cwd .. "/bin/Debug/net7.0/" .. d .. ".dll", "file")
+        return vim.fn.input("Path to dll: ", cwd .. "/bin/Debug/net9.0/" .. d .. ".dll", "file")
       end,
     },
     {
