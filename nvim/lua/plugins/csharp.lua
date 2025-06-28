@@ -40,15 +40,10 @@ local function runner_key_mappings()
 end
 
 local function install_lsp_and_dap_if_needed()
-  local INSTALL_THESE = {
+  require("installer").install_if_missing({
     "omnisharp", -- LSP
     "netcoredbg", -- DAP
-  }
-  for _, pkg in ipairs(INSTALL_THESE) do
-    if not require("mason-registry").is_installed(pkg) then
-      require("mason.api.command").MasonInstall({ pkg })
-    end
-  end
+  })
 end
 
 local function configure_lsp()

@@ -1,8 +1,7 @@
 local function install_lsp_if_needed()
-  local pkg = "clojure-lsp"
-  if not require("mason-registry").is_installed(pkg) then
-    require("mason.api.command").MasonInstall({ pkg })
-  end
+  require("installer").install_if_missing({
+    "clojure-lsp", -- LSP
+  })
 end
 
 local function runner_keybindings()
