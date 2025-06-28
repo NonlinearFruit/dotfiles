@@ -56,14 +56,14 @@ local function configure_lsp()
 
   vim.lsp.config("omnisharp", {
     cmd = {
-      vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',
-      '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
-      '--hostPID',
+      vim.fn.executable("OmniSharp") == 1 and "OmniSharp" or "omnisharp",
+      "-z", -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
+      "--hostPID",
       tostring(vim.fn.getpid()),
-      'DotNet:enablePackageRestore=false',
-      '--encoding',
-      'utf-8',
-      '--languageserver',
+      "DotNet:enablePackageRestore=false",
+      "--encoding",
+      "utf-8",
+      "--languageserver",
     },
     on_attach = function(client, bufnr)
       -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642

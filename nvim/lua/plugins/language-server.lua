@@ -69,7 +69,7 @@ end
 local function configure()
   vim.lsp.config("*", {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
   })
 end
 
@@ -78,5 +78,5 @@ return {
   config = configure,
   lazy = false,
   virtual = true,
-  on_attach = on_attach -- For other plugins to use
+  on_attach = on_attach, -- For other plugins to use
 }

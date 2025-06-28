@@ -32,8 +32,8 @@ end
 return {
   "mason-org/mason-lspconfig.nvim", -- easier to configure mason
   dependencies = {
-      "mason-org/mason.nvim", -- tool to install lsp/dap/linter/formatters
-      "neovim/nvim-lspconfig", -- configure lsps
+    "mason-org/mason.nvim", -- tool to install lsp/dap/linter/formatters
+    "neovim/nvim-lspconfig", -- configure lsps
   },
   config = configure,
 }
