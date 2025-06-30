@@ -1,0 +1,16 @@
+#!/bin/env nu
+
+def main [] {
+  get-clients-with-session
+  | do {|it| print "Current Avengers!"; $it} $in
+  | each {|client|
+    print $" [($client.windowIndex) ($client.windowName)] ($client.sessionName)"
+    $client
+  } | ignore
+}
+
+def get-clients-with-session [] {
+  tmux list-clients -F '#{session_name} #{window_index} #{window_name}'
+  | lines
+  | parse "{sessionName} {windowIndex} {windowName}"
+}
