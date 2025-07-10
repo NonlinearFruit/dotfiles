@@ -1,0 +1,15 @@
+#!/usr/bin/env nu
+
+def main [--cmd=""] {
+  ^tmux capture-pane -S- -p
+  | split row --regex $' *($env.USER)@.*\n *'
+  | parse $'$ {cmd}(char newline){output}'
+  | where cmd !~ ^reprint
+  | if $cmd == "" {
+    input list --fuzzy --display cmd
+  } else {
+    where cmd =~ $cmd
+    | last
+  }
+  | get output
+}
