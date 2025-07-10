@@ -1,0 +1,32 @@
+#!/usr/bin/env -S nu --stdin
+
+# Take input from stdin and outputs vimgrep structured results
+def main [] {
+  let input = $in | lines
+  $input
+  | parse-dotnet-build
+  | if ($in | is-not-empty) {
+    return $in
+  } else {
+    $input
+    | parse-dotnet-test
+  }
+}
+
+# Note: When dotnet test is ran, window needs to be wide enough to prevent wrapping
+# Note: When reprint is ran, window needs to be wide enough to prevent wrapping
+def parse-dotnet-test [] {
+  parse '      {full_namespace} ({time}): Error Message: {message}'
+  | get full_namespace
+  | each { split row '.' | last | str replace --regex '\(.*?\)' '' }
+  | uniq
+  | each {|test_name| null; ^rg $test_name --vimgrep (pwd) }
+  | to text
+}
+
+def parse-dotnet-build [] {
+  parse '    {full_path}({line},{column}): error {code}: {message}'
+  | update full_path { if $in =~ 'C:\\' { ^wslpath $in } else { $in } }
+  | each { $'($in.full_path):($in.line):($in.column):($in.message)' }
+  | to text
+}
