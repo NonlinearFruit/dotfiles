@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 def main [--cmd=""] {
-  ^tmux capture-pane -S- -p
+  ^tmux capture-pane -S- -p -J
   | split row --regex $' *($env.USER)@.*\n *'
   | parse $'$ {cmd}(char newline){output}'
   | where cmd !~ ^reprint
