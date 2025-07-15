@@ -4,7 +4,6 @@
 # TODO
 # - unread count in status bar
 # - emoji support
-# - limit history based on term height
 # - stdin
 # - multiline in tmux prompt
 # - graceful quit when following
@@ -46,10 +45,15 @@ def post-message [server user message] {
 
 def follow-messages [server user limit] {
   let last_read = get-last-read $server $user
+  mut old_messages = list-messages $server $user $limit $last_read
+  print $old_messages
   loop {
     let messages = list-messages $server $user $limit $last_read
-    clear
-    print $messages
+    if $messages != $old_messages {
+      clear
+      print $messages
+      $old_messages = $messages
+    }
     sleep 300ms
   }
 }
@@ -80,6 +84,7 @@ def list-messages [server user limit last_read] {
     format-message-group
   }
   | flatten
+  | last (term size | get rows)
   | to text
 }
 
@@ -116,6 +121,7 @@ def format-message [message last_read] {
   $"($message.user | into-color)($message.user)(ansi reset): ($message.message)"
   | if $message.id == $last_read and not $message.is_latest_message {
     append (format-last-read)
+    | to text
   } else {
     $in
   }
@@ -172,4 +178,3 @@ def into-color [] {
     | get ($index mod ($in | length))
   } $in
 }
-
