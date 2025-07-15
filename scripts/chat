@@ -9,6 +9,9 @@
 # - graceful quit when following
 # - scrolling
 # - send message while popup is up
+# Requires:
+# - cargo install nu_plugin_emoji
+# - nu -c 'plugin add nu_plugin_emoji'
 def main [
   message = ""        # Message to post
   --list-messages(-l) # Print the messages
@@ -33,11 +36,20 @@ def main [
 }
 
 def post-message [server user message] {
-  {
+  plugin use emoji
+  $message
+  | parse -r '(?<emoji>:[^:\s]+:)'
+  | get emoji
+  | uniq
+  | reduce --fold $message {|shortcode accumulator|
+    $accumulator
+    | str replace --all $shortcode (emoji $shortcode)
+  }
+  | {
     id: (random uuid -v 7)
     date: (date now)
     user: $user
-    message: $message
+    message: $in
   }
   | to json
   | save -a $server
@@ -79,7 +91,7 @@ def list-messages [server user limit last_read] {
   }
   | update-last-read $server $user $last_read
   | insert displayable_message { format-message $in $last_read }
-  | group-by human_date --to-table
+  | better-group-by human_date
   | each {|group|
     format-message-group
   }
@@ -134,6 +146,9 @@ def format-last-read [] {
 
 def update-last-read [server user last_read] {
   let msgs = $in
+  if ($msgs | is-empty) {
+    return $msgs
+  }
   let latest_message = $msgs
   | last
   | get id
@@ -177,4 +192,12 @@ def into-color [] {
     ]
     | get ($index mod ($in | length))
   } $in
+}
+
+def better-group-by [cell:cell-path] {
+  if ($in | is-empty) {
+    $in
+  } else {
+    group-by $cell --to-table
+  }
 }
