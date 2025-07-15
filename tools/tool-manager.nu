@@ -3,7 +3,7 @@
 export def install-manager [manager = ""] {
   let mng = if $manager == "" { select-manager } else { $manager }
   let version = run $mng "self latest-version" ""
-  run $manager "self install" $version
+  run $mng "self install" $version
 }
 
 export def install-tool [] {
