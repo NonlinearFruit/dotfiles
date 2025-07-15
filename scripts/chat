@@ -1,0 +1,43 @@
+#!/usr/bin/env nu
+
+def main [
+  message = ""        # Message to post
+  --list-messages(-l) # Print the messages
+  --limit = 0         # Limit how many messages to show
+  --follow(-f)        # Continuously print messages
+  --server(-s) = "~/.chat-history" # File used for persistence
+] {
+  let session = ^tmux display-message -p "#{session_name}"
+  mut server = $server | path expand
+  if $message != "" {
+    post-message $server $session $message
+  }
+  if $list_messages and $follow {
+    follow-messages $server $limit
+  } else if $list_messages {
+    list-messages $server $limit
+  }
+}
+
+def post-message [server session message] {
+  let date = date now | format date "%F %H:%M" 
+  $"[($date)] ($session): ($message)(char newline)"
+  | save -a $server
+}
+
+def follow-messages [server limit] {
+  clear
+  loop {
+    list-messages $server $limit
+    sleep 200ms
+    clear
+  }
+}
+
+def list-messages [server limit] {
+  if $limit < 1 {
+    ^tail $server
+  } else {
+    ^tail -($limit) $server
+  }
+}
