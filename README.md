@@ -71,6 +71,7 @@ Helpful automation for various tasks
 |last-cron|
 |llm|
 |look-alike|
+|mp3|
 |ned|
 |number-gossip|
 |nvim-plugins|
@@ -78,6 +79,7 @@ Helpful automation for various tasks
 |passphrase|
 |precisionvim|
 |profile-nvim|
+|reprint|
 |ssh|
 |stopwatch|
 |sundays|
@@ -85,8 +87,11 @@ Helpful automation for various tasks
 |tmux-clones|
 |tmux-rogues|
 |to-me|
+|to-vimgrep|
 |toggle-pair|
 |view|
+|who-is-smallest-of-them-all|
+|whos-where|
 </details>
 
 <details><summary>Setups</summary>
@@ -99,7 +104,6 @@ Automation for initializing a fresh OS
 |haskell|
 |nvims|
 |openscad|
-|podman|
 |termux|
 |tools|
 |wsl|
