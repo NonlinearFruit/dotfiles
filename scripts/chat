@@ -9,10 +9,10 @@ def main [
   --user(-u):string   # User name to use
   --server(-s) = "~/.chat-history" # File used for persistence
 ] {
-  let session = $user | default (^tmux display-message -p "#{session_name}")
+  mut user = $user | default (^tmux display-message -p "#{session_name}")
   mut server = $server | path expand
   if $message != "" {
-    post-message $server $session $message
+    post-message $server $user $message
   }
   if $list_messages and $follow {
     follow-messages $server $limit
@@ -21,10 +21,10 @@ def main [
   }
 }
 
-def post-message [server session message] {
+def post-message [server user message] {
   {
     date: (date now)
-    session: $session
+    user: $user
     message: $message
   }
   | to json
@@ -41,6 +41,9 @@ def follow-messages [server limit] {
 }
 
 def list-messages [server limit] {
+  if ($server | path exists | not $in) {
+    return ""
+  }
   open $server
   | jq --slurp
   | from json
@@ -62,7 +65,7 @@ def list-messages [server limit] {
 }
 
 def format-message [message] {
-  $"($message.session | into-color)($message.session)(ansi reset): ($message.message)"
+  $"($message.user | into-color)($message.user)(ansi reset): ($message.message)"
 }
 
 def into-color [] {
