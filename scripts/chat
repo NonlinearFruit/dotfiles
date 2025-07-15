@@ -61,5 +61,24 @@ def list-messages [server limit] {
 }
 
 def format-message [message] {
-  $"($message.session): ($message.message)"
+  $"($message.session | into-color)($message.session)(ansi reset): ($message.message)"
+}
+
+def into-color [] {
+  split row ''
+  | reduce --fold 0 {|character accumulator|
+    $accumulator + ($character | into binary | into int)
+  }
+  | do {|index|
+    [
+      (ansi blue)
+      (ansi cyan)
+      (ansi green)
+      (ansi magenta)
+      (ansi purple)
+      (ansi red)
+      (ansi yellow)
+    ]
+    | get ($index mod ($in | length))
+  } $in
 }

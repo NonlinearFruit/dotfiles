@@ -60,6 +60,7 @@ Helpful automation for various tasks
 |Script|
 |-|
 |backup-repo|
+|chat|
 |clip|
 |countdown|
 |datediff|
