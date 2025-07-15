@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
 
+# Tool for chatting with the rogues and clones that are in your tmux server
 def main [
   message = ""        # Message to post
   --list-messages(-l) # Print the messages
@@ -47,10 +48,18 @@ def list-messages [server limit] {
   } else {
     last $limit
   }
-  | each { format-message $in }
+  | insert human_date { $in.date | date humanize }
+  | insert displayable_message { format-message $in }
+  | group-by human_date --to-table
+  | each {|group|
+    $group.human_date
+    | fill --alignment r --width (term size | get columns)
+    | prepend $group.items.displayable_message
+  }
+  | flatten
   | to text
 }
 
 def format-message [message] {
-  $"[($message.date | date humanize | fill --width 14)] ($message.session): ($message.message)"
+  $"($message.session): ($message.message)"
 }
