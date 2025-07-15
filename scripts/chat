@@ -6,9 +6,10 @@ def main [
   --list-messages(-l) # Print the messages
   --limit = 0         # Limit how many messages to show
   --follow(-f)        # Continuously print messages
+  --user(-u):string   # User name to use
   --server(-s) = "~/.chat-history" # File used for persistence
 ] {
-  let session = ^tmux display-message -p "#{session_name}"
+  let session = $user | default (^tmux display-message -p "#{session_name}")
   mut server = $server | path expand
   if $message != "" {
     post-message $server $session $message
