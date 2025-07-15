@@ -20,24 +20,37 @@ def main [
 }
 
 def post-message [server session message] {
-  let date = date now | format date "%F %H:%M" 
-  $"[($date)] ($session): ($message)(char newline)"
+  {
+    date: (date now)
+    session: $session
+    message: $message
+  }
+  | to json
   | save -a $server
 }
 
 def follow-messages [server limit] {
-  clear
   loop {
-    list-messages $server $limit
-    sleep 200ms
+    let messages = list-messages $server $limit
     clear
+    print $messages
+    sleep 300ms
   }
 }
 
 def list-messages [server limit] {
-  if $limit < 1 {
-    ^tail $server
+  open $server
+  | jq --slurp
+  | from json
+  | if $limit < 1 {
+    $in
   } else {
-    ^tail -($limit) $server
+    last $limit
   }
+  | each { format-message $in }
+  | to text
+}
+
+def format-message [message] {
+  $"[($message.date | date humanize | fill --width 14)] ($message.session): ($message.message)"
 }
