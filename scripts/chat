@@ -1,12 +1,22 @@
 #!/usr/bin/env nu
 
 # Tool for chatting with the rogues and clones that are in your tmux server
+# TODO
+# - unread count in status bar
+# - emoji support
+# - limit history based on term height
+# - stdin
+# - multiline in tmux prompt
+# - graceful quit when following
+# - scrolling
+# - send message while popup is up
 def main [
   message = ""        # Message to post
   --list-messages(-l) # Print the messages
   --limit = 0         # Limit how many messages to show
   --follow(-f)        # Continuously print messages
   --user(-u):string   # User name to use
+  --unread-message-count(-c)       # Get number of unread messages
   --server(-s) = "~/.chat-history" # File used for persistence
 ] {
   mut user = $user | default (^tmux display-message -p "#{session_name}")
@@ -18,6 +28,8 @@ def main [
     follow-messages $server $user $limit
   } else if $list_messages {
     list-messages $server $user $limit (get-last-read $server $user)
+  } else if $unread_message_count {
+    unread-count $server $user
   }
 }
 
@@ -54,7 +66,13 @@ def list-messages [server user limit last_read] {
   } else {
     last $limit
   }
-  | insert human_date { $in.date | date humanize }
+  | insert human_date {
+    $in.date
+    | date humanize
+    | str replace -r '\d+ seconds? ago' 'now'
+    | str replace -r '^\D*\d minutes? ago$' 'a few minutes ago'
+    | str replace -r '(\d)\d minutes ago' '${1}0 minutes ago'
+  }
   | update-last-read $server $user $last_read
   | insert displayable_message { format-message $in $last_read }
   | group-by human_date --to-table
@@ -63,6 +81,21 @@ def list-messages [server user limit last_read] {
   }
   | flatten
   | to text
+}
+
+def load-messages [server] {
+  open $server
+  | jq --slurp
+  | from json
+}
+
+def unread-count [server user] {
+  let last_read = get-last-read $server $user
+  load-messages $server
+  | skip until {|msg| $msg.id == $last_read }
+  | where user != $user
+  | length
+  | if $in == 0 { $in } else { $in - 1 }
 }
 
 def format-message-group [] {
@@ -81,10 +114,10 @@ def group-heading [group] {
 
 def format-message [message last_read] {
   $"($message.user | into-color)($message.user)(ansi reset): ($message.message)"
-  | if $message.id != $last_read or $message.is_latest_message {
-    $in
-  } else {
+  | if $message.id == $last_read and not $message.is_latest_message {
     append (format-last-read)
+  } else {
+    $in
   }
 }
 
@@ -139,3 +172,4 @@ def into-color [] {
     | get ($index mod ($in | length))
   } $in
 }
+
