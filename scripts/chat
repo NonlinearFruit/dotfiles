@@ -15,14 +15,15 @@ def main [
     post-message $server $user $message
   }
   if $list_messages and $follow {
-    follow-messages $server $limit
+    follow-messages $server $user $limit
   } else if $list_messages {
-    list-messages $server $limit
+    list-messages $server $user $limit (get-last-read $server $user)
   }
 }
 
 def post-message [server user message] {
   {
+    id: (random uuid -v 7)
     date: (date now)
     user: $user
     message: $message
@@ -31,16 +32,17 @@ def post-message [server user message] {
   | save -a $server
 }
 
-def follow-messages [server limit] {
+def follow-messages [server user limit] {
+  let last_read = get-last-read $server $user
   loop {
-    let messages = list-messages $server $limit
+    let messages = list-messages $server $user $limit $last_read
     clear
     print $messages
     sleep 300ms
   }
 }
 
-def list-messages [server limit] {
+def list-messages [server user limit last_read] {
   if ($server | path exists | not $in) {
     return ""
   }
@@ -53,19 +55,70 @@ def list-messages [server limit] {
     last $limit
   }
   | insert human_date { $in.date | date humanize }
-  | insert displayable_message { format-message $in }
+  | update-last-read $server $user $last_read
+  | insert displayable_message { format-message $in $last_read }
   | group-by human_date --to-table
   | each {|group|
-    $group.human_date
-    | fill --alignment r --width (term size | get columns)
-    | prepend $group.items.displayable_message
+    format-message-group
   }
   | flatten
   | to text
 }
 
-def format-message [message] {
+def format-message-group [] {
+  let group = $in
+  $group.items
+  | each {|msg|
+    $msg.displayable_message
+  }
+  | append (group-heading $group)
+}
+
+def group-heading [group] {
+  $group.human_date
+  | fill --alignment r --width (term size | get columns)
+}
+
+def format-message [message last_read] {
   $"($message.user | into-color)($message.user)(ansi reset): ($message.message)"
+  | if $message.id != $last_read or $message.is_latest_message {
+    $in
+  } else {
+    append (format-last-read)
+  }
+}
+
+def format-last-read [] {
+  "last read"
+  | fill --alignment c --width (term size | get columns) --character -
+}
+
+def update-last-read [server user last_read] {
+  let msgs = $in
+  let latest_message = $msgs
+  | last
+  | get id
+
+  if $latest_message != $last_read {
+    set-last-read $server $user $latest_message
+  }
+
+  $msgs
+  | insert is_latest_message { $in.id == $latest_message }
+}
+
+def get-last-read [server user] {
+  $"($server)-last-read-($user)"
+  | if ($in | path exists) {
+    open $in
+  } else {
+    null
+  }
+}
+
+def set-last-read [server user id] {
+  $id
+  | save -f $"($server)-last-read-($user)"
 }
 
 def into-color [] {
