@@ -1,0 +1,60 @@
+#!/usr/bin/env nu
+
+# Tooling and tips for pairing and mobbing
+#   Choose who will do what role
+#   mob --roles [driver navigator] --peeps [alice bob] 
+#
+#   List some mobbing styles
+#   mob --list-styles
+def main [
+  --roles(-r): list<string> # (eg: [driver navigator])
+  --peeps(-p): list<string> # (eg: [alice bob charlie])
+  --list-styles
+  --list-modifiers
+] {
+  if ($list_styles) {
+    styles
+    | return $in
+  }
+  if ($list_modifiers) {
+    modifiers
+    | return $in
+  }
+  if ($roles | is-empty) {
+    $peeps
+    | shuffle
+    | return $in
+  }
+  $roles
+  | sort
+  | zip ($peeps | shuffle)
+  | each {|pair|
+    {
+      role: $pair.0
+      person: $pair.1
+    }
+  }
+}
+
+def styles [] {
+  [
+    [title       roles                      description];
+    [null        [driver navigator]         'driver types, navigator directs']
+    [null        [driver navigator referee] 'driver navigator + ref researchs/enforces rules/inflicts misery']
+    [null        [red green]                'red writes tests, green writes production code']
+    [null        [red green refactor]       'red green + refactor refactors the code']
+    [null        ['two cent' nickle]        'two cent types and scores 2 points for showing something new, nickle scores 5 points for suggesting a approach']
+    ['ping pong' everyone                   'red green refactor swap!']
+    [knockout    everyone                   'red swap green swap refactor swap']
+  ]
+  | update roles { to text }
+  | update title {|it| $it.title | default $it.roles }
+}
+
+def modifiers [] {
+  [
+    [modifier description];
+    [hotseat 'rotation every 2 minutes or less']
+    ['test && commit || revert' 'rotation ends with a clean working tree and tests passing else revert']
+  ]
+}
