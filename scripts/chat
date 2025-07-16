@@ -3,7 +3,6 @@
 # Tool for chatting with the rogues and clones that are in your tmux server
 # TODO
 # - unread count in status bar
-# - emoji support
 # - stdin
 # - multiline in tmux prompt
 # - graceful quit when following

@@ -13,8 +13,6 @@ def main [] {
   }
 }
 
-# Note: When dotnet test is ran, window needs to be wide enough to prevent wrapping
-# Note: When reprint is ran, window needs to be wide enough to prevent wrapping
 def parse-dotnet-test [] {
   parse '      {full_namespace} ({time}): Error Message: {message}'
   | get full_namespace
