@@ -25,6 +25,11 @@ def main [
     | shuffle
     | return $in
   }
+  assign-peeps-to-roles $peeps $roles
+  | save-result-for-later
+}
+
+def assign-peeps-to-roles [peeps roles] {
   $roles
   | sort
   | zip ($peeps | shuffle)
@@ -33,6 +38,32 @@ def main [
       role: $pair.0
       person: $pair.1
     }
+  }
+  | recurse-if-result-matches-last-run $peeps $roles
+}
+
+def save-result-for-later [] {
+  let $current = $in
+  $current
+  | to nuon
+  | save -f ~/.mob-previous-result
+
+  $current
+}
+
+def recurse-if-result-matches-last-run [peeps roles] {
+  let current = $in
+  if ('~/.mob-previous-result' | path exists) {
+    open ~/.mob-previous-result
+    | from nuon
+  } else {
+    []
+  }
+  | if ($in == $current) {
+    print again
+    assign-peeps-to-roles $peeps $roles
+  } else {
+    $current
   }
 }
 
@@ -53,8 +84,8 @@ def styles [] {
 
 def modifiers [] {
   [
-    [modifier description];
-    [hotseat 'rotation every 2 minutes or less']
+    [modifier                   description];
+    [hotseat                    'rotation every 2 minutes or less']
     ['test && commit || revert' 'rotation ends with a clean working tree and tests passing else revert']
   ]
 }
