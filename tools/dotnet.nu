@@ -3,6 +3,9 @@ export def latest-version [package] {
 
 export def installed-version [package] {
   ^dotnet tool list -g $package
+  | lines
+  | last
+  | str replace -r '^\D+(\d+\.\d+\.\d+)\D+$' '$1'
 }
 
 export def install [package] {

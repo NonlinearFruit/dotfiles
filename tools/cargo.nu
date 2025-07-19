@@ -25,13 +25,15 @@ export def "self install" [version] {
     ^curl https://sh.rustup.rs -sSf | sh -s -- -y
     # dnf install gcc
   } else {
-    rustup update stable
+    ^rustup update stable
   }
 }
 
 export def "self installed-version" [] {
-  ^cargo --version
-  | parse 'cargo {version} {end}'
+  ^rustup --version
+  | complete
+  | get stdout
+  | parse 'rustup {version} {end}'
   | get -i version.0
 }
 
@@ -41,5 +43,12 @@ export def "self latest-version" [] {
     0
   } else {
     ^rustup check
+    | complete
+    | get stdout
+    | lines
+    | parse "rustup - {msg} : {version}"
+    | get version
+    | str replace '^.*(\d+\.\d+\.\d+)$' '$1'
+    | first
   }
 }
