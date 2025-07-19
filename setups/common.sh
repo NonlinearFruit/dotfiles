@@ -15,7 +15,6 @@ mkdir -p ~/.vim/swapfiles
 mkdir -p ~/.vim/undofiles
 
 # Neovim
-sudo $MANAGER install -y build-essential # for Telescope FZF extension
 mkdir -p ~/.nvim/swapfiles
 mkdir -p ~/.nvim/undofiles
 mkdir -p ~/.config/nvim

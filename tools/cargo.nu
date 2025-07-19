@@ -17,7 +17,7 @@ export def installed-version [package] {
 }
 
 export def install [package] {
-  ^cargo install $package
+  ^cargo install --locked $package
 }
 
 export def "self install" [version] {

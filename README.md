@@ -11,15 +11,14 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ## Setup on fresh OS
 
-Might need to `sudo apt update && sudo apt upgrade` if some dependencies can not install
-
 ```sh
-sudo apt update
-sudo apt install -y git
+sudo dnf update
+sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
 ./map.sh common | sh
+source ~/.bashrc
 ```
 
 ### OS Specific Setup and Mappings
