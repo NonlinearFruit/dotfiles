@@ -1,3 +1,7 @@
+- cmd: cronie
+  description: cron for Fedora
+  manager: dnf
+
 - cmd: bat
   description: better cat
   url: https://github.com/sharkdp/bat
