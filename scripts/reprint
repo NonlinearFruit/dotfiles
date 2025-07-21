@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
 
+# Reprints output from a specific command in the tmux pane history
 def main [--cmd=""] {
   ^tmux capture-pane -S- -p -J
   | split row --regex $' *($env.USER)@.*\n *'

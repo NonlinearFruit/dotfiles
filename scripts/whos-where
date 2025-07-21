@@ -1,12 +1,12 @@
 #!/bin/env nu
 
+# Show which tmux session is in which window
 def main [] {
   get-clients-with-session
-  | do {|it| print "Current Avengers!"; $it} $in
   | each {|client|
-    print $" [($client.windowIndex) ($client.windowName)] ($client.sessionName)"
-    $client
-  } | ignore
+    $" [($client.windowIndex) ($client.windowName)] ($client.sessionName)"
+  }
+  | to text
 }
 
 def get-clients-with-session [] {
