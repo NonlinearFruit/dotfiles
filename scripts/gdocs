@@ -1,20 +1,76 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nu
+
+const DOCS = '~/projects/gitlab/doc/api'
 
 # Features
 # - tmux popup to search docs 
 # - ability to send selected docs to a nvim server
-DOCS='~/projects/gitlab/doc/api'
-RELOAD="reload:rg --column --color=always --smart-case {q} $DOCS || :"
-OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
-          nvim -M {1} +{2}     # No selection. Open the current line in Vim.
-        else
-          nvim -M +cw -q {+f}  # Build quickfix list for the selected items.
-        fi'
-fzf --disabled --ansi --multi \
-    --bind "start:$RELOAD" --bind "change:$RELOAD" \
-    --bind "enter:become:$OPENER" \
-    --bind "ctrl-o:execute:$OPENER" \
-    --bind 'alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview' \
-    --delimiter : \
-    --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
-    --preview-window '~4,+{2}+4/3,<80(up)'
+def --wrapped main [...rest] {
+  if ($rest | is-empty) {
+    search-gitlab-docs
+  } else if $rest.0 == 'search' {
+    extended-rg ($rest | last | split row ' ')
+  }
+}
+
+def search-gitlab-docs [] {
+  assert-docs-exist
+  fancy-fzf
+  | open-in-vim
+}
+
+def assert-docs-exist [] {
+  if ($DOCS | path exists) {
+    return
+  }
+  input $"'($DOCS)' is missing. Would you like to clone? [y/N] "
+  | if $in == 'y' {
+    ^git clone git@gitlab.com:gitlab-org/gitlab.git $DOCS
+  } else {
+    exit 1
+  }
+}
+
+def fancy-fzf [] {
+  const myself = path self
+  let reload = $"($myself) search {q}"
+  (^fzf --disabled --ansi --multi
+      --bind $"start:reload:($reload)" --bind $"change:reload:($reload)"
+      --delimiter :
+      --preview 'bat --style=full --color=always --highlight-line {2} {1}'
+      --preview-window '~4,+{2}+4/3,<80(up)')
+  | lines
+}
+
+def open-in-vim [] {
+  if ($in | is-empty) {
+    print "gdocs cancelled"
+  } else if ($in | length) == 1 {
+    first
+    | ^nvim -M -q -
+  } else {
+    to text
+    | ^nvim -M +cw -q -
+  }
+}
+
+def extended-rg [query] {
+  let initial_results = first-grep $query.0
+  $query
+  | skip 1
+  | reduce --fold $initial_results {|q|
+    where message =~ $q
+  }
+  | get original
+  | to text
+}
+
+def first-grep [query] {
+  ^rg --column $query ($DOCS | path expand)
+  | lines
+  | each {|original|
+    parse '{file}:{line}:{column}:{message}'
+    | insert original $original
+  }
+  | flatten
+}
