@@ -3,7 +3,7 @@
   manager: dnf
 
 - cmd: bat
-  description: better cat
+  description: better cat. binstall might be necessary
   url: https://github.com/sharkdp/bat
   manager: cargo
 
@@ -151,4 +151,8 @@
 
 - cmd: nu_plugin_emoji
   description: emoji tool for nushell. Used in chat script
+  manager: cargo
+
+- cmd: nu_plugin_query
+  description: query tool for nushell. Used for parsing html. Requires dnf's `openssl-devel`
   manager: cargo
