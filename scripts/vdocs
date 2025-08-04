@@ -1,0 +1,69 @@
+#!/usr/bin/env nu
+
+# Features
+# - search vimdocs
+# - tmux popup to search docs 
+# - ability to send selected docs to a nvim server (separate nvim binding?)
+def --wrapped main [...rest] {
+  if ($rest | is-empty) {
+    search-gitlab-docs
+  } else if $rest.0 == 'search' {
+    extended-rg ($rest | last | split row ' ')
+  }
+}
+
+def search-gitlab-docs [] {
+  fancy-fzf
+  | open-in-vim
+}
+
+def fancy-fzf [] {
+  const myself = path self
+  let reload = $"($myself) search {q}"
+  (^fzf --disabled --ansi --multi
+      --bind $"start:reload:($reload)" --bind $"change:reload:($reload)"
+      --delimiter :
+      --preview 'bat --language vimhelp --style=full --color=always --highlight-line {2} {1}'
+      --preview-window '~4,+{2}+4/3,<80(up)')
+  | lines
+}
+
+def open-in-vim [] {
+  if ($in | is-empty) {
+    print "gdocs cancelled"
+  } else if ($in | length) == 1 {
+    first
+    | ^nvim -M -q -
+  } else {
+    to text
+    | ^nvim -M +cw -q -
+  }
+}
+
+def extended-rg [query] {
+  let initial_results = first-grep $query.0
+  $query
+  | skip 1
+  | reduce --fold $initial_results {|q|
+    where message =~ $q
+  }
+  | get original
+  | to text
+}
+
+def first-grep [query] {
+  let DOCS = ^ned +'set runtimepath'
+  | parse "{_}runtimepath={it}"
+  | get it
+  | split row ","
+  | each { path join doc | path expand }
+  | where ($it | path exists)
+
+  ^rg --column $query ...$DOCS
+  | lines
+  | each {|original|
+    parse '{file}:{line}:{column}:{message}'
+    | insert original $original
+  }
+  | flatten
+}
