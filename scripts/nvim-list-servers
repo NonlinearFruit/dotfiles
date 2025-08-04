@@ -1,0 +1,33 @@
+#!/usr/bin/env nu
+
+# List nvim server names with tmux window name and current working directory as json array
+def main [] {
+   ps --long
+   | join (nvim-servers $in) pid nvim_server_ppid
+   | join (processes-with-window) ppid tmux_process
+   | insert nvim_server_name { get-nvim-server-name-by-pid $in.nvim_server_pid }
+   | select nvim_server_name tmux_window cwd
+   | each { to json --raw }
+   | to text
+}
+
+def nvim-servers [processes] {
+   $processes
+   | where command =~ '/nvim'
+   | where command =~ embed
+   | rename --column { pid: nvim_server_pid, ppid: nvim_server_ppid }
+   | select nvim_server_pid nvim_server_ppid
+}
+
+def processes-with-window [] {
+   ^tmux list-panes -aF '#{pane_pid}@#{window_name}'
+   | parse '{tmux_process}@{tmux_window}'
+}
+
+def get-nvim-server-name-by-pid [pid] {
+   ls /run/user/1000/nvim.*
+   | get name
+   | where ($it | str contains $'($pid)')
+   | first
+   | str replace '1000/nvim' '1000//nvim'
+}
