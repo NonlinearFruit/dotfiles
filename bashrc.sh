@@ -76,6 +76,7 @@ fi
 # Editor
 if command -v nvim > /dev/null; then
   export EDITOR=nvim
+  export MANPAGER='nvim +Man!'
 elif command -v vim > /dev/null; then
   export EDITOR=vim
 else
