@@ -11,9 +11,5 @@
   ["init.sh", "~/projects/privatefiles/init.sh"],
   ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"],
   ["https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_shorter_catechism.json", "~/scripts/westminster_shorter_catechism.json", "curl"],
-  ["https://raw.githubusercontent.com/NonlinearFruit/nu-gron/master/gron.nu", "~/.config/nushell/scripts/gron.nu", "curl"],
-  ["https://raw.githubusercontent.com/NonlinearFruit/nu-vipe/master/vipe.nu", "~/.config/nushell/scripts/vipe.nu", "curl"],
-  ["https://raw.githubusercontent.com/NonlinearFruit/nu-fox/master/fox.nu", "~/.config/nushell/scripts/fox.nu", "curl"],
-  ["https://raw.githubusercontent.com/NonlinearFruit/nuUnit/master/nuunit.nu", "~/scripts/nuunit", "curl"],
   ["wezterm/*", "~/.config/wezterm"]
 ]
