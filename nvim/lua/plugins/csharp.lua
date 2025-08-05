@@ -7,10 +7,9 @@ end
 local function go_to_test_file_key_mapping()
   if os.execute("command -v rg > /dev/null") == 0 then
     vim.keymap.set("n", "<leader>gt", function()
-      local currentFile = vim.api.nvim_buf_get_name(0)
-      local currentFileName = currentFile:match("[^/]+$")
-      local testFileName = currentFileName:gsub("%.cs", "Tests.cs")
-      vim.fn.jobstart("rg --files | rg " .. testFileName, {
+      local current_file_stem = vim.fn.expand("%:t:r")
+      local test_file_name = current_file_stem .. "Tests.cs"
+      vim.fn.jobstart("rg --files | rg " .. test_file_name, {
         stdout_buffered = true,
         on_stdout = function(_, data)
           if data and data[1] and data[1] ~= "" then
