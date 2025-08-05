@@ -1,0 +1,11 @@
+#!/usr/bin/env nu
+
+# Cleans up bash history file
+def main [] {
+  open ~/.bash_history
+  | lines
+  | str trim
+  | uniq
+  | collect
+  | save -f ~/.bash_history
+}
