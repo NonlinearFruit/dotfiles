@@ -6,7 +6,7 @@ def main [] {
    | join (nvim-servers $in) pid nvim_server_ppid
    | join (processes-with-window) ppid tmux_process
    | insert nvim_server_name { get-nvim-server-name-by-pid $in.nvim_server_pid }
-   | select nvim_server_name tmux_window cwd
+   | select nvim_server_name tmux_window tmux_pane_index cwd
    | each { to json --raw }
    | to text
 }
@@ -20,8 +20,8 @@ def nvim-servers [processes] {
 }
 
 def processes-with-window [] {
-   ^tmux list-panes -aF '#{pane_pid}@#{window_name}'
-   | parse '{tmux_process}@{tmux_window}'
+   ^tmux list-panes -aF '#{pane_pid}@#{window_name}@#{pane_index}'
+   | parse '{tmux_process}@{tmux_window}@{tmux_pane_index}'
 }
 
 def get-nvim-server-name-by-pid [pid] {

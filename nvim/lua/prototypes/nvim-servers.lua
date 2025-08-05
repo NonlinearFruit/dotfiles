@@ -19,8 +19,8 @@ return {
             end
             return {
               value = server,
-              display = server.tmux_window,
-              ordinal = server.tmux_window,
+              display = server.tmux_window .. "." .. server.tmux_pane_index,
+              ordinal = server.tmux_window .. "." .. server.tmux_pane_index,
             }
           end,
         }),
@@ -30,7 +30,7 @@ return {
             actions.close(prompt_bufnr)
             local selection = action_state.get_selected_entry()
             local server = selection.value
-            vim.fn.system("nvim --server " .. server.nvim_server_name .. " --remote " .. current_file)
+            vim.fn.system("nvim --server " .. server.nvim_server_name .. " --remote-tab " .. current_file)
           end)
           return true
         end,
@@ -38,5 +38,3 @@ return {
       :find()
   end,
 }
--- to execute the function
--- require("prototypes/nvim-servers").send(require("telescope.themes").get_dropdown{}, vim.api.nvim_buf_get_name(0))
