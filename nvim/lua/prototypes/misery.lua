@@ -1,4 +1,6 @@
 -- Misery.nvim <https://github.com/tjdevries/misery.nvim>
+-- lua require("prototypes.misery").hit_me()
+-- lua require("prototypes.misery").save_me()
 local M = {}
 
 local hidden_cursor = {
@@ -6,8 +8,6 @@ local hidden_cursor = {
   start = function()
     vim.cmd([[set guicursor=n-v:hor01-Normal]])
     vim.opt.cursorline = false
-    vim.opt.relativenumber = false
-    vim.opt.number = false
   end,
   stop = function()
     vim.opt.guicursor = { "n-v-c-sm:block", "i-ci-ve:ver25", "r-cr-o:hor20" }
@@ -31,30 +31,109 @@ local invisiline = {
 
 local random_theme = {
   name = "random theme",
-  start = function(self)
+  start = function()
     local colorschemes = vim.api.nvim_get_runtime_file("colors/*", true)
     colorschemes = vim.tbl_map(function(colorscheme)
       return vim.fn.fnamemodify(colorscheme, ":t:r")
+    end, colorschemes)
+    colorschemes = vim.tbl_filter(function(colorscheme)
+      return colorscheme ~= "README"
     end, colorschemes)
 
     local random_colorscheme = colorschemes[math.random(#colorschemes)]
     vim.cmd.hi("clear")
     vim.cmd.colorscheme(random_colorscheme)
-
-    self.state.colorscheme = random_colorscheme
   end,
-  done = function()
+  stop = function()
     vim.cmd.hi("clear")
-    vim.cmd.colorscheme("gruvbuddy")
+    vim.cmd("NonlinearFruitColorSchemeEnable")
   end,
 }
 
-M.getEffects = function()
-  return {
-    invisiline,
-    hidden_cursor,
-    random_theme,
-  }
+local flip = {
+  name = "flip",
+  start = function(self)
+    local make_map = function(lhs, rhs)
+      vim.keymap.set("n", lhs, function()
+        print(string.format("typed: %s, executed: %s", lhs, rhs))
+        return rhs
+      end, { expr = true })
+    end
+
+    for _, pair in ipairs(self.pairs) do
+      make_map(pair[1], pair[2])
+      make_map(pair[2], pair[1])
+    end
+  end,
+  stop = function(self)
+    for _, pair in ipairs(self.pairs) do
+      pcall(vim.keymap.del, "n", pair[1])
+      pcall(vim.keymap.del, "n", pair[2])
+    end
+  end,
+  pairs = {
+    { "j", "k" },
+    { "w", "b" },
+    { "h", "l" },
+    { "gg", "G" },
+    { "e", "ge" },
+    { "f", "F" },
+    { "t", "T" },
+    { "n", "N" },
+    { "?", "/" },
+    { "#", "*" },
+    { "i", "a" },
+    { "I", "A" },
+    { ";", "," },
+    { "$", "^" },
+    { "o", "O" },
+    { "y", "p" },
+    { "u", "<c-r>" },
+    { "<c-o>", "<c-i>" },
+    { "<c-u>", "<c-d>" },
+  },
+}
+
+local left_to_right = {
+  name = "tfel-ot-thgir",
+  start = function()
+    for _, window in ipairs(vim.api.nvim_list_wins()) do
+      vim.wo[window].rightleft = true
+    end
+  end,
+  stop = function()
+    for _, window in ipairs(vim.api.nvim_list_wins()) do
+      vim.wo[window].rightleft = false
+    end
+  end,
+}
+
+M.effects = {
+  invisiline,
+  hidden_cursor,
+  random_theme,
+  flip,
+  left_to_right,
+}
+
+M.hit_me = function()
+  if M.current_effect then
+    print("You are currently suffering under '" .. M.current_effect.name .. "'")
+  else
+    M.current_effect = M.effects[math.random(#M.effects)]
+    print("Enjoy '" .. M.current_effect.name .. "'!")
+    M.current_effect:start()
+  end
+end
+
+M.save_me = function()
+  if M.current_effect then
+    M.current_effect:stop()
+    M.current_effect = nil
+    print("You have been freed")
+  else
+    print("There is no misery")
+  end
 end
 
 return M
