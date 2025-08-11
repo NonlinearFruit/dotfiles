@@ -108,12 +108,32 @@ local left_to_right = {
   end,
 }
 
+local different_editor = {
+  name = "different editor",
+  -- Filter editor list to one's that exit on the machine
+  start = function (self)
+    local timeout = 5 * 60
+    local editor = self.editors[math.random(#self.editors)]
+    -- vim.api.nvim_open_term(0, {})
+    -- <cmd>term timeout 10 vi .bashrc<cr>
+    local cmd = string.format("terminal timeout %d %s %s", timeout, editor, "%")
+    vim.cmd(cmd)
+  end,
+  editors = {
+    "ed",
+    "ex",
+    "vi",
+    "nano",
+  },
+}
+
 M.effects = {
   invisiline,
   hidden_cursor,
   random_theme,
   flip,
   left_to_right,
+  different_editor,
 }
 
 M.hit_me = function()
