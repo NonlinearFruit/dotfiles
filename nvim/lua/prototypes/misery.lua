@@ -5,6 +5,7 @@ local M = {}
 
 local hidden_cursor = {
   name = "hidden cursor",
+  desc = "Make the cursor invisible",
   start = function()
     vim.cmd([[set guicursor=n-v:hor01-Normal]])
     vim.opt.cursorline = false
@@ -15,7 +16,8 @@ local hidden_cursor = {
 }
 
 local invisiline = {
-  name = "invisicursor",
+  name = "invisiline",
+  desc = "Make the current line opaque",
   start = function()
     vim.opt.cursorline = true
     vim.opt.list = false
@@ -31,6 +33,7 @@ local invisiline = {
 
 local random_theme = {
   name = "random theme",
+  desc = "Apply random theme from runtime paths",
   start = function()
     local colorschemes = vim.api.nvim_get_runtime_file("colors/*", true)
     colorschemes = vim.tbl_map(function(colorscheme)
@@ -52,6 +55,7 @@ local random_theme = {
 
 local flip = {
   name = "flip",
+  desc = "Change motion directions in normal mode",
   start = function(self)
     local make_map = function(lhs, rhs)
       vim.keymap.set("n", lhs, function()
@@ -94,8 +98,9 @@ local flip = {
   },
 }
 
-local left_to_right = {
+local right_to_left = {
   name = "tfel-ot-thgir",
+  desc = "Flip the text to display right to left",
   start = function()
     for _, window in ipairs(vim.api.nvim_list_wins()) do
       vim.wo[window].rightleft = true
@@ -110,14 +115,19 @@ local left_to_right = {
 
 local different_editor = {
   name = "different editor",
-  -- Filter editor list to one's that exit on the machine
+  desc = "Open the current file in another randomly-chosen editor",
   start = function (self)
     local timeout = 5 * 60
-    local editor = self.editors[math.random(#self.editors)]
-    -- vim.api.nvim_open_term(0, {})
-    -- <cmd>term timeout 10 vi .bashrc<cr>
+    local valid_editors = vim.tbl_filter(function(editor)
+      return os.execute("which "..editor) == 0
+    end, self.editors)
+    local editor = valid_editors[math.random(#valid_editors)]
     local cmd = string.format("terminal timeout %d %s %s", timeout, editor, "%")
     vim.cmd(cmd)
+    -- vim.api.nvim_open_term(0, {})
+  end,
+  stop = function ()
+    -- noop
   end,
   editors = {
     "ed",
@@ -132,7 +142,7 @@ M.effects = {
   hidden_cursor,
   random_theme,
   flip,
-  left_to_right,
+  right_to_left,
   different_editor,
 }
 
