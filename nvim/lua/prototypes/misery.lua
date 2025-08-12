@@ -116,17 +116,17 @@ local right_to_left = {
 local different_editor = {
   name = "different editor",
   desc = "Open the current file in another randomly-chosen editor",
-  start = function (self)
+  start = function(self)
     local timeout = 5 * 60
     local valid_editors = vim.tbl_filter(function(editor)
-      return os.execute("which "..editor) == 0
+      return os.execute("which " .. editor) == 0
     end, self.editors)
     local editor = valid_editors[math.random(#valid_editors)]
     local cmd = string.format("terminal timeout %d %s %s", timeout, editor, "%")
     vim.cmd(cmd)
     -- vim.api.nvim_open_term(0, {})
   end,
-  stop = function ()
+  stop = function()
     -- noop
   end,
   editors = {
@@ -140,7 +140,7 @@ local different_editor = {
 local crutchless = {
   name = "crutchless",
   desc = "Disable noobie crutches",
-  start = function ()
+  start = function()
     local function map(key)
       vim.keymap.set({ "n", "i", "v", "c" }, key, "<nop>", {})
     end
@@ -151,7 +151,7 @@ local crutchless = {
     map("<right>")
     map("<up>")
   end,
-  stop = function ()
+  stop = function()
     local function unmap(key)
       vim.keymap.del({ "n", "i", "v", "c" }, key)
     end
