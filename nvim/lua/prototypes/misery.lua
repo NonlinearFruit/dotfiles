@@ -137,6 +137,41 @@ local different_editor = {
   },
 }
 
+local crutchless = {
+  name = "crutchless",
+  desc = "Disable noobie crutches",
+  start = function ()
+    local function map(key)
+      vim.keymap.set({ "n", "i", "v", "c" }, key, "<nop>", {})
+    end
+    map("<bs>")
+    map("<del>")
+    map("<down>")
+    map("<left>")
+    map("<right>")
+    map("<up>")
+  end,
+  stop = function ()
+    local function unmap(key)
+      vim.keymap.del({ "n", "i", "v", "c" }, key)
+    end
+    unmap("<bs>")
+    unmap("<del>")
+    unmap("<down>")
+    unmap("<left>")
+    unmap("<right>")
+    unmap("<up>")
+  end,
+  keys = {
+    "<bs>",
+    "<del>",
+    "<down>",
+    "<left>",
+    "<right>",
+    "<up>",
+  },
+}
+
 M.effects = {
   invisiline,
   hidden_cursor,
@@ -144,6 +179,7 @@ M.effects = {
   flip,
   right_to_left,
   different_editor,
+  crutchless,
 }
 
 M.hit_me = function()
