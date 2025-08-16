@@ -2,49 +2,16 @@
 
 # Generates a cryptographically secure passphrase
 def main [
-  --with-entropy               # Print the entropy of the passphrase
-  --number-of-numbers: int = 0 # Number of single digit numbers in passphrase
-  number_of_words?: int = 1    # Number of words in passphrase
+  --with-entropy (-e)               # Print the entropy of the passphrase
+  --number-of-numbers (-n): int = 0 # Number of single digit numbers in passphrase
+  number_of_words?: int = 1         # Number of words in passphrase
   ] {
-  let ipsum_structure = ipsum --with-entropy=$with_entropy --as-json $number_of_words
-    | from json
-  let numbers = if $number_of_numbers > 0 {
-      1..$number_of_numbers
-      | each {
-        {
-          position: ((random-number ($number_of_words * 2 - 1)) * 2)
-          value: (random-number 9 | into string)
-        }
-      }
-    } else {
-      []
-    }
-  let words = $ipsum_structure
-    | get words
-    | enumerate
-    | each {|thing|
-      {
-        position: ($thing.index * 4 + 1)
-        value: $'(ansi cyan)($thing.item)(ansi reset)'
-      }
-    }
-  let separators = if $number_of_words > 1 {
-      0..($number_of_words - 2)
-      | each {|index|
-        {
-          position: ($index * 4 + 3)
-          value: $'(ansi grey)#(ansi reset)'
-        }
-      }
-    } else {
-      []
-    }
-  let passphrase = $separators ++ $words ++ $numbers
-    | sort-by position
-    | get value
-    | str join
+  let numbers = generate-numbers $number_of_numbers $number_of_words
+  let words = generate-words $number_of_words $with_entropy
+  let separators = generate-separators $number_of_words
+  let passphrase = generate-passphrase $separators $words.words $numbers
   if $with_entropy {
-    let word_entropy = $ipsum_structure.entropy
+    let word_entropy = $words.entropy
     let number_entropy = (10 | math log 2 | $in * $number_of_numbers)
     let number_position_entropy = if $number_of_words > 0 { $number_of_words * 2 | math log 2 | $in * $number_of_numbers } else { 0 }
     print ({
@@ -59,6 +26,57 @@ def main [
   }
   $passphrase | ansi strip | clip copy
   print "Copied!"
+}
+
+def generate-numbers [number_of_numbers number_of_words] {
+  if $number_of_numbers < 1 {
+    return []
+  }
+  1..$number_of_numbers
+  | each {
+    {
+      position: ((random-number ($number_of_words * 2 - 1)) * 2)
+      value: (random-number 9 | into string)
+    }
+  }
+}
+
+def generate-words [number_of_words with_entropy] {
+  let ipsum_structure = ^ipsum --with-entropy=($with_entropy) --as-json $number_of_words
+    | from json
+  $ipsum_structure
+    | get words
+    | enumerate
+    | each {|thing|
+      {
+        position: ($thing.index * 4 + 1)
+        value: $'(ansi cyan)($thing.item)(ansi reset)'
+      }
+    }
+    | {
+      entropy: $ipsum_structure.entropy?
+      words: $in
+    }
+}
+
+def generate-separators [number_of_words] {
+  if $number_of_words < 2 {
+    return []
+  }
+  0..($number_of_words - 2)
+  | each {|index|
+    {
+      position: ($index * 4 + 3)
+      value: $'(ansi grey)#(ansi reset)'
+    }
+  }
+}
+
+def generate-passphrase [separators words numbers] {
+  $separators ++ $words ++ $numbers
+  | sort-by position
+  | get value
+  | str join
 }
 
 def random-number [max: int = 10] {
