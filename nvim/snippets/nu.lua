@@ -29,9 +29,9 @@ return {
           const pathToSelf = path self
           let nameOfSelf = $pathToSelf | path parse | get stem
           if $rest in [ [-h] [--help] ] {{
-            nu -c $'use ($pathToSelf); scope modules | where name == ($nameOfSelf) | get 0.commands.name'
+            ^$nu.current-exe -c $'use ($pathToSelf); scope modules | where name == ($nameOfSelf) | get 0.commands.name'
           }} else {{
-            nu -c $'use ($pathToSelf); ($nameOfSelf) ($rest | str join (" "))'
+            ^$nu.current-exe -c $'use ($pathToSelf); ($nameOfSelf) ($rest | str join (" "))'
           }}
         }}
 
