@@ -3,27 +3,29 @@
 # Generates a cryptographically secure passphrase
 def main [
   --with-entropy (-e)               # Print the entropy of the passphrase
+  --with-random-separator (-s)      # Use random separator (eg: ~!@#$%^&*-_=+|\:;,./?)
   --number-of-numbers (-n): int = 0 # Number of single digit numbers in passphrase
   number_of_words?: int = 1         # Number of words in passphrase
-  ] {
+] {
   let numbers = generate-numbers $number_of_numbers $number_of_words
   let words = generate-words $number_of_words $with_entropy
-  let separators = generate-separators $number_of_words
-  let passphrase = generate-passphrase $separators $words.words $numbers
+  let separators = generate-separators $number_of_words $with_random_separator
+  let passphrase = generate-passphrase $separators.separators $words.words $numbers
   if $with_entropy {
-    let word_entropy = $words.entropy
-    let number_entropy = (10 | math log 2 | $in * $number_of_numbers)
+    let number_entropy = 10 | math log 2 | $in * $number_of_numbers
     let number_position_entropy = if $number_of_words > 0 { $number_of_words * 2 | math log 2 | $in * $number_of_numbers } else { 0 }
-    print {
+    {
       passphrase: $passphrase
-      word_entropy: $word_entropy
+      word_entropy: $words.entropy
       number_entropy: $number_entropy
       number_position_entropy: $number_position_entropy
-      total_entropy: ($word_entropy + $number_entropy + $number_position_entropy)
+      separator_entropy: $separators.entropy
     }
+    | insert total_entropy { sum-float-values }
   } else {
-    print $passphrase
+    $passphrase
   }
+  | print
   $passphrase | ansi strip | clip copy
   print "Copied!"
 }
@@ -36,7 +38,7 @@ def generate-numbers [number_of_numbers number_of_words] {
   | each {
     {
       position: ((random-number ($number_of_words * 2 - 1)) * 2)
-      value: (random-number 9 | into string)
+      value: (random-number 10 | into string)
     }
   }
 }
@@ -59,16 +61,28 @@ def generate-words [number_of_words with_entropy] {
     }
 }
 
-def generate-separators [number_of_words] {
+def generate-separators [number_of_words with_random_separator] {
   if $number_of_words < 2 {
     return []
   }
+  let separators = if $with_random_separator {
+    r#'~!@#$%^&*-_=+|\:;,./?"'`<>{}()'#
+    | split row ''
+  } else {
+    ["#"]
+  }
+  let separator = $separators
+  | get (random-number ($in | length))
   0..($number_of_words - 2)
   | each {|index|
     {
       position: ($index * 4 + 3)
-      value: $'(ansi grey)#(ansi reset)'
+      value: $'(ansi grey)($separator)(ansi reset)'
     }
+  }
+  | {
+    entropy: ($separators | length | math log 2)
+    separators: $in
   }
 }
 
@@ -84,6 +98,13 @@ def random-number [max: int = 10] {
     od -N3 -An -i /dev/urandom
     | into int
     | $in * $max / $max_int
-    | math round
+    | math floor
+}
+
+def sum-float-values [] {
+  transpose _ value
+  | get value
+  | where ($it | describe) == float
+  | math sum
 }
 

@@ -39,7 +39,7 @@ def get-all-words [] {
 }
 
 def generate-words [number_of_words all_words] {
-  if $number_of_words < 0 {
+  if $number_of_words < 1 {
     return []
   }
   1..$number_of_words
