@@ -14,13 +14,13 @@ def main [
     let word_entropy = $words.entropy
     let number_entropy = (10 | math log 2 | $in * $number_of_numbers)
     let number_position_entropy = if $number_of_words > 0 { $number_of_words * 2 | math log 2 | $in * $number_of_numbers } else { 0 }
-    print ({
+    print {
       passphrase: $passphrase
       word_entropy: $word_entropy
       number_entropy: $number_entropy
       number_position_entropy: $number_position_entropy
       total_entropy: ($word_entropy + $number_entropy + $number_position_entropy)
-    })
+    }
   } else {
     print $passphrase
   }

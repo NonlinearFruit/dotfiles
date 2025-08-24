@@ -2,6 +2,10 @@
   description: cron for Fedora
   manager: dnf
 
+- cmd: moreutils
+  description: Collection of helpful commands like sponge
+  manager: dnf
+
 - cmd: bat
   description: better cat. binstall might be necessary
   url: https://github.com/sharkdp/bat
