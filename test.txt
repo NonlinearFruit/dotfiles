@@ -1,0 +1,1948 @@
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+    ·    ──┬─
+    ·      ╰── Other error
+ 27 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux capture-pane
+No manual entry for capture-pane
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ tmux capture-pane -M
+command capture-pane: unknown flag -M
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ man tmux
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ vim scripts/reprint 
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+reprint: command not found
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ ./map.sh common | sh
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'                                                                                                                                                                                         
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:13:7]
+ 12 │     where cmd =~ $cmd
+ 13 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 14 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint --cmd 'man'
+Error: nu::shell::access_beyond_end
+
+  × Row number too large (empty content).
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:14:7]
+ 13 │     where cmd =~ $cmd
+ 14 │     | last
+    ·       ──┬─
+    ·         ╰── index too large (empty content)
+ 15 │   }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint            
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+   ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:5:3]
+ 4 │ def main [--cmd=""] {
+ 5 │   (main-screen | str trim --right) ++ (alt-screen)
+   ·   ────────────────────────┬───────────────────────
+   ·                           ╰── Other error
+ 6 │   | tee { save test.txt }
+   ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:20:3]
+ 19 │ def tmux-pane-history [] {
+ 20 │   (main-screen | str trim --right) ++ (alt-screen)
+    ·   ────────────────────────┬───────────────────────
+    ·                           ╰── Other error
+ 21 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ (alt-screen)
+    ·     ─────────┬─────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in + (alt-screen)
+    ·     ─────────┬────────
+    ·              ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $in ++ alt-screen
+    ·     ────────┬────────
+    ·             ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:21:5]
+ 20 │   main-screen
+ 21 │   | str trim --right
+    ·     ────┬───
+    ·         ╰── Other error
+ 22 │   # | $"($in)(alt-screen)"
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:26:4]
+ 25 │ def main-screen [] {
+ 26 │   ^tmux capture-pane -S- -p -J
+   Error: nu::shell::io::other
+
+  × I/O error
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:22:5]
+ 21 │   | str trim --right
+ 22 │   | $"($in)(alt-screen)"
+    ·     ──────────┬─────────
+    ·               ╰── Other error
+ 23 │ }
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
+Error: nu::shell::type_mismatch
+
+  × Type mismatch.
+    ╭─[/home/bbolen/projects/dotfiles/scripts/reprint:11:5]
+ 10 │   | if $cmd == "" {
+ 11 │     input list --fuzzy --display cmd
+    ·     ─────┬────
+    ·          ╰── expected a list or table, it can also be a problem with the an inner type of your list.
+ 12 │   } else {
+    ╰────
+
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ echo hi
+hi
+
+bbolen@WIN-L-8WF0:~/projects/dotfiles master
+ $ reprint
