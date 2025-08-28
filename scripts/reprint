@@ -2,15 +2,36 @@
 
 # Reprints output from a specific command in the tmux pane history
 def main [--cmd=""] {
-  ^tmux capture-pane -S- -p -J
+  tmux-pane-history
   | split row --regex $' *($env.USER)@.*\n *'
   | parse $'$ {cmd}(char newline){output}'
   | where cmd !~ ^reprint
   | if $cmd == "" {
-    input list --fuzzy --display cmd
+    reverse
+    | uniq-by cmd
+    | reverse
+    | input list --fuzzy --display cmd
   } else {
     where cmd =~ $cmd
     | last
   }
   | get output
+}
+
+# If the output of reprint is being piped to an editor
+# the pane history is _sometimes_ sent to the alt screen.
+# This leaves a screen-height number of blank lines at
+# the end of the main-screen capture.
+def tmux-pane-history [] {
+  main-screen
+  | str trim --right
+  | $"($in)(alt-screen)"
+}
+
+def main-screen [] {
+  ^tmux capture-pane -S- -p -J
+}
+
+def alt-screen [] {
+  ^tmux capture-pane -S- -p -J -a -q
 }
