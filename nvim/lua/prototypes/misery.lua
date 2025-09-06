@@ -10,7 +10,7 @@ local hidden_cursor = {
     vim.cmd([[set guicursor=n-v:hor01-Normal]])
     vim.opt.cursorline = false
   end,
-  stop = function()
+  stop = function() -- Does not fully undo the changes
     vim.opt.guicursor = { "n-v-c-sm:block", "i-ci-ve:ver25", "r-cr-o:hor20" }
   end,
 }
@@ -24,7 +24,7 @@ local invisiline = {
     vim.cmd([[set guicursor=n-v:ver10-Error]])
     vim.cmd([[highlight CursorLine guibg=#111111 guifg=#111111]])
   end,
-  stop = function()
+  stop = function() -- Does not fully undo the changes
     vim.opt.list = true
     vim.cmd.hi("CursorLine guifg=none guibg=#2b2b2b")
     vim.opt.guicursor = { "n-v-c-sm:block", "i-ci-ve:ver25", "r-cr-o:hor20" }
@@ -53,7 +53,7 @@ local random_theme = {
   end,
 }
 
-local flip = {
+local flip_bindings = {
   name = "flip",
   desc = "Change motion directions in normal mode",
   start = function(self)
@@ -116,6 +116,7 @@ local right_to_left = {
 local different_editor = {
   name = "different editor",
   desc = "Open the current file in another randomly-chosen editor",
+  -- augroup = "misery.differen_editor",
   start = function(self)
     local timeout = 5 * 60
     local valid_editors = vim.tbl_filter(function(editor)
@@ -123,11 +124,17 @@ local different_editor = {
     end, self.editors)
     local editor = valid_editors[math.random(#valid_editors)]
     local cmd = string.format("terminal timeout %d %s %s", timeout, editor, "%")
+    -- local group = vim.api.nvim_create_augroup(self.augroup, { clear = true })
+    -- -- autocmd TermOpen * startinsert
+    -- vim.api.nvim_create_autocmd("TermOpen", {
+    --   group = group,
+    --   command = "startinsert",
+    -- })
     vim.cmd(cmd)
     -- vim.api.nvim_open_term(0, {})
   end,
-  stop = function()
-    -- noop
+  stop = function(self)
+    -- vim.api.nvim_clear_autocmds({ group = self.augroup })
   end,
   editors = {
     "ed",
@@ -176,20 +183,27 @@ M.effects = {
   invisiline,
   hidden_cursor,
   random_theme,
-  flip,
+  flip_bindings,
   right_to_left,
   different_editor,
   crutchless,
 }
 
-M.hit_me = function()
+M.hit_me = function(optional_effect_name)
   if M.current_effect then
     print("You are currently suffering under '" .. M.current_effect.name .. "'")
+    return
+  end
+  if optional_effect_name then
+    local effects_with_name = vim.tbl_filter(function(effect)
+      return effect.name == optional_effect_name
+    end, M.effects)
+    M.current_effect = effects_with_name[1]
   else
     M.current_effect = M.effects[math.random(#M.effects)]
-    print("Enjoy '" .. M.current_effect.name .. "'!")
-    M.current_effect:start()
   end
+  print("Enjoy '" .. M.current_effect.name .. "'!")
+  M.current_effect:start()
 end
 
 M.save_me = function()
