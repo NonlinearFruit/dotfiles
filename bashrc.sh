@@ -3,7 +3,7 @@
 
 # Scripts
 if [ -d ~/scripts ]; then
-    export PATH=$PATH:~/scripts
+    export PATH="$PATH:$HOME/scripts"
 fi
 
 # Exit if this shell should not be interative
@@ -124,7 +124,7 @@ if [ -d /usr/local/go/bin ]; then
     export PATH="$PATH:/usr/local/go/bin"
 fi
 if [ -d ~/go/bin ]; then
-    export PATH="$PATH:~/go/bin"
+    export PATH="$PATH:$HOME/go/bin"
 fi
 
 # Fuzzy Find (fzf)
