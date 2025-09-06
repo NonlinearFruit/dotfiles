@@ -1,7 +1,7 @@
 -- TODO: This works but better would be:
 -- * Only visual bindings
 -- * Binding is:
---     * sa<character>: adds <character> around the selection 
+--     * sa<character>: adds <character> around the selection
 --     * sr<character>: replaces whatever is currently wrapping the selection with <character>
 --     * sd<character>: deletes <character> around the selection
 -- * Visual mode: Look at start and end of selection
