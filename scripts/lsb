@@ -4,11 +4,18 @@
 def main [
   ...query: string # Bible query
 ] {
-  query-lsb-api $query
-  | if (is-standard-passage) {
-    format-passage
-  } else {
-    format-search-results
+  let result = query-lsb-api $query
+  try {
+    $result
+    | if ($in | is-standard-passage) {
+      format-passage
+    } else {
+      format-search-results
+    }
+  } catch {
+    print $"ERROR: ($in)"
+    print ($result | is-standard-passage)
+    print $result
   }
 }
 
