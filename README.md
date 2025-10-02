@@ -11,14 +11,15 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ## Setup on fresh OS
 
+Might need to `sudo apt update && sudo apt upgrade` if some dependencies can not install
+
 ```sh
-sudo dnf update
-sudo dnf install -y git
+sudo apt update
+sudo apt install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
 ./map.sh common | sh
-source ~/.bashrc
 ```
 
 ### OS Specific Setup and Mappings
@@ -60,20 +61,25 @@ Helpful automation for various tasks
 |-|
 |backup-repo|
 |chat|
+|clean-history|
 |clip|
 |countdown|
 |datediff|
 |esv|
 |esv-search|
+|gdocs|
 |highlight|
 |ipsum|
 |is|
 |last-cron|
 |llm|
 |look-alike|
+|lsb|
+|mob|
 |mp3|
 |ned|
 |number-gossip|
+|nvim-list-servers|
 |nvim-plugins|
 |nvims|
 |passphrase|
@@ -89,6 +95,7 @@ Helpful automation for various tasks
 |to-me|
 |to-vimgrep|
 |toggle-pair|
+|vdocs|
 |view|
 |who-is-smallest-of-them-all|
 |whos-where|
@@ -100,6 +107,7 @@ Automation for initializing a fresh OS
 
 |Setup|
 |-|
+|bootstrap|
 |common|
 |haskell|
 |nvims|
