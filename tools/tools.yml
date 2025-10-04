@@ -110,6 +110,12 @@
   manager: go
   id: github.com/packwiz/packwiz@latest
 
+- cmd: d2
+  description: Diagramming tool
+  url: https://github.com/terrastruct/d2
+  manager: go
+  id: oss.terrastruct.com/d2
+
 - cmd: curl
   description: http client
   manager: dnf
