@@ -1,0 +1,50 @@
+#!/bin/env nu
+
+# Answer a yes/no question from Matthew Henry's Scripture Catechism correctly for a zero exit code 
+def main [] {
+  let qna = list-all-qnas
+  | shuffle
+  | first
+  input $"Q($qna.Number): ($qna.Question) [y/n] "
+  | str substring 0..0
+  | str downcase
+  | if $in == ($qna.Answer | str substring 0..0 | str downcase) {
+    print $qna.Answer
+    exit 0
+  } else {
+    print $qna.Answer
+    exit 1
+  }
+}
+
+def list-all-qnas [] {
+  if not (qna-cache-exists) {
+    mkdir ("~/.cache/matthew-henry-gate" | path expand)
+    list-all-qna-from-website
+    | save-to-qna-cache
+  }
+  load-from-qna-cache
+}
+
+def qna-cache-exists [] {
+  "~/.cache/matthew-henry-gate/qnas.json"
+  | path exists
+}
+
+def list-all-qna-from-website [] {
+  http get --raw https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/refs/heads/master/creeds/matthew_henrys_scripture_catechism.json
+}
+
+def save-to-qna-cache [] {
+  to json
+  | save "~/.cache/matthew-henry-gate/qnas.json" -f
+}
+
+def load-from-qna-cache [] {
+  open ("~/.cache/matthew-henry-gate/qnas.json" | path expand)
+  | from json
+  | get Data
+  | update SubQuestions {|qna| $qna.SubQuestions | update Number {$"($qna.Number).($in)"}}
+  | get SubQuestions
+  | flatten
+}
