@@ -5,7 +5,7 @@ export def latest-version [package] {
     get stdout
     | parse '{id} = "{version}"{space}# {description}'
     | where id == $package
-    | get -i version.0
+    | get --optional version.0
   }
 }
 
@@ -13,7 +13,7 @@ export def installed-version [package] {
   ^cargo install --list
   | parse '{id} v{version}:'
   | where id == $package
-  | get -i version.0
+  | get --optional version.0
 }
 
 export def install [package] {
@@ -34,7 +34,7 @@ export def "self installed-version" [] {
   | complete
   | get stdout
   | parse 'rustup {version} {end}'
-  | get -i version.0
+  | get --optional version.0
 }
 
 export def "self latest-version" [] {

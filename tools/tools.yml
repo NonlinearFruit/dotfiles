@@ -120,6 +120,10 @@
   description: http client
   manager: dnf
 
+- cmd: git-lfs
+  description: git large file storage
+  manager: dnf
+
 - cmd: jq
   description: json query and manipulation tool
   manager: dnf
@@ -165,4 +169,8 @@
 
 - cmd: nu_plugin_query
   description: query tool for nushell. Used for parsing html. Requires dnf's `openssl-devel`
+  manager: cargo
+
+- cmd: tokei
+  description: counts lines of code
   manager: cargo
