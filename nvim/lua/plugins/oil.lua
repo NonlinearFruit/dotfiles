@@ -1,5 +1,9 @@
 local function configure()
-  require("oil").setup()
+  require("oil").setup({
+    keymaps = {
+      ['~'] = false
+    }
+  })
   vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Browse parent directory" })
 end
 
