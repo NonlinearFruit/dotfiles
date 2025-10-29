@@ -3,6 +3,7 @@
   ["bashrc.sh", "~/.bashrc"],
   ["cheatsheets/*", "~/.local/share/tealdeer/pages"],
   ["gitconfig.ini", "~/.gitconfig"],
+  ["glide.ts", "~/.config/glide/glide.ts"],
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
   ["tmux.conf", "~/.tmux.conf"],

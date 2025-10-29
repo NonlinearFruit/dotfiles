@@ -33,3 +33,6 @@ ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
 
 # Nushell
 mkdir -p ~/.config/nushell/scripts
+
+# Glide
+mkdir -p  ~/.config/glide/
