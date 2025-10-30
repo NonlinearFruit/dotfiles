@@ -11,15 +11,14 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ## Setup on fresh OS
 
-Might need to `sudo apt update && sudo apt upgrade` if some dependencies can not install
-
 ```sh
-sudo apt update
-sudo apt install -y git
+sudo dnf update
+sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
 ./map.sh common | sh
+source ~/.bashrc
 ```
 
 ### OS Specific Setup and Mappings
@@ -36,124 +35,127 @@ For configuration specific to a particular OS, create setup and mappings for it.
 
 The actual dotfiles for various tools
 
-|Config|
-|-|
-|bash-aliases|
-|bashrc|
-|firefox|
-|gitconfig|
-|nvim|
-|ollama|
-|termux|
-|tmux|
-|tools|
-|vimrc|
-|vivaldi|
-|wezterm|
-|wsl|
+| Config |
+| --- |
+| bash-aliases |
+| bashrc |
+| firefox |
+| gitconfig |
+| glide |
+| nvim |
+| ollama |
+| termux |
+| tmux |
+| tools |
+| vimrc |
+| vivaldi |
+| wezterm |
+| wsl |
 </details>
 
 <details><summary>Scripts</summary>
 
 Helpful automation for various tasks
 
-|Script|
-|-|
-|backup-repo|
-|chat|
-|clean-history|
-|clip|
-|countdown|
-|datediff|
-|esv|
-|esv-search|
-|gdocs|
-|highlight|
-|ipsum|
-|is|
-|last-cron|
-|llm|
-|look-alike|
-|lsb|
-|mob|
-|mp3|
-|ned|
-|number-gossip|
-|nvim-list-servers|
-|nvim-plugins|
-|nvims|
-|passphrase|
-|precisionvim|
-|profile-nvim|
-|reprint|
-|ssh|
-|stopwatch|
-|sundays|
-|tmux-clients-in-window|
-|tmux-clones|
-|tmux-rogues|
-|to-me|
-|to-vimgrep|
-|toggle-pair|
-|vdocs|
-|view|
-|who-is-smallest-of-them-all|
-|whos-where|
+| Script | Demo |
+| --- | --- |
+| backup-repo |  |
+| chat |  |
+| clean-history |  |
+| clip |  |
+| cljue | [demo](.tapes/cljue.gif) |
+| countdown |  |
+| datediff |  |
+| esv |  |
+| esv-search |  |
+| gdocs |  |
+| highlight |  |
+| ipsum |  |
+| is |  |
+| last-cron |  |
+| llm |  |
+| look-alike |  |
+| lsb |  |
+| matthew-henry-gate |  |
+| mob |  |
+| mp3 |  |
+| ned |  |
+| number-gossip |  |
+| nvim-list-servers |  |
+| nvim-plugins |  |
+| nvims |  |
+| passphrase |  |
+| precisionvim |  |
+| profile-nvim |  |
+| reprint |  |
+| ssh |  |
+| stopwatch |  |
+| sundays |  |
+| tmux-clients-in-window |  |
+| tmux-clones |  |
+| tmux-rogues |  |
+| to-me |  |
+| to-vimgrep |  |
+| toggle-pair |  |
+| vdocs |  |
+| view |  |
+| who-is-smallest-of-them-all |  |
+| whos-where |  |
 </details>
 
 <details><summary>Setups</summary>
 
 Automation for initializing a fresh OS
 
-|Setup|
-|-|
-|bootstrap|
-|common|
-|haskell|
-|nvims|
-|openscad|
-|termux|
-|tools|
-|wsl|
+| Setup |
+| --- |
+| bootstrap |
+| common |
+| haskell |
+| nvims |
+| openscad |
+| termux |
+| tools |
+| wsl |
 </details>
 
 <details><summary>Mappings</summary>
 
 Symlink any config file to any location
 
-|Mapping|
-|-|
-|common|
-|termux|
-|wsl|
+| Mapping |
+| --- |
+| common |
+| termux |
+| wsl |
 </details>
 
 <details><summary>Cheatsheets</summary>
 
 Custom TLDR pages
 
-|Cheatsheet|
-|-|
-|bash-notes|
-|cargo-watch|
-|dbeaver-mongo|
-|dotnet-format|
-|dotnet-outdated|
-|fzf-notes|
-|neotest|
-|neovim|
-|nerd-font-symbols|
-|nerd-fonts|
-|netrw|
-|null-ls|
-|nvim-dap|
-|podman-notes|
-|rust-notes|
-|telescope|
-|tmux-notes|
-|wezterm|
-|winget|
-|wsl2|
+| Cheatsheet |
+| --- |
+| bash-notes |
+| cargo-watch |
+| dbeaver-mongo |
+| dotnet-format |
+| dotnet-outdated |
+| fzf-notes |
+| neotest |
+| neovim |
+| nerd-font-symbols |
+| nerd-fonts |
+| netrw |
+| null-ls |
+| nvim-dap |
+| podman-notes |
+| rust-notes |
+| telescope |
+| tmux-notes |
+| wezterm |
+| winget |
+| wsl2 |
 </details>
 
 ## Formatting

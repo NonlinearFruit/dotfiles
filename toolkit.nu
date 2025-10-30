@@ -55,7 +55,7 @@ The actual dotfiles for various tools
 
 Helpful automation for various tasks
 
-(get-scripts | each { { Script: $in } } | to md)
+(get-scripts | each {|name| { Script: $name } | if ($".tapes/($name).gif" | path exists) { insert Demo $"[demo]\(.tapes/($name).gif)" } else { insert Demo "" } } | to md)
 </details>
 
 <details><summary>Setups</summary>

@@ -116,6 +116,12 @@
   manager: go
   id: oss.terrastruct.com/d2
 
+- cmd: vhs
+  description: terminal gif recorder
+  url: https://github.com/charmbracelet/vhs
+  manager: go
+  id: github.com/charmbracelet/vhs
+
 - cmd: curl
   description: http client
   manager: dnf
