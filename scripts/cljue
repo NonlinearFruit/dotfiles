@@ -1,0 +1,79 @@
+#!/usr/bin/env bb
+
+; Requires on path
+; - bb (https://github.com/babashka/babashka)
+; - bat (https://github.com/sharkdp/bat)
+; - cat
+; - fzf (https://github.com/junegunn/fzf)
+; - this scipt (for the fzf preview)
+(require '[clojure.java.io :as io])
+(require '[clojure.string :as string])
+(require '[clojure.java.shell :refer [sh]])
+(require '[cheshire.core :as cheshire])
+
+(def clj-docs-uri "https://clojuredocs.org/clojuredocs-export.json")
+
+(def clj-docs-cache (.getAbsolutePath (io/file (System/getProperty "user.home")
+                                              ".cache"
+                                              "cljue")))
+
+(def clj-docs-json (.getAbsolutePath (io/file clj-docs-cache
+                                     "clojure-docs.json")))
+
+(defn bat [stdin]
+  (:out (sh "bat" "--color" "always" "--language" "clojure" "--plain" :in stdin)))
+
+(defn cat [file]
+  (:out (sh "cat" file)))
+
+(defn fzf [stdin]
+  (string/trim (:out (sh
+          "fzf" "--ansi" "--preview" "cljue {}"
+          :in stdin))))
+
+(defn clj-doc-json-exists? []
+  (.exists (io/as-file clj-docs-json)))
+
+(defn download-clj-docs []
+  (println "Downloading clj docs")
+  (sh "mkdir" clj-docs-cache)
+  (with-open [in (io/input-stream clj-docs-uri)
+              out (io/output-stream clj-docs-json)]
+    (io/copy in out)))
+
+(defn download-clj-docs-if-necessary []
+  (when (not (clj-doc-json-exists?))
+    (download-clj-docs)))
+
+(defn clj-docs []
+  (cheshire/parse-string (cat clj-docs-json) true))
+
+(defn clj-doc [ns name]
+  (first (filter #(and (= (:ns %) ns)
+                       (= (:name %) name))
+                 (:vars (clj-docs)))))
+
+(defn format-examples [clj_doc_examples]
+  (bat (string/join "\n\n\n"
+                    (map-indexed #(str "; Example #" %1 "\n" (string/trim (:body %2)))
+                                 clj_doc_examples))))
+
+(defn examples [thing] 
+  (let [input (re-seq #"[^/]+" thing)
+             ns (first input)
+             name (last input)]
+    (format-examples (:examples (clj-doc ns name)))))
+
+(defn search []
+  (fzf (string/join "\n"
+                    (map #(str (:ns %) "/" (:name %))
+                         (:vars (clj-docs))))))
+
+(defn -main [& args]
+  (download-clj-docs-if-necessary)
+  (print (if (empty? args)
+    (examples (search))
+    (examples (first args)))))
+
+(when (= *file* (System/getProperty "babashka.file"))
+  (apply -main *command-line-args*))
