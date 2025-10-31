@@ -11,6 +11,7 @@ glide.prefs.set(
 // https://github.com/glide-browser/glide/discussions/63
 glide.keymaps.set("normal", "gT", "tab_prev");
 glide.keymaps.set("normal", "gt", "tab_next");
+glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>");
 
 // https://addons.mozilla.org
 glide.addons.install(
