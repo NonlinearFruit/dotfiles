@@ -66,7 +66,7 @@ Helpful automation for various tasks
 | cljue | [demo](.tapes/cljue.gif) |
 | countdown |  |
 | datediff |  |
-| esv |  |
+| esv | [demo](.tapes/esv.gif) |
 | esv-search |  |
 | gdocs |  |
 | highlight |  |
