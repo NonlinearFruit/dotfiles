@@ -1,14 +1,14 @@
 #!/bin/env nu
 
-def main [] {
+def main [--sample-size(-s) = 10] {
   let baselineProfile = 'nvim-baseline'
   try-create-baseline-nvim $baselineProfile
   [
     $baselineProfile
     nvim
   ]
-  | each {|vim|
-    run-multiple-profiles $vim
+  | par-each {|vim|
+    run-multiple-profiles $vim $sample_size
   }
 }
 
@@ -32,9 +32,9 @@ def create-baseline-nvim [directory] {
   | save -f $init
 }
 
-def run-multiple-profiles [vim] {
-  let output_file = "output.txt"
-  1..10
+def run-multiple-profiles [vim sample_size] {
+  let output_file = mktemp
+  1..$sample_size
   | each {
     run-vim-profile $vim $output_file
   }

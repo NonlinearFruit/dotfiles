@@ -86,7 +86,7 @@ Helpful automation for various tasks
 | nvims |  |
 | passphrase |  |
 | precisionvim |  |
-| profile-nvim |  |
+| profile-nvim | [demo](.tapes/profile-nvim.gif) |
 | reprint |  |
 | ssh |  |
 | stopwatch |  |
