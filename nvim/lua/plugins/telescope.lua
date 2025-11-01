@@ -53,6 +53,7 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
+  event = "VeryLazy",
   opts = {
     defaults = {
       path_display = {

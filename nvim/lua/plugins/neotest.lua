@@ -33,6 +33,7 @@ end
 
 return {
   "nvim-neotest/neotest",
+  event = "VeryLazy",
   opts = {
     diagnostic = {
       enabled = true,

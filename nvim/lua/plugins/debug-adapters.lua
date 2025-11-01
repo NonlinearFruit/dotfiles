@@ -131,6 +131,7 @@ end
 return {
   "rcarriga/nvim-dap-ui",
   config = configure,
+  event = "VeryLazy",
   dependencies = {
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",

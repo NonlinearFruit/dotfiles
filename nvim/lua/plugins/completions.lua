@@ -58,6 +58,7 @@ return {
   "hrsh7th/nvim-cmp",
   opts = {},
   config = configure,
+  event = "VeryLazy",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp", -- get completions from lsp
     "L3MON4D3/LuaSnip", -- snippet engine

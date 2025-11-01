@@ -36,4 +36,5 @@ return {
     "neovim/nvim-lspconfig", -- configure lsps
   },
   config = configure,
+  event = "VeryLazy",
 }
