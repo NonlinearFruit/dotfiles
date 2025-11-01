@@ -3,28 +3,25 @@
 ; Requires on path
 ; - bb (https://github.com/babashka/babashka)
 ; - bat (https://github.com/sharkdp/bat)
-; - cat
 ; - fzf (https://github.com/junegunn/fzf)
 ; - this scipt (for the fzf preview)
 (require '[clojure.java.io :as io])
 (require '[clojure.string :as string])
 (require '[clojure.java.shell :refer [sh]])
 (require '[cheshire.core :as cheshire])
+(require '[babashka.fs :as fs])
 
 (def clj-docs-uri "https://clojuredocs.org/clojuredocs-export.json")
 
-(def clj-docs-cache (.getAbsolutePath (io/file (System/getProperty "user.home")
-                                              ".cache"
-                                              "cljue")))
+(def clj-docs-cache (fs/xdg-cache-home "cljue"))
 
-(def clj-docs-json (.getAbsolutePath (io/file clj-docs-cache
-                                     "clojure-docs.json")))
+(def clj-docs-json (fs/file clj-docs-cache "clojure-docs.json"))
 
 (defn bat [stdin]
   (:out (sh "bat" "--color" "always" "--language" "clojure" "--plain" :in stdin)))
 
 (defn cat [file]
-  (:out (sh "cat" file)))
+  (string/join "\n" (fs/read-all-lines file)))
 
 (defn fzf [stdin]
   (string/trim (:out (sh
@@ -32,11 +29,11 @@
           :in stdin))))
 
 (defn clj-doc-json-exists? []
-  (.exists (io/as-file clj-docs-json)))
+  (fs/exists? clj-docs-json))
 
 (defn download-clj-docs []
   (println "Downloading clj docs")
-  (sh "mkdir" clj-docs-cache)
+  (fs/create-dirs clj-docs-cache)
   (with-open [in (io/input-stream clj-docs-uri)
               out (io/output-stream clj-docs-json)]
     (io/copy in out)))
