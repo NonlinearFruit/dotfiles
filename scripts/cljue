@@ -39,7 +39,7 @@
     (io/copy in out)))
 
 (defn download-clj-docs-if-necessary []
-  (when (not (clj-doc-json-exists?))
+  (when-not (clj-doc-json-exists?)
     (download-clj-docs)))
 
 (defn clj-docs []
@@ -56,7 +56,7 @@
                                  clj_doc_examples))))
 
 (defn examples [thing] 
-  (let [input (re-seq #"[^/]+" thing)
+  (let [input (string/split thing #"/" 2)
              ns (first input)
              name (last input)]
     (format-examples (:examples (clj-doc ns name)))))
