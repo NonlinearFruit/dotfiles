@@ -7,6 +7,9 @@ local function configure()
   })
 end
 
+-- Print directory with treesitter parsers
+-- :lua= require("nvim-treesitter.configs").get_parser_install_dir()
+
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
