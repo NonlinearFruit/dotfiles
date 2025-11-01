@@ -4,7 +4,6 @@
 ; - bb (https://github.com/babashka/babashka)
 ; - bat (https://github.com/sharkdp/bat)
 ; - fzf (https://github.com/junegunn/fzf)
-; - this scipt (for the fzf preview)
 (require '[clojure.java.io :as io])
 (require '[clojure.string :as string])
 (require '[clojure.java.shell :refer [sh]])
@@ -25,7 +24,7 @@
 
 (defn fzf [stdin]
   (string/trim (:out (sh
-          "fzf" "--ansi" "--preview" "cljue {}"
+          "fzf" "--ansi" "--preview" (str *file* " {}")
           :in stdin))))
 
 (defn clj-doc-json-exists? []
@@ -43,6 +42,7 @@
     (download-clj-docs)))
 
 (defn clj-docs []
+  "Expected structure is {vars: [{ns: string, name: string, examples: [{body: string}]}]}"
   (cheshire/parse-string (cat clj-docs-json) true))
 
 (defn clj-doc [ns name]
