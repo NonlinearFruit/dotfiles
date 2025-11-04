@@ -35,127 +35,127 @@ For configuration specific to a particular OS, create setup and mappings for it.
 
 The actual dotfiles for various tools
 
-| Config |
-| --- |
-| bash-aliases |
-| bashrc |
-| firefox |
-| gitconfig |
-| glide |
-| nvim |
-| ollama |
-| termux |
-| tmux |
-| tools |
-| vimrc |
-| vivaldi |
-| wezterm |
-| wsl |
+|Config|
+|-|
+|bash-aliases|
+|bashrc|
+|firefox|
+|gitconfig|
+|glide|
+|nvim|
+|ollama|
+|termux|
+|tmux|
+|tools|
+|vimrc|
+|vivaldi|
+|wezterm|
+|wsl|
 </details>
 
 <details><summary>Scripts</summary>
 
 Helpful automation for various tasks
 
-| Script | Demo |
-| --- | --- |
-| backup-repo |  |
-| chat |  |
-| clean-history |  |
-| clip |  |
-| cljue | [demo](.tapes/cljue.gif) |
-| countdown |  |
-| datediff |  |
-| esv | [demo](.tapes/esv.gif) |
-| esv-search |  |
-| gdocs |  |
-| highlight |  |
-| ipsum |  |
-| is |  |
-| last-cron |  |
-| llm |  |
-| look-alike |  |
-| lsb |  |
-| matthew-henry-gate |  |
-| mob |  |
-| mp3 |  |
-| ned |  |
-| number-gossip |  |
-| nvim-list-servers |  |
-| nvim-plugins |  |
-| nvims |  |
-| passphrase |  |
-| precisionvim |  |
-| profile-nvim | [demo](.tapes/profile-nvim.gif) |
-| reprint |  |
-| ssh |  |
-| stopwatch |  |
-| sundays |  |
-| tmux-clients-in-window |  |
-| tmux-clones |  |
-| tmux-rogues |  |
-| to-me |  |
-| to-vimgrep |  |
-| toggle-pair |  |
-| vdocs |  |
-| view |  |
-| who-is-smallest-of-them-all |  |
-| whos-where |  |
+|Script|Demo|
+|-|-|
+|backup-repo||
+|chat||
+|clean-history||
+|clip||
+|cljue|[demo](.tapes/cljue.gif)|
+|countdown||
+|datediff||
+|esv|[demo](.tapes/esv.gif)|
+|esv-search||
+|gdocs||
+|highlight||
+|ipsum||
+|is||
+|last-cron||
+|llm||
+|look-alike||
+|lsb||
+|matthew-henry-gate|[demo](.tapes/matthew-henry-gate.gif)|
+|mob||
+|mp3||
+|ned||
+|number-gossip||
+|nvim-list-servers||
+|nvim-plugins||
+|nvims||
+|passphrase||
+|precisionvim||
+|profile-nvim|[demo](.tapes/profile-nvim.gif)|
+|reprint||
+|ssh||
+|stopwatch||
+|sundays||
+|tmux-clients-in-window||
+|tmux-clones||
+|tmux-rogues||
+|to-me||
+|to-vimgrep||
+|toggle-pair||
+|vdocs||
+|view||
+|who-is-smallest-of-them-all||
+|whos-where||
 </details>
 
 <details><summary>Setups</summary>
 
 Automation for initializing a fresh OS
 
-| Setup |
-| --- |
-| bootstrap |
-| common |
-| haskell |
-| nvims |
-| openscad |
-| termux |
-| tools |
-| wsl |
+|Setup|
+|-|
+|bootstrap|
+|common|
+|haskell|
+|nvims|
+|openscad|
+|termux|
+|tools|
+|wsl|
 </details>
 
 <details><summary>Mappings</summary>
 
 Symlink any config file to any location
 
-| Mapping |
-| --- |
-| common |
-| termux |
-| wsl |
+|Mapping|
+|-|
+|common|
+|termux|
+|wsl|
 </details>
 
 <details><summary>Cheatsheets</summary>
 
 Custom TLDR pages
 
-| Cheatsheet |
-| --- |
-| bash-notes |
-| cargo-watch |
-| dbeaver-mongo |
-| dotnet-format |
-| dotnet-outdated |
-| fzf-notes |
-| neotest |
-| neovim |
-| nerd-font-symbols |
-| nerd-fonts |
-| netrw |
-| null-ls |
-| nvim-dap |
-| podman-notes |
-| rust-notes |
-| telescope |
-| tmux-notes |
-| wezterm |
-| winget |
-| wsl2 |
+|Cheatsheet|
+|-|
+|bash-notes|
+|cargo-watch|
+|dbeaver-mongo|
+|dotnet-format|
+|dotnet-outdated|
+|fzf-notes|
+|neotest|
+|neovim|
+|nerd-font-symbols|
+|nerd-fonts|
+|netrw|
+|null-ls|
+|nvim-dap|
+|podman-notes|
+|rust-notes|
+|telescope|
+|tmux-notes|
+|wezterm|
+|winget|
+|wsl2|
 </details>
 
 ## Formatting
