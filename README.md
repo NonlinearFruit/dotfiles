@@ -69,7 +69,7 @@ Helpful automation for various tasks
 |esv|[demo](.tapes/esv.gif)|
 |esv-search||
 |gdocs||
-|highlight||
+|highlight|[demo](.tapes/highlight.gif)|
 |ipsum||
 |is||
 |last-cron||
