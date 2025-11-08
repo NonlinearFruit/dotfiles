@@ -1,3 +1,5 @@
+// https://github.com/RobertCraigie/dotfiles/tree/main/glide
+
 // firefox.yml
 glide.prefs.set(
   "browser.startup.homepage",
