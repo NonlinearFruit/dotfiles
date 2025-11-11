@@ -40,20 +40,33 @@ glide.excmds.create({ name: "b#", description: "[b]uffer [#]alternate -> switche
   }
 });
 
-glide.keymaps.set("normal", "<leader>d", async () => {
-  const clone_url = glide.ctx.url + ".git"
-  const git_path = glide.path.join(glide.path.home_dir, "projects")
-  await glide.process.execute("git", ["-C", git_path, "clone", clone_url])
-  await browser.notifications.create({ type: "basic", title: "glide config", message: "Repo is cloned!" })
-}, { description: "clone ([d]ownload) git repo" })
-
-glide.keymaps.set("normal", "gx", async () => {
-  const [owner, repo] = glide.ctx.url.pathname.split("/").slice(1, 3);
-  if (!owner || !repo) throw new Error("current URL is not a github repo");
-  const repo_path = glide.path.join(glide.path.home_dir, "projects", repo);
-  await glide.process.execute("tmux", ["new-window", "-t", "nonlinearfruit:", "-c", repo_path]);
-  await browser.notifications.create({ type: "basic", title: "glide config", message: "Tmux tab created" })
-}, { description: "open repo in tmux" });
-
 // https://github.com/glide-browser/glide/discussions/93#discussioncomment-14918102
 glide.keymaps.set(["normal", "insert"], "<C-,>", "blur", { description: "Go to normal mode without focus on a specific element" })
+
+glide.autocmds.create("UrlEnter", { hostname: "github.com" }, ({ tab_id }) => {
+  glide.buf.keymaps.set("normal", "<leader>d", async () => {
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Download started..." })
+    const clone_url = glide.ctx.url + ".git"
+    const git_path = glide.path.join(glide.path.home_dir, "projects")
+    await glide.process.execute("git", ["-C", git_path, "clone", clone_url])
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Repo is cloned!" })
+  }, { description: "clone ([d]ownload) git repo" })
+
+  glide.buf.keymaps.set("normal", "gx", async () => {
+    const [owner, repo] = glide.ctx.url.pathname.split("/").slice(1, 3);
+    if (!owner || !repo) throw new Error("current URL is not a github repo");
+    const repo_path = glide.path.join(glide.path.home_dir, "projects", repo);
+    await glide.process.execute("tmux", ["new-window", "-t", "nonlinearfruit:", "-c", repo_path]);
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Tmux tab created" })
+  }, { description: "open repo in tmux" });
+});
+
+glide.autocmds.create("UrlEnter", { hostname: "www.youtube.com" }, ({ tab_id }) => {
+  glide.buf.keymaps.set("normal", "<leader>d", async () => {
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Download started..." })
+    const video_url = glide.ctx.url
+    await glide.process.execute("nix-shell", ["--packages", "yt-dlp", "--run", "yt-dlp --cookies-from-browser vivaldi --paths ~/Downloads/youtube " + video_url])
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Video is downloaded!" })
+  }, { description: "[d]ownload youtube video" })
+});
+
