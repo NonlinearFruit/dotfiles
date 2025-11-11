@@ -181,6 +181,10 @@
   description: counts lines of code
   manager: cargo
 
+- cmd: org.videolan.VLC
+  description: Video player
+  manager: flatpak
+
 - cmd: org.wezfurlong.wezterm
   description: Configurable terminal emulator
   manager: flatpak
