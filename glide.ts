@@ -55,3 +55,5 @@ glide.keymaps.set("normal", "gx", async () => {
   await browser.notifications.create({ type: "basic", title: "glide config", message: "Tmux tab created" })
 }, { description: "open repo in tmux" });
 
+// https://github.com/glide-browser/glide/discussions/93#discussioncomment-14918102
+glide.keymaps.set(["normal", "insert"], "<C-,>", "blur", { description: "Go to normal mode without focus on a specific element" })
