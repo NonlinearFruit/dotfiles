@@ -1,6 +1,0 @@
-#!/bin/sh
-FILE=$1
-LINE=$2
-COLM=$3
-echo "vim $FILE -c \"normal ${LINE}G${COLM}|\" -c 'normal zz'" >> /home/bbolen/junk/precisionvim.logs
-vim $FILE -c "normal ${LINE}G${COLM}|" -c 'normal zz'
