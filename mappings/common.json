@@ -4,6 +4,7 @@
   ["cheatsheets/*", "~/.local/share/tealdeer/pages"],
   ["gitconfig.ini", "~/.gitconfig"],
   ["glide.ts", "~/.config/glide/glide.ts"],
+  ["glide.desktop", "~/.local/share/applications/glide.desktop"],
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
   ["tmux.conf", "~/.tmux.conf"],

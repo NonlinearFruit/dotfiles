@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Glide
+Exec=glide
+Icon=glide
+Terminal=false
