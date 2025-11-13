@@ -70,3 +70,11 @@ glide.autocmds.create("UrlEnter", { hostname: "www.youtube.com" }, ({ tab_id }) 
   }, { description: "[d]ownload youtube video" })
 });
 
+glide.autocmds.create("UrlEnter", { hostname: "www.vimgolf.com" }, ({ tab_id }) => {
+  glide.buf.keymaps.set("normal", "<leader>d", async () => {
+    const parts = glide.ctx.url.pathname.split("/")
+    const challenge = parts[parts.length -1]
+    await glide.process.execute("nu", ["~/projects/vim-golf/toolkit.nu", "download-challenge", challenge])
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Golf is downloaded!" })
+  }, { description: "[d]ownload vim golf" })
+});

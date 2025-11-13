@@ -2,6 +2,9 @@
 Type=Application
 Version=1.0
 Name=Glide
+Comment=Configurable keyboard centric web browser
 Exec=glide
 Icon=glide
 Terminal=false
+Keywords=web;browser;internet
+Categories=Internet;Browser;
