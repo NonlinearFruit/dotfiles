@@ -78,3 +78,11 @@ glide.autocmds.create("UrlEnter", { hostname: "www.vimgolf.com" }, ({ tab_id }) 
     await browser.notifications.create({ type: "basic", title: "glide config", message: "Golf is downloaded!" })
   }, { description: "[d]ownload vim golf" })
 });
+
+glide.autocmds.create("UrlEnter", { hostname: "projecteuler.net" }, ({ tab_id }) => {
+  glide.buf.keymaps.set("normal", "<leader>d", async () => {
+    const challenge = glide.ctx.url.pathname.split("=")[1]
+    await glide.process.execute("nu", ["~/projects/project-euler/toolkit.nu", "download-challenge", challenge])
+    await browser.notifications.create({ type: "basic", title: "glide config", message: "Problem is downloaded!" })
+  }, { description: "[d]ownload Project Euler problem" })
+});
