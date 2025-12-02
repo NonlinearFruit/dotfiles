@@ -9,6 +9,10 @@ glide.prefs.set(
   "signon.rememberSignons",
   false,
 );
+glide.prefs.set(
+  "ui.systemUsesDarkTheme",
+  1,
+);
 
 // https://github.com/glide-browser/glide/discussions/63
 glide.keymaps.set("normal", "gT", "tab_prev");
