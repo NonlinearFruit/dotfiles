@@ -20,11 +20,12 @@ def main [
 }
 
 def query-lsb-api [query] {
+  let build_id = http get https://read.lsbible.org/ | parse '{_}"buildId":"{build_id}"{_}' | first | get build_id
   {
     q: ($query | str join " ")
   }
   | url build-query
-  | $"https://read.lsbible.org/_next/data/n6yZnAeWmTcbY7mfSVTSp/index.json?($in)"
+  | $"https://read.lsbible.org/_next/data/($build_id)/index.json?($in)"
   | http get $in
   | get pageProps
 }
