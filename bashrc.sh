@@ -143,7 +143,7 @@ fi
 
 # Fast Node Manager (fnm)
 if command -v fnm > /dev/null; then
-  export DEFAULT_NODE="18"
+  export DEFAULT_NODE="24"
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env)"
   if ! fnm use $DEFAULT_NODE > /dev/null 2> /dev/null; then
