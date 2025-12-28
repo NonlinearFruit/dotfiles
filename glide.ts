@@ -1,4 +1,10 @@
-// https://github.com/RobertCraigie/dotfiles/tree/main/glide
+// Config docs: https://glide-browser.app/config
+// API docs: https://glide-browser.app/api
+// Default config files: https://github.com/glide-browser/glide/tree/main/src/glide/browser/base/content/plugins
+// Default keymappings: https://github.com/glide-browser/glide/blob/main/src/glide/browser/base/content/plugins/keymaps.mts
+// Creator's dotfiles: https://github.com/RobertCraigie/dotfiles/tree/main/glide
+
+glide.o.hint_size = "18px"
 
 // firefox.yml
 glide.prefs.set(
