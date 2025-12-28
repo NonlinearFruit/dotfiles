@@ -88,3 +88,14 @@ glide.autocmds.create("UrlEnter", { hostname: "projecteuler.net" }, ({ tab_id })
     await browser.notifications.create({ type: "basic", title: "glide config", message: "Problem is downloaded!" })
   }, { description: "[d]ownload Project Euler problem" })
 });
+
+glide.keymaps.set("normal", "yf", () => {
+  glide.hints.show({
+    action: async (target: any) => {
+      if (target.href) {
+        await navigator.clipboard.writeText(target.href)
+      }
+    }
+  })
+})
+glide.keymaps.set("normal", "/", "keys <C-f>");
