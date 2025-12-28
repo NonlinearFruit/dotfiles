@@ -26,16 +26,13 @@ glide.addons.install(
 );
 
 let previousTabId: number | undefined;
-let currentTabId: number | undefined;
 browser.tabs.onActivated.addListener((activeInfo) => {
-  currentTabId = activeInfo.tabId
   previousTabId = activeInfo.previousTabId;
 });
-glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes current tab" }, async () => {
-  if (currentTabId) {
-    browser.tabs.remove(currentTabId);
-  }
-});
+glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes current tab"}, () => {
+  glide.excmds.execute("tab_close")
+})
+
 glide.excmds.create({ name: "b#", description: "[b]uffer [#]alternate -> switches to previously active tab" }, async () => {
   if (previousTabId) {
     await browser.tabs.update(previousTabId, { active: true })
