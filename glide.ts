@@ -25,6 +25,36 @@ glide.addons.install(
   "https://addons.mozilla.org/firefox/downloads/file/4599707/bitwarden_password_manager-2025.10.0.xpi",
 );
 
+glide.autocmds.create("ModeChanged", "*", ({ new_mode }) => {
+	let color = null;
+
+	switch (new_mode) {
+		case "insert": // Yellow
+			color = "#FBC02D";
+			break;
+
+		case "normal": // Gray
+			color = "#9E9E9E";
+			break;
+
+		case "command": // Green
+			color = "#689F38";
+			break;
+
+		case "hint": // Teal
+			color = "#00796B";
+			break;
+
+		case "ignore": // Red
+			color = "#FF5252";
+			break;
+	}
+
+	if (color) {
+		browser.theme.update({ colors: { frame: color } });
+	}
+});
+
 let previousTabId: number | undefined;
 browser.tabs.onActivated.addListener((activeInfo) => {
   previousTabId = activeInfo.previousTabId;
