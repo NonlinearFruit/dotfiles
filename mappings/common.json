@@ -11,6 +11,8 @@
   ["vimrc.vim", "~/.vimrc"],
   ["map.sh", "~/projects/privatefiles/map.sh"],
   ["init.sh", "~/projects/privatefiles/init.sh"],
+  ["https://raw.githubusercontent.com/neovim/neovim/refs/heads/master/runtime/nvim.desktop", "~/.local/share/applications/nvim.desktop", "curl"],
+  ["https://raw.githubusercontent.com/neovim/neovim/refs/heads/master/runtime/nvim.png", "~/.local/share/icons/hicolor/48x48/apps/nvim.png", "curl"],
   ["https://raw.githubusercontent.com/NonlinearFruit/english-words/master/words.txt", "~/scripts/words.txt", "curl"],
   ["https://raw.githubusercontent.com/NonlinearFruit/Creeds.json/master/creeds/westminster_shorter_catechism.json", "~/scripts/westminster_shorter_catechism.json", "curl"],
   ["wezterm/*", "~/.config/wezterm"]
