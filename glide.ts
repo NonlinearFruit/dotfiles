@@ -181,3 +181,18 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
 		.filter((id): id is number => id !== undefined);
 	await browser.tabs.remove(tab_ids_to_close);
 });
+
+glide.keymaps.set("normal", "yc", () =>
+  glide.hints.show({
+    selector: "pre,code",
+    async action(target) {
+      console.log(target)
+      const text = (await target.content.execute((target) => target.textContent)).trim()
+      console.log(text)
+      if (text) {
+        await navigator.clipboard.writeText(text);
+      }
+    }
+  }),
+  { description: "[y]ank [c]ode -> Shows hints on all preformated text and places the selected codeblock in clipboard" }
+)
