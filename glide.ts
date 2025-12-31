@@ -196,3 +196,10 @@ glide.keymaps.set("normal", "yc", () =>
   }),
   { description: "[y]ank [c]ode -> Shows hints on all preformated text and places the selected codeblock in clipboard" }
 )
+
+glide.search_engines.add({
+  name: "Brave",
+  keyword: "b",
+  search_url: "https://search.brave.com/search?q={searchTerms}",
+  is_default: true
+})
