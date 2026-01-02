@@ -3,6 +3,7 @@
 // Default config files: https://github.com/glide-browser/glide/tree/main/src/glide/browser/base/content/plugins
 // Default keymappings: https://github.com/glide-browser/glide/blob/main/src/glide/browser/base/content/plugins/keymaps.mts
 // Creator's dotfiles: https://github.com/RobertCraigie/dotfiles/tree/main/glide
+// Firefox Javascript APIS (use browser.*): https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs
 
 glide.o.hint_size = "18px"
 
