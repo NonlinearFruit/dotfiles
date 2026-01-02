@@ -202,6 +202,11 @@ glide.keymaps.set("normal", "yc", () =>
   { description: "[y]ank [c]ode -> Shows hints on all preformated text and places the selected codeblock in clipboard" }
 )
 
+glide.excmds.create({ name: "tabo", description: "[tab] [o]nly -> deletes all non-active non-pinned tabs"}, async () => {
+  const tabs_to_close = await browser.tabs.query({active: false, pinned: false})
+  browser.tabs.remove(tabs_to_close.map(t => t.id));
+})
+
 glide.search_engines.add({
   name: "Brave",
   keyword: "b",
