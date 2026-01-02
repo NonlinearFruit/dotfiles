@@ -69,6 +69,10 @@ glide.excmds.create({ name: "b#", description: "[b]uffer [#]alternate -> switche
   }
 });
 
+glide.excmds.create({ name: "noh", description: "[no] [h]ighlight -> clears find highlights" }, async () => {
+  await browser.find.removeHighlighting()
+});
+
 // https://github.com/glide-browser/glide/discussions/93#discussioncomment-14918102
 glide.keymaps.set(["normal", "insert"], "<C-,>", "blur", { description: "Go to normal mode without focus on a specific element" })
 
