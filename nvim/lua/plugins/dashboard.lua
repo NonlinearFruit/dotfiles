@@ -68,8 +68,8 @@ local function configure()
         },
         {
           icon = " ",
-          desc = "Browser File Tree",
-          key = "b",
+          desc = "Browse File Tree",
+          key = "-",
           key_hl = "LineNr",
           action = "Oil",
         },
