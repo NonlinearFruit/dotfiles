@@ -27,33 +27,16 @@ glide.addons.install(
 );
 
 glide.autocmds.create("ModeChanged", "*", ({ new_mode }) => {
-	let color = null;
-
-	switch (new_mode) {
-		case "insert": // Yellow
-			color = "#FBC02D";
-			break;
-
-		case "normal": // Gray
-			color = "#9E9E9E";
-			break;
-
-		case "command": // Green
-			color = "#689F38";
-			break;
-
-		case "hint": // Teal
-			color = "#00796B";
-			break;
-
-		case "ignore": // Red
-			color = "#FF5252";
-			break;
-	}
-
-	if (color) {
-		browser.theme.update({ colors: { frame: color } });
-	}
+  const mode_colors: Record<keyof GlideModes, string> = {
+    "command": "#689F38", // Green
+    "hint": "#00796B", // Teal
+    "ignore": "#FF5252", // Red
+    "insert": "#FBC02D", // Yellow
+    "normal": "#9E9E9E", // Gray
+    "op-pending": "#FF8F00", // Orange
+    "visual": "#7B1FA2", // Purple
+  }
+  browser.theme.update({ colors: { frame: mode_colors[new_mode] } });
 });
 
 let previousTabId: number | undefined;
