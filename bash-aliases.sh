@@ -5,6 +5,7 @@ alias ls='ls --color=auto'
 alias populars='history | sed -E "s/^[ ]+[0-9]+[ ]+//" | cut -d" " -f1 | sort | uniq -c --repeated | sort -r'
 alias vi="$EDITOR"
 alias vim="$EDITOR"
+alias dirp='basename $PWD'
 alias protontricks='flatpak run com.github.Matoking.protontricks'
 
 if is wsl ; then
