@@ -8,6 +8,10 @@ let mapleader = ' '
 
 """ RIDER """
 if has("ide") " https://vi.stackexchange.com/a/43062/11897
+
+  set visualbell
+  set noerrorbells " https://superuser.com/a/677312/468052
+
   " Mimic Vanilla Vim
   nnoremap g, :action JumpToLastChange<cr>
   nnoremap g; :action JumpToNextChange<cr>
