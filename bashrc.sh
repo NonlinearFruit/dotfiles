@@ -173,6 +173,7 @@ fi
 
 # Dotnet
 if [ -d "$HOME/.dotnet" ]; then
+  export DOTNET_ROOT="$HOME/.dotnet"
   export PATH="$HOME/.dotnet:$PATH"
   export PATH="$HOME/.dotnet/tools:$PATH"
 fi
