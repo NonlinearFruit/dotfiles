@@ -25,7 +25,7 @@ local function configure()
   vim.diagnostic.config({
     virtual_text = false,
     underline = true,
-    signs = false,
+    signs = true,
   })
 end
 
