@@ -122,6 +122,12 @@
   manager: go
   id: github.com/charmbracelet/vhs
 
+- cmd: freeze
+  description: create image from command output
+  url: https://github.com/charmbracelet/freeze
+  manager: go
+  id: github.com/charmbracelet/freeze
+
 - cmd: curl
   description: http client
   manager: dnf
