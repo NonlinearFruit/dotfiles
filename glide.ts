@@ -11,6 +11,7 @@ glide.o.hint_size = "18px"
 glide.prefs.set("browser.startup.page", 3); // Open previous windows and tabs
 glide.prefs.set("signon.rememberSignons", false);
 glide.prefs.set("ui.systemUsesDarkTheme", 1);
+glide.prefs.set("browser.tabs.splitView.enabled", true);
 
 // https://github.com/glide-browser/glide/discussions/63
 glide.keymaps.set("normal", "gT", "tab_prev");
