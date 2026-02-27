@@ -114,7 +114,8 @@ glide.keymaps.set("normal", "yf", () => {
     }
   })
 })
-glide.keymaps.set("normal", "/", "keys <C-f>");
+
+glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}));
 glide.keymaps.set("normal", "n", () => glide.findbar.next_match());
 glide.keymaps.set("normal", "N", () => glide.findbar.previous_match());
 glide.keymaps.set("normal", "<leader>/b", "commandline_show tab ", { description: "Search[/] open tabs ([b]uffers)" });
