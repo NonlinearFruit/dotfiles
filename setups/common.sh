@@ -36,3 +36,12 @@ mkdir -p ~/.config/nushell/scripts
 
 # Glide
 mkdir -p  ~/.config/glide/
+
+# Nushell <https://www.nushell.sh/book/installation.html#pre-built-binaries>
+echo "[gemfury-nushell]
+name=Gemfury Nushell Repo
+baseurl=https://yum.fury.io/nushell/
+enabled=1
+gpgcheck=0
+gpgkey=https://yum.fury.io/nushell/gpg.key" | sudo tee /etc/yum.repos.d/fury-nushell.repo
+sudo dnf install -y nushell

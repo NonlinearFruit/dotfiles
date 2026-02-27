@@ -12,13 +12,26 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 ## Setup on fresh OS
 
 ```sh
-sudo dnf update
+sudo dnf update -y
 sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
 ./map.sh common | sh
+./tools/tool-manager.nu install-manager cargo
 source ~/.bashrc
+
+# Neovim
+./tools/tool-manager.nu install-tool gcc
+./tools/tool-manager.nu install-tool bob
+bob use latest
+source ~/.bashrc
+nvim
+
+# Others
+sudo dnf install -y tmux
+./tools/tool-manager.nu install-tool z
+./tools/tool-manager.nu install-tool fzf
 ```
 
 ### OS Specific Setup and Mappings
@@ -27,6 +40,13 @@ For configuration specific to a particular OS, create setup and mappings for it.
 ```sh
 ./init.sh common termux | sh
 ./map.sh common wsl | sh
+```
+
+### Setting up for pairing
+
+```sh
+# Add ssh keys for the others to authorized keys
+sudo dnf install -y tmux
 ```
 
 ## Features
