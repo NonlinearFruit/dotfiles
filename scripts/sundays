@@ -7,10 +7,8 @@ def main [
   $birthdate
   | into record
   | update year {$in + 18}
-  | $"($in.month)-($in.day)-($in.year)"
-  | into datetime
-  | datediff $in --weeks 
-  | into float
-  | math abs
-  | math floor
+  | $"($in.year)-($in.month)-($in.day)"
+  | seq date --end-date $in --output-format '%A'
+  | where $it == 'Sunday'
+  | length
 }
