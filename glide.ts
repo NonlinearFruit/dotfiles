@@ -1,3 +1,9 @@
+// # Notes
+// `:map` to show all bindings as a webpage
+// `:repl` to open an interactive browser dev console
+//     - Application Menu > More Tools > Browser Toolbox for full dev tools at the browser level
+//
+// # Resources
 // Config docs: https://glide-browser.app/config
 // API docs: https://glide-browser.app/api
 // Default config files: https://github.com/glide-browser/glide/tree/main/src/glide/browser/base/content/plugins
