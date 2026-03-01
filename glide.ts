@@ -151,7 +151,7 @@ glide.keymaps.set("normal", "yf", () => {
       }
     }
   })
-})
+}, { description: "[y]ank [f]ound links" })
 
 glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}), { description: "[/] Search text on page" });
 glide.keymaps.set("normal", "n", () => glide.findbar.next_match(), { description: "[n]ext match on page" });
