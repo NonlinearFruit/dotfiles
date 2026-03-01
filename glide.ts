@@ -10,6 +10,7 @@ glide.o.hint_size = "18px"
 // firefox.yml
 glide.prefs.set("browser.startup.page", 3); // Open previous windows and tabs
 glide.prefs.set("signon.rememberSignons", false);
+glide.prefs.set("extensions.formautofill.creditCards.enabled", false);
 glide.prefs.set("ui.systemUsesDarkTheme", 1);
 glide.prefs.set("browser.tabs.splitView.enabled", true);
 
