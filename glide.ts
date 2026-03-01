@@ -19,6 +19,8 @@ glide.prefs.set("signon.rememberSignons", false);
 glide.prefs.set("extensions.formautofill.creditCards.enabled", false);
 glide.prefs.set("ui.systemUsesDarkTheme", 1);
 glide.prefs.set("browser.tabs.splitView.enabled", true);
+// Disable "Alt" key from toggling top menu
+glide.prefs.set("ui.key.menuAccessKeyFocuses", false)
 
 // https://github.com/glide-browser/glide/discussions/63
 glide.keymaps.set("normal", "gT", "tab_prev");
