@@ -23,6 +23,24 @@ glide.prefs.set("browser.tabs.splitView.enabled", true);
 // https://github.com/glide-browser/glide/discussions/63
 glide.keymaps.set("normal", "gT", "tab_prev");
 glide.keymaps.set("normal", "gt", "tab_next");
+glide.keymaps.set("normal", "1gt", "tab 0");
+glide.keymaps.set("normal", "2gt", "tab 1");
+glide.keymaps.set("normal", "3gt", "tab 2");
+glide.keymaps.set("normal", "4gt", "tab 3");
+glide.keymaps.set("normal", "5gt", "tab 4");
+glide.keymaps.set("normal", "6gt", "tab 5");
+glide.keymaps.set("normal", "7gt", "tab 6");
+glide.keymaps.set("normal", "8gt", "tab 7");
+glide.keymaps.set("normal", "9gt", "tab 8");
+glide.keymaps.set("normal", "1gT", "tab -1"); // Technically gT should go {count} tabs backwards, but last, second to last, etc is more helpful
+glide.keymaps.set("normal", "2gT", "tab -2");
+glide.keymaps.set("normal", "3gT", "tab -3");
+glide.keymaps.set("normal", "4gT", "tab -4");
+glide.keymaps.set("normal", "5gT", "tab -5");
+glide.keymaps.set("normal", "6gT", "tab -6");
+glide.keymaps.set("normal", "7gT", "tab -7");
+glide.keymaps.set("normal", "8gT", "tab -8");
+glide.keymaps.set("normal", "9gT", "tab -9");
 glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>");
 glide.keymaps.set("normal", "-", "go_up");
 
