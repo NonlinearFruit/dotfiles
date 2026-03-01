@@ -122,9 +122,9 @@ glide.keymaps.set("normal", "yf", () => {
   })
 })
 
-glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}));
-glide.keymaps.set("normal", "n", () => glide.findbar.next_match());
-glide.keymaps.set("normal", "N", () => glide.findbar.previous_match());
+glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}), { description: "[/] Search text on page" });
+glide.keymaps.set("normal", "n", () => glide.findbar.next_match(), { description: "[n]ext match on page" });
+glide.keymaps.set("normal", "N", () => glide.findbar.previous_match(), { description: "[N] previous match on page" });
 glide.keymaps.set("normal", "<leader>/b", "commandline_show tab ", { description: "Search[/] open tabs ([b]uffers)" });
 
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
