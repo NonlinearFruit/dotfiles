@@ -51,6 +51,17 @@ let previousTabId: number | undefined;
 browser.tabs.onActivated.addListener((activeInfo) => {
   previousTabId = activeInfo.previousTabId;
 });
+
+// Always normal mode when switching tabs
+glide.autocmds.create("UrlEnter", {}, async ({ tab_id, url }) => {
+  // only trigger when changing tabs, not when navigating urls or opening a new tab
+  if (previousTabId !== tab_id && url !== "about:newtab") {
+    // HACK: sleep is needed when switching tabs quickly, otherwise `mode_change normal` may not take effect
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    await glide.excmds.execute("mode_change normal");
+  }
+});
+
 glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes current tab"}, () => {
   glide.excmds.execute("tab_close")
 })
