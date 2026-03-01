@@ -143,6 +143,8 @@ glide.autocmds.create("UrlEnter", { hostname: "projecteuler.net" }, ({ tab_id })
   }, { description: "[d]ownload Project Euler problem" })
 });
 
+glide.keymaps.del("normal", "<leader>f")
+glide.keymaps.set("normal", "gf", "hint --location=browser-ui", { description: "[g]lobal [f]ind for browser ui clickables" })
 glide.keymaps.set("normal", "yf", () => {
   glide.hints.show({
     action: async (target: any) => {
