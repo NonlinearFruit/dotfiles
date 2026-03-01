@@ -236,3 +236,18 @@ glide.search_engines.add({
   search_url: "https://search.brave.com/search?q={searchTerms}",
   is_default: true
 })
+
+glide.keymaps.set("normal", "<<", async ({ tab_id }) => {
+  const tab = await browser.tabs.get(tab_id);
+  if (tab.index > 0) {
+    await browser.tabs.move(tab_id, { index: tab.index - 1 });
+  }
+}, { description: "[<<] Move tab left" });
+
+glide.keymaps.set("normal", ">>", async ({ tab_id }) => {
+  const tab = await browser.tabs.get(tab_id);
+  await browser.tabs.move(tab_id, { index: tab.index + 1 });
+}, { description: "[>>] Move tab right" });
+
+glide.keymaps.set("normal", "u", "undo");
+glide.keymaps.set("normal", "<C-r>", "redo");
