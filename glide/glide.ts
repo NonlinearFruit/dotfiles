@@ -11,48 +11,12 @@
 // Creator's dotfiles: https://github.com/RobertCraigie/dotfiles/tree/main/glide
 // Firefox Javascript APIS (use browser.*): https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs
 
+glide.include("vanilla-vim.ts")
+glide.include("vanilla-firefox.ts")
+
 glide.o.hint_size = "18px"
 
-// firefox.yml
-glide.prefs.set("browser.startup.page", 3); // Open previous windows and tabs
-glide.prefs.set("signon.rememberSignons", false);
-glide.prefs.set("extensions.formautofill.creditCards.enabled", false);
-glide.prefs.set("ui.systemUsesDarkTheme", 1);
-glide.prefs.set("browser.tabs.splitView.enabled", true);
-// Disable "Alt" key from toggling top menu
-glide.prefs.set("ui.key.menuAccessKeyFocuses", false)
-
-// https://github.com/glide-browser/glide/discussions/63
-glide.keymaps.set("normal", "gT", "tab_prev");
-glide.keymaps.set("normal", "gt", "tab_next");
-glide.keymaps.set("normal", "1gt", "tab 0");
-glide.keymaps.set("normal", "2gt", "tab 1");
-glide.keymaps.set("normal", "3gt", "tab 2");
-glide.keymaps.set("normal", "4gt", "tab 3");
-glide.keymaps.set("normal", "5gt", "tab 4");
-glide.keymaps.set("normal", "6gt", "tab 5");
-glide.keymaps.set("normal", "7gt", "tab 6");
-glide.keymaps.set("normal", "8gt", "tab 7");
-glide.keymaps.set("normal", "9gt", "tab 8");
-glide.keymaps.set("normal", "1gT", "tab -1"); // Technically gT should go {count} tabs backwards, but last, second to last, etc is more helpful
-glide.keymaps.set("normal", "2gT", "tab -2");
-glide.keymaps.set("normal", "3gT", "tab -3");
-glide.keymaps.set("normal", "4gT", "tab -4");
-glide.keymaps.set("normal", "5gT", "tab -5");
-glide.keymaps.set("normal", "6gT", "tab -6");
-glide.keymaps.set("normal", "7gT", "tab -7");
-glide.keymaps.set("normal", "8gT", "tab -8");
-glide.keymaps.set("normal", "9gT", "tab -9");
-glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>");
 glide.keymaps.set("normal", "-", "go_up");
-
-// https://addons.mozilla.org
-glide.addons.install(
-  "https://addons.mozilla.org/firefox/downloads/file/4598854/ublock_origin-1.67.0.xpi",
-);
-glide.addons.install(
-  "https://addons.mozilla.org/firefox/downloads/file/4599707/bitwarden_password_manager-2025.10.0.xpi",
-);
 
 glide.autocmds.create("ModeChanged", "*", ({ new_mode }) => {
   const mode_colors: Record<keyof GlideModes, string> = {
@@ -67,33 +31,10 @@ glide.autocmds.create("ModeChanged", "*", ({ new_mode }) => {
   browser.theme.update({ colors: { frame: mode_colors[new_mode] } });
 });
 
-let previousTabId: number | undefined;
-browser.tabs.onActivated.addListener((activeInfo) => {
-  previousTabId = activeInfo.previousTabId;
-});
-
 // Always normal mode when switching tabs
-glide.autocmds.create("UrlEnter", {}, async ({ tab_id, url }) => {
-  // only trigger when changing tabs, not when navigating urls or opening a new tab
-  if (previousTabId !== tab_id && url !== "about:newtab") {
-    // HACK: sleep is needed when switching tabs quickly, otherwise `mode_change normal` may not take effect
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    await glide.excmds.execute("mode_change normal");
-  }
-});
-
-glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes current tab"}, () => {
-  glide.excmds.execute("tab_close")
-})
-
-glide.excmds.create({ name: "b#", description: "[b]uffer [#]alternate -> switches to previously active tab" }, async () => {
-  if (previousTabId) {
-    await browser.tabs.update(previousTabId, { active: true })
-  }
-});
-
-glide.excmds.create({ name: "noh", description: "[no] [h]ighlight -> clears find highlights" }, async () => {
-  await browser.find.removeHighlighting()
+browser.tabs.onActivated.addListener(async (activeInfo) => {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  await glide.excmds.execute("mode_change normal");
 });
 
 // https://github.com/glide-browser/glide/discussions/93#discussioncomment-14918102
@@ -155,9 +96,6 @@ glide.keymaps.set("normal", "yf", () => {
   })
 }, { description: "[y]ank [f]ound links" })
 
-glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}), { description: "[/] Search text on page" });
-glide.keymaps.set("normal", "n", () => glide.findbar.next_match(), { description: "[n]ext match on page" });
-glide.keymaps.set("normal", "N", () => glide.findbar.previous_match(), { description: "[N] previous match on page" });
 glide.keymaps.set("normal", "<leader>/b", "commandline_show tab ", { description: "Search[/] open tabs ([b]uffers)" });
 
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
@@ -229,18 +167,6 @@ glide.keymaps.set("normal", "yc", () =>
   { description: "[y]ank [c]ode -> Shows hints on all preformated text and places the selected codeblock in clipboard" }
 )
 
-glide.excmds.create({ name: "tabo", description: "[tab] [o]nly -> deletes all non-active non-pinned tabs"}, async () => {
-  const tabs_to_close = await browser.tabs.query({active: false, pinned: false})
-  browser.tabs.remove(tabs_to_close.map(t => t.id));
-})
-
-glide.search_engines.add({
-  name: "Brave",
-  keyword: "b",
-  search_url: "https://search.brave.com/search?q={searchTerms}",
-  is_default: true
-})
-
 glide.keymaps.set("normal", "<<", async ({ tab_id }) => {
   const tab = await browser.tabs.get(tab_id);
   if (tab.index > 0) {
@@ -252,9 +178,6 @@ glide.keymaps.set("normal", ">>", async ({ tab_id }) => {
   const tab = await browser.tabs.get(tab_id);
   await browser.tabs.move(tab_id, { index: tab.index + 1 });
 }, { description: "[>>] Move tab right" });
-
-glide.keymaps.set("normal", "u", "undo");
-glide.keymaps.set("normal", "<C-r>", "redo");
 
 glide.keymaps.set("normal", "gs", () => {
     glide.hints.show({
