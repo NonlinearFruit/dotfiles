@@ -40,12 +40,6 @@ glide.keymaps.set("normal", "gs", () => {
                     element.setAttribute("tabindex", "-1");
                 }
                 element.focus();
-
-                const originalOutline = element.style.outline;
-                element.style.outline = "2px solid red";
-                setTimeout(() => {
-                    element.style.outline = originalOutline;
-                }, 600);
             });
         }
     });
