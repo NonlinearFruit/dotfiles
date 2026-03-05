@@ -1,54 +1,64 @@
+// TODO: Reorder tabs by changing line order (including pinned tabes)
+//     - Pinned tabs should not be closeable
+// TODO: Update url of a tab
+// TODO: Open new tab for new lines that didn't exist before
+// TODO: Pin/unpin tabs
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
-	const tabs = await browser.tabs.query({ pinned: false });
+	const tabs = await get_list_of_current_tabs()
+  const tempfile = await save_tabs_to_temp_file(tabs)
+  await let_user_edit_file_and_wait_for_exit(tempfile)
+  const tabs_to_keep = await get_list_of_tab_ids_from_file(tempfile)
+  await close_unwanted_tabs(tabs, tabs_to_keep)
+});
 
+async function get_list_of_current_tabs() {
+  return await browser.tabs.query({ pinned: false })
+}
+
+async function save_tabs_to_temp_file(tabs) {
 	const tab_lines = tabs.map((tab) => {
 		const title = tab.title?.replace(/\n/g, " ") || "No Title";
 		const url = tab.url || "about:blank";
 		return `${tab.id}: ${title} (${url})`;
 	});
+	const tempfile = await mktemp("glide_tab_edit.XXXXXX")
+	await glide.fs.write(tempfile, tab_lines.join("\n"));
+  return tempfile
+}
 
-	const mktempcmd = await glide.process.execute("mktemp", ["-t", "glide_tab_edit.XXXXXX"]);
-
-	let stdout = "";
-	for await (const chunk of mktempcmd.stdout) {
-		stdout += chunk;
-	}
-	const temp_filepath = stdout.trim();
-
-	tab_lines.unshift("// Delete the corresponding lines to close the tabs");
-	tab_lines.unshift("// vim: ft=qute-tab-edit");
-	tab_lines.unshift("");
-	await glide.fs.write(temp_filepath, tab_lines.join("\n"));
-
-	console.log("Temp file created at:", temp_filepath);
-
-	const editcmd = await glide.process.execute("gnome-text-editor", [
+async function let_user_edit_file_and_wait_for_exit(tempfile) {
+	const edit_cmd = await glide.process.execute("gnome-text-editor", [
 	   "--standalone",
-	   temp_filepath,
+	   tempfile,
 	 ]);
-
-	const cp = await editcmd.wait();
-	if (cp.exit_code !== 0) {
-		throw new Error(`Editor command failed with exit code ${cp.exit_code}`);
+	const edit_result = await edit_cmd.wait();
+	if (edit_result.exit_code !== 0) {
+		throw new Error(`Editor command failed with exit code ${edit_result.exit_code}`);
 	}
-	console.log("Edit complete");
+}
 
-	// read the edited file
-	const edited_content = await glide.fs.read(temp_filepath, "utf8");
-	const edited_lines = edited_content
+async function get_list_of_tab_ids_from_file(tempfile) {
+	const edited_content = await glide.fs.read(tempfile, "utf8")
+	const tabs_to_keep = edited_content
 		.split("\n")
 		.filter((line) => line.trim().length > 0)
-		.filter((line) => !line.startsWith("//"));
+		.filter((line) => !line.startsWith("//"))
+    .map((line) => {
+      const tab_id = line.split(":")[0]
+      return Number(tab_id)
+    })
+  return tabs_to_keep
+}
 
-	const tabs_to_keep = edited_lines.map((line) => {
-		const tab_id = line.split(":")[0];
-		return Number(tab_id);
-	});
-
-	const tab_ids_to_close = tabs
+async function close_unwanted_tabs(current_tabs, tabs_to_keep) {
+	const tab_ids_to_close = current_tabs
 		.filter((tab) => tab.id && !tabs_to_keep.includes(tab.id))
 		.map((tab) => tab.id)
 		.filter((id): id is number => id !== undefined);
 	await browser.tabs.remove(tab_ids_to_close);
-});
+}
 
+async function mktemp(template) {
+	const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template]);
+	return (await mktemp_cmd.stdout.text()).trim();
+}
