@@ -11,9 +11,11 @@
 // Creator's dotfiles: https://github.com/RobertCraigie/dotfiles/tree/main/glide
 // Firefox Javascript APIS (use browser.*): https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs
 
-glide.include("vanilla-vim.ts")
+glide.include("gnarly-scrollable-picker.ts")
+glide.include("gnarly-tab-edit.ts")
 glide.include("vanilla-firefox.ts")
 glide.include("vanilla-glide.ts")
+glide.include("vanilla-vim.ts")
 
 glide.keymaps.set("normal", "-", "go_up");
 
@@ -73,60 +75,6 @@ glide.keymaps.set("normal", "yf", () => {
 
 glide.keymaps.set("normal", "<leader>/b", "commandline_show tab ", { description: "Search[/] open tabs ([b]uffers)" });
 
-glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
-	const tabs = await browser.tabs.query({ pinned: false });
-
-	const tab_lines = tabs.map((tab) => {
-		const title = tab.title?.replace(/\n/g, " ") || "No Title";
-		const url = tab.url || "about:blank";
-		return `${tab.id}: ${title} (${url})`;
-	});
-
-	const mktempcmd = await glide.process.execute("mktemp", ["-t", "glide_tab_edit.XXXXXX"]);
-
-	let stdout = "";
-	for await (const chunk of mktempcmd.stdout) {
-		stdout += chunk;
-	}
-	const temp_filepath = stdout.trim();
-
-	tab_lines.unshift("// Delete the corresponding lines to close the tabs");
-	tab_lines.unshift("// vim: ft=qute-tab-edit");
-	tab_lines.unshift("");
-	await glide.fs.write(temp_filepath, tab_lines.join("\n"));
-
-	console.log("Temp file created at:", temp_filepath);
-
-	const editcmd = await glide.process.execute("gnome-text-editor", [
-	   "--standalone",
-	   temp_filepath,
-	 ]);
-
-	const cp = await editcmd.wait();
-	if (cp.exit_code !== 0) {
-		throw new Error(`Editor command failed with exit code ${cp.exit_code}`);
-	}
-	console.log("Edit complete");
-
-	// read the edited file
-	const edited_content = await glide.fs.read(temp_filepath, "utf8");
-	const edited_lines = edited_content
-		.split("\n")
-		.filter((line) => line.trim().length > 0)
-		.filter((line) => !line.startsWith("//"));
-
-	const tabs_to_keep = edited_lines.map((line) => {
-		const tab_id = line.split(":")[0];
-		return Number(tab_id);
-	});
-
-	const tab_ids_to_close = tabs
-		.filter((tab) => tab.id && !tabs_to_keep.includes(tab.id))
-		.map((tab) => tab.id)
-		.filter((id): id is number => id !== undefined);
-	await browser.tabs.remove(tab_ids_to_close);
-});
-
 glide.keymaps.set("normal", "yc", () =>
   glide.hints.show({
     selector: "pre,code",
@@ -153,56 +101,3 @@ glide.keymaps.set("normal", ">>", async ({ tab_id }) => {
   const tab = await browser.tabs.get(tab_id);
   await browser.tabs.move(tab_id, { index: tab.index + 1 });
 }, { description: "[>>] Move tab right" });
-
-glide.keymaps.set("normal", "gs", () => {
-    glide.hints.show({
-        selector: "div, section, article, aside, nav, ul, ol, pre, code, main, textarea, [class*='scroll']",
-
-        pick: async ({ content, hints }) => {
-            const results = await content.map((element: HTMLElement) => {
-                const style = window.getComputedStyle(element);
-
-                const overflowY = style.overflowY;
-                const overflowX = style.overflowX;
-                const isScrollableStyle =
-                    (overflowY === 'auto' || overflowY === 'scroll') ||
-                    (overflowX === 'auto' || overflowX === 'scroll');
-
-                const canScroll =
-                    element.scrollHeight > element.clientHeight ||
-                    element.scrollWidth > element.clientWidth;
-
-                const hasScrollClass = element.className.includes("scroll");
-                const isNotRoot = element !== document.body && element !== document.documentElement;
-
-                return (isScrollableStyle || hasScrollClass) && canScroll && isNotRoot;
-            });
-
-            const filteredHints = hints.filter((_, i) => results[i]);
-
-            if (filteredHints.length === 0) {
-                glide.excmds.execute("hints_remove");
-                glide.excmds.execute("mode_change normal");
-            }
-
-            return filteredHints;
-        },
-
-        action: async ({ content }) => {
-            await content.execute((element: HTMLElement) => {
-                element.scrollIntoView({ block: "center", behavior: "smooth" });
-
-                if (!element.hasAttribute("tabindex")) {
-                    element.setAttribute("tabindex", "-1");
-                }
-                element.focus();
-
-                const originalOutline = element.style.outline;
-                element.style.outline = "2px solid red";
-                setTimeout(() => {
-                    element.style.outline = originalOutline;
-                }, 600);
-            });
-        }
-    });
-}, { description: "Focus scrollable elements" });
