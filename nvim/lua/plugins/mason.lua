@@ -13,6 +13,10 @@ local function configure()
     ui = {
       border = "rounded",
     },
+    registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry", -- For roslyn
+    },
   })
 
   mason_lsp_config.setup({

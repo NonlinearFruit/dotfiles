@@ -40,43 +40,12 @@ end
 
 local function install_lsp_and_dap_if_needed()
   require("installer").install_if_missing({
-    "omnisharp", -- LSP
+    -- "roslyn", -- LSP Needs to be manually installed from the Mason gui?
     "netcoredbg", -- DAP
   })
 end
 
 local function configure_lsp()
-  local lsp = require("plugins.language-server")
-
-  vim.lsp.config("omnisharp", {
-    cmd = {
-      vim.fn.executable("OmniSharp") == 1 and "OmniSharp" or "omnisharp",
-      "-z", -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
-      "--hostPID",
-      tostring(vim.fn.getpid()),
-      "DotNet:enablePackageRestore=false",
-      "--encoding",
-      "utf-8",
-      "--languageserver",
-    },
-    on_attach = function(client, bufnr)
-      -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
-      local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
-      for i, v in ipairs(tokenModifiers) do
-        local tmp = string.gsub(v, " ", "_")
-        tokenModifiers[i] = string.gsub(tmp, "-_", "")
-      end
-      local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
-      for i, v in ipairs(tokenTypes) do
-        local tmp = string.gsub(v, " ", "_")
-        tokenTypes[i] = string.gsub(tmp, "-_", "")
-      end
-      lsp.on_attach(client, bufnr)
-    end,
-    handlers = {
-      ["textDocument/definition"] = require("omnisharp_extended").handler,
-    },
-  })
   vim.lsp.enable("omnisharp")
 end
 
@@ -131,6 +100,6 @@ return {
   ft = "cs",
   virtual = true,
   dependencies = {
-    "hoffs/omnisharp-extended-lsp.nvim", -- improve c# lsp
+    "seblyng/roslyn.nvim", -- c# lsp
   },
 }
