@@ -41,6 +41,8 @@ glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes cur
   glide.excmds.execute("tab_close")
 })
 
+glide.keymaps.set("normal", "<C-w>q", "tab_close", { description: "[w]indow [c]lose => closes the current tab" })
+
 glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>");
 
 glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}), { description: "[/] Search text on page" });
