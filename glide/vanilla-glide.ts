@@ -27,3 +27,9 @@ glide.keymaps.set(["normal", "insert"], "<C-,>", "blur", { description: "Go to n
 // Same functionality, better binding
 glide.keymaps.del("normal", "<leader>f")
 glide.keymaps.set("normal", "gf", "hint --location=browser-ui", { description: "[g]lobal [f]ind for browser ui clickables" })
+
+// Unwanted bindings 
+glide.keymaps.del("normal", "<leader>r")
+glide.keymaps.del("normal", "<leader>R")
+glide.keymaps.del("normal", "<leader><leader>")
+glide.keymaps.del("normal", "<leader>d")
