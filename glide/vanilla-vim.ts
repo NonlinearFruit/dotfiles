@@ -52,3 +52,32 @@ glide.excmds.create({ name: "noh", description: "[no] [h]ighlight -> clears find
 
 glide.keymaps.set("normal", "u", "undo");
 glide.keymaps.set("normal", "<C-r>", "redo");
+
+// Split windows
+glide.excmds.create({
+    name: 'vs',
+    description: '[v]ertical [s]plit => Pick another tab to split view with',
+}, async () => {
+    const activeTab = await glide.tabs.active()
+    if (activeTab.pinned) return // Can't split pinned tabs at present
+    const tabs = await glide.tabs.query({ active: false, pinned: false })
+    glide.commandline.show({
+        title: "Show other",
+        options: tabs.map(t => ({
+            label: t.title,
+            async execute() {
+                glide.unstable.split_views.create([activeTab.id, t.id])
+            }
+        })),
+    })
+})
+glide.keymaps.set('normal', '<C-w>v', 'vs', { description: '[w]indow [v]ertical split => Pick another tab to split view with' })
+glide.keymaps.set('normal', '<C-w>c', ({ tab_id }) => {
+    glide.unstable.split_views.separate(tab_id)
+}, { description: '[w]indow [c]lose current split (without closing any tabs)' })
+glide.keymaps.set('normal', '<C-w><C-w>', async ({ tab_id }) => {
+    const split_tabs = await glide.unstable.split_views.get(tab_id)
+    if (!split_tabs) return
+    const other_tab = split_tabs.tabs.filter(t => t.id !== tab_id)[0]
+    await browser.tabs.update(other_tab.id, { active: true })
+}, { description: 'oh [w]indow my [w]indow => switch which window in split is focused' })
