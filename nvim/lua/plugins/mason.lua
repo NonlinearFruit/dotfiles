@@ -14,8 +14,8 @@ local function configure()
       border = "rounded",
     },
     registries = {
-        "github:mason-org/mason-registry",
-        "github:Crashdummyy/mason-registry", -- For roslyn
+      "github:mason-org/mason-registry",
+      "github:Crashdummyy/mason-registry", -- For roslyn
     },
   })
 
