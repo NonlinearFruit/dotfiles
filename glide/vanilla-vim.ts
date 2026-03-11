@@ -64,7 +64,7 @@ glide.keymaps.set('normal', '<C-w>c', ({ tab_id }) => {
     glide.unstable.split_views.separate(tab_id)
 }, { description: '[w]indow [c]lose current split (without closing any tabs)' })
 glide.keymaps.set('normal', '<C-w><C-w>', async ({ tab_id }) => {
-    const split_tabs = await glide.unstable.split_views.get(tab_id)
+    const split_tabs = glide.unstable.split_views.get(tab_id)
     if (!split_tabs) return
     const other_tab = split_tabs.tabs.filter(t => t.id !== tab_id)[0]
     await browser.tabs.update(other_tab.id, { active: true })
