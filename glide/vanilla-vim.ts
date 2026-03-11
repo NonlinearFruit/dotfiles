@@ -1,26 +1,12 @@
 // Configuration that mimics Vanilla Vim
 
 // https://github.com/glide-browser/glide/discussions/63
-glide.keymaps.set("normal", "gT", "tab_prev");
-glide.keymaps.set("normal", "gt", "tab_next");
-glide.keymaps.set("normal", "1gt", "tab 0");
-glide.keymaps.set("normal", "2gt", "tab 1");
-glide.keymaps.set("normal", "3gt", "tab 2");
-glide.keymaps.set("normal", "4gt", "tab 3");
-glide.keymaps.set("normal", "5gt", "tab 4");
-glide.keymaps.set("normal", "6gt", "tab 5");
-glide.keymaps.set("normal", "7gt", "tab 6");
-glide.keymaps.set("normal", "8gt", "tab 7");
-glide.keymaps.set("normal", "9gt", "tab 8");
-glide.keymaps.set("normal", "1gT", "tab -1"); // Technically gT should go {count} tabs backwards, but last, second to last, etc is more helpful
-glide.keymaps.set("normal", "2gT", "tab -2");
-glide.keymaps.set("normal", "3gT", "tab -3");
-glide.keymaps.set("normal", "4gT", "tab -4");
-glide.keymaps.set("normal", "5gT", "tab -5");
-glide.keymaps.set("normal", "6gT", "tab -6");
-glide.keymaps.set("normal", "7gT", "tab -7");
-glide.keymaps.set("normal", "8gT", "tab -8");
-glide.keymaps.set("normal", "9gT", "tab -9");
+glide.keymaps.set("normal", "gT", "tab_prev", { description: "[g]o to previous [T]ab" });
+glide.keymaps.set("normal", "gt", "tab_next", { description: "[g]o to next [t]ab" });
+for (let i = 1; i < 10; i++) {
+	glide.keymaps.set("normal", `${i}gt`, `tab ${i - 1}`, { description: `[g]o to [t]ab ${i}` })
+	glide.keymaps.set("normal", `${i}gT`, `tab ${i * -1}`, { description: `[g]o to [T]ab ${i} from the end` }) // Technically gT should go {count} tabs backwards, but last, second to last, etc is more helpful
+};
 glide.excmds.create({ name: "tabo", description: "[tab] [o]nly -> deletes all non-active non-pinned tabs"}, async () => {
   const tabs_to_close = await browser.tabs.query({active: false, pinned: false})
   browser.tabs.remove(tabs_to_close.map(t => t.id));
