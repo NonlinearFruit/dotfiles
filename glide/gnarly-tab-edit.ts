@@ -70,6 +70,6 @@ async function open_new_tabs(updated_tabs) {
 }
 
 async function mktemp(template) {
-  const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", "json"]);
+  const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".json"]);
   return (await mktemp_cmd.stdout.text()).trim();
 }
