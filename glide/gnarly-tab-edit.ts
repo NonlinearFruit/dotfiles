@@ -7,20 +7,28 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
 	const tabs = await get_list_of_current_tabs()
   const tempfile = await save_tabs_to_temp_file(tabs)
   await let_user_edit_file_and_wait_for_exit(tempfile)
-  const tabs_to_keep = await get_list_of_tab_ids_from_file(tempfile)
+  const updated_tabs = await get_list_of_tab_ids_from_file(tempfile)
+  const tabs_to_keep = updated_tabs.map(t => t.id)
   await close_unwanted_tabs(tabs, tabs_to_keep)
 });
 
 async function get_list_of_current_tabs() {
-  return await browser.tabs.query({ pinned: false })
+  return await browser.tabs.query({})
 }
 
 async function save_tabs_to_temp_file(tabs) {
-	const tab_lines = tabs.map((tab) => {
-		const title = tab.title?.replace(/\n/g, " ") || "No Title";
-		const url = tab.url || "about:blank";
-		return `${tab.id}: ${title} (${url})`;
-	});
+	const tab_lines = tabs
+    .toSorted((a, b) => a.index - b.index)
+    .map((tab) => {
+      return JSON.stringify({
+        title: tab.title?.replace(/\n/g, " ") || "No Title",
+        url: tab.url || "about:blank",
+        id: tab.id,
+        index: tab.index,
+        active: tab.active,
+        pinned: tab.pinned,
+      })
+    });
 	const tempfile = await mktemp("glide_tab_edit.XXXXXX")
 	await glide.fs.write(tempfile, tab_lines.join("\n"));
   return tempfile
@@ -43,10 +51,7 @@ async function get_list_of_tab_ids_from_file(tempfile) {
 		.split("\n")
 		.filter((line) => line.trim().length > 0)
 		.filter((line) => !line.startsWith("//"))
-    .map((line) => {
-      const tab_id = line.split(":")[0]
-      return Number(tab_id)
-    })
+    .map((line) => JSON.parse(line))
   return tabs_to_keep
 }
 
@@ -59,6 +64,6 @@ async function close_unwanted_tabs(current_tabs, tabs_to_keep) {
 }
 
 async function mktemp(template) {
-	const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template]);
+	const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", "json"]);
 	return (await mktemp_cmd.stdout.text()).trim();
 }
