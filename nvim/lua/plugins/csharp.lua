@@ -45,10 +45,6 @@ local function install_lsp_and_dap_if_needed()
   })
 end
 
-local function configure_lsp()
-  vim.lsp.enable("omnisharp")
-end
-
 local function configure_dap()
   local dap_ok, dap = pcall(require, "dap")
   if not dap_ok then
@@ -90,7 +86,6 @@ local function configure()
   go_to_test_file_key_mapping()
   runner_key_mappings()
   install_lsp_and_dap_if_needed()
-  configure_lsp()
   configure_dap()
 end
 
