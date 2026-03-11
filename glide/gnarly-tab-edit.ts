@@ -1,7 +1,6 @@
 // TODO: Reorder tabs by changing line order (including pinned tabes)
 //     - Pinned tabs should not be closeable
 // TODO: Update url of a tab
-// TODO: Open new tab for new lines that didn't exist before
 // TODO: Pin/unpin tabs
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
   const tabs = await get_list_of_current_tabs()
@@ -10,6 +9,7 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
   const updated_tabs = await get_list_of_tab_ids_from_file(tempfile)
   const tabs_to_keep = updated_tabs.map(t => t.id)
   await close_unwanted_tabs(tabs, tabs_to_keep)
+  await open_new_tabs(updated_tabs)
 });
 
 async function get_list_of_current_tabs() {
@@ -61,6 +61,12 @@ async function close_unwanted_tabs(current_tabs, tabs_to_keep) {
     .map((tab) => tab.id)
     .filter((id): id is number => id !== undefined);
   await browser.tabs.remove(tab_ids_to_close);
+}
+
+async function open_new_tabs(updated_tabs) {
+  updated_tabs
+    .filter(t => !t.id)
+    .forEach(async t => await browser.tabs.create({url: t.url}))
 }
 
 async function mktemp(template) {
