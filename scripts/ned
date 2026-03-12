@@ -9,15 +9,13 @@ def --wrapped main [
   --in-place (-i)         # Modify file in place
 ] {
   if $file == "" {
-    ^nvim --clean ($rest | str join ' ') -E '+%print' '+q!' -
+    ^nvim ($rest | str join ' ') '+%print' - -l /dev/null
   } else if $in_place {
-    ^nvim --clean --headless ($rest | str join ' ') -E '+wq' $file
+    ^nvim ($rest | str join ' ') '+x' $file -l /dev/null
+    | complete
+    | ignore
   } else {
-    let temp = mktemp --suffix .txt
-    ^nvim --clean --headless ($rest | str join ' ') -E $'+w! ($temp)' '+q!' $file | complete
-    let output = open $temp | str trim
-    rm $temp
-    $output
+    ^nvim ($rest | str join ' ') '+%print' $file -l /dev/null
   }
 }
 
