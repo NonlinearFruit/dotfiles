@@ -1,8 +1,10 @@
 #!/usr/bin/env -S nu --stdin
 
-# Neovim sED
-# sed: echo hi | sed s/hi/hello/
-# ned: echo hi | ned +s/hi/hello
+# ned: [n]vim s[ed]
+# A sed-ish way to use nvim
+@example "Edit stream" {echo "hello world" | ned "s/hello/hi"} --result "hi world"
+@example "Edit file and output result without modifying it" {echo "hello world" > test.txt; ned "s/hello/hi" -f test.txt} --result "hi world"
+@example "Edit file inplace with no output" {echo "hello world" > test.txt; ned -i "s/hello/hi" -f test.txt; cat test.txt} --result "hi world"
 def --wrapped main [
   ...ex_cmds               # Params for nvim
   --file (-f):string = "-" # Read from file instead of stdin
