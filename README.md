@@ -97,7 +97,7 @@ Helpful automation for various tasks
 | matthew-henry-gate | [demo](.tapes/matthew-henry-gate.gif) |
 | mob |  |
 | mp3 |  |
-| ned |  |
+| ned | [demo](.tapes/ned.gif) |
 | number-gossip |  |
 | nvim-list-servers |  |
 | nvim-plugins |  |
