@@ -67,7 +67,6 @@ The actual dotfiles for various tools
 | tmux |
 | tools |
 | vimrc |
-| vivaldi |
 | wezterm |
 | wsl |
 </details>

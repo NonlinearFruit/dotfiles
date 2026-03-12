@@ -199,10 +199,6 @@
   description: Configurable terminal emulator
   manager: flatpak
 
-- cmd: com.vivaldi.Vivaldi
-  description: Power user browser
-  manager: flatpak
-
 - cmd: com.valvesoftware.Steam
   description: Video game manager
   manager: flatpak
