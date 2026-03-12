@@ -9,13 +9,13 @@ def --wrapped main [
   --in-place (-i)         # Modify file in place
 ] {
   if $file == "" {
-    ^nvim ($rest | str join ' ') '+%print' - -l /dev/null
+    ^nvim ...$rest '+%print' - -l /dev/null
   } else if $in_place {
-    ^nvim ($rest | str join ' ') '+x' $file -l /dev/null
+    ^nvim ...$rest '+x' $file -l /dev/null
     | complete
     | ignore
   } else {
-    ^nvim ($rest | str join ' ') '+%print' $file -l /dev/null
+    ^nvim ...$rest '+%print' $file -l /dev/null
   }
 }
 
