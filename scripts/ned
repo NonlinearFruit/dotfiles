@@ -4,16 +4,16 @@
 # sed: echo hi | sed s/hi/hello/
 # ned: echo hi | ned +s/hi/hello
 def --wrapped main [
-  ...rest                 # Params for nvim
+  ...ex_cmds               # Params for nvim
   --file (-f):string = "-" # Read from file instead of stdin
-  --in-place (-i)         # Modify file in place
+  --in-place (-i)          # Modify file in place
 ] {
   if $in_place {
-    ^nvim ...$rest '+x' $file -l /dev/null
+    ^nvim ...$ex_cmds '+x' $file -l /dev/null
     | complete
     | ignore
   } else {
-    ^nvim ...$rest '+%print' $file -l /dev/null
+    ^nvim ...$ex_cmds '+%print' $file -l /dev/null
   }
 }
 
