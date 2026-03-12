@@ -59,7 +59,6 @@ The actual dotfiles for various tools
 | --- |
 | bash-aliases |
 | bashrc |
-| firefox |
 | gitconfig |
 | glide |
 | nvim |
