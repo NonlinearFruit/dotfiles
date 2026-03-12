@@ -9,11 +9,17 @@ def --wrapped main [
   --in-place (-i)          # Modify file in place
 ] {
   if $in_place {
-    ^nvim ...$ex_cmds '+x' $file -l /dev/null
+    ^nvim ...(format $ex_cmds) '+x' $file -l /dev/null
     | complete
     | ignore
   } else {
-    ^nvim ...$ex_cmds '+%print' $file -l /dev/null
+    ^nvim ...(format $ex_cmds) '+%print' $file -l /dev/null
   }
 }
 
+# Prefixing with a plus indicates that nvim should execute it as a cmd after
+# config and first file.
+def format [ex_cmds] {
+  $ex_cmds
+  | each { '+' + $in }
+}
