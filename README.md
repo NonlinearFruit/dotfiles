@@ -93,7 +93,7 @@ Helpful automation for various tasks
 | last-cron |  |
 | llm |  |
 | look-alike |  |
-| lsb |  |
+| lsb | [demo](.tapes/lsb.gif) |
 | matthew-henry-gate | [demo](.tapes/matthew-henry-gate.gif) |
 | mob |  |
 | mp3 |  |
