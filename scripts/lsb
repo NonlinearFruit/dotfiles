@@ -41,7 +41,7 @@ def format-passage [] {
   | get passages
   | get passageHtml
   | first
-  | query web --query 'span .prose'
+  | query web --query '.prose, .block-quote, .poetry'
   | flatten
   | where $it != '*'
   | str join
