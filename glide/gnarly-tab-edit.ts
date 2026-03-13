@@ -8,6 +8,7 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
   await close_unwanted_tabs(tabs, updated_tabs)
   await update_tab_url(tabs, updated_tabs)
   await update_tab_pinned_ness(tabs, updated_tabs)
+  await update_focused_tab(tabs, updated_tabs)
   await open_new_tabs(updated_tabs)
 });
 
@@ -75,6 +76,14 @@ async function update_tab_pinned_ness(current_tabs, updated_tabs) {
     .filter(t => t.id)
     .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].pinned != ut.pinned)
     .forEach(async t => await browser.tabs.update(t.id, {pinned: t.pinned}))
+}
+
+async function update_focused_tab(current_tabs, updated_tabs) {
+  updated_tabs
+    .filter(t => t.id)
+    .filter(t => t.active)
+    .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].active != ut.active)
+    .forEach(async t => await browser.tabs.update(t.id, {active: t.active}))
 }
 
 async function open_new_tabs(updated_tabs) {
