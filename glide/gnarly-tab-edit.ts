@@ -88,7 +88,12 @@ async function open_new_tabs_and_adjust_order(updated_tabs) {
   updated_tabs
     .forEach(async (t, i) => {
       if (t.id === undefined) {
-        await browser.tabs.create({url: t.url, index: i})
+        await browser.tabs.create({
+          url: t.url,
+          index: i,
+          active: t.active,
+          pinned: t.pinned
+        })
       } else {
         await browser.tabs.move(t.id, {index: i})
       }
