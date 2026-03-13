@@ -1,3 +1,11 @@
+// Gnarly Tab Edit: edit tabs in a text editor
+// Features:
+// - Opens current tabs in the configured text editor
+// - Deleting a line => Deletes the tab
+// - Reordering lines => Reorders tabs
+// - Adding a line (with "url": "...") => Creates new tab
+// - Setting active true => Focuses the tab
+// - Setting pinned to true/false => pins/unpins the tab
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
   const tabs = await get_list_of_current_tabs()
   const tempfile = await save_tabs_to_temp_file(tabs)
