@@ -1,6 +1,5 @@
 // TODO: Reorder tabs by changing line order (including pinned tabes)
 //     - Pinned tabs should not be closeable
-// TODO: Pin/unpin tabs
 glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor" }, async () => {
   const tabs = await get_list_of_current_tabs()
   const tempfile = await save_tabs_to_temp_file(tabs)
@@ -9,6 +8,7 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
   const tabs_to_keep = updated_tabs.map(t => t.id)
   await close_unwanted_tabs(tabs, tabs_to_keep)
   await update_tab_url(tabs, updated_tabs)
+  await update_tab_pinned_ness(tabs, updated_tabs)
   await open_new_tabs(updated_tabs)
 });
 
@@ -68,6 +68,13 @@ async function update_tab_url(current_tabs, updated_tabs) {
     .filter(t => t.id)
     .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].url != ut.url)
     .forEach(async t => await browser.tabs.update(t.id, {url: t.url}))
+}
+
+async function update_tab_pinned_ness(current_tabs, updated_tabs) {
+  updated_tabs
+    .filter(t => t.id)
+    .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].pinned != ut.pinned)
+    .forEach(async t => await browser.tabs.update(t.id, {pinned: t.pinned}))
 }
 
 async function open_new_tabs(updated_tabs) {
