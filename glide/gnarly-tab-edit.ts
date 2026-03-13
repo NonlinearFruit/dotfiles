@@ -88,8 +88,11 @@ async function update_focused_tab(current_tabs, updated_tabs) {
 
 async function open_new_tabs(updated_tabs) {
   updated_tabs
-    .filter(t => !t.id)
-    .forEach(async t => await browser.tabs.create({url: t.url}))
+    .forEach(async (t, i) => {
+      if (t.id === undefined) {
+        await browser.tabs.create({url: t.url, index: i})
+      }
+    })
 }
 
 async function mktemp(template) {
