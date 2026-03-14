@@ -25,15 +25,7 @@ async function get_list_of_current_tabs() {
 async function save_tabs_to_temp_file(tabs) {
   const tab_lines = tabs
     .toSorted((a, b) => a.index - b.index)
-    .map((tab) => {
-      return JSON.stringify({
-        title: tab.title?.replace(/\n/g, " ").substring(0,40).padEnd(40, " "),
-        id: tab.id,
-        active: tab.active,
-        pinned: tab.pinned,
-        url: tab.url,
-      })
-    });
+    .map(stringify);
   const tempfile = await mktemp("glide_tab_edit.XXXXXX")
   await glide.fs.write(tempfile, tab_lines.join("\n"));
   return tempfile
@@ -118,4 +110,13 @@ function hasId(tab) {
 
 function find(list, id) {
   return list.find(i => i.id === id)
+}
+
+function stringify(tab) {
+  const id = JSON.stringify(tab.id).padStart(4, " ")
+  const title = JSON.stringify(tab.title?.replace(/\n/g, " ").substring(0,40)).padEnd(42, " ")
+  const active = JSON.stringify(tab.active).padStart(5, " ")
+  const pinned = JSON.stringify(tab.pinned).padStart(5, " ")
+  const url = JSON.stringify(tab.url)
+  return `{"id":${id},"title":${title},"active":${active},"pinned":${pinned},"url":${url}}`
 }
