@@ -27,12 +27,11 @@ async function save_tabs_to_temp_file(tabs) {
     .toSorted((a, b) => a.index - b.index)
     .map((tab) => {
       return JSON.stringify({
-        title: tab.title?.replace(/\n/g, " ") || "No Title",
-        url: tab.url || "about:blank",
+        title: tab.title?.replace(/\n/g, " ").substring(0,40).padEnd(40, " "),
         id: tab.id,
-        index: tab.index,
         active: tab.active,
         pinned: tab.pinned,
+        url: tab.url,
       })
     });
   const tempfile = await mktemp("glide_tab_edit.XXXXXX")
