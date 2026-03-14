@@ -63,31 +63,31 @@ async function get_list_of_tab_ids_from_file(tempfile) {
 async function close_unwanted_tabs(current_tabs, updated_tabs) {
   const tabs_to_keep = updated_tabs.map(t => t.id)
   const tab_ids_to_close = current_tabs
-    .filter((tab) => tab.id && !tabs_to_keep.includes(tab.id))
-    .map((tab) => tab.id)
-    .filter((id): id is number => id !== undefined);
-  await browser.tabs.remove(tab_ids_to_close);
+    .filter(hasId)
+    .filter(t => !tabs_to_keep.includes(t.id))
+    .map(t => t.id)
+  await browser.tabs.remove(tab_ids_to_close)
 }
 
 async function update_tab_url(current_tabs, updated_tabs) {
   updated_tabs
-    .filter(t => t.id)
-    .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].url != ut.url)
+    .filter(hasId)
+    .filter(ut => find(current_tabs, ut.id).url != ut.url)
     .forEach(async t => await browser.tabs.update(t.id, {url: t.url}))
 }
 
 async function update_tab_pinned_ness(current_tabs, updated_tabs) {
   updated_tabs
-    .filter(t => t.id)
-    .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].pinned != ut.pinned)
+    .filter(hasId)
+    .filter(ut => find(current_tabs, ut.id).pinned != ut.pinned)
     .forEach(async t => await browser.tabs.update(t.id, {pinned: t.pinned}))
 }
 
 async function update_focused_tab(current_tabs, updated_tabs) {
   updated_tabs
-    .filter(t => t.id)
+    .filter(hasId)
     .filter(t => t.active)
-    .filter(ut => current_tabs.filter(ct => ct.id === ut.id)[0].active != ut.active)
+    .filter(ut => find(current_tabs, ut.id).active != ut.active)
     .forEach(async t => await browser.tabs.update(t.id, {active: t.active}))
 }
 
@@ -110,4 +110,12 @@ async function open_new_tabs_and_adjust_order(updated_tabs) {
 async function mktemp(template) {
   const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".json"]);
   return (await mktemp_cmd.stdout.text()).trim();
+}
+
+function hasId(tab) {
+  return tab?.id !== undefined
+}
+
+function find(list, id) {
+  return list.find(i => i.id === id)
 }
