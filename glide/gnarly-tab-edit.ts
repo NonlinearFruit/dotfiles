@@ -10,7 +10,7 @@ glide.excmds.create({ name: "tab_edit", description: "Edit tabs in a text editor
   const tabs = await get_list_of_current_tabs()
   const tempfile = await save_tabs_to_temp_file(tabs)
   await let_user_edit_file_and_wait_for_exit(tempfile)
-  const updated_tabs = await get_list_of_tab_ids_from_file(tempfile)
+  const updated_tabs = await get_list_of_tabs_from_file(tempfile)
   await close_unwanted_tabs(tabs, updated_tabs)
   await update_tab_url(tabs, updated_tabs)
   await update_tab_pinned_ness(tabs, updated_tabs)
@@ -50,7 +50,7 @@ async function let_user_edit_file_and_wait_for_exit(tempfile) {
   }
 }
 
-async function get_list_of_tab_ids_from_file(tempfile) {
+async function get_list_of_tabs_from_file(tempfile) {
   const edited_content = await glide.fs.read(tempfile, "utf8")
   const tabs_to_keep = edited_content
     .split("\n")
