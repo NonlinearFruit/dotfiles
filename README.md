@@ -77,6 +77,7 @@ Helpful automation for various tasks
 
 | Script | Demo |
 | --- | --- |
+| -- | [demo](.tapes/--.gif) |
 | backup-repo |  |
 | chat |  |
 | clean-history |  |

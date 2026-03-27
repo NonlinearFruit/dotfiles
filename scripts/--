@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Easily comment out individual components from a pipe
+# Think of the lua commenting syntax
+
+cat
