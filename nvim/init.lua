@@ -59,6 +59,14 @@ local function setPlugins()
   })
 end
 
+local function enableCodeFolding()
+  -- Use treesitter by default
+  vim.o.foldmethod = "expr"
+  vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  -- Start buffers with nothing folded
+  vim.opt.foldlevelstart = 99
+end
+
 setBackups()
 setIndentation()
 setLeader()
@@ -66,3 +74,4 @@ setPlugins()
 tweakDisplay()
 tweakNetrw()
 disableMouse()
+enableCodeFolding()

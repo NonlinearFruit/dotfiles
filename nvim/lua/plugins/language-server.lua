@@ -89,5 +89,5 @@ return {
   lazy = false,
   virtual = true,
   on_attach = on_attach, -- For other plugins to use
-  capabilities = capabilities
+  capabilities = capabilities,
 }
