@@ -6,6 +6,11 @@ end
 
 local function configure()
   install_lsp_and_dap_if_needed()
+  local lsp = require("plugins.language-server")
+  vim.lsp.config("ts_ls", {
+    on_attach = lsp.on_attach,
+    capabilities = lsp.capabilities,
+  })
   vim.lsp.enable("ts_ls")
 end
 

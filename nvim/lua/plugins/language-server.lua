@@ -44,6 +44,16 @@ local on_attach = function(client, bufnr)
   end, { buffer = bufnr, remap = false, desc = "[=] Format file" })
 end
 
+-- :h grr
+-- These GLOBAL keymaps are created unconditionally when Nvim starts:
+-- - "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+-- - "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+-- - "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+-- - "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+-- - "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
+-- - "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
+-- - CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
+
 -- Unused vim.lsp.buf.*
 -- add_workspace_folder
 -- clear_references
@@ -79,4 +89,5 @@ return {
   lazy = false,
   virtual = true,
   on_attach = on_attach, -- For other plugins to use
+  capabilities = capabilities
 }
