@@ -178,6 +178,10 @@
   description: Container host
   manager: dnf
 
+- cmd: libicu
+  description: A thing that dotnet likes to have for globalization
+  manager: dnf
+
 - cmd: nu_plugin_emoji
   description: emoji tool for nushell. Used in chat script
   manager: cargo
