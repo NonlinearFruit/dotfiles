@@ -81,7 +81,6 @@
   manager: cargo
   id: tree-sitter-cli
 
-# cargo binstall <https://crates.io/crates/cargo-binstall>
 # podman <https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md>
 
 - cmd: dotnet outdated
