@@ -40,7 +40,8 @@ end
 
 local function install_lsp_and_dap_if_needed()
   require("installer").install_if_missing({
-    -- "roslyn", -- LSP Needs to be manually installed from the Mason gui?
+    -- Avoid WSL bug in file watching in dotnet runtime <https://github.com/seblyng/roslyn.nvim/issues/303#issuecomment-4144530656>
+    "roslyn@5.4.0-2.26175.10", -- LSP Needs to be manually installed from the Mason gui?
     "netcoredbg", -- DAP
   })
 end
