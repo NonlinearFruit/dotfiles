@@ -63,6 +63,7 @@ The actual dotfiles for various tools
 | glide |
 | nvim |
 | ollama |
+| pi |
 | termux |
 | tmux |
 | tools |
@@ -104,6 +105,7 @@ Helpful automation for various tasks
 | nvim-plugins |  |
 | nvims |  |
 | passphrase |  |
+| print-pi-session |  |
 | profile-nvim | [demo](.tapes/profile-nvim.gif) |
 | reprint |  |
 | ssh |  |

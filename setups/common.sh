@@ -41,6 +41,9 @@ mkdir -p ~/.config/nushell/scripts
 # Glide
 mkdir -p  ~/.config/glide/
 
+# Pi
+mkdir -p  ~/.pi/agent/extensions/
+
 # Nushell <https://www.nushell.sh/book/installation.html#pre-built-binaries>
 echo "[gemfury-nushell]
 name=Gemfury Nushell Repo

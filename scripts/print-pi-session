@@ -1,0 +1,62 @@
+#!/usr/bin/env nu
+
+# print-pi-session | bat --language md
+def main [] {
+  select-session
+  | get data
+  | where type == message
+  | get message
+  | structure-messages
+  | each { format-message }
+  | to text
+}
+
+def select-session [] {
+  ls ~/.pi/agent/sessions/*/*.jsonl
+  | get name
+  | each {|file|
+    open
+    | lines
+    | each { from json }
+    | {
+      file: $file
+      data: $in
+    }
+  }
+  | each {|thing|
+    {
+      cwd: ($thing.data | first | get cwd | str replace "/home/bolen/projects/" "")
+      age: ($thing.data | first | get timestamp | into datetime | date humanize)
+      first-prompt: ($thing.data | where type == message | get message | where role == user | first | get content.text.0)
+      file: $thing.file
+      data: $thing.data
+    }
+  }
+  | input list --display {|thing|
+    $"[($thing.age)] ($thing.cwd): ($thing.first-prompt)"
+  }
+}
+
+def structure-messages [] {
+  each {|msg|
+    {
+      role: $msg.role
+      content: ($msg | get content | flatten | where type == text | get text | to text)
+    }
+  }
+  | where content != ""
+}
+
+def format-message [] {
+  $"(to-color $in.role)($in.role)(ansi reset): ($in.content)"
+}
+
+def to-color [role] {
+  {
+    user: (ansi green)
+    assistant: (ansi yellow)
+    toolResult: (ansi blue)
+  }
+  | get -o $role
+  | default (ansi default)
+}

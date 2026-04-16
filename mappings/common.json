@@ -7,6 +7,7 @@
   ["glide.desktop", "~/.local/share/applications/glide.desktop"],
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
+  ["pi/save-last-extension.ts", "~/.pi/agent/extensions/save-last-extension.ts"],
   ["tmux.conf", "~/.tmux.conf"],
   ["vimrc.vim", "~/.vimrc"],
   ["map.sh", "~/projects/privatefiles/map.sh"],
