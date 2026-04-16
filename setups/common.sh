@@ -22,6 +22,10 @@ mkdir -p ~/.config/nvim
 # Scripts
 mkdir ~/scripts
 
+# Git Jump
+curl https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/git-jump/git-jump -o ~/scripts/git-jump
+chmod +x ~/scripts/git-jump
+
 # Tealdear
 mkdir -p ~/.local/share/tealdeer/pages
 
