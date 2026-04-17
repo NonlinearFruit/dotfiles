@@ -182,6 +182,10 @@
   description: A thing that dotnet likes to have for globalization
   manager: dnf
 
+- cmd: clang-devel
+  description: A thing that rust (specifically tree-sitter) wants to have
+  manager: dnf
+
 - cmd: nu_plugin_emoji
   description: emoji tool for nushell. Used in chat script
   manager: cargo
@@ -205,3 +209,23 @@
 - cmd: com.valvesoftware.Steam
   description: Video game manager
   manager: flatpak
+
+- cmd: caveman
+  description: simplify ai responses
+  id: git:github.com/v2nic/pi-caveman
+  manager: pi
+
+- cmd: agent-stuff
+  description: some helpful pi extensions
+  id: git:github.com/mitsuhiko/agent-stuff
+  manager: pi
+
+- cmd: awesome-copilot
+  description: some helpful ai skills
+  id: git:github.com/github/awesome-copilot
+  manager: pi
+
+- cmd: pi-skills
+  description: pi extensions from the pi maintainer
+  id: git:github.com/badlogic/pi-skills
+  manager: pi
