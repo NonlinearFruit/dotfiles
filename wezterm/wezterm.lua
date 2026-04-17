@@ -37,6 +37,11 @@ WEZTERM.on("new-scheme", function(window, pane)
   window:toast_notification("dotfiles", "Color Scheme #" .. nextIndex .. ": " .. newScheme, nil, 500)
 end)
 
+WEZTERM.on("gui-startup", function(cmd)
+  local _, _, window = WEZTERM.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
 local function getDefaultConfig()
   return WEZTERM.config_builder()
 end
