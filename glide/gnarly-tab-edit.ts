@@ -32,8 +32,10 @@ async function save_tabs_to_temp_file(tabs) {
 }
 
 async function let_user_edit_file_and_wait_for_exit(tempfile) {
-  const edit_cmd = await glide.process.execute("gnome-text-editor", [
-     "--standalone",
+  const edit_cmd = await glide.process.execute("wezterm", [
+     "start",
+     "--",
+     "nvim",
      tempfile,
    ]);
   const edit_result = await edit_cmd.wait();
