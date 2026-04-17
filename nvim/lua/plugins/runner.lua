@@ -1,5 +1,6 @@
 local function configure()
   local runner = require("runner")
+  local helpers = require("helpers")
   vim.keymap.set("n", "<leader>vd", runner.close, { desc = "[v]imux [d]elete" })
   vim.keymap.set("n", "<leader>vp", runner.prompt, { desc = "[v]imux [p]rompt" })
 
@@ -15,12 +16,7 @@ local function configure()
   )
 
   vim.keymap.set("v", "<leader>vp", function()
-    local vstart = vim.fn.getpos("'<")
-    local vend = vim.fn.getpos("'>")
-    local line_start = vstart[2]
-    local line_end = vend[2]
-    local lines = vim.fn.getline(line_start, line_end)
-    runner.run(lines[1])
+    runner.run(helpers.get_selected_text())
   end, { desc = "[v]imux [p]rompt with the selected code" })
 end
 
