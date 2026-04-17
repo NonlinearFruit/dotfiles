@@ -1,6 +1,9 @@
 #!/bin/bash
 # Executed by bash(1) for non-login shells.
 
+# https://www.nushell.sh/blog/2026-02-28-nushell_v0_111_0.html#experimental-native-clipboard
+export NU_EXPERIMENTAL_OPTIONS=native-clip
+
 # Scripts
 if [ -d ~/scripts ]; then
     export PATH="$PATH:$HOME/scripts"
