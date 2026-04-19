@@ -62,7 +62,6 @@ The actual dotfiles for various tools
 | gitconfig |
 | glide |
 | nvim |
-| ollama |
 | pi |
 | termux |
 | tmux |
@@ -93,7 +92,6 @@ Helpful automation for various tasks
 | ipsum |  |
 | is |  |
 | last-cron |  |
-| llm |  |
 | look-alike |  |
 | lsb | [demo](.tapes/lsb.gif) |
 | matthew-henry-gate | [demo](.tapes/matthew-henry-gate.gif) |
