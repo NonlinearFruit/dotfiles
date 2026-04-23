@@ -1,0 +1,51 @@
+{
+  "lastChangelogVersion": "0.67.6",
+  "enableInstallTelemetry": false,
+  "packages": [
+    "git:github.com/v2nic/pi-caveman",
+    {
+      "source": "git:github.com/michalvavra/agents",
+      "extensions": [
+        "agents/pi/extensions/filter-output.ts",
+        "agents/pi/extensions/security.ts"
+      ],
+      "skills": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/mitsuhiko/agent-stuff",
+      "extensions": [
+        "extensions/review.ts",
+        "extensions/whimsical.ts"
+      ],
+      "skills": [
+        "skills/frontend-design"
+      ],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/github/awesome-copilot",
+      "skills": [
+        "skills/refactor",
+        "skills/repo-story-time"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/badlogic/pi-skills",
+      "skills": [
+        "skills/youtube-transcript"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    }
+  ],
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-haiku-4-5",
+  "defaultThinkingLevel": "medium"
+}

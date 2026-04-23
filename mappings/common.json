@@ -8,6 +8,7 @@
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
   ["pi/save-last-extension.ts", "~/.pi/agent/extensions/save-last-extension.ts"],
+  ["pi/settings.json", "~/.pi/agent/settings.json"],
   ["tmux.conf", "~/.tmux.conf"],
   ["vimrc.vim", "~/.vimrc"],
   ["map.sh", "~/projects/privatefiles/map.sh"],
