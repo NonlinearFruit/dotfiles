@@ -11,6 +11,7 @@ alias protontricks='flatpak run com.github.Matoking.protontricks'
 if is wsl ; then
   alias npp='notepad++.exe'
   alias podman="podman.exe"
+  alias ramalama="ramalama.exe"
   if ! command -v dotnet > /dev/null ; then
     alias dotnet='dotnet.exe'
   fi
