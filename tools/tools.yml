@@ -1,3 +1,11 @@
+- cmd: yazi-build
+  description: TUI file explorer
+  manager: cargo
+
+- cmd: git-filter-repo
+  description: Quickly rewrite git repository history
+  manager: dnf
+
 - cmd: cronie
   description: cron for Fedora
   manager: dnf
@@ -228,4 +236,9 @@
 - cmd: pi-skills
   description: pi extensions from the pi maintainer
   id: git:github.com/badlogic/pi-skills
+  manager: pi
+
+- cmd: agents
+  description: Some security pi extensions
+  id: git:github.com/michalvavra/agents
   manager: pi
