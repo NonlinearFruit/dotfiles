@@ -1,0 +1,36 @@
+#!/bin/env sh
+
+# <https://stackoverflow.com/a/59115583>
+rebasing-branch() {
+  for location in rebase-merge rebase-apply; do
+    path=$(git rev-parse --git-path ${location})
+    if test -d ${path}; then
+      revision=$(<${path}/head-name)
+      echo ${revision##refs/heads/}
+      return 0
+    fi
+  done
+}
+
+branch() {
+  git symbolic-ref HEAD --short 2>/dev/null
+}
+
+changes() {
+  STAGED="$(git diff --cached --name-only 2>/dev/null | wc --lines)s"
+  WORKTREE="$(git diff --name-only 2>/dev/null | wc --lines)w"
+  UNTRACKED="$(git ls-files --others  --exclude-standard 2>/dev/null | wc --lines)u"
+  echo "${STAGED}${WORKTREE}${UNTRACKED}" | sed "s/0.//g"
+}
+
+PROMPT=$(branch)
+if git rev-parse --quiet --verify MERGE_HEAD > /dev/null; then
+  PROMPT="$PROMPT [merging]"
+elif git rev-parse --quiet --verify REBASE_HEAD > /dev/null; then
+  PROMPT="$(rebasing-branch) [rebasing]"
+fi
+CHANGES=$(changes)
+if [[ -n "$CHANGES" ]]; then
+  PROMPT="$PROMPT ($CHANGES)"
+fi
+echo "$PROMPT"
