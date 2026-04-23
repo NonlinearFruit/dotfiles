@@ -7,6 +7,8 @@
   ["glide.desktop", "~/.local/share/applications/glide.desktop"],
   ["scripts/*", "~/scripts"],
   ["nvim/*", "~/.config/nvim"],
+  ["pi/answer-extension.ts", "~/.pi/agent/extensions/answer-extension.ts"],
+  ["pi/cursor-rules-extension.ts", "~/.pi/agent/extensions/cursor-rules-extension.ts"],
   ["pi/save-last-extension.ts", "~/.pi/agent/extensions/save-last-extension.ts"],
   ["pi/settings.json", "~/.pi/agent/settings.json"],
   ["tmux.conf", "~/.tmux.conf"],
