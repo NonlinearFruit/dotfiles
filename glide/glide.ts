@@ -13,6 +13,7 @@
 
 glide.include("gnarly-scrollable-picker.ts")
 glide.include("gnarly-tab-edit.ts")
+glide.include("gnarly-text-edit.ts")
 glide.include("vanilla-firefox.ts")
 glide.include("vanilla-glide.ts")
 glide.include("vanilla-vim.ts")
