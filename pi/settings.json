@@ -36,6 +36,26 @@
       "prompts": []
     },
     {
+      "source": "git:github.com/obra/superpowers",
+      "skills": [
+        "skills/test-driven-development",
+        "skills/writing-plans",
+        "skills/writing-skills"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/prateekmedia/pi-hooks",
+      "extensions": [
+        "permission/permission.ts"
+      ],
+      "skills": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
       "source": "git:github.com/badlogic/pi-skills",
       "skills": [
         "skills/youtube-transcript"

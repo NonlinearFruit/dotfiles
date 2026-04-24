@@ -42,7 +42,7 @@ mkdir -p ~/.config/nushell/scripts
 mkdir -p  ~/.config/glide/
 
 # Pi
-mkdir -p  ~/.pi/agent/extensions/
+mkdir -p  ~/.pi/agent/{extensions,skills}/
 
 # Nushell <https://www.nushell.sh/book/installation.html#pre-built-binaries>
 echo "[gemfury-nushell]

@@ -242,3 +242,13 @@
   description: Some security pi extensions
   id: git:github.com/michalvavra/agents
   manager: pi
+
+- cmd: superpowers
+  description: Skills writing skills and code writing skills
+  id: git:github.com/obra/superpowers
+  manager: pi
+
+- cmd: pi-hooks
+  description: Permmission pi extension
+  id: git:github.com/prateekmedia/pi-hooks
+  manager: pi
