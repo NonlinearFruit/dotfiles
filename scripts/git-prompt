@@ -30,7 +30,8 @@ changes() {
   STAGED="$(git diff --cached --name-only 2>/dev/null | wc --lines)s"
   WORKTREE="$(git diff --name-only 2>/dev/null | wc --lines)w"
   UNTRACKED="$(git ls-files --others  --exclude-standard 2>/dev/null | wc --lines)u"
-  echo "${STAGED}${WORKTREE}${UNTRACKED}" | sed -E ':1; s/(^|[^0-9])0[swu]/\1/g; t1;'
+  AHEAD_BEHIND="$(git rev-list --left-right --count @...@{u} | sed -E 's/^([0-9]+)/\1a/; s/\s+([0-9]+)$/\1b/')"
+  echo "${STAGED}${WORKTREE}${UNTRACKED}${AHEAD_BEHIND}" | sed -E ':1; s/(^|[^0-9])0[swuab]/\1/g; t1;'
 }
 
 if ! is_git_repo; then
