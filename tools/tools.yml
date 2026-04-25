@@ -2,6 +2,10 @@
   description: TUI file explorer
   manager: cargo
 
+- cmd: ramalama
+  description: Spin up clankers locally with ease
+  manager: dnf
+
 - cmd: git-filter-repo
   description: Quickly rewrite git repository history
   manager: dnf
@@ -252,3 +256,8 @@
   description: Permmission pi extension
   id: git:github.com/prateekmedia/pi-hooks
   manager: pi
+
+- cmd: pi
+  description: Minimal extensible coding agent
+  id: '@mariozechner/pi-coding-agent'
+  manager: npm
