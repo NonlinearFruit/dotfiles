@@ -21,18 +21,6 @@ local types = require("luasnip.util.types")
 local conds = require("luasnip.extras.conditions")
 local conds_expand = require("luasnip.extras.conditions.expand")
 
-vim.treesitter.query.set(
-  "c_sharp",
-  "InlineDataArgs_Result",
-  [[
-    ((attribute_list
-      (attribute
-        name: (_) @id
-        (attribute_argument_list) @it))
-    (#eq? @id "InlineData"))
-  ]]
-)
-
 return {
   snippet(
     "fact",
