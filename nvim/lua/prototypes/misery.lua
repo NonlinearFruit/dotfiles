@@ -179,8 +179,36 @@ local crutchless = {
   },
 }
 
+local deranged_register = {
+  name = "deranged register",
+  desc = "Every yank lands in a random register, the default registers are always empty",
+  augroup = "misery.chaos_register",
+  registers = "abcdefghijklmnopqrstuvwxyz",
+  start = function(self)
+    local group = vim.api.nvim_create_augroup(self.augroup, { clear = true })
+    vim.api.nvim_create_autocmd("TextYankPost", {
+      group = group,
+      callback = function()
+        local ev = vim.v.event
+        local registers = "abcdefghijklmnopqrstuvwxyz"
+        local i = math.random(#registers)
+        local reg = registers:sub(i, i)
+        vim.fn.setreg(reg, ev.regcontents, ev.regtype)
+        vim.notify(string.format('yanked into "%s', reg), vim.log.levels.WARN)
+        -- Clear the default yank registers so that a plain `p` does not work
+        vim.fn.setreg('"', "")
+        vim.fn.setreg("0", "")
+      end,
+    })
+  end,
+  stop = function(self)
+    vim.api.nvim_clear_autocmds({ group = self.augroup })
+  end,
+}
+
 M.effects = {
   invisiline,
+  deranged_register,
   hidden_cursor,
   random_theme,
   flip_bindings,
