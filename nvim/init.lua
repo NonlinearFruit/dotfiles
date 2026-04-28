@@ -19,6 +19,7 @@ local function tweakDisplay()
   vim.opt.number = true
   vim.opt.relativenumber = false
   vim.o.termguicolors = true
+  vim.o.cursorline = true
 end
 
 local function tweakNetrw()
