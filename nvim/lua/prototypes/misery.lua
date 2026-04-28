@@ -206,8 +206,93 @@ local deranged_register = {
   end,
 }
 
+local lvl = vim.diagnostic.severity
+local hysteric_diagnostics = {
+  name = "hysteric diagnostics",
+  desc = "Inject fake diagnostics",
+  namespace = vim.api.nvim_create_namespace("misery.hysteric_diagnostics"),
+  augroup = "misery.hysteric_diagnostics",
+  timer = nil,
+  messages = {
+    { severity = lvl.ERROR, message = "syntax error, try once more with feeling" },
+    { severity = lvl.ERROR, message = "unreachable code, unachievable dreams" },
+    { severity = lvl.HINT, message = "possible null reference, reconsider the choices that have brought you to this moment" },
+    { severity = lvl.WARN, message = "this variable is shadowed by its own ambition" },
+    -- From Alan Perlis <https://www.cs.yale.edu/homes/perlis-alan/quotes.html>
+    { severity = lvl.ERROR, message = "it is often the early bird that makes the worm" },
+    { severity = lvl.ERROR, message = "simplicity does not precede complexity, but follows it" },
+    { severity = lvl.ERROR, message = "there are two ways to write error-free programs; only the third way works" },
+    { severity = lvl.HINT, message = "is it possible that software is not like anything else, that it is meant to be discarded: that the whole point is to see it as a soap bubble?" },
+    { severity = lvl.HINT, message = "it is easier to change the specification to fit the program than vice versa" },
+    { severity = lvl.HINT, message = "it is easier to write an incorrect program than understand a correct one" },
+    { severity = lvl.HINT, message = "the proof of a system's value is its existence" },
+    { severity = lvl.HINT, message = "there will always be things we wish to say in our programs that in all known languages can only be said poorly" },
+    { severity = lvl.WARN, message = "in seeking the unattainable, simplicity only gets in the way" },
+    { severity = lvl.WARN, message = "one man's constant is another man's variable" },
+    { severity = lvl.WARN, message = "optimization hinders evolution" },
+    { severity = lvl.WARN, message = "string is a perfect vehicle for hiding information" },
+    { severity = lvl.WARN, message = "syntactic sugar causes cancer of the semicolon" },
+  },
+  start = function(self)
+    local function sprinkle()
+      local buf = vim.api.nvim_get_current_buf()
+      if not vim.api.nvim_buf_is_valid(buf) then
+        return
+      end
+      local line_count = vim.api.nvim_buf_line_count(buf)
+      if line_count == 0 then
+        return
+      end
+      local diagnostics = {}
+      local count = math.random(1, 3)
+      for _ = 1, count do
+        local pick = self.messages[math.random(#self.messages)]
+        local lnum = math.random(0, line_count - 1)
+        local line = vim.api.nvim_buf_get_lines(buf, lnum, lnum + 1, false)[1] or ""
+        table.insert(diagnostics, {
+          lnum = lnum,
+          col = 0,
+          end_lnum = lnum,
+          end_col = #line,
+          severity = pick.severity,
+          message = pick.message,
+          source = self.name,
+        })
+      end
+      vim.diagnostic.set(self.namespace, buf, diagnostics)
+    end
+
+    self.timer = vim.uv.new_timer()
+    self.timer:start(2000, 30000, vim.schedule_wrap(sprinkle))
+
+    local group = vim.api.nvim_create_augroup(self.augroup, { clear = true })
+    vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
+      group = group,
+      callback = function()
+        if math.random() < 0.3 then
+          sprinkle()
+        end
+      end,
+    })
+  end,
+  stop = function(self)
+    if self.timer then
+      self.timer:stop()
+      self.timer:close()
+      self.timer = nil
+    end
+    pcall(vim.api.nvim_clear_autocmds, { group = self.augroup })
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_valid(buf) then
+        vim.diagnostic.reset(self.namespace, buf)
+      end
+    end
+  end,
+}
+
 M.effects = {
   invisiline,
+  hysteric_diagnostics,
   deranged_register,
   hidden_cursor,
   random_theme,
