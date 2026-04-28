@@ -9,7 +9,7 @@ branch() {
 }
 
 # <https://stackoverflow.com/a/59115583>
-rebase-branch-old() {
+rebase_branch_old() {
   path=$(git rev-parse --git-path rebase-apply) # rebase.backend is apply
   if test -d ${path}; then
     revision=$(<${path}/head-name)
@@ -18,7 +18,7 @@ rebase-branch-old() {
 }
 
 # <https://stackoverflow.com/a/59115583>
-rebase-branch-new() {
+rebase_branch_new() {
   path=$(git rev-parse --git-path rebase-merge) # rebase.backend is merge
   if test -d ${path}; then
     revision=$(<${path}/head-name)
@@ -39,8 +39,8 @@ if ! is_git_repo; then
 fi
 
 PROMPT=$(branch)
-REBASE_BRANCH=$(rebase-branch-new)
-REBASE_BRANCH_OLD=$(rebase-branch-old)
+REBASE_BRANCH=$(rebase_branch_new)
+REBASE_BRANCH_OLD=$(rebase_branch_old)
 if [[ -n "$REBASE_BRANCH" ]]; then
   PROMPT="$REBASE_BRANCH [rebasing]"
 elif [[ -n "$REBASE_BRANCH_OLD" ]]; then
