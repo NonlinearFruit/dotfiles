@@ -203,8 +203,12 @@
   manager: cargo
 
 - cmd: nu_plugin_query
-  description: query tool for nushell. Used for parsing html. Requires dnf's `openssl-devel`
+  description: query tool for nushell. Used for parsing html. Requires openssl-devel
   manager: cargo
+
+- cmd: openssl-devel
+  description: Used by nu_plugin_query
+  manager: dnf
 
 - cmd: tokei
   description: counts lines of code
