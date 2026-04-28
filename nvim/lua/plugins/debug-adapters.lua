@@ -10,6 +10,8 @@ local function key_mappings()
   keymap("<f10>", "lua require('dap').step_over()", "Step over")
   keymap("<f11>", "lua require('dap').step_into()", "Step into")
   keymap("<f12>", "lua require('dap').step_out()", "Step out")
+  -- :lua require('dapui').close() to close all dap-ui windows
+  -- :lua require('dapui').toggle()
 end
 
 local function configure_dap_ui()

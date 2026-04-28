@@ -58,25 +58,47 @@ local function configure_dap()
     args = { "--interpreter=vscode" },
   }
 
+  local function pick_runnable_dll()
+    local helpers = require("helpers")
+    local cwd = vim.fn.getcwd()
+
+    -- Runnable projects emit <Name>.runtimeconfig.json next to <Name>.dll.
+    local configs = vim.fn.glob(cwd .. "/**/bin/Debug/**/*.runtimeconfig.json", true, true)
+    local dlls = {}
+    for _, cfg in ipairs(configs) do
+      table.insert(dlls, (cfg:gsub("%.runtimeconfig%.json$", ".dll")))
+    end
+
+    local selection
+    if #dlls == 0 then
+      selection = vim.fn.input("Path to dll: ", cwd .. "/", "file")
+    elseif #dlls == 1 then
+      selection = dlls[1]
+    else
+      selection = helpers.pick_one_sync("Select dlls to run", dlls)
+    end
+
+    if selection == nil or selection == "" then
+      return dap.ABORT
+    end
+    return selection
+  end
+
   dap.configurations.cs = {
     {
       type = "netcoredbg",
       name = "launch - netcoredbg",
       request = "launch",
-      program = function()
-        local cwd = vim.fn.getcwd()
-        local d = vim.fn.fnamemodify(cwd, ":t")
-        return vim.fn.input("Path to dll: ", cwd .. "/bin/Debug/net9.0/" .. d .. ".dll", "file")
-      end,
+      program = pick_runnable_dll,
     },
     {
       type = "netcoredbg",
       name = "attach - netcoredbg",
       request = "attach",
       processId = function()
-        local pgrep = vim.fn.system("pgrep -f 'dotnet run'")
+        local pid = vim.fn.system("pgrep -f 'dotnet run'")
         vim.fn.setenv("NETCOREDBG_ATTACH_PID", pid)
-        return tonumber(pgrep)
+        return tonumber(pid)
       end,
     },
   }
@@ -97,5 +119,6 @@ return {
   virtual = true,
   dependencies = {
     "seblyng/roslyn.nvim", -- c# lsp
+    "mfussenegger/nvim-dap", -- must load before configure_dap() runs on ft=cs
   },
 }
