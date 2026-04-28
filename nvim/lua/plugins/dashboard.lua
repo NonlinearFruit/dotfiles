@@ -60,6 +60,13 @@ local function configure()
       header = header,
       center = {
         {
+          icon = " ",
+          desc = "Empty buffer",
+          key = "n",
+          key_hl = "LineNr",
+          action = "enew",
+        },
+        {
           icon = " ",
           desc = "Find Files",
           key = "f",
