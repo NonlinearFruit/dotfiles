@@ -133,7 +133,7 @@ local different_editor = {
     vim.cmd(cmd)
     -- vim.api.nvim_open_term(0, {})
   end,
-  stop = function(self)
+  stop = function()
     -- vim.api.nvim_clear_autocmds({ group = self.augroup })
   end,
   editors = {
@@ -183,7 +183,6 @@ local deranged_register = {
   name = "deranged register",
   desc = "Every yank lands in a random register, the default registers are always empty",
   augroup = "misery.chaos_register",
-  registers = "abcdefghijklmnopqrstuvwxyz",
   start = function(self)
     local group = vim.api.nvim_create_augroup(self.augroup, { clear = true })
     vim.api.nvim_create_autocmd("TextYankPost", {
