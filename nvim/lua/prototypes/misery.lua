@@ -216,17 +216,26 @@ local hysteric_diagnostics = {
   messages = {
     { severity = lvl.ERROR, message = "syntax error, try once more with feeling" },
     { severity = lvl.ERROR, message = "unreachable code, unachievable dreams" },
-    { severity = lvl.HINT, message = "possible null reference, reconsider the choices that have brought you to this moment" },
+    {
+      severity = lvl.HINT,
+      message = "possible null reference, reconsider the choices that have brought you to this moment",
+    },
     { severity = lvl.WARN, message = "this variable is shadowed by its own ambition" },
     -- From Alan Perlis <https://www.cs.yale.edu/homes/perlis-alan/quotes.html>
     { severity = lvl.ERROR, message = "it is often the early bird that makes the worm" },
     { severity = lvl.ERROR, message = "simplicity does not precede complexity, but follows it" },
     { severity = lvl.ERROR, message = "there are two ways to write error-free programs; only the third way works" },
-    { severity = lvl.HINT, message = "is it possible that software is not like anything else, that it is meant to be discarded: that the whole point is to see it as a soap bubble?" },
+    {
+      severity = lvl.HINT,
+      message = "is it possible that software is not like anything else, that it is meant to be discarded: that the whole point is to see it as a soap bubble?",
+    },
     { severity = lvl.HINT, message = "it is easier to change the specification to fit the program than vice versa" },
     { severity = lvl.HINT, message = "it is easier to write an incorrect program than understand a correct one" },
     { severity = lvl.HINT, message = "the proof of a system's value is its existence" },
-    { severity = lvl.HINT, message = "there will always be things we wish to say in our programs that in all known languages can only be said poorly" },
+    {
+      severity = lvl.HINT,
+      message = "there will always be things we wish to say in our programs that in all known languages can only be said poorly",
+    },
     { severity = lvl.WARN, message = "in seeking the unattainable, simplicity only gets in the way" },
     { severity = lvl.WARN, message = "one man's constant is another man's variable" },
     { severity = lvl.WARN, message = "optimization hinders evolution" },
