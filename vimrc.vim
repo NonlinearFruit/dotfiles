@@ -12,6 +12,8 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
   set visualbell
   set noerrorbells " https://superuser.com/a/677312/468052
 
+  nnoremap <c-x><c-e> :! wezterm.exe start -- wsl.exe ~/scripts/open-nvim-from-windows %<cr>
+
   " Mimic Vanilla Vim
   nnoremap g, :action JumpToLastChange<cr>
   nnoremap g; :action JumpToNextChange<cr>
@@ -25,6 +27,9 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
   " Hunks
   noremap ]h :action VcsShowNextChangeMarker<cr>
   noremap [h :action VcsShowPrevChangeMarker<cr>
+  nnoremap <leader>hp :action VcsShowCurrentChangeMarker<cr>
+  nnoremap <leader>hb :action Annotate<cr>
+  nnoremap <leader>hB :action Vcs.ShowTabbedFileHistory<cr>
   nnoremap <leader>hr :action Vcs.RollbackChangedLines<cr>
 
   " Diagnostics
@@ -33,8 +38,14 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
 
   " Search
   nnoremap <leader>// :action Find<cr>
+  nnoremap <leader>/b :action Switcher<cr>
   nnoremap <leader>/g :action FindInPath<cr>
   nnoremap <leader>/f :action GotoFile<cr>
+
+  " Tests
+  nnoremap <leader>tr :action RiderUnitTestRunContextAction<cr>
+  nnoremap <leader>td :action RiderUnitTestDebugContextAction<cr>
+  nnoremap <leader>tw :action ActivateUnitTestsToolWindow<cr>
 
   " Code Actions
   " [c]ode [a]ctions
@@ -69,10 +80,10 @@ if has("ide") " https://vi.stackexchange.com/a/43062/11897
   nnoremap <leader>bc :action BuildSolutionAction<cr>
   nnoremap <leader>at :action RiderUnitTestRunSolutionAction<cr>
   nnoremap <leader>vp :action ActivateTerminalToolWindow<cr>
-  nnoremap <leader>tr :action RiderUnitTestRunContextAction<cr>
 
   " Rider Rewrites
   nnoremap gi :action GotoImplementation<cr>
+  nnoremap <c-k> :action ShowErrorDescription<cr>
 
   " Rider Plugins
   nnoremap gl :action uk.co.ben_gibson.git.link.ui.actions.menu.CopyAction<cr>

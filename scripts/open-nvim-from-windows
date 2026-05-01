@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+FILE=$1
+LINE=$2
+
+if [ "$LINE" = "" ]; then
+  ~/.local/share/bob/nvim-bin/nvim $(wslpath -u $FILE)
+else
+  ~/.local/share/bob/nvim-bin/nvim +$LINE $(wslpath -u $FILE)
+fi
