@@ -9,6 +9,8 @@
   ["nvim/*", "~/.config/nvim"],
   ["pi/answer-extension.ts", "~/.pi/agent/extensions/answer-extension.ts"],
   ["pi/cursor-rules-extension.ts", "~/.pi/agent/extensions/cursor-rules-extension.ts"],
+  ["pi/thinking-extension.ts", "~/.pi/agent/extensions/thinking-extension.ts"],
+  ["pi/validate-edit-extension.ts", "~/.pi/agent/extensions/validate-edit-extension.ts"],
   ["pi/models.json", "~/.pi/agent/models.json"],
   ["pi/save-last-extension.ts", "~/.pi/agent/extensions/save-last-extension.ts"],
   ["pi/settings.json", "~/.pi/agent/settings.json"],
