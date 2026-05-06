@@ -32,12 +32,20 @@ async function save_tabs_to_temp_file(tabs) {
 }
 
 async function let_user_edit_file_and_wait_for_exit(tempfile) {
-  const edit_cmd = await glide.process.execute("wezterm", [
-     "start",
-     "--",
-     "nvim",
-     tempfile,
-   ]);
+  const edit_cmd = glide.ctx.os == "win"
+    ? await glide.process.execute("C:\\Program Files\\WezTerm\\wezterm.exe", [
+      "start",
+      "--",
+      "wsl.exe",
+      "~/scripts/open-nvim-from-windows",
+      `'${tempfile}'`,
+    ])
+    : await glide.process.execute("wezterm", [
+      "start",
+      "--",
+      "nvim",
+      tempfile,
+    ])
   const edit_result = await edit_cmd.wait();
   if (edit_result.exit_code !== 0) {
     throw new Error(`Editor command failed with exit code ${edit_result.exit_code}`);
@@ -102,8 +110,14 @@ async function open_new_tabs_and_adjust_order(updated_tabs) {
 }
 
 async function mktemp(template) {
-  const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".json"]);
-  return (await mktemp_cmd.stdout.text()).trim();
+  if (glide.ctx.os == "win") {
+    const randomSuffix = Math.random().toString(36).substring(2, 8);
+    const filename = template.replace("XXXXXX", randomSuffix);
+    return glide.path.join(glide.path.temp_dir, `${filename}.md`);
+  } else {
+    const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".md"]);
+    return (await mktemp_cmd.stdout.text()).trim();
+  }
 }
 
 function hasId(tab) {
