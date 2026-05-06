@@ -1,0 +1,81 @@
+#!/usr/bin/env -S deno run --no-lock --allow-net --allow-env
+
+import { io } from "npm:socket.io-client@4.7.2"
+
+const SESSION_NAME = process.env.CUCKOO_SESSION
+const PARTICIPANT_NAME = process.env.CUCKOO_PARTICIPANT_NAME
+const CUCKOO_URL = `https://cuckoo.team/${SESSION_NAME}`
+const ANSI_RESET = "\x1b[0m"
+const TOMATO_FOREGROUND = "\x1b[38;2;78;80;191m"
+const BREAK_FOREGROUND = "\x1b[38;2;179;212;252m"
+const PAUSE_FOREGROUND = "\x1b[38;2;83;83;98m"
+const CLEAR_LINE = "\r\x1b[K"
+const ICONS = {
+  work: " ",
+  break: " ",
+  running: "  ",
+  paused: "󰏤 ",
+}
+const DEFAULTS = {
+  timeDisplay: "00:00",
+  isRunning: false,
+  isBreak: false,
+}
+const STATE = {
+  timeDisplay: DEFAULTS.timeDisplay,
+  isRunning: DEFAULTS.isRunning,
+  isBreak: DEFAULTS.isBreak,
+}
+
+function write(text) {
+  Deno.stdout.writeSync(new TextEncoder().encode(text))
+}
+
+function renderTimer() {
+  const icon = STATE.isBreak ? ICONS.break : ICONS.work
+  const status = STATE.isRunning ? ICONS.running : ICONS.paused
+  const color = STATE.isBreak ? BREAK_FOREGROUND : TOMATO_FOREGROUND
+  write(`${CLEAR_LINE}${color}${icon}${ANSI_RESET} ${status} ${STATE.timeDisplay}`)
+}
+
+function start() {
+  write("Connecting...")
+  const socket = io(CUCKOO_URL, {
+    transports: ["websocket"],
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    reconnectionAttempts: 5,
+  })
+
+  socket.on("connect", () => {
+    write(`${CLEAR_LINE}  Url: ${CUCKOO_URL}`)
+    console.log()
+    console.log(` User: ${PARTICIPANT_NAME}`)
+    socket.emit("update user", PARTICIPANT_NAME)
+  })
+
+  socket.on("update timer", (data) => {
+    STATE.timeDisplay = data.currentFormatted
+    STATE.isRunning = data.current > 0
+    renderTimer()
+  })
+
+  socket.on("update settings", (data) => {
+    STATE.isBreak = data.sessions?.currentType === "breakTime"
+    STATE.isRunning = !data.flags?._isTimerPaused
+    renderTimer()
+  })
+
+  socket.on("finish timer", () => {
+    STATE.isRunning = DEFAULTS.isRunning
+    STATE.timeDisplay = DEFAULTS.timeDisplay
+    renderTimer()
+  })
+
+  socket.on("disconnect", () => console.log("Disconnected from Cuckoo"))
+  socket.on("connect_error", (err) => console.error("Connection error:", err.message))
+}
+
+start()
+await new Promise(() => {}); // Don't exit

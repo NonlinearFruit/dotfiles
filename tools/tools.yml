@@ -1,3 +1,11 @@
+- cmd: deno
+  description: Javascript runtime
+  manager: cargo
+
+- cmd: cmake
+  description: Required by deno
+  manager: dnf
+
 - cmd: yazi-build
   description: TUI file explorer
   manager: cargo
