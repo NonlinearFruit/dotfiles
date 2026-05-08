@@ -96,9 +96,11 @@ local function configure_dap()
       name = "attach - netcoredbg",
       request = "attach",
       processId = function()
-        local pid = vim.fn.system("pgrep -f 'dotnet run'")
-        vim.fn.setenv("NETCOREDBG_ATTACH_PID", pid)
-        return tonumber(pid)
+        return require("dap.utils").pick_process({
+          filter = function(proc)
+            return proc.name:match("bin/Debug") ~= nil or proc.name:match("bin/Release") ~= nil
+          end,
+        })
       end,
     },
   }
