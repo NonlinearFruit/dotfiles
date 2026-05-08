@@ -1,6 +1,5 @@
 local function configure()
   -- lsp comes with nushell out-of-the-box
-  vim.lsp.enable("nushell")
   vim.bo.commentstring = "# %s"
 end
 

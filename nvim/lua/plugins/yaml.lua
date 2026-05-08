@@ -21,7 +21,6 @@ end
 local function configure()
   install_lsp_and_dap_if_needed()
   configure_lsp()
-  vim.lsp.enable("yamlls")
 end
 
 return {

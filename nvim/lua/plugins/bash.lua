@@ -7,7 +7,6 @@ end
 local function configure()
   install_lsp_and_dap_if_needed()
   vim.bo.filetype = "sh"
-  vim.lsp.enable("bashls")
 end
 
 return {
