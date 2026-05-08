@@ -13,6 +13,7 @@
   ["pi/as-uncle-bob-martin-prompt.md", "~/.pi/agent/prompts/as-uncle-bob-martin.md"],
   ["pi/double-check-prompt.md", "~/.pi/agent/prompts/double-check.md"],
   ["pi/retro-prev-session-prompt.md", "~/.pi/agent/prompts/retro-prev-session.md"],
+  ["pi/zoom-out-prompt.md", "~/.pi/agent/prompts/zoom-out.md"],
   ["pi/answer-extension.ts", "~/.pi/agent/extensions/answer-extension.ts"],
   ["pi/cursor-rules-extension.ts", "~/.pi/agent/extensions/cursor-rules-extension.ts"],
   ["pi/thinking-extension.ts", "~/.pi/agent/extensions/thinking-extension.ts"],
