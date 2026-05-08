@@ -80,9 +80,7 @@ glide.keymaps.set("normal", "yc", () =>
   glide.hints.show({
     selector: "pre,code",
     async action(target) {
-      console.log(target)
-      const text = (await target.content.execute((target) => target.textContent)).trim()
-      console.log(text)
+      const text = (await target.content.execute(t => t.textContent)).trim()
       if (text) {
         await navigator.clipboard.writeText(text);
       }
@@ -90,6 +88,23 @@ glide.keymaps.set("normal", "yc", () =>
   }),
   { description: "[y]ank [c]ode -> Shows hints on all preformated text and places the selected codeblock in clipboard" }
 )
+
+glide.keymaps.set("normal", "yt", () => {
+  glide.hints.show({
+    selector: "p, span",
+    pick: async ({ hints, content }) => {
+      // or maybe .textContent depending what semantics you want
+      const has_text = await content.map((element) => !!element.innerText);
+      return hints.filter((_hint, i) => has_text[i]);
+    },
+    async action(target) {
+      const text = (await target.content.execute(t => t.textContent)).trim()
+      if (text) {
+        await navigator.clipboard.writeText(text);
+      }
+    },
+  });
+}, { description: "[y]ank [t]ext -> Shows hints on all elements with text and places the selected text in clipboard" });
 
 glide.keymaps.set("normal", "<<", async ({ tab_id }) => {
   const tab = await browser.tabs.get(tab_id);
