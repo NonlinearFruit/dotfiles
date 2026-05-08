@@ -4,6 +4,23 @@
   "packages": [
     "git:github.com/v2nic/pi-caveman",
     {
+      "source": "git:github.com/mattpocock/skills",
+      "skills": [
+        "skills/engineering/diagnose",
+        "skills/engineering/grill-with-docs",
+        "skills/engineering/improve-codebase-architecture",
+        "skills/engineering/tdd",
+        "skills/engineering/to-issues",
+        "skills/engineering/to-prd",
+        "skills/engineering/triage",
+        "skills/productivity/grill-me",
+        "skills/productivity/write-a-skill"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
       "source": "git:github.com/michalvavra/agents",
       "extensions": [
         "agents/pi/extensions/filter-output.ts",
