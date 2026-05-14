@@ -7,6 +7,10 @@
   description: View processes
   manager: cargo
 
+- cmd: gnuplot
+  description: For making charts
+  manager: dnf
+
 - cmd: deno
   description: Javascript runtime
   manager: cargo
