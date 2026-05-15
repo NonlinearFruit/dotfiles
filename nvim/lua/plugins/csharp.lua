@@ -112,6 +112,7 @@ local function configure()
   runner_key_mappings()
   install_lsp_and_dap_if_needed()
   configure_dap()
+  vim.cmd.compiler("dotnet")
 end
 
 return {
