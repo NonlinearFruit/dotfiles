@@ -41,15 +41,15 @@ fi
 PROMPT=$(branch)
 REBASE_BRANCH=$(rebase_branch_new)
 REBASE_BRANCH_OLD=$(rebase_branch_old)
-if [[ -n "$REBASE_BRANCH" ]]; then
+if [ -n "$REBASE_BRANCH" ]; then
   PROMPT="$REBASE_BRANCH [rebasing]"
-elif [[ -n "$REBASE_BRANCH_OLD" ]]; then
+elif [ -n "$REBASE_BRANCH_OLD" ]; then
   PROMPT="$REBASE_BRANCH_OLD [*rebasing]"
 elif git rev-parse --quiet --verify MERGE_HEAD > /dev/null 2>&1; then
   PROMPT="$PROMPT [merging]"
 fi
 CHANGES=$(changes)
-if [[ -n "$CHANGES" ]]; then
+if [ -n "$CHANGES" ]; then
   PROMPT="$PROMPT ($CHANGES)"
 fi
 echo "$PROMPT"
