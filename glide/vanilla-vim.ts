@@ -22,6 +22,8 @@ glide.excmds.create({ name: "b#", description: "[b]uffer [#]alternate -> switche
     await browser.tabs.update(previousTabId, { active: true })
   }
 });
+glide.keymaps.set("normal", "<C-^>", "b#", { description: "switches to previously active tab" });
+glide.keymaps.set("normal", "<C-6>", "b#", { description: "switches to previously active tab" });
 
 glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes current tab"}, () => {
   glide.excmds.execute("tab_close")
@@ -29,7 +31,9 @@ glide.excmds.create({ name: "bd", description: "[b]uffer [d]elete -> deletes cur
 
 glide.keymaps.set("normal", "<C-w>q", "tab_close", { description: "[w]indow [c]lose => closes the current tab" })
 
-glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>");
+glide.keymaps.set(["command", "insert"], "<C-h>", "keys <Backspace>", { description: "delete character before cursor" });
+glide.keymaps.set(["command", "insert"], "<C-w>", "keys <C-Backspace>", { description: "delete word before cursor" });
+glide.keymaps.set(["command", "insert"], "<C-u>", "keys <S-Home><Backspace>", { description: "delete to to beginning of line" });
 
 glide.keymaps.set("normal", "/", () => glide.findbar.open({mode: "normal", highlight_all: true}), { description: "[/] Search text on page" });
 glide.keymaps.set("normal", "n", () => glide.findbar.next_match(), { description: "[n]ext match on page" });
@@ -40,9 +44,7 @@ glide.excmds.create({ name: "noh", description: "[no] [h]ighlight -> clears find
 
 glide.keymaps.set("normal", "u", "undo");
 glide.keymaps.set("normal", "<C-r>", "redo");
-
-glide.keymaps.set("normal", "<C-^>", "b#", { description: "switches to previously active tab" });
-glide.keymaps.set("normal", "<C-6>", "b#", { description: "switches to previously active tab" });
+glide.keymaps.set( "normal", "<C-]>", "hint -s 'a[href]' --auto", { description: "follow link" });
 
 // Split windows
 glide.excmds.create({
