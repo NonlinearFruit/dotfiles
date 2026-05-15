@@ -41,6 +41,9 @@ glide.excmds.create({ name: "noh", description: "[no] [h]ighlight -> clears find
 glide.keymaps.set("normal", "u", "undo");
 glide.keymaps.set("normal", "<C-r>", "redo");
 
+glide.keymaps.set("normal", "<C-^>", "b#", { description: "switches to previously active tab" });
+glide.keymaps.set("normal", "<C-6>", "b#", { description: "switches to previously active tab" });
+
 // Split windows
 glide.excmds.create({
     name: 'vs',
