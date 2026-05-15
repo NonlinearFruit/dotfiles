@@ -16,8 +16,15 @@ export def installed-version [package] {
   | get --optional version.0
 }
 
-export def install [package] {
-  ^cargo install --locked $package
+export def install [package = "" --git=""] {
+  if ($package | is-not-empty) {
+    ^cargo install --locked $package
+  } else if ($git | is-not-empty) {
+    ^cargo install --locked --git $git
+  } else {
+    print "No package provided!"
+    exit 1
+  }
 }
 
 export def "self install" [version] {

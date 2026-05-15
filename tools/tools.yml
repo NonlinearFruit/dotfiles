@@ -11,6 +11,15 @@
   description: For making charts
   manager: dnf
 
+- cmd: nono
+  description: Capability-based sandboxes with fine-grained policies. Requires dbus-devel
+  id: --git https://github.com/always-further/nono
+  manager: cargo
+
+- cmd: dbus-devel
+  description: Required by nono
+  manager: dnf
+
 - cmd: deno
   description: Javascript runtime
   manager: cargo
