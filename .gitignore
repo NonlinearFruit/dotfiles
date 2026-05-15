@@ -3,4 +3,5 @@ nvim/lua/nonlinearfruit.lua
 nvim/lua/json.lua
 .luarc.json
 todo.md
-glide.d.ts
+*.d.ts
+*.schema.json
