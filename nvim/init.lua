@@ -68,6 +68,25 @@ local function enableCodeFolding()
   vim.opt.foldlevelstart = 99
 end
 
+local function setupFiletypeDetection()
+  vim.filetype.add({
+    pattern = {
+      [".*"] = {
+        priority = -1,
+        function(path, _)
+          local stat = vim.uv.fs_stat(path)
+          if stat and stat.type == "file" then
+            local content = vim.fn.readfile(path, "", 1)[1] or ""
+            if content:match("deno") then
+              return "javascript"
+            end
+          end
+        end,
+      },
+    },
+  })
+end
+
 setBackups()
 setIndentation()
 setLeader()
@@ -76,3 +95,4 @@ tweakDisplay()
 tweakNetrw()
 disableMouse()
 enableCodeFolding()
+setupFiletypeDetection()
