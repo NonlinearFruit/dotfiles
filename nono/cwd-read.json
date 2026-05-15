@@ -1,0 +1,12 @@
+{
+  "extends": "air-gapped",
+  "meta": {
+    "name": "cwd-read",
+    "description": "Run pi with read access to current directory"
+  },
+  "filesystem": {
+    "read": [
+      "$WORKDIR"
+    ]
+  }
+}

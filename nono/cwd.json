@@ -1,0 +1,12 @@
+{
+  "extends": "air-gapped.json",
+  "meta": {
+    "name": "cwd",
+    "description": "Run pi with read/write access to current directory"
+  },
+  "filesystem": {
+    "allow": [
+      "$WORKDIR"
+    ]
+  }
+}

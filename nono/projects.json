@@ -1,0 +1,12 @@
+{
+  "extends": "air-gapped",
+  "meta": {
+    "name": "projects",
+    "description": "Read/write access to the whole projects folder"
+  },
+  "filesystem": {
+    "allow": [
+      "~/projects/"
+    ]
+  }
+}

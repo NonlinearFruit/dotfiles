@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "name": "air-gapped",
+    "description": "Run pi without file system access"
+  },
+  "groups": {
+    "include": ["node_runtime", "linux_temp_read"]
+  },
+  "filesystem": {
+    "allow": [
+      "~/.pi/agent/"
+    ],
+    "read": [
+      "~/projects/dotfiles/pi/"
+    ]
+  }
+}

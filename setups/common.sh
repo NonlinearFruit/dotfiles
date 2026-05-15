@@ -30,7 +30,7 @@ chmod +x ~/scripts/git-jump
 mkdir -p ~/.local/share/tealdeer/pages
 
 # Wezterm
-mkdir -p  ~/.config/wezterm/
+mkdir -p ~/.config/wezterm/
 
 # Keys
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
@@ -39,10 +39,13 @@ ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
 mkdir -p ~/.config/nushell/scripts
 
 # Glide
-mkdir -p  ~/.config/glide/
+mkdir -p ~/.config/glide/
 
 # Pi
-mkdir -p  ~/.pi/agent/{extensions,skills,prompts}/
+mkdir -p ~/.pi/agent/{extensions,skills,prompts}/
+
+# Nono
+mkdir -p ~/.config/nono/profiles/
 
 # Nushell <https://www.nushell.sh/book/installation.html#pre-built-binaries>
 echo "[gemfury-nushell]
