@@ -23,6 +23,7 @@ local function configure()
   runner_keybindings()
   install_lsp_if_needed()
   -- :LspStart on first load
+  vim.lsp.enable("clojure_lsp")
 end
 
 return {

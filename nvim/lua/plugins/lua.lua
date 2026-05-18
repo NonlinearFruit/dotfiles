@@ -7,6 +7,7 @@ end
 
 local function configure()
   install_lsp_and_dap_if_needed()
+  vim.lsp.enable("lua_ls")
   require("lazydev").setup()
 end
 

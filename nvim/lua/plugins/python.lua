@@ -6,6 +6,7 @@ end
 
 local function configure()
   install_lsp_and_dap_if_needed()
+  vim.lsp.enable("pylyzer")
 end
 
 return {
