@@ -1,5 +1,5 @@
 {
-  "extends": "air-gapped.json",
+  "extends": "air-gapped",
   "meta": {
     "name": "cwd",
     "description": "Run pi with read/write access to current directory"
