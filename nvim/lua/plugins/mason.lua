@@ -19,9 +19,7 @@ local function configure()
     },
   })
 
-  mason_lsp_config.setup({
-    automatic_installation = false,
-  })
+  mason_lsp_config.setup()
 
   --vim.lsp.set_log_level('debug')
 
