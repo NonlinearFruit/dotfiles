@@ -72,15 +72,6 @@
       "prompts": []
     },
     {
-      "source": "git:github.com/prateekmedia/pi-hooks",
-      "extensions": [
-        "permission/permission.ts"
-      ],
-      "skills": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
       "source": "git:github.com/badlogic/pi-skills",
       "skills": [
         "skills/youtube-transcript"
