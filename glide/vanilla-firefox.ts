@@ -6,6 +6,7 @@ glide.prefs.set("ui.systemUsesDarkTheme", 1);
 glide.prefs.set("browser.tabs.splitView.enabled", true);
 // Disable "Alt" key from toggling top menu
 glide.prefs.set("ui.key.menuAccessKeyFocuses", false)
+glide.prefs.set("media.videocontrols.picture-in-picture.video-toggle.enabled", true);
 
 // https://addons.mozilla.org
 glide.addons.install(
