@@ -2,7 +2,15 @@
   "lastChangelogVersion": "0.67.6",
   "enableInstallTelemetry": false,
   "packages": [
-    "git:github.com/v2nic/pi-caveman",
+    {
+      "source": "git:github.com/JuliusBrussee/caveman",
+      "skills": [
+        "skills/caveman"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
     {
       "source": "git:github.com/mattpocock/skills",
       "skills": [
