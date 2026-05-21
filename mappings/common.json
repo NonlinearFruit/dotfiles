@@ -21,6 +21,7 @@
   ["pi/cursor-rules-extension.ts", "~/.pi/agent/extensions/cursor-rules-extension.ts"],
   ["pi/double-check-prompt.md", "~/.pi/agent/prompts/double-check.md"],
   ["pi/models.json", "~/.pi/agent/models.json"],
+  ["pi/nono-profile-extension.ts", "~/.pi/agent/extensions/nono-profile-extension.ts"],
   ["pi/retro-prev-session-prompt.md", "~/.pi/agent/prompts/retro-prev-session.md"],
   ["pi/save-last-extension.ts", "~/.pi/agent/extensions/save-last-extension.ts"],
   ["pi/settings.json", "~/.pi/agent/settings.json"],
