@@ -13,5 +13,14 @@
     "read": [
       "~/projects/dotfiles/pi/"
     ]
+  },
+  "environment": {
+    "allow_vars": [
+      "HOME",
+      "MCPC_HOME_DIR",
+      "NONO_PROFILE",
+      "PATH",
+      "TERM"
+    ]
   }
 }
