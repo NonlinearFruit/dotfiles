@@ -113,9 +113,9 @@ async function mktemp(template) {
   if (glide.ctx.os == "win") {
     const randomSuffix = Math.random().toString(36).substring(2, 8);
     const filename = template.replace("XXXXXX", randomSuffix);
-    return glide.path.join(glide.path.temp_dir, `${filename}.md`);
+    return glide.path.join(glide.path.temp_dir, `${filename}.json`);
   } else {
-    const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".md"]);
+    const mktemp_cmd = await glide.process.execute("mktemp", ["-t", template, "--suffix", ".json"]);
     return (await mktemp_cmd.stdout.text()).trim();
   }
 }
