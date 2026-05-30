@@ -1,6 +1,7 @@
 {
   "lastChangelogVersion": "0.77.0",
   "enableInstallTelemetry": false,
+  "showHardwareCursor": true,
   "packages": [
     {
       "source": "git:github.com/JuliusBrussee/caveman",
