@@ -8,9 +8,14 @@
   },
   "filesystem": {
     "allow": [
+      "~/.local/share/NuGet",
+      "~/.nuget",
       "~/.pi/agent/"
     ],
     "read": [
+      "/etc/gitconfig",
+      "~/.dotnet",
+      "~/.gitconfig",
       "~/projects/dotfiles/pi/"
     ]
   },
