@@ -3,25 +3,17 @@
 if [[ "$1" == "copy" ]]; then
   if is termux ; then
     termux-clipboard-set
-  fi
-
-  if is wsl ; then
+  elif is wsl ; then
     clip.exe
-  fi
-
-  if is linux ; then
+  elif is linux ; then
     xclip -sel clip
   fi
 else
   if is termux ; then
     termux-clipboard-get
-  fi
-
-  if is wsl ; then
+  elif is wsl ; then
     powershell.exe Get-Clipboard | dos2unix
-  fi
-
-  if is linux ; then
+  elif is linux ; then
     xclip -sel clip -o
   fi
 fi
