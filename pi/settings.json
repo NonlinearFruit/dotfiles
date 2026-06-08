@@ -52,16 +52,6 @@
       "prompts": []
     },
     {
-      "source": "git:github.com/github/awesome-copilot",
-      "skills": [
-        "skills/refactor",
-        "skills/repo-story-time"
-      ],
-      "extensions": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
       "source": "git:github.com/obra/superpowers",
       "skills": [
         "skills/test-driven-development",
