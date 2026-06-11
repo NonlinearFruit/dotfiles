@@ -92,13 +92,6 @@ Symlink any config file to any location
 (get-mappings | each { { Mapping: $in } } | to md)
 </details>
 
-<details><summary>Cheatsheets</summary>
-
-Custom TLDR pages
-
-(get-cheatsheets | each { { Cheatsheet: $in } } | to md)
-</details>
-
 ## Formatting
 
 ```sh
@@ -118,9 +111,9 @@ Custom TLDR pages
 def get-configs [] {
   let not_configs = [
     README, toolkit
-    cheatsheets, scripts
-    init, setups
-    map, mappings
+    scripts, init,
+    setups, map,
+    mappings
   ]
   ls
   | get name
@@ -150,14 +143,6 @@ def get-mappings [] {
 
 def get-setups [] {
   ls setups
-  | get name
-  | path parse
-  | get stem
-  | sort
-}
-
-def get-cheatsheets [] {
-  ls cheatsheets
   | get name
   | path parse
   | get stem

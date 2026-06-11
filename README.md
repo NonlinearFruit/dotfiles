@@ -61,6 +61,7 @@ The actual dotfiles for various tools
 | bashrc |
 | gitconfig |
 | glide |
+| nono |
 | nvim |
 | pi |
 | termux |
@@ -84,10 +85,12 @@ Helpful automation for various tasks
 | clip |  |
 | cljue | [demo](.tapes/cljue.gif) |
 | countdown |  |
+| cuckoo |  |
 | datediff |  |
 | esv | [demo](.tapes/esv.gif) |
 | esv-search |  |
 | gdocs |  |
+| git-prompt |  |
 | highlight | [demo](.tapes/highlight.gif) |
 | ipsum |  |
 | is |  |
@@ -102,8 +105,8 @@ Helpful automation for various tasks
 | nvim-list-servers |  |
 | nvim-plugins |  |
 | nvims |  |
+| open-nvim-from-windows |  |
 | passphrase |  |
-| print-pi-session |  |
 | profile-nvim | [demo](.tapes/profile-nvim.gif) |
 | reprint |  |
 | ssh |  |
@@ -146,22 +149,6 @@ Symlink any config file to any location
 | common |
 | termux |
 | wsl |
-</details>
-
-<details><summary>Cheatsheets</summary>
-
-Custom TLDR pages
-
-| Cheatsheet |
-| --- |
-| bash-notes |
-| neotest |
-| neovim |
-| nerd-font-symbols |
-| nerd-fonts |
-| netrw |
-| nvim-dap |
-| telescope |
 </details>
 
 ## Formatting
