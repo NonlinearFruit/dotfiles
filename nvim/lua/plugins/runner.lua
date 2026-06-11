@@ -15,6 +15,14 @@ local function configure()
     { desc = "[v]imux [z]oom (tmux <leader>-z to toggle https://superuser.com/a/576505/468052)" }
   )
 
+  vim.keymap.set("n", "<leader>vq", function()
+    vim.fn.setqflist({}, "r", {
+      lines = runner.capture(1),
+      efm = vim.o.errorformat,
+    })
+    vim.cmd("copen")
+  end, { desc = "[v]imux capture pane into [q]uickfix" })
+
   vim.keymap.set("v", "<leader>vp", function()
     runner.run(helpers.get_selected_text())
   end, { desc = "[v]imux [p]rompt with the selected code" })
