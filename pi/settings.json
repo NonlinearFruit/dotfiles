@@ -22,8 +22,32 @@
         "skills/engineering/to-issues",
         "skills/engineering/to-prd",
         "skills/engineering/triage",
+        "skills/in-progress/review",
         "skills/productivity/grill-me",
+        "skills/productivity/teach",
         "skills/productivity/write-a-skill"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/cursor/plugins/thermos",
+      "skills": [
+        "skills/thermo-nuclear-code-quality-review",
+        "skills/thermo-nuclear-review"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
+    },
+    {
+      "source": "git:github.com/slagyr/agent-lib",
+      "skills": [
+        "skills/architecture",
+        "skills/refactor",
+        "skills/smells",
+        "skills/tdd"
       ],
       "extensions": [],
       "themes": [],
