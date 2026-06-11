@@ -7,6 +7,7 @@ alias vi="$EDITOR"
 alias vim="$EDITOR"
 alias dirp='basename $PWD'
 alias protontricks='flatpak run com.github.Matoking.protontricks'
+alias nono='MCPC_HOME_DIR=/tmp/.mcpc nono'
 
 if is wsl ; then
   alias npp='notepad++.exe'
