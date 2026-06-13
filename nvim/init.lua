@@ -1,12 +1,12 @@
-local function setLeader()
+local function set_leader()
   vim.g.mapleader = " "
 end
 
-local function disableMouse()
+local function disable_mouse()
   vim.opt.mouse = ""
 end
 
-local function setIndentation()
+local function set_indentation()
   vim.opt.tabstop = 2
   vim.opt.softtabstop = 2
   vim.opt.shiftwidth = 2
@@ -14,7 +14,7 @@ local function setIndentation()
   vim.opt.smartindent = true
 end
 
-local function tweakDisplay()
+local function tweak_display()
   vim.opt.wrap = false
   vim.opt.number = true
   vim.opt.relativenumber = false
@@ -22,22 +22,19 @@ local function tweakDisplay()
   vim.o.cursorline = true
 end
 
-local function tweakNetrw()
+local function tweak_netrw()
   vim.g.netrw_banner = 0 -- Hide banner
   vim.g.netrw_liststyle = 3 -- Tree view
   vim.g.netrw_preview = 0 -- Preview below
 end
 
-local function setBackups()
-  vim.opt.swapfile = true
-  vim.opt.directory = os.getenv("HOME") .. "/.nvim/swapfiles"
+local function set_backups()
   vim.opt.backup = true
-  vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
   vim.opt.undofile = true
-  vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undofiles"
+  vim.opt.backupdir = os.getenv("HOME") .. "/.nvim/backupfiles"
 end
 
-local function setPlugins()
+local function set_plugins()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -60,7 +57,7 @@ local function setPlugins()
   })
 end
 
-local function enableCodeFolding()
+local function enable_code_folding()
   -- Use treesitter by default
   vim.o.foldmethod = "expr"
   vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -68,7 +65,7 @@ local function enableCodeFolding()
   vim.opt.foldlevelstart = 99
 end
 
-local function setupFiletypeDetection()
+local function setup_filetype_detection()
   vim.filetype.add({
     pattern = {
       [".*"] = {
@@ -89,12 +86,12 @@ local function setupFiletypeDetection()
   })
 end
 
-setBackups()
-setIndentation()
-setLeader()
-setPlugins()
-tweakDisplay()
-tweakNetrw()
-disableMouse()
-enableCodeFolding()
-setupFiletypeDetection()
+set_backups()
+set_indentation()
+set_leader()
+set_plugins()
+tweak_display()
+tweak_netrw()
+disable_mouse()
+enable_code_folding()
+setup_filetype_detection()
