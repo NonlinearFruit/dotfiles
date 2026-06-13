@@ -1,6 +1,8 @@
 local function configure()
   vim.cmd("TSInstall d2")
-  vim.bo.filetype = "d2"
+  vim.filetype.add({
+    extension = { d2 = "d2" },
+  })
 end
 
 return {

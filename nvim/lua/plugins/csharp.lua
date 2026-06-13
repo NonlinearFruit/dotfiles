@@ -1,7 +1,7 @@
 local function non_standard_options()
-  vim.opt.tabstop = 4
-  vim.opt.softtabstop = 4
-  vim.opt.shiftwidth = 4
+  vim.opt_local.tabstop = 4
+  vim.opt_local.softtabstop = 4
+  vim.opt_local.shiftwidth = 4
 end
 
 local function go_to_test_file_key_mapping()

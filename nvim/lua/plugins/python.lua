@@ -12,6 +12,6 @@ end
 return {
   "local/python",
   config = configure,
-  ft = "py",
+  ft = "python",
   virtual = true,
 }

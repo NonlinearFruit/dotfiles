@@ -1,5 +1,7 @@
 local function configure()
-  vim.bo.filetype = "xml"
+  vim.filetype.add({
+    extension = { xaml = "xml", props = "xml", csproj = "xml" },
+  })
 end
 
 return {

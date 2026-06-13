@@ -1,5 +1,7 @@
 local function configure()
-  vim.bo.filetype = "crontab"
+  vim.filetype.add({
+    extension = { crontab = "crontab" },
+  })
 end
 
 return {
