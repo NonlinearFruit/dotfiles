@@ -20,6 +20,7 @@ local function configure()
   })
 
   mason_lsp_config.setup()
+  require("installer").mark_mason_ready()
 
   --vim.lsp.set_log_level('debug')
 
