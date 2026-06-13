@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if is termux ; then
+  termux-open "$@" # requires pkg install termux-api
+elif is wsl ; then
+  explorer.exe "$(wslpath -w "$@")"
+elif is linux ; then
+  xdg-open "$@"
+fi
