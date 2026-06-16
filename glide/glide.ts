@@ -42,7 +42,7 @@ glide.autocmds.create("UrlEnter", { hostname: "www.youtube.com" }, ({ tab_id }) 
   glide.buf.keymaps.set("normal", "<leader>d", async () => {
     await browser.notifications.create({ type: "basic", title: "glide config", message: "Download started..." })
     const video_url = glide.ctx.url
-    await glide.process.execute("nix-shell", ["--packages", "yt-dlp", "--run", "yt-dlp --cookies-from-browser vivaldi --paths ~/Downloads/youtube " + video_url])
+    await glide.process.execute("nix-shell", ["--packages", "yt-dlp", "--run", `yt-dlp --cookies-from-browser firefox:${glide.path.profile_dir} --paths ~/Downloads/youtube ${video_url}`])
     await browser.notifications.create({ type: "basic", title: "glide config", message: "Video is downloaded!" })
   }, { description: "[d]ownload youtube video" })
 });
