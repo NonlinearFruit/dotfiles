@@ -42,6 +42,7 @@ local function install_lsp_and_dap_if_needed()
   require("installer").install_if_missing({
     -- Avoid WSL bug in file watching in dotnet runtime <https://github.com/seblyng/roslyn.nvim/issues/303#issuecomment-4144530656>
     "roslyn@5.4.0-2.26175.10", -- LSP Needs to be manually installed from the Mason gui?
+    "html-lsp", -- Roslyn uses this for Razor/CSHTML cohosting
     "netcoredbg", -- DAP
   })
 end
@@ -111,6 +112,7 @@ local function configure()
   go_to_test_file_key_mapping()
   runner_key_mappings()
   install_lsp_and_dap_if_needed()
+  vim.lsp.enable("html")
   configure_dap()
   vim.cmd.compiler("dotnet")
 end
