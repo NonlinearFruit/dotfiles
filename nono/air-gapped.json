@@ -14,8 +14,10 @@
     ],
     "read": [
       "/etc/gitconfig",
+      "~/.cargo/bin",
       "~/.dotnet",
       "~/.gitconfig",
+      "~/.local/share/bob",
       "~/projects/dotfiles/pi/"
     ]
   },
