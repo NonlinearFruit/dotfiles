@@ -94,6 +94,17 @@
       "extensions": [],
       "themes": [],
       "prompts": []
+    },
+    {
+      "source": "git:github.com/DietrichGebert/ponytail",
+      "skills": [
+        "skills/ponytail",
+        "skills/ponytail-audit",
+        "skills/ponytail-review"
+      ],
+      "extensions": [],
+      "themes": [],
+      "prompts": []
     }
   ],
   "defaultProvider": "anthropic",
