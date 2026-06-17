@@ -9,6 +9,7 @@
   "filesystem": {
     "allow": [
       "~/.local/share/NuGet",
+      "~/.local/share/bob",
       "~/.nuget",
       "~/.pi/agent/"
     ],
@@ -23,6 +24,7 @@
   },
   "environment": {
     "allow_vars": [
+      "EDITOR",
       "HOME",
       "MCPC_HOME_DIR",
       "NONO_PROFILE",
