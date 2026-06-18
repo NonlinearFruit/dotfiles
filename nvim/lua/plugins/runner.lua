@@ -3,6 +3,7 @@ local function configure()
   local helpers = require("helpers")
   vim.keymap.set("n", "<leader>vd", runner.close, { desc = "[v]imux [d]elete" })
   vim.keymap.set("n", "<leader>vp", runner.prompt, { desc = "[v]imux [p]rompt" })
+  vim.keymap.set("n", "<leader>vs", runner.switch, { desc = "[v]imux [s]witch which pane is the runner" })
 
   vim.keymap.set("n", "<leader>vr", function()
     runner.run("!!")

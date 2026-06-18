@@ -1,5 +1,31 @@
 -- Inspiration: https://github.com/preservim/vimux
 local M = {}
+local runner_id
+
+local function cache_runner_id(id)
+  runner_id = id
+  return runner_id
+end
+
+local function list_panes()
+  local panes = {}
+  local pane_query = "#{pane_active}\t#{pane_id}\t#{pane_index}\t#{pane_current_command}"
+  local lines = vim.fn.systemlist("tmux list-panes -F '"..pane_query.."'")
+
+  for _, line in ipairs(lines) do
+    local fields = vim.split(line, "\t")
+    if #fields >= 4 then
+      table.insert(panes, {
+        active = fields[1] == "1",
+        id = fields[2],
+        index = fields[3],
+        command = fields[4],
+      })
+    end
+  end
+
+  return panes
+end
 
 M.close = function()
   local runner = M.getId()
@@ -102,14 +128,50 @@ M.zoom = function()
   os.execute("tmux resize-pane -Z -t " .. runner)
 end
 
-M.getId = function()
-  local panes = vim.fn.systemlist("tmux list-panes -F '#{pane_active}:#{pane_id}'")
-  for _, pane in pairs(panes) do
-    if string.sub(pane, 1, 1) ~= "1" then
-      return string.sub(pane, 3)
+M.switch = function()
+  local panes = {}
+  for _, pane in ipairs(list_panes()) do
+    if not pane.active then
+      table.insert(panes, pane)
     end
   end
-  return ""
+
+  if #panes == 0 then
+    return cache_runner_id(M.createIfNoRunner())
+  elseif #panes == 1 then
+    return cache_runner_id(panes[1].id)
+  end
+
+  local helpers = require("helpers")
+  local selection = helpers.pick_one_sync("Select runner pane", panes, function(pane)
+    return string.format("%s [%s]", pane.command, pane.index)
+  end)
+
+  if selection == nil then
+    return M.getId()
+  end
+
+  return cache_runner_id(selection.id)
+end
+
+M.getId = function()
+  local first_non_active_pane = nil
+  if runner_id ~= nil then
+    for _, pane in ipairs(list_panes()) do
+      if pane.id == runner_id then
+        return runner_id
+      elseif not pane.active and first_non_active_pane == nil then
+        first_non_active_pane = pane.id
+      end
+    end
+    runner_id = nil
+  end
+
+  if first_non_active_pane == nil then
+    return ""
+  end
+
+  return cache_runner_id(first_non_active_pane)
 end
 
 return M
