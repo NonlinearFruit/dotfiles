@@ -105,6 +105,7 @@ Helpful automation for various tasks
 | nvim-list-servers |  |
 | nvim-plugins |  |
 | nvims |  |
+| open |  |
 | open-nvim-from-windows |  |
 | passphrase |  |
 | profile-nvim | [demo](.tapes/profile-nvim.gif) |
@@ -119,7 +120,6 @@ Helpful automation for various tasks
 | to-vimgrep |  |
 | toggle-pair |  |
 | vdocs |  |
-| view |  |
 | who-is-smallest-of-them-all |  |
 | whos-where |  |
 </details>
