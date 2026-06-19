@@ -29,7 +29,7 @@ end
 
 M.close = function()
   local runner = M.getId()
-  if runner == "" then
+  if runner == nil then
     return
   end
   os.execute("tmux kill-pane -t " .. runner)
@@ -42,21 +42,10 @@ end
 
 M.createIfNoRunner = function()
   local runner = M.getId()
-  if runner == "" then
-    local job = vim.fn.jobstart("tmux -V", {
-      stdout_buffered = true,
-      on_stdout = function(_, data)
-        local version = data[1]
-        if string.sub(version, 6, 8) == "3.0" then
-          os.execute("tmux split-window -p 40 -h")
-        else
-          os.execute("tmux split-window -l 40% -h")
-        end
-      end,
-    })
-    vim.fn.jobwait({ job })
-    os.execute("tmux last-pane")
-    runner = M.getId()
+  if runner == nil then
+    local split_command = "tmux split-window -d -P -F '#{pane_id}' -l 40% -h"
+    runner = vim.fn.systemlist(split_command)[1]
+    cache_runner_id(runner)
   end
   return runner
 end
@@ -72,7 +61,7 @@ end
 
 M.run = function(cmd)
   local runner = M.createIfNoRunner()
-  if runner == "" or cmd == "" then
+  if runner == nil or cmd == "" then
     return
   end
   local hex_escape = toHexadecimal(cmd)
@@ -156,21 +145,13 @@ end
 
 M.getId = function()
   local first_non_active_pane = nil
-  if runner_id ~= nil then
-    for _, pane in ipairs(list_panes()) do
-      if pane.id == runner_id then
-        return runner_id
-      elseif not pane.active and first_non_active_pane == nil then
-        first_non_active_pane = pane.id
-      end
+  for _, pane in ipairs(list_panes()) do
+    if pane.id == runner_id then
+      return runner_id
+    elseif not pane.active and first_non_active_pane == nil then
+      first_non_active_pane = pane.id
     end
-    runner_id = nil
   end
-
-  if first_non_active_pane == nil then
-    return ""
-  end
-
   return cache_runner_id(first_non_active_pane)
 end
 
