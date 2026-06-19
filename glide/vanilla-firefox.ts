@@ -12,8 +12,6 @@ glide.prefs.set("media.videocontrols.picture-in-picture.video-toggle.enabled", t
 glide.prefs.set("privacy.donottrackheader.enabled", true);
 glide.prefs.set("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 glide.prefs.set("dom.security.https_only_mode", true);
-glide.prefs.set("network.trr.mode", 3); // DNS over HTTPS
-glide.prefs.set("network.trr.uri", "https://mozilla.cloudflare-dns.com/dns-query");
 
 // https://addons.mozilla.org
 glide.addons.install(
