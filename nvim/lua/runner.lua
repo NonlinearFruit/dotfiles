@@ -10,7 +10,7 @@ end
 local function list_panes()
   local panes = {}
   local pane_query = "#{pane_active}\t#{pane_id}\t#{pane_index}\t#{pane_current_command}"
-  local lines = vim.fn.systemlist("tmux list-panes -F '"..pane_query.."'")
+  local lines = vim.fn.systemlist("tmux list-panes -F '" .. pane_query .. "'")
 
   for _, line in ipairs(lines) do
     local fields = vim.split(line, "\t")
