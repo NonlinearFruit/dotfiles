@@ -6,8 +6,10 @@ local function install(packages)
 
   for _, pkg in ipairs(packages) do
     local name = pkg:gsub("@.*$", "")
+    local version = pkg:match("@(.+)$")
     if not registry.is_installed(name) then
-      registry.get_package(name):install()
+      local opts = version and { version = version } or nil
+      registry.get_package(name):install(opts)
     end
   end
 end
