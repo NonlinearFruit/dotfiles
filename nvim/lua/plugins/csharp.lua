@@ -123,7 +123,10 @@ return {
   ft = "cs",
   virtual = true,
   dependencies = {
-    "seblyng/roslyn.nvim", -- c# lsp
+    {
+      "seblyng/roslyn.nvim", -- c# lsp
+      commit = "49526a2958893d0c8000d03b16ed923340ce13cc", -- last version compatible with the rosylin lsp pinned above
+    },
     "mfussenegger/nvim-dap", -- must load before configure_dap() runs on ft=cs
   },
 }
