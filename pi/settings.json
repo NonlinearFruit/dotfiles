@@ -18,12 +18,12 @@
         "skills/engineering/diagnose",
         "skills/engineering/grill-with-docs",
         "skills/engineering/improve-codebase-architecture",
-        "skills/engineering/tdd",
         "skills/engineering/to-issues",
         "skills/engineering/to-prd",
         "skills/engineering/triage",
         "skills/in-progress/review",
         "skills/productivity/grill-me",
+        "skills/productivity/handoff",
         "skills/productivity/teach",
         "skills/productivity/write-a-skill"
       ],
@@ -46,8 +46,7 @@
       "skills": [
         "skills/architecture",
         "skills/refactor",
-        "skills/smells",
-        "skills/tdd"
+        "skills/smells"
       ],
       "extensions": [],
       "themes": [],
