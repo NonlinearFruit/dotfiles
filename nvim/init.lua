@@ -54,6 +54,9 @@ local function set_plugins()
     change_detection = {
       notify = false,
     },
+    dev = {
+      path = "~/projects",
+    },
   })
 end
 
