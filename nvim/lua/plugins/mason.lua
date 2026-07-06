@@ -19,7 +19,9 @@ local function configure()
     },
   })
 
-  mason_lsp_config.setup()
+  mason_lsp_config.setup({
+    automatic_enable = false, -- Avoid race between mason lsp enable and custom lsp config in other files
+  })
   require("installer").mark_mason_ready()
 
   --vim.lsp.set_log_level('debug')
