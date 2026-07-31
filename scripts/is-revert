@@ -1,0 +1,17 @@
+#!/bin/env nu
+
+# true if the diff for this commit compliments exactly the commit it claims to revert
+def main [revert_commit] {
+  let original_commit = ^git log -n 1 --format=%B $revert_commit
+  | parse 'This reverts commit {commit}.'
+  | get 0.commit
+  (patch $original_commit) == (reverse-patch $revert_commit)
+}
+
+def patch [commit] {
+  ^git diff $"($commit)^" $commit
+}
+
+def reverse-patch [commit] {
+  ^git diff $commit $"($commit)^"
+}
