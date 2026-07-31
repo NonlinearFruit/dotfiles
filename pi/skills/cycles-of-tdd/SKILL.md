@@ -11,16 +11,6 @@ description: >-
 
 # Cycles of TDD
 
-## Quick start
-
-For each behavior:
-
-1. Write one small failing test.
-2. Write the smallest amount of code to pass it.
-3. Refactor while tests stay green.
-4. Every few tests, ask whether the code is becoming more general through the smallest useful transformation.
-5. Every hour or so, step back and review boundaries and architecture.
-
 ## Workflows
 
 ### 1. Nano-cycle: The Three Laws
@@ -30,6 +20,8 @@ For each behavior:
 - Write no more production code than needed to make the current failing test pass.
 - Prefer line-by-line or nearly line-by-line movement.
 
+Done when: exactly one test is failing, that test fails for the expected reason (not setup or syntax), and the production change makes only that test pass — nothing more was added.
+
 ### 2. Micro-cycle: Red / Green / Refactor
 
 - `RED`: add a failing unit test for one behavior.
@@ -38,12 +30,15 @@ For each behavior:
 - Treat refactoring as continuous work, not a later cleanup phase.
 - Avoid horizontal slicing: do one test, one implementation step, then repeat.
 
-### Verify RED / GREEN
+### Completion criteria: RED / GREEN / REFACTOR
 
-Before moving on:
-- `RED`: the new test fails for the expected reason, not because of setup or typos.
-- `GREEN`: the new test passes, related tests stay green, and output is clean.
-- During `RED` and `GREEN`, run the smallest test scope that covers the change.
+`RED` is done when: the new test fails for the expected reason — not because of setup, imports, or typos. Run the smallest test scope; if it fails for the wrong reason, fix the test before writing any production code.
+
+`GREEN` is done when: the new test passes, all previously passing tests are still green, and output is clean. If unrelated tests broke, fix them before moving to REFACTOR.
+
+`REFACTOR` is done when: every name communicates intent without requiring the reader to look at the body; no logic is duplicated across the production code or the tests; structure fits the shape of the problem. All tests must remain green throughout. If you cannot refactor without breaking tests, the design needs a smaller step — backtrack rather than skip.
+
+Additional constraints that apply during RED and GREEN:
 - Tests should verify observable behavior through public interfaces, not implementation details.
 - Name tests with concrete examples of behavior instead of abstract capability labels.
 - Prefer real code; mock only when unavoidable.
@@ -58,9 +53,9 @@ Every few tests, stop and inspect the direction of the design:
 - Would the latest code likely pass plausible unwritten tests too?
 - When generalizing, can the next step be a smaller transformation instead of a design leap?
 
-Use the Transformation Priority Premise to prefer the smallest move that increases generality, such as moving from a constant to a calculation, from a scalar to a collection, or from an unconditional path to a conditional one.
+Use the Transformation Priority Premise to prefer the smallest move that increases generality. See [TPP moves](REFERENCE.md) for a ranked list of transformations.
 
-If the code only satisfies the exact examples already written, it is probably too specific.
+Done when: you can answer yes to "would this implementation plausibly pass reasonable unwritten cases?" If no — the code is too specific. Before writing the next test, either choose a different next test that encourages a more general solution, or apply the next smaller TPP move. Do not proceed until the answer is yes.
 
 ### 4. Primary cycle: Boundaries
 
@@ -70,25 +65,13 @@ Roughly once per hour, zoom out:
 - Decide which side of each boundary the current behavior belongs on.
 - Use those architecture decisions to guide the next round of tests and implementation.
 
-### 5. Recovery: When You Get Stuck
-
-If the next step requires a large leap outside the tiny TDD loop:
-
-1. Treat that as a signal of local optimization.
-2. Backtrack to an earlier passing test.
-3. Remove or rewrite overly specific tests.
-4. Rebuild with tests that add specificity more slowly and code that adds generality sooner.
-5. Use TPP to choose a smaller transformation instead of forcing a large redesign in one jump.
+Done when: every boundary you are nearing has a decided side, and the next test is chosen to honor that decision. If a boundary is too uncertain to decide, that uncertainty is the work — resolve it (sketch, discuss, or spike) before resuming the micro-cycle.
 
 ## Heuristics
 
-- Getting the code to work is only half the job; the other half is keeping it easy to change.
-- If production code starts mirroring test data too closely, generalize it.
-- If generalization feels blocked, pick a smaller TPP move.
-- If refactoring is being postponed, part of TDD is being skipped.
 - If a test needs many mocks or awkward setup, treat that as a boundary or design smell.
 - If architecture concerns are surfacing, pause and review boundaries instead of pushing through blindly.
 
-## Advanced features
+## Reference
 
-See [REFERENCE.md](REFERENCE.md) for prompts, review questions, and a compact operating checklist.
+See [REFERENCE.md](REFERENCE.md) for the operating checklist, TPP moves, failure modes (including stuck recovery), and a short prompt for this skill.
