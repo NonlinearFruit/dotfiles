@@ -18,6 +18,7 @@
         "skills/engineering/diagnose",
         "skills/engineering/grill-with-docs",
         "skills/engineering/improve-codebase-architecture",
+        "skills/engineering/prototype",
         "skills/engineering/to-issues",
         "skills/engineering/to-prd",
         "skills/engineering/triage",
@@ -25,7 +26,8 @@
         "skills/productivity/grill-me",
         "skills/productivity/handoff",
         "skills/productivity/teach",
-        "skills/productivity/write-a-skill"
+        "skills/productivity/write-a-skill",
+        "skills/productivity/writing-great-skills"
       ],
       "extensions": [],
       "themes": [],
@@ -68,29 +70,7 @@
         "extensions/review.ts",
         "extensions/whimsical.ts"
       ],
-      "skills": [
-        "skills/frontend-design"
-      ],
-      "themes": [],
-      "prompts": []
-    },
-    {
-      "source": "git:github.com/obra/superpowers",
-      "skills": [
-        "skills/test-driven-development",
-        "skills/writing-plans",
-        "skills/writing-skills"
-      ],
-      "extensions": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
-      "source": "git:github.com/badlogic/pi-skills",
-      "skills": [
-        "skills/youtube-transcript"
-      ],
-      "extensions": [],
+      "skills": [],
       "themes": [],
       "prompts": []
     },
