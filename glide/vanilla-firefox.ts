@@ -15,7 +15,7 @@ glide.prefs.set("dom.security.https_only_mode", true);
 
 // https://addons.mozilla.org
 glide.addons.install(
-  "https://addons.mozilla.org/firefox/downloads/file/4598854/ublock_origin-1.67.0.xpi",
+  "https://addons.mozilla.org/firefox/downloads/file/4598854/ublock_origin-1.67.0.xpi", { private_browsing_allowed: true },
 );
 glide.addons.install(
   "https://addons.mozilla.org/firefox/downloads/file/4599707/bitwarden_password_manager-2025.10.0.xpi",
