@@ -8,4 +8,7 @@ return {
   config = configure,
   ft = "nu",
   virtual = true,
+  dependencies = {
+    "neovim/nvim-lspconfig",
+  },
 }
