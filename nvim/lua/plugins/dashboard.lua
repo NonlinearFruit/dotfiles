@@ -134,5 +134,10 @@ return {
   "nvimdev/dashboard-nvim",
   lazy = false,
   config = configure,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = {
+    {
+      "nvim-tree/nvim-web-devicons",
+      commit = "d06a97319ff761388f3fb4cbdcdc3ec69cbfba21", -- Wezterm's bundled nerd font is old, can't use latest without missing glyphs
+    },
+  },
 }
