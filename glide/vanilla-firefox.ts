@@ -13,6 +13,19 @@ glide.prefs.set("privacy.donottrackheader.enabled", true);
 glide.prefs.set("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 glide.prefs.set("dom.security.https_only_mode", true);
 
+glide.prefs.set("browser.gesture.swipe.left", null);
+glide.prefs.set("browser.gesture.swipe.right", null);
+glide.prefs.set("browser.gesture.pinch.in", null);
+glide.prefs.set("browser.gesture.pinch.in.shift", null);
+glide.prefs.set("browser.gesture.pinch.out", null);
+glide.prefs.set("browser.gesture.pinch.out.shift", null);
+glide.prefs.set("browser.gesture.swipe.down", null);
+glide.prefs.set("browser.gesture.swipe.up", null);
+glide.prefs.set("browser.gesture.tap", null);
+glide.prefs.set("browser.gesture.twist.end", null);
+glide.prefs.set("browser.gesture.twist.left", null);
+glide.prefs.set("browser.gesture.twist.right", null);
+
 // https://addons.mozilla.org
 glide.addons.install(
   "https://addons.mozilla.org/firefox/downloads/file/4598854/ublock_origin-1.67.0.xpi", { private_browsing_allowed: true },
