@@ -12,6 +12,10 @@
   description: View processes
   manager: cargo
 
+- cmd: kde-connect
+  description: For interacting with Android
+  manager: dnf
+
 - cmd: gnuplot
   description: For making charts
   manager: dnf
