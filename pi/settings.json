@@ -38,21 +38,9 @@
       "prompts": []
     },
     {
-      "source": "git:github.com/cursor/plugins/thermos",
+      "source": "git:github.com/multica-ai/andrej-karpathy-skills",
       "skills": [
-        "skills/thermo-nuclear-code-quality-review",
-        "skills/thermo-nuclear-review"
-      ],
-      "extensions": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
-      "source": "git:github.com/slagyr/agent-lib",
-      "skills": [
-        "skills/architecture",
-        "skills/refactor",
-        "skills/smells"
+        "skills/karpathy-guidelines"
       ],
       "extensions": [],
       "themes": [],
@@ -61,7 +49,6 @@
     {
       "source": "git:github.com/mitsuhiko/agent-stuff",
       "extensions": [
-        "extensions/review.ts",
         "extensions/whimsical.ts"
       ],
       "skills": [],
