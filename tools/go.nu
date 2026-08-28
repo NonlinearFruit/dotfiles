@@ -8,7 +8,7 @@ export def install [package version = latest] {
   ^go install $"($package)@($version)"
 }
 
-export def "self install" [version = 1.22.0] {
+export def "self install" [version = 1.27.0] {
   if not (is-admin) {
     print "Needs admin rights to install!"
     return
