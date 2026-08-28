@@ -182,6 +182,12 @@
   manager: go
   id: github.com/charmbracelet/freeze
 
+- cmd: hugo
+  description: static site generate
+  url: https://github.com/gohugoio/hugo
+  manager: go
+  id: -tags extended github.com/gohugoio/hugo@latest
+
 - cmd: curl
   description: http client
   manager: dnf
