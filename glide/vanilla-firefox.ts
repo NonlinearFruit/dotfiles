@@ -5,6 +5,7 @@ glide.prefs.set("extensions.formautofill.creditCards.enabled", false);
 glide.prefs.set("extensions.formautofill.addresses.enabled", false);
 glide.prefs.set("ui.systemUsesDarkTheme", 1);
 glide.prefs.set("browser.tabs.splitView.enabled", true);
+glide.prefs.set("sidebar.verticalTabs", true);
 // Disable "Alt" key from toggling top menu
 glide.prefs.set("ui.key.menuAccessKeyFocuses", false)
 glide.prefs.set("media.videocontrols.picture-in-picture.video-toggle.enabled", true);
@@ -13,6 +14,7 @@ glide.prefs.set("privacy.donottrackheader.enabled", true);
 glide.prefs.set("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 glide.prefs.set("dom.security.https_only_mode", true);
 
+// Disable gestures
 glide.prefs.set("browser.gesture.swipe.left", null);
 glide.prefs.set("browser.gesture.swipe.right", null);
 glide.prefs.set("browser.gesture.pinch.in", null);
