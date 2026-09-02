@@ -17,6 +17,7 @@ glide.include("gnarly-text-edit.ts")
 glide.include("vanilla-firefox.ts")
 glide.include("vanilla-glide.ts")
 glide.include("vanilla-vim.ts")
+glide.include("redirects.ts")
 
 glide.keymaps.set("normal", "-", "go_up");
 
