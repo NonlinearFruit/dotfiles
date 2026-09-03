@@ -42,3 +42,16 @@ glide.search_engines.add({
   search_url: "https://search.brave.com/search?q={searchTerms}",
   is_default: true
 })
+
+const thingsToHide = [
+  "#firefox-view-button",
+  "#alltabs-button",
+  "#star-button-box",
+  "#taskbar-tabs-button",
+  "#tabs-newtab-button",
+  ".titlebar-button",
+];
+for (const selector of thingsToHide) {
+  const style = `${selector} { display: none !important; }`
+  glide.styles.add(style, { id: `hide-${selector}` });
+}
