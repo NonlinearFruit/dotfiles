@@ -3,6 +3,6 @@
   ["$(echo /mnt/c/Users/$USER/.config/glide/glide.d.ts)", "glide/glide.d.ts", "cp"],
   ["vimrc.vim", "/mnt/c/Users/$USER/.ideavimrc", "cp"],
   ["wezterm/*", "$(echo /mnt/c/Users/$USER/.config/wezterm)", "cp"],
-  ["wsl.ini", "/etc/wsl.conf"],
-  ["wsl.ini", "$(echo /mnt/c/Users/$USER/.wslconfig)"]
+  ["wsl-etc.ini", "/etc/wsl.conf"],
+  ["wsl-windows.ini", "$(echo /mnt/c/Users/$USER/.wslconfig)"]
 ]
