@@ -19,12 +19,6 @@ const redirects = [
            "reddit.com",
     ],
   },
-  {
-    redirect_to: "gh.bloat.cat",
-    redirect_from: [
-           "gist.github.com",
-    ],
-  },
 ]
 
 glide.autocmds.create("ConfigLoaded", async () => {
