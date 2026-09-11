@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # Show which tmux session is in which window
 def main [] {

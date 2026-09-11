@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # Lookup passage from the ESV Bible
 def main [

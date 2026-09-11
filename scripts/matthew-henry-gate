@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # Answer a yes/no question from Matthew Henry's Scripture Catechism correctly for a zero exit code 
 def main [] {

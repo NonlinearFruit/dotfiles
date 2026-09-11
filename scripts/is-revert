@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # true if the diff for this commit compliments exactly the commit it claims to revert
 def main [revert_commit] {

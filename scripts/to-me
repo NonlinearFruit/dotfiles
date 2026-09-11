@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # Summon all tmux clients to your window
 def main [

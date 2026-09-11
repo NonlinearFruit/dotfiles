@@ -1,4 +1,4 @@
-#!/bin/env nu
+#!/usr/bin/env nu
 
 # Show which tmux session is most restrictive for
 # width and which is most restrictive for height
