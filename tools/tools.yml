@@ -1,17 +1,3 @@
-- cmd: mcpc
-  description: A universal CLI client for MCP
-  id: "@apify/mcpc"
-  manager: npm
-
-- cmd: gritql
-  description: Powerful treesitter find/replace
-  id: "@getgrit/cli"
-  manager: npm
-
-- cmd: procs
-  description: View processes
-  manager: cargo
-
 - cmd: kde-connect
   description: For interacting with Android
   manager: dnf
@@ -20,33 +6,12 @@
   description: For making charts
   manager: dnf
 
-- cmd: nono
-  description: Capability-based sandboxes with fine-grained policies. Requires dbus-devel
-  id: --git https://github.com/always-further/nono
-  manager: cargo
-
 - cmd: dbus-devel
   description: Required by nono
   manager: dnf
 
-- cmd: deno
-  description: Javascript runtime
-  manager: cargo
-
 - cmd: cmake
   description: Required by deno
-  manager: dnf
-
-- cmd: yazi-build
-  description: TUI file explorer
-  manager: cargo
-
-- cmd: ramalama
-  description: Spin up clankers locally with ease
-  manager: dnf
-
-- cmd: git-filter-repo
-  description: Quickly rewrite git repository history
   manager: dnf
 
 - cmd: cronie
@@ -61,139 +26,8 @@
   description: Collection of helpful commands like sponge
   manager: dnf
 
-- cmd: bat
-  description: better cat. binstall might be necessary
-  url: https://github.com/sharkdp/bat
-  manager: cargo
-
-- cmd: bob
-  id: bob-nvim
-  note: cargo install --locked bob-nvim fixes dependency error
-  description: nvim version manager
-  url: https://github.com/MordechaiHadad/bob
-  manager: cargo
-
-- cmd: binstall
-  id: cargo-binstall
-  description: install cargo packages via binary
-  url: https://github.com/cargo-bins/cargo-binstall
-  manager: cargo
-
-- cmd: fd
-  description: better find
-  url: https://github.com/sharkdp/fd
-  manager: cargo
-  id: fd-find
-
-- cmd: fnm
-  description: node versioning
-  url: https://github.com/Schniz/fnm
-  manager: cargo
-  id: fnm
-
-- cmd: htmlq
-  description: jq for html using css selectors
-  url: https://github.com/mgdm/htmlq
-  manager: cargo
-  id: htmlq
-
-- cmd: ripgrep
-  description: better grep
-  url: https://github.com/BurntSushi/ripgrep
-  manager: cargo
-  id: ripgrep
-
-- cmd: tldr
-  description: examples of using different commands
-  url: https://github.com/dbrgn/tealdeer
-  manager: cargo
-  id: tealdeer
-
-- cmd: cargo watch
-  description: automatically run tests and things when files change `cargo watch -x test`
-  manager: cargo
-  id: cargo-watch
-
-- cmd: z
-  description: better autojump
-  url: https://github.com/ajeetdsouza/zoxide
-  manager: cargo
-  id: zoxide
-
-- cmd: agg
-  description: aciinema cast to
-  url: gif
-  manager: cargo
-  id: --git https://github.com/asciinema/agg
-
-- cmd: treesitter-cli
-  description: Used by nvim treesitter to dynamically install parsers
-  url: https://github.com/tree-sitter/tree-sitter
-  manager: cargo
-  id: tree-sitter-cli
-
-# podman <https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md>
-
-- cmd: dotnet outdated
-  description: check for out of date nugets and update them
-  url: https://github.com/dotnet-outdated/dotnet-outdated
-  manager: dotnet
-  id: dotnet-outdated-tool
-
-- cmd: usql
-  description: universal sql cli
-  url: https://github.com/xo/usql
-  manager: go
-  id: --tags most github.com/xo/usql@latest
-
-- cmd: glab
-  description: gitlab cli
-  url: https://gitlab.com/gitlab-org/cli/cmd/glab
-  manager: go
-  id: gitlab.com/gitlab-org/cli/cmd/glab@main
-
-- cmd: fzf
-  description: fuzzy finder
-  url: https://github.com/junegunn/fzf
-  manager: go
-  id: github.com/junegunn/fzf
-
-- cmd: packwiz
-  description: minecraft modpack manager
-  url: https://github.com/packwiz/packwiz
-  manager: go
-  id: github.com/packwiz/packwiz@latest
-
-- cmd: d2
-  description: Diagramming tool
-  url: https://github.com/terrastruct/d2
-  manager: go
-  id: oss.terrastruct.com/d2
-
-- cmd: vhs
-  description: terminal gif recorder
-  url: https://github.com/charmbracelet/vhs
-  manager: go
-  id: github.com/charmbracelet/vhs
-
-- cmd: freeze
-  description: create image from command output
-  url: https://github.com/charmbracelet/freeze
-  manager: go
-  id: github.com/charmbracelet/freeze
-
-- cmd: hugo
-  description: static site generate
-  url: https://github.com/gohugoio/hugo
-  manager: go
-  id: -tags extended github.com/gohugoio/hugo@latest
-
 - cmd: curl
   description: http client
-  manager: dnf
-
-- cmd: git-lfs
-  description: git large file storage
   manager: dnf
 
 - cmd: jq
@@ -202,10 +36,6 @@
 
 - cmd: figlet
   description: ascii font
-  manager: dnf
-
-- cmd: tmux
-  description: terminal multiplexer
   manager: dnf
 
 - cmd: unzip
@@ -243,21 +73,9 @@
   description: A thing that rust (specifically tree-sitter) wants to have
   manager: dnf
 
-- cmd: nu_plugin_emoji
-  description: emoji tool for nushell. Used in chat script
-  manager: cargo
-
-- cmd: nu_plugin_query
-  description: query tool for nushell. Used for parsing html. Requires openssl-devel
-  manager: cargo
-
 - cmd: openssl-devel
   description: Used by nu_plugin_query
   manager: dnf
-
-- cmd: tokei
-  description: counts lines of code
-  manager: cargo
 
 - cmd: org.videolan.VLC
   description: Video player
@@ -270,43 +88,3 @@
 - cmd: com.valvesoftware.Steam
   description: Video game manager
   manager: flatpak
-
-- cmd: caveman
-  description: simplify ai responses
-  id: git:github.com/v2nic/pi-caveman
-  manager: pi
-
-- cmd: agent-stuff
-  description: some helpful pi extensions
-  id: git:github.com/mitsuhiko/agent-stuff
-  manager: pi
-
-- cmd: awesome-copilot
-  description: some helpful ai skills
-  id: git:github.com/github/awesome-copilot
-  manager: pi
-
-- cmd: pi-skills
-  description: pi extensions from the pi maintainer
-  id: git:github.com/badlogic/pi-skills
-  manager: pi
-
-- cmd: agents
-  description: Some security pi extensions
-  id: git:github.com/michalvavra/agents
-  manager: pi
-
-- cmd: superpowers
-  description: Skills writing skills and code writing skills
-  id: git:github.com/obra/superpowers
-  manager: pi
-
-- cmd: pi-hooks
-  description: Permmission pi extension
-  id: git:github.com/prateekmedia/pi-hooks
-  manager: pi
-
-- cmd: pi
-  description: Minimal extensible coding agent
-  id: '@mariozechner/pi-coding-agent'
-  manager: npm

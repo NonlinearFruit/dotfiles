@@ -12,8 +12,8 @@ def --wrapped main [...rest] {
 
 export def install-manager [manager = ""] {
   let mng = if $manager == "" { select-manager } else { $manager }
-  let version = run $mng "self latest-version" ""
-  run $mng "self install" $version
+  let version = run-it $mng "self latest-version" ""
+  run-it $mng "self install" $version
 }
 
 export def install-tool [tool = ""] {
@@ -27,7 +27,7 @@ export def install-tool [tool = ""] {
 
   $tool.id?
   | default $tool.cmd
-  | run $tool.manager install $in
+  | run-it $tool.manager install $in
 }
 
 export def list-tools [] {
@@ -51,7 +51,7 @@ def select-manager [] {
 def installed-tool-version [tool] {
   $tool.id?
   | default $tool.cmd
-  | run $tool.manager installed-version $in
+  | run-it $tool.manager installed-version $in
   | complete
   | if $in.exit_code != 0 {
     "err"
@@ -78,6 +78,6 @@ def load-tools [] {
   open tools/tools.yml
 }
 
-def run [manager command parameter] {
+def run-it [manager command parameter] {
   nu -c $'use tools/($manager).nu; ($manager) ($command) ($parameter)'
 }

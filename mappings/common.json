@@ -10,6 +10,7 @@
   ["https://raw.githubusercontent.com/neovim/neovim/refs/heads/master/runtime/nvim.png", "~/.local/share/icons/hicolor/48x48/apps/nvim.png", "curl"],
   ["init.sh", "~/projects/privatefiles/init.sh"],
   ["map.sh", "~/projects/privatefiles/map.sh"],
+  ["mise-global.toml", "~/.config/mise/config.toml"],
   ["nono/*", "~/.config/nono/profiles"],
   ["nvim/*", "~/.config/nvim"],
   ["pi/*", "~/.pi/agent"],

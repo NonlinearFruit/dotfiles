@@ -14,7 +14,7 @@ mkdir -p ~/projects/privatefiles
 mkdir -p ~/.config/nvim
 
 # Scripts
-mkdir ~/scripts
+mkdir -p ~/scripts
 
 # Git Jump
 curl https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/git-jump/git-jump -o ~/scripts/git-jump
@@ -25,6 +25,9 @@ mkdir -p ~/.local/share/tealdeer/pages
 
 # Wezterm
 mkdir -p ~/.config/wezterm/
+
+# Mise
+mkdir -p ~/.config/mise/
 
 # Keys
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
@@ -40,12 +43,3 @@ mkdir -p ~/.pi/agent/{extensions,skills,prompts}/
 
 # Nono
 mkdir -p ~/.config/nono/profiles/
-
-# Nushell <https://www.nushell.sh/book/installation.html#pre-built-binaries>
-echo "[gemfury-nushell]
-name=Gemfury Nushell Repo
-baseurl=https://yum.fury.io/nushell/
-enabled=1
-gpgcheck=0
-gpgkey=https://yum.fury.io/nushell/gpg.key" | sudo tee /etc/yum.repos.d/fury-nushell.repo
-sudo dnf install -y nushell
