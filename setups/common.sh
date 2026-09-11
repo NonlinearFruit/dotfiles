@@ -10,13 +10,7 @@ fi
 sudo $MANAGER install -y jq curl
 mkdir -p ~/projects/privatefiles
 
-# Vim
-mkdir -p ~/.vim/swapfiles
-mkdir -p ~/.vim/undofiles
-
 # Neovim
-mkdir -p ~/.nvim/swapfiles
-mkdir -p ~/.nvim/undofiles
 mkdir -p ~/.config/nvim
 
 # Scripts

@@ -34,9 +34,6 @@ local function configure()
   vim.keymap.set("n", prefix .. "m", require("telescope.builtin").marks, { desc = "[/] Search [M]arks" })
   vim.keymap.set("n", prefix .. "r", require("telescope.builtin").registers, { desc = "[/] Search [R]egisters" })
   vim.keymap.set("n", prefix .. "s", require("telescope.builtin").spell_suggest, { desc = "[/] Search [S]pell" })
-  vim.keymap.set("n", prefix .. "t", function()
-    require("telescope.builtin").live_grep({ cwd = "~/projects/dotfiles/cheatsheets", disable_coordinates = true })
-  end, { desc = "[/] Search [T]LDR style notes" })
   vim.keymap.set(
     "n",
     prefix .. "w",

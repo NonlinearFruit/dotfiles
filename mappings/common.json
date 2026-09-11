@@ -1,7 +1,6 @@
 [
   ["bash-aliases.sh", "~/.bash_aliases"],
   ["bashrc.sh", "~/.bashrc"],
-  ["cheatsheets/*", "~/.local/share/tealdeer/pages"],
   ["gitconfig.ini", "~/.gitconfig"],
   ["glide.desktop", "~/.local/share/applications/glide.desktop"],
   ["glide/*", "~/.config/glide"],

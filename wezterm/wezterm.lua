@@ -1,7 +1,6 @@
 WEZTERM = require("wezterm")
 ACTION = WEZTERM.action
 OPACITY_EVENT = "toggle-opacity"
-SCHEMES = require("colorschemes").dark
 
 WEZTERM.on(OPACITY_EVENT, function(window, pane)
   local overrides = window:get_config_overrides() or {}
@@ -11,30 +10,6 @@ WEZTERM.on(OPACITY_EVENT, function(window, pane)
     overrides.window_background_opacity = (overrides.window_background_opacity or 1) - 0.25
   end
   window:set_config_overrides(overrides)
-end)
-
-WEZTERM.on("new-scheme", function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  local currentScheme = overrides.color_scheme or SCHEMES[1]
-  local function indexOf(array, value)
-    for i, v in ipairs(array) do
-      if v == value then
-        return i
-      end
-    end
-    return nil
-  end
-  local maxIndex = #SCHEMES
-  local currentIndex = indexOf(SCHEMES, currentScheme)
-  local nextIndex = currentIndex + 1
-  if nextIndex > maxIndex then
-    nextIndex = 1
-  end
-  local newScheme = SCHEMES[nextIndex]
-  WEZTERM.log_info(currentIndex .. " == " .. currentScheme .. " -> " .. nextIndex .. " == " .. newScheme)
-  overrides.color_scheme = newScheme
-  window:set_config_overrides(overrides)
-  window:toast_notification("dotfiles", "Color Scheme #" .. nextIndex .. ": " .. newScheme, nil, 500)
 end)
 
 WEZTERM.on("gui-startup", function(cmd)
@@ -62,7 +37,6 @@ local function bindKeys(config)
     { key = "v", mods = "CTRL|SHIFT", action = ACTION.PasteFrom("Clipboard") },
     { key = "p", mods = "CTRL|SHIFT", action = ACTION.ActivateCommandPalette },
     { key = "o", mods = "CTRL|SHIFT", action = ACTION.EmitEvent(OPACITY_EVENT) },
-    { key = "s", mods = "CTRL|SHIFT", action = ACTION.EmitEvent("new-scheme") },
     {
       key = "k",
       mods = "ALT",
@@ -75,7 +49,6 @@ local function bindKeys(config)
 end
 
 local function configureDisplay(config)
-  config.color_scheme = SCHEMES[0]
   config.font_size = 14
   return config
 end
