@@ -6,13 +6,13 @@
 # - ability to send selected docs to a nvim server (separate nvim binding?)
 def --wrapped main [...rest] {
   if ($rest | is-empty) {
-    search-gitlab-docs
+    search-vimdocs
   } else if $rest.0 == 'search' {
     extended-rg ($rest | last | split row ' ')
   }
 }
 
-def search-gitlab-docs [] {
+def search-vimdocs [] {
   fancy-fzf
   | open-in-vim
 }
@@ -30,7 +30,7 @@ def fancy-fzf [] {
 
 def open-in-vim [] {
   if ($in | is-empty) {
-    print "gdocs cancelled"
+    print "vdocs cancelled"
   } else if ($in | length) == 1 {
     first
     | ^nvim -M -q -

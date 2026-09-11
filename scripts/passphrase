@@ -63,7 +63,7 @@ def generate-words [number_of_words with_entropy] {
 
 def generate-separators [number_of_words with_random_separator] {
   if $number_of_words < 2 {
-    return []
+    return { entropy: 0.0, separators: [] }
   }
   let separators = if $with_random_separator {
     r#'~!@#$%^&*-_=+|\:;,./?"'`<>{}()'#

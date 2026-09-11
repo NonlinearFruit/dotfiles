@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
 
+const REPO = '~/projects/gitlab'
 const DOCS = '~/projects/gitlab/doc/api'
 
 # Features
@@ -25,7 +26,7 @@ def assert-docs-exist [] {
   }
   input $"'($DOCS)' is missing. Would you like to clone? [y/N] "
   | if $in == 'y' {
-    ^git clone git@gitlab.com:gitlab-org/gitlab.git $DOCS
+    ^git clone git@gitlab.com:gitlab-org/gitlab.git $REPO
   } else {
     exit 1
   }

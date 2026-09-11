@@ -69,5 +69,5 @@ def random-number [max: int = 10] {
     od -N3 -An -i /dev/urandom
     | into int
     | $in * $max / $max_int
-    | math round
+    | math floor
 }
