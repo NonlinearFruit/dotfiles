@@ -47,7 +47,7 @@ machine_context='\u@\h'
 machine="${dark_gray}$machine_context${restore_color}"
 location_context='\w'
 location="${light_gray}$location_context${restore_color}"
-if command -v git prompt > /dev/null; then
+if command -v git-prompt > /dev/null; then
   extra_context='$(git prompt)'
 fi
 extra="${light_cyan}$extra_context${restore_color}"
@@ -84,12 +84,6 @@ fi
 # Private Configuration (Not source controlled)
 if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
-fi
-
-# SSH
-if [ -d ~/.ssh ]; then
-    eval $(ssh-agent -s) > /dev/null
-    ssh-add ~/.ssh/id_rsa 2> /dev/null
 fi
 
 # Nix Home Manager
