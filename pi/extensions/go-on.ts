@@ -11,6 +11,6 @@ export default function goOnExtension(pi) {
           },
           { triggerTurn: true }
         )
-      : ctx.ui.notifiy()
+      : ctx.ui.notify()
   });
 }
