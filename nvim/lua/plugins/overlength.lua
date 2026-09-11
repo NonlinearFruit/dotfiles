@@ -11,13 +11,13 @@ local function enable_overlength_mode()
   vim.cmd(string.format("highlight OverLength ctermbg=%s guibg=%s", config.terminal_background, config.gui_background))
   vim.opt.colorcolumn = tostring(config.column_length)
   vim.fn.matchadd("OverLength", string.format("\\%%%dv.\\+", config.column_length + 1))
-  overlength_active = false
+  overlength_active = true
 end
 
 local function disable_overlength_mode()
   vim.cmd("highlight clear OverLength")
   vim.opt.colorcolumn = "0"
-  overlength_active = true
+  overlength_active = false
 end
 
 local function configure()
