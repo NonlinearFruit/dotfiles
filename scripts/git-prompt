@@ -47,6 +47,8 @@ elif [ -n "$REBASE_BRANCH_OLD" ]; then
   PROMPT="$REBASE_BRANCH_OLD [*rebasing]"
 elif git rev-parse --quiet --verify MERGE_HEAD > /dev/null 2>&1; then
   PROMPT="$PROMPT [merging]"
+elif [ -z "$PROMPT" ]; then
+  PROMPT="$(git rev-parse --short HEAD 2>/dev/null) [detached]"
 fi
 CHANGES=$(changes)
 if [ -n "$CHANGES" ]; then
