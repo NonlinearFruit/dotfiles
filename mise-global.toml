@@ -1,41 +1,40 @@
+[settings]
+not_found_auto_install = true
+
 [tools]
 node = "24.14.1"
 go = "1.27.1"
 rust = "1.98.1"
 dotnet = "10.0.202"
+neovim = "nightly"
 "aqua:nushell/nushell" = "0.115.1"
 
 "aqua:BurntSushi/ripgrep" = "15.2.0"
-"aqua:sharkdp/fd" = "10.5.0"
-"aqua:sharkdp/bat" = "0.26.1"
+"aqua:sharkdp/fd" = { version = "10.5.0", lazy = true, lazy_bins = ["fd"] }
+"aqua:sharkdp/bat" = { version = "0.26.1", lazy = true, lazy_bins = ["bat"] }
 "aqua:ajeetdsouza/zoxide" = "0.9.9"
-"aqua:junegunn/fzf" = "0.74.3"
-"aqua:dbrgn/tealdeer" = "1.8.1"
-"aqua:gohugoio/hugo" = "0.166.0"
-"aqua:terrastruct/d2" = "0.9.0"
-"aqua:sxyazi/yazi" = "26.1.22"
-"gitlab:gitlab-org/cli" = "1.117.0"
-"cargo:bob-nvim" = "4.1.6"
-"cargo:htmlq" = "0.4.0"
-"cargo:procs" = "0.14.11"
-"cargo:tree-sitter-cli" = "0.26.8"
-"cargo:cargo-watch" = "8.5.3"
-"cargo:cargo-binstall" = "1.23.0"
-"cargo:deno" = "2.7.14"
-"cargo:tokei" = "14.0.0"
-"npm:@apify/mcpc" = "0.3.0"
-"npm:@getgrit/cli" = "0.1.0-alpha.1743007075"
-"npm:@earendil-works/pi-coding-agent" = "0.84.3"
-"go:github.com/charmbracelet/vhs" = "0.12.0"
-"go:github.com/charmbracelet/freeze" = "0.2.2"
-"go:github.com/xo/usql" = { version = "v0.21.4", tags = "most" }
-"go:github.com/packwiz/packwiz" = "v0.0.0-20260906154125-ef87d964f8cb"
-"cargo:https://github.com/always-further/nono" = { version = "tag:v0.76.0" }
-"cargo:https://github.com/asciinema/agg" = { version = "tag:v1.9.0" }
+"aqua:junegunn/fzf" = { version = "0.74.3", lazy = true, lazy_bins = ["fzf"] }
+"aqua:dbrgn/tealdeer" = { version = "1.8.1", lazy = true, lazy_bins = ["tldr"] }
+"aqua:gohugoio/hugo" = { version = "0.166.0", lazy = true, lazy_bins = ["hugo"] }
+"aqua:terrastruct/d2" = { version = "0.9.0", lazy = true, lazy_bins = ["d2"] }
+"aqua:sxyazi/yazi" = { version = "26.1.22", lazy = true, lazy_bins = ["yazi"] }
+"gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
+"cargo:procs" = { version = "0.14.11", lazy = true, lazy_bins = ["procs"] }
+"cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter-cli"] }
+"cargo:cargo-watch" = { version = "8.5.3", lazy = true, lazy_bins = ["cargo-watch"] }
+"cargo:cargo-binstall" = { version = "1.23.0", lazy = true, lazy_bins = ["cargo-binstall"] }
+"cargo:deno" = { version = "2.7.14", lazy = true, lazy_bins = ["deno"] }
+"cargo:tokei" = { version = "14.0.0", lazy = true, lazy_bins = ["tokei"] }
+"npm:@apify/mcpc" = { version = "0.3.0", lazy = true, lazy_bins = ["mcpc"] }
+"npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
+"npm:@earendil-works/pi-coding-agent" = { version = "0.84.3", lazy = true, lazy_bins = ["pi"] }
+"go:github.com/charmbracelet/vhs" = { version = "0.12.0", lazy = true, lazy_bins = ["vhs"] }
+"cargo:https://github.com/always-further/nono" = { version = "tag:v0.76.0", lazy = true, lazy_bins = ["nono"] }
+"cargo:https://github.com/asciinema/agg" = { version = "tag:v1.9.0", lazy = true, lazy_bins = ["agg"] }
 "cargo:nu_plugin_emoji" = "0.24.0"
 "cargo:nu_plugin_query" = "0.115.1"
-"dotnet:dotnet-outdated-tool" = "4.7.1"
-"aqua:git-lfs/git-lfs" = "3.7.1"
-"aqua:tmux/tmux-builds" = "3.5a"
-"pipx:git-filter-repo" = "2.47.0"
-"pipx:ramalama" = "0.24.0"
+"dotnet:dotnet-outdated-tool" = { version = "4.7.1", lazy = true, lazy_bins = ["dotnet-outdated"] }
+"aqua:git-lfs/git-lfs" = { version = "3.7.1", lazy = true, lazy_bins = ["git-lfs"] }
+"aqua:tmux/tmux-builds" = "3.6b"
+"pipx:git-filter-repo" = { version = "2.47.0", lazy = true, lazy_bins = ["git-filter-repo"] }
+"pipx:ramalama" = { version = "0.24.0", lazy = true, lazy_bins = ["ramalama"] }

@@ -63,13 +63,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Neovim Manager (bob)
-if [ -d ~/.local/share/bob/nvim-bin/ ]; then
-  export PATH="$PATH:$HOME/.local/share/bob/nvim-bin/"
-  if ! command -v nvim > /dev/null; then
-    bob use stable
-  fi
-fi
+eval "$(~/.local/bin/mise activate bash)" # added by https://mise.run/bash
 
 # Editor
 if command -v nvim > /dev/null; then
@@ -84,11 +78,6 @@ fi
 # Private Configuration (Not source controlled)
 if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
-fi
-
-# Nix Home Manager
-if [ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]; then
-  source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
 fi
 
 # Pip && Python Dependency Manager (pdm)
