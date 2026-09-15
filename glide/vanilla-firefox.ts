@@ -50,6 +50,8 @@ const thingsToHide = [
   "#taskbar-tabs-button",
   "#tabs-newtab-button",
   ".titlebar-button",
+  "#unified-extensions-button",
+  "#fxa-toolbar-menu-button"
 ];
 for (const selector of thingsToHide) {
   const style = `${selector} { display: none !important; }`
