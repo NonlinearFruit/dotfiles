@@ -26,6 +26,7 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ```sh
 sudo dnf update -y
+curl -fsSL https://mise.run/bash | sh
 sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles

@@ -13,6 +13,7 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 
 ```sh
 sudo dnf update -y
+curl -fsSL https://mise.run/bash | sh
 sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
@@ -61,6 +62,7 @@ The actual dotfiles for various tools
 | bashrc |
 | gitconfig |
 | glide |
+| mise-global |
 | nono |
 | nvim |
 | pi |
@@ -69,7 +71,8 @@ The actual dotfiles for various tools
 | tools |
 | vimrc |
 | wezterm |
-| wsl |
+| wsl-etc |
+| wsl-windows |
 </details>
 
 <details><summary>Scripts</summary>
@@ -85,7 +88,6 @@ Helpful automation for various tasks
 | clip |  |
 | cljue | [demo](.tapes/cljue.gif) |
 | countdown |  |
-| cuckoo |  |
 | datediff |  |
 | esv | [demo](.tapes/esv.gif) |
 | esv-search |  |
@@ -94,6 +96,7 @@ Helpful automation for various tasks
 | highlight | [demo](.tapes/highlight.gif) |
 | ipsum |  |
 | is |  |
+| is-revert |  |
 | last-cron |  |
 | look-alike |  |
 | lsb | [demo](.tapes/lsb.gif) |
@@ -130,7 +133,6 @@ Automation for initializing a fresh OS
 
 | Setup |
 | --- |
-| bootstrap |
 | common |
 | haskell |
 | nvims |
