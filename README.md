@@ -116,7 +116,6 @@ Automation for initializing a fresh OS
 | Setup |
 | --- |
 | common |
-| haskell |
 | nvims |
 | openscad |
 | termux |
