@@ -1,7 +1,6 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { isToolCallEventType } from "@mariozechner/pi-coding-agent";
 
-export default function (pi: ExtensionAPI) {
+export default function (pi) {
   pi.on("tool_call", async (event, ctx) => {
     if (!isToolCallEventType("edit", event)) return;
 
@@ -13,7 +12,7 @@ export default function (pi: ExtensionAPI) {
   });
 }
 
-function validateEdits(edits: unknown): string | null {
+function validateEdits(edits) {
   if (!Array.isArray(edits)) {
     return "❌ edits must be an array";
   }
@@ -27,7 +26,7 @@ function validateEdits(edits: unknown): string | null {
       return `❌ Edit ${i}: must have oldText (string) and newText (string)`;
     }
 
-    const jsonError = trySerializeEdit(item as EditItem);
+    const jsonError = trySerializeEdit(item);
     if (jsonError) {
       return `❌ Edit ${i} has JSON serialization error:\n  ${jsonError}\n\n` +
              `Common cause: Unescaped quotes in oldText or newText.\n` +
@@ -35,7 +34,7 @@ function validateEdits(edits: unknown): string | null {
     }
   }
 
-  const overlapError = findOverlap(edits as EditItem[]);
+  const overlapError = findOverlap(edits);
   if (overlapError) {
     return `❌ ${overlapError}\n\n` +
            `Solution: Ensure each oldText is unique and non-overlapping.`;
@@ -44,22 +43,21 @@ function validateEdits(edits: unknown): string | null {
   return null;
 }
 
-function isValidEditItem(item: unknown): boolean {
+function isValidEditItem(item) {
   if (typeof item !== "object" || item === null) return false;
-  const e = item as Record<string, unknown>;
-  return typeof e.oldText === "string" && typeof e.newText === "string";
+  return typeof item.oldText === "string" && typeof item.newText === "string";
 }
 
-function trySerializeEdit(edit: EditItem): string | null {
+function trySerializeEdit(edit) {
   try {
     JSON.stringify({ edits: [edit] });
     return null;
   } catch (err) {
-    return (err as Error).message;
+    return err.message;
   }
 }
 
-function findOverlap(edits: EditItem[]): string | null {
+function findOverlap(edits) {
   for (let i = 0; i < edits.length; i++) {
     for (let j = i + 1; j < edits.length; j++) {
       const a = edits[i].oldText;
@@ -76,9 +74,4 @@ function findOverlap(edits: EditItem[]): string | null {
   }
 
   return null;
-}
-
-interface EditItem {
-  oldText: string;
-  newText: string;
 }

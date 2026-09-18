@@ -21,4 +21,3 @@ const THEMES = {
   "cwd": "warning",
   "projects": "error"
 }
-

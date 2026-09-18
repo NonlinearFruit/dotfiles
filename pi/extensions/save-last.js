@@ -1,11 +1,9 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import type { AutocompleteItem } from "@mariozechner/pi-tui";
-import { writeFile, readdir, stat } from "node:fs/promises";
+import { writeFile, readdir } from "node:fs/promises";
 import { join, isAbsolute, dirname, basename } from "node:path";
 import { homedir } from "node:os";
 
-export default function (pi: ExtensionAPI) {
-  const getFileCompletions = async (prefix: string): Promise<AutocompleteItem[] | null> => {
+export default function (pi) {
+  const getFileCompletions = async (prefix) => {
     try {
       // Resolve the directory and file prefix
       let dir = "";
@@ -30,7 +28,7 @@ export default function (pi: ExtensionAPI) {
 
       // Read directory contents
       const entries = await readdir(dir, { withFileTypes: true });
-      const completions: AutocompleteItem[] = [];
+      const completions = [];
 
       for (const entry of entries) {
         if (entry.name.startsWith(filePrefix)) {
@@ -55,7 +53,7 @@ export default function (pi: ExtensionAPI) {
 
   pi.registerCommand("save-last", {
     description: "Export the most recent AI response to a txt file",
-    getArgumentCompletions: (prefix: string) => getFileCompletions(prefix),
+    getArgumentCompletions: (prefix) => getFileCompletions(prefix),
     handler: async (args, ctx) => {
       ctx.ui.notify(`Export started`, "success");
       const entries = ctx.sessionManager.getBranch();
@@ -82,7 +80,7 @@ export default function (pi: ExtensionAPI) {
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
       const filename = args.trim() || `ai-response-${timestamp}.txt`;
 
-      let filepath: string;
+      let filepath;
       if (isAbsolute(filename)) {
         filepath = filename;
       } else if (filename.startsWith("~")) {

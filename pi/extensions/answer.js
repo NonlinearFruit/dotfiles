@@ -8,9 +8,7 @@
  *   /answer   - extract questions from the last assistant message and answer them
  */
 
-import type { ExtensionAPI, ExtensionCommandContext } from "@mariozechner/pi-coding-agent";
-
-function getLastAssistantText(ctx: ExtensionCommandContext): string | null {
+function getLastAssistantText(ctx) {
   const branch = ctx.sessionManager.getBranch();
   for (let i = branch.length - 1; i >= 0; i--) {
     const entry = branch[i];
@@ -18,7 +16,7 @@ function getLastAssistantText(ctx: ExtensionCommandContext): string | null {
     const msg = entry.message;
     if (!("role" in msg) || msg.role !== "assistant") continue;
     const textParts = msg.content
-      .filter((c): c is { type: "text"; text: string } => c.type === "text")
+      .filter((c) => c.type === "text")
       .map((c) => c.text);
     if (textParts.length > 0) return textParts.join("\n");
   }
@@ -32,14 +30,14 @@ function getLastAssistantText(ctx: ExtensionCommandContext): string | null {
  * numbered items, inline prose. Strips leading bullet/number markers and
  * common markdown emphasis so the prompt reads cleanly.
  */
-function extractQuestions(text: string): string[] {
-  const questions: string[] = [];
-  const seen = new Set<string>();
+function extractQuestions(text) {
+  const questions = [];
+  const seen = new Set();
 
   // Split into "sentences" by terminal punctuation while keeping the '?' tokens.
   // Regex captures text up to and including ? . or ! (or end-of-string).
   const sentenceRe = /[^.!?\n]*\?/g;
-  let match: RegExpExecArray | null;
+  let match;
   while ((match = sentenceRe.exec(text)) !== null) {
     let q = match[0].trim();
     if (!q.endsWith("?")) continue;
@@ -65,8 +63,8 @@ function extractQuestions(text: string): string[] {
   return questions;
 }
 
-function formatQA(pairs: Array<{ question: string; answer: string }>): string {
-  const lines: string[] = [
+function formatQA(pairs) {
+  const lines = [
     "Here are my answers to the questions you asked:",
     "",
   ];
@@ -79,7 +77,7 @@ function formatQA(pairs: Array<{ question: string; answer: string }>): string {
   return lines.join("\n");
 }
 
-export default function (pi: ExtensionAPI) {
+export default function (pi) {
   pi.registerCommand("answer", {
     description: "Extract questions from the last AI response and answer them interactively",
     handler: async (_args, ctx) => {
@@ -102,7 +100,7 @@ export default function (pi: ExtensionAPI) {
 
       ctx.ui.notify(`Found ${questions.length} question${questions.length === 1 ? "" : "s"}`, "info");
 
-      const pairs: Array<{ question: string; answer: string }> = [];
+      const pairs = [];
       for (let i = 0; i < questions.length; i++) {
         const q = questions[i];
         const title = `Question ${i + 1}/${questions.length}: ${q}`;
