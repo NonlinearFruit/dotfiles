@@ -40,8 +40,7 @@ end
 
 local function install_lsp_and_dap_if_needed()
   require("installer").install_if_missing({
-    -- Avoid WSL bug in file watching in dotnet runtime <https://github.com/seblyng/roslyn.nvim/issues/303#issuecomment-4144530656>
-    "roslyn@5.4.0-2.26175.10",
+    "roslyn",
     "html-lsp", -- Roslyn uses this for Razor/CSHTML cohosting
     "netcoredbg", -- DAP
   })
@@ -123,10 +122,7 @@ return {
   ft = "cs",
   virtual = true,
   dependencies = {
-    {
-      "seblyng/roslyn.nvim", -- c# lsp
-      commit = "49526a2958893d0c8000d03b16ed923340ce13cc", -- last version compatible with the rosylin lsp pinned above
-    },
+    "seblyng/roslyn.nvim", -- c# lsp
     "mfussenegger/nvim-dap", -- must load before configure_dap() runs on ft=cs
   },
 }
