@@ -20,7 +20,7 @@ $'
 
 <img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/NonlinearFruit/dotfiles/ci.yml">
 
-A simple repo that elegantly manages my configs and scripts using `init.sh` and `map.sh`
+A simple repo that elegantly manages my configs and scripts using `init.sh` and `mise`
 
 ## Setup on fresh OS
 
@@ -31,36 +31,17 @@ sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
-./map.sh common | sh
-./tools/tool-manager.nu install-manager cargo
-source ~/.bashrc
-
-# Neovim
-./tools/tool-manager.nu install-tool gcc
-./tools/tool-manager.nu install-tool bob
-bob use latest
-source ~/.bashrc
+mise dot apply --yes
 nvim
-
-# Others
-sudo dnf install -y tmux
-./tools/tool-manager.nu install-tool z
-./tools/tool-manager.nu install-tool fzf
 ```
 
 ### OS Specific Setup and Mappings
 
-For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
+For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh`, then you can:
 ```sh
 ./init.sh common termux | sh
-./map.sh common wsl | sh
-```
-
-### Setting up for pairing
-
-```sh
-# Add ssh keys for the others to authorized keys
-sudo dnf install -y tmux
+mise dot apply --yes
+mise --env termux dot apply --yes
 ```
 
 ## Features
@@ -86,13 +67,6 @@ Automation for initializing a fresh OS
 (get-setups | each { { Setup: $in } } | to md)
 </details>
 
-<details><summary>Mappings</summary>
-
-Symlink any config file to any location
-
-(get-mappings | each { { Mapping: $in } } | to md)
-</details>
-
 ## Formatting
 
 ```sh
@@ -113,8 +87,7 @@ def get-configs [] {
   let not_configs = [
     README, toolkit
     scripts, init,
-    setups, map,
-    mappings
+    setups
   ]
   ls
   | get name
@@ -130,14 +103,6 @@ def get-scripts [] {
   | get name
   | path parse
   | where ($it.extension | is-empty)
-  | get stem
-  | sort
-}
-
-def get-mappings [] {
-  ls mappings
-  | get name
-  | path parse
   | get stem
   | sort
 }

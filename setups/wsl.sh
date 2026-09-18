@@ -1,3 +1,4 @@
 sudo dnf install -y dos2unix
-mkdir -p /mnt/c/Users/$USER/.config/wezterm
-mkdir -p /mnt/c/Users/$USER/.config/glide
+winuser=$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')
+winhome="/mnt/c/Users/${winuser}"
+ln -sfn "$winhome" "$HOME/winhome"

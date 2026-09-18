@@ -9,6 +9,8 @@ if [ -d ~/scripts ]; then
     export PATH="$PATH:$HOME/scripts"
 fi
 
+eval "$(~/.local/bin/mise activate bash)"
+
 # Exit if this shell should not be interative
 case $- in
     *i*) ;;
@@ -63,8 +65,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-eval "$(~/.local/bin/mise activate bash)" # added by https://mise.run/bash
-
 # Editor
 if command -v nvim > /dev/null; then
   export EDITOR=nvim
@@ -80,56 +80,19 @@ if [ -f ~/.bashrc_private ]; then
     source ~/.bashrc_private
 fi
 
-# Pip && Python Dependency Manager (pdm)
+# User binaries
 if [ -d ~/.local/bin ]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
-# Sdkman
-if [ -d ~/.sdkman ]; then
-    export SDKMAN_DIR="$HOME/.sdkman"
-    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-fi
-
-# Rust
-if [ -d ~/.cargo ]; then
-  if [ -f ~/.cargo/env ]; then
-    source ~/.cargo/env
-  else
-    export PATH="$PATH:$HOME/.cargo/bin"
-  fi
-fi
-
-# Go
-if [ -d /usr/local/go/bin ]; then
-    export PATH="$PATH:/usr/local/go/bin"
-fi
-if [ -d ~/go/bin ]; then
-    export PATH="$PATH:$HOME/go/bin"
-fi
-
 # Fuzzy Find (fzf)
 if command -v fzf > /dev/null; then
-  if [[ ! "$PATH" == */.fzf/bin* ]]; then
-    PATH="$PATH:$HOME/.fzf/bin"
-  fi
   eval "$(fzf --bash)"
 
   # Use fd (rust find)
   if command -v fd > /dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  fi
-fi
-
-# Fast Node Manager (fnm)
-if command -v fnm > /dev/null; then
-  export DEFAULT_NODE="24"
-  export PATH="$HOME/.local/share/fnm:$PATH"
-  eval "$(fnm env)"
-  if ! fnm use $DEFAULT_NODE > /dev/null 2> /dev/null; then
-    fnm install $DEFAULT_NODE > /dev/null
-    fnm use $DEFAULT_NODE > /dev/null
   fi
 fi
 
@@ -152,19 +115,7 @@ if is wsl ; then
   export PATH="$(echo "$PATH" | sed 's#:/mnt/c/Program Files/nodejs/##g')"
 fi
 
-# Dotnet
-if [ -d "$HOME/.dotnet" ]; then
-  export DOTNET_ROOT="$HOME/.dotnet"
-  export PATH="$HOME/.dotnet:$PATH"
-  export PATH="$HOME/.dotnet/tools:$PATH"
-fi
-
 # Aliases
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
-fi
-
-# GritQL
-if [ -f "$HOME/.grit/bin/env" ]; then
-  source "$HOME/.grit/bin/env"
 fi

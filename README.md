@@ -7,7 +7,7 @@
 
 <img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/NonlinearFruit/dotfiles/ci.yml">
 
-A simple repo that elegantly manages my configs and scripts using `init.sh` and `map.sh`
+A simple repo that elegantly manages my configs and scripts using `init.sh` and `mise`
 
 ## Setup on fresh OS
 
@@ -18,36 +18,17 @@ sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
-./map.sh common | sh
-./tools/tool-manager.nu install-manager cargo
-source ~/.bashrc
-
-# Neovim
-./tools/tool-manager.nu install-tool gcc
-./tools/tool-manager.nu install-tool bob
-bob use latest
-source ~/.bashrc
+mise dot apply --yes
 nvim
-
-# Others
-sudo dnf install -y tmux
-./tools/tool-manager.nu install-tool z
-./tools/tool-manager.nu install-tool fzf
 ```
 
 ### OS Specific Setup and Mappings
 
-For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh` and a `mappings/wsl.json`, then you can:
+For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh`, then you can:
 ```sh
 ./init.sh common termux | sh
-./map.sh common wsl | sh
-```
-
-### Setting up for pairing
-
-```sh
-# Add ssh keys for the others to authorized keys
-sudo dnf install -y tmux
+mise dot apply --yes
+mise --env termux dot apply --yes
 ```
 
 ## Features
@@ -62,6 +43,7 @@ The actual dotfiles for various tools
 | bashrc |
 | gitconfig |
 | glide |
+| mise |
 | mise-global |
 | nono |
 | nvim |
@@ -139,17 +121,6 @@ Automation for initializing a fresh OS
 | openscad |
 | termux |
 | tools |
-| wsl |
-</details>
-
-<details><summary>Mappings</summary>
-
-Symlink any config file to any location
-
-| Mapping |
-| --- |
-| common |
-| termux |
 | wsl |
 </details>
 

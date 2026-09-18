@@ -1,0 +1,47 @@
+[dotfiles]
+"~/.bash_aliases" = "bash-aliases.sh"
+"~/.bashrc" = "bashrc.sh"
+"~/.gitconfig" = "gitconfig.ini"
+"~/.local/share/applications/glide.desktop" = "glide.desktop"
+"~/.config/glide/*" = "glide/*"
+"~/projects/privatefiles/init.sh" = "init.sh"
+"~/.config/mise/config.toml" = "mise-global.toml"
+"~/.config/nono/profiles/*" = "nono/*"
+"~/.config/nvim/*" = "nvim/*"
+"~/.pi/agent/*" = "pi/*"
+"~/scripts/*" = "scripts/*"
+"~/.tmux.conf" = "tmux.conf"
+"~/.vimrc" = "vimrc.vim"
+"~/.config/wezterm/*" = "wezterm/*"
+
+[dotfiles."~/winhome/.config/glide/*"]
+source = "glide/*"
+mode = "copy"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."~/projects/dotfiles/glide/glide.d.ts"]
+source = "~/winhome/.config/glide/glide.d.ts"
+mode = "copy"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."~/winhome/.ideavimrc"]
+source = "vimrc.vim"
+mode = "copy"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."~/winhome/.config/wezterm/*"]
+source = "wezterm/*"
+mode = "copy"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."/etc/wsl.conf"]
+source = "wsl-etc.ini"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."~/winhome/.wslconfig"]
+source = "wsl-windows.ini"
+variants = [{ profile = "wsl" }]
+
+[dotfiles."~/.termux/termux.properties"]
+source = "termux.properties"
+variants = [{ profile = "termux" }]

@@ -20,7 +20,7 @@ neovim = "nightly"
 "aqua:sxyazi/yazi" = { version = "26.1.22", lazy = true, lazy_bins = ["yazi"] }
 "gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
 "cargo:procs" = { version = "0.14.11", lazy = true, lazy_bins = ["procs"] }
-"cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter-cli"] }
+"cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter"] }
 "cargo:cargo-watch" = { version = "8.5.3", lazy = true, lazy_bins = ["cargo-watch"] }
 "cargo:cargo-binstall" = { version = "1.23.0", lazy = true, lazy_bins = ["cargo-binstall"] }
 "cargo:deno" = { version = "2.7.14", lazy = true, lazy_bins = ["deno"] }
