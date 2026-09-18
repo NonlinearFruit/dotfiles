@@ -9,16 +9,16 @@
   "filesystem": {
     "allow": [
       "~/.local/share/NuGet",
-      "~/.local/share/bob",
+      "~/.local/share/mise/installs",
       "~/.nuget",
       "~/.pi/agent/"
     ],
     "read": [
       "/etc/gitconfig",
       "~/.cargo/bin",
+      "~/.config/mise/config.toml",
       "~/.dotnet",
       "~/.gitconfig",
-      "~/.local/share/bob",
       "~/projects/dotfiles/pi/"
     ]
   },
