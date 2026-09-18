@@ -3,7 +3,10 @@
 "~/.bashrc" = "bashrc.sh"
 "~/.gitconfig" = "gitconfig.ini"
 "~/.local/share/applications/glide.desktop" = "glide.desktop"
-"~/.config/glide/*" = "glide/*"
+"~/.config/glide/glide.ts" = "glide/glide.ts"
+"~/.config/glide/redirects.ts" = "glide/redirects.ts"
+"~/.config/glide/gnarly-*" = "glide/gnarly-*"
+"~/.config/glide/vanilla-*" = "glide/vanilla-*"
 "~/projects/privatefiles/init.sh" = "init.sh"
 "~/.config/mise/config.toml" = "mise-global.toml"
 "~/.config/nono/profiles/*" = "nono/*"
@@ -12,7 +15,7 @@
 "~/scripts/*" = "scripts/*"
 "~/.tmux.conf" = "tmux.conf"
 "~/.vimrc" = "vimrc.vim"
-"~/.config/wezterm/*" = "wezterm/*"
+"~/.config/wezterm/wezterm.lua" = "wezterm.lua"
 
 [dotfiles."~/winhome/.config/glide/*"]
 source = "glide/*"
