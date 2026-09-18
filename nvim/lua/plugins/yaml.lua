@@ -26,6 +26,9 @@ end
 
 return {
   "local/yaml",
+  dependencies = {
+    "mason-org/mason-lspconfig.nvim",
+  },
   config = configure,
   ft = "yaml",
   virtual = true,
