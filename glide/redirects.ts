@@ -25,6 +25,7 @@ glide.autocmds.create("ConfigLoaded", async () => {
   for (const [id, redirect] of redirects.entries())
     // id is 0 is ignored
     await configureRedirect(id+1, redirect.redirect_to, redirect.redirect_from)
+  cleanupDanglingRedirects(redirects)
 });
 
 async function configureRedirect(id, redirect_to, redirect_froms) {
@@ -44,5 +45,17 @@ async function configureRedirect(id, redirect_to, redirect_froms) {
        },
      },
    ],
+  })
+}
+
+// When a redirect is removed from config, it is still persisted between
+// browser sessions and needs to be explicitly removed
+async function cleanupDanglingRedirects(configRules) {
+  const browserRules = await browser.declarativeNetRequest.getDynamicRules()
+  const danglingRules = browserRules
+    .filter(r => r.id > configRules.length)
+    .map(r => r.id)
+  await browser.declarativeNetRequest.updateDynamicRules({
+   removeRuleIds: danglingRules,
   })
 }
