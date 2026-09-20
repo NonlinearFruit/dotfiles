@@ -15,7 +15,7 @@ neovim = "nightly"
 "aqua:ajeetdsouza/zoxide" = "0.9.9"
 "aqua:junegunn/fzf" = { version = "0.74.3", lazy = true, lazy_bins = ["fzf"] }
 "aqua:dbrgn/tealdeer" = { version = "1.8.1", lazy = true, lazy_bins = ["tldr"] }
-"aqua:gohugoio/hugo" = { version = "0.166.0", lazy = true, lazy_bins = ["hugo"] }
+"go:github.com/gohugoio/hugo" = { version = "0.166.0", tags = "extended", lazy = true, lazy_bins = ["hugo"] }
 "aqua:terrastruct/d2" = { version = "0.9.0", lazy = true, lazy_bins = ["d2"] }
 "aqua:sxyazi/yazi" = { version = "26.1.22", lazy = true, lazy_bins = ["yazi"] }
 "gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
