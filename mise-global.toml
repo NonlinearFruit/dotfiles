@@ -2,39 +2,39 @@
 not_found_auto_install = true
 
 [tools]
-node = "24.14.1"
-go = "1.27.1"
-rust = "1.98.1"
-dotnet = "10.0.202"
-neovim = "nightly"
-"aqua:nushell/nushell" = "0.115.1"
-
 "aqua:BurntSushi/ripgrep" = "15.2.0"
-"aqua:sharkdp/fd" = { version = "10.5.0", lazy = true, lazy_bins = ["fd"] }
-"aqua:sharkdp/bat" = { version = "0.26.1", lazy = true, lazy_bins = ["bat"] }
 "aqua:ajeetdsouza/zoxide" = "0.9.9"
-"aqua:junegunn/fzf" = { version = "0.74.3", lazy = true, lazy_bins = ["fzf"] }
-"aqua:dbrgn/tealdeer" = { version = "1.8.1", lazy = true, lazy_bins = ["tldr"] }
-"go:github.com/gohugoio/hugo" = { version = "0.166.0", tags = "extended", lazy = true, lazy_bins = ["hugo"] }
-"aqua:terrastruct/d2" = { version = "0.9.0", lazy = true, lazy_bins = ["d2"] }
-"aqua:sxyazi/yazi" = { version = "26.1.22", lazy = true, lazy_bins = ["yazi"] }
-"gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
-"cargo:procs" = { version = "0.14.11", lazy = true, lazy_bins = ["procs"] }
-"cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter"] }
-"cargo:cargo-watch" = { version = "8.5.3", lazy = true, lazy_bins = ["cargo-watch"] }
-"cargo:cargo-binstall" = { version = "1.23.0", lazy = true, lazy_bins = ["cargo-binstall"] }
-"cargo:deno" = { version = "2.7.14", lazy = true, lazy_bins = ["deno"] }
-"cargo:tokei" = { version = "14.0.0", lazy = true, lazy_bins = ["tokei"] }
-"npm:@apify/mcpc" = { version = "0.3.0", lazy = true, lazy_bins = ["mcpc"] }
-"npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
-"npm:@earendil-works/pi-coding-agent" = { version = "0.84.3", lazy = true, lazy_bins = ["pi"] }
-"go:github.com/charmbracelet/vhs" = { version = "0.12.0", lazy = true, lazy_bins = ["vhs"] }
-"cargo:https://github.com/always-further/nono" = { version = "tag:v0.76.0", lazy = true, lazy_bins = ["nono"] }
-"cargo:https://github.com/asciinema/agg" = { version = "tag:v1.9.0", lazy = true, lazy_bins = ["agg"] }
+"aqua:nushell/nushell" = "0.115.1"
+"aqua:tmux/tmux-builds" = "3.6b"
 "cargo:nu_plugin_emoji" = "0.24.0"
 "cargo:nu_plugin_query" = "0.115.1"
-"dotnet:dotnet-outdated-tool" = { version = "4.7.1", lazy = true, lazy_bins = ["dotnet-outdated"] }
+dotnet = "10.0.202"
+go = "1.27.1"
+neovim = "nightly"
+node = "24.14.1"
+rust = "1.98.1"
+
+"aqua:dbrgn/tealdeer" = { version = "1.8.1", lazy = true, lazy_bins = ["tldr"] }
 "aqua:git-lfs/git-lfs" = { version = "3.7.1", lazy = true, lazy_bins = ["git-lfs"] }
-"aqua:tmux/tmux-builds" = "3.6b"
+"aqua:junegunn/fzf" = { version = "0.74.3", lazy = true, lazy_bins = ["fzf"] }
+"aqua:sharkdp/bat" = { version = "0.26.1", lazy = true, lazy_bins = ["bat"] }
+"aqua:sharkdp/fd" = { version = "10.5.0", lazy = true, lazy_bins = ["fd"] }
+"aqua:sxyazi/yazi" = { version = "26.1.22", lazy = true, lazy_bins = ["yazi"] }
+"aqua:terrastruct/d2" = { version = "0.9.0", lazy = true, lazy_bins = ["d2"] }
+"cargo:cargo-binstall" = { version = "1.23.0", lazy = true, lazy_bins = ["cargo-binstall"] }
+"cargo:cargo-watch" = { version = "8.5.3", lazy = true, lazy_bins = ["cargo-watch"] }
+"cargo:deno" = { version = "2.7.14", lazy = true, lazy_bins = ["deno"] }
+"cargo:https://github.com/always-further/nono" = { version = "tag:v0.76.0", lazy = true, lazy_bins = ["nono"] }
+"cargo:https://github.com/asciinema/agg" = { version = "tag:v1.9.0", lazy = true, lazy_bins = ["agg"] }
+"cargo:procs" = { version = "0.14.11", lazy = true, lazy_bins = ["procs"] }
+"cargo:tokei" = { version = "14.0.0", lazy = true, lazy_bins = ["tokei"] }
+"cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter"] }
+"dotnet:dotnet-outdated-tool" = { version = "4.7.1", lazy = true, lazy_bins = ["dotnet-outdated"] }
+"gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
+"go:github.com/charmbracelet/vhs" = { version = "0.12.0", lazy = true, lazy_bins = ["vhs"] }
+"go:github.com/gohugoio/hugo" = { version = "0.166.0", tags = "extended", lazy = true, lazy_bins = ["hugo"] }
+"npm:@apify/mcpc" = { version = "0.3.0", lazy = true, lazy_bins = ["mcpc"] }
+"npm:@earendil-works/pi-coding-agent" = { version = "0.84.3", lazy = true, lazy_bins = ["pi"] }
+"npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
 "pipx:git-filter-repo" = { version = "2.47.0", lazy = true, lazy_bins = ["git-filter-repo"] }
 "pipx:ramalama" = { version = "0.24.0", lazy = true, lazy_bins = ["ramalama"] }
