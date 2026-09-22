@@ -18,7 +18,8 @@ sudo dnf install -y git
 git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./init.sh common | sh
-mise dot apply --yes
+mise dot apply --force --yes
+source bashrc.sh
 nvim
 ```
 
