@@ -1,0 +1,101 @@
+#!/usr/bin/env nu
+
+# Edit tmux windows in your editor
+# - Delete window by removing the line
+# - Reorder windows by reordering lines
+# - Rename window by editing the name
+# - Change active window by setting the active boolean
+def main [] {
+  let current = get-windows-from-tmux
+  let tempfile = save-to-tempfile $current
+  ^$env.EDITOR $tempfile
+  let updated = get-windows-from-file $tempfile
+  close-unwanted $current $updated
+  reorder $current $updated
+  set-active $current $updated
+  update-name $current $updated
+  ignore
+}
+
+def get-windows-from-tmux [] {
+  ^tmux list-windows -F "#{window_index}\t#{window_id}\t#{window_name}\t#{window_active}"
+  | lines
+  | parse "{index}\t{id}\t{name}\t{active}"
+  | update index { into int }
+  | update active { $in == "1" }
+  | sort-by index
+  | reject index
+}
+
+def save-to-tempfile [windows] {
+  let tempfile = mktemp --tmpdir tmux_window_edit.XXXXXX --suffix .json
+  $windows
+  | each { to json --raw }
+  | str join "\n"
+  | save --force $tempfile
+  $tempfile
+}
+
+def get-windows-from-file [tempfile] {
+  open --raw $tempfile
+  | lines
+  | each { from json }
+}
+
+def close-unwanted [current updated] {
+  $current
+  | where id not-in $updated.id
+  | each {|window|
+    ^tmux kill-window -t $window.id
+  }
+}
+
+def reorder [current updated] {
+  $current
+  | where id in $updated.id
+  | enumerate
+  | where {|row|
+    $updated
+    | get --optional $row.index
+    | get --optional id
+    | $in != $row.item.id
+  }
+  | each {|row|
+    $updated
+    | get $row.index
+    | {
+      source: $row.item.id
+      target: $in.id
+    }
+  }
+  | insert id { transpose k v | get v | sort | to text }
+  | uniq-by id
+  | each {|it|
+    ^tmux swap-window -s $it.source -t $it.target
+  }
+}
+
+def set-active [current updated] {
+  $updated
+  | where active
+  | where $in.id not-in ($current | where active | get id)
+  | each { ^tmux select-window -t $in.id }
+}
+
+def update-name [current updated] {
+  $updated
+  | each {|new|
+    $current
+    | where id == $new.id
+    | first
+    | {
+      id: $new.id
+      new_name: $new.name
+      old_name: $in.name
+    }
+  }
+  | where $it.new_name != $it.old_name
+  | each {
+    ^tmux rename-window -t $in.id $in.new_name
+  }
+}
