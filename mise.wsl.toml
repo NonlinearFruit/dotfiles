@@ -1,0 +1,6 @@
+[bootstrap.files."/etc/wsl.conf"]
+source = "wsl-etc.ini"
+owner = "root"
+group = "root"
+mode = "0644"
+replace = true

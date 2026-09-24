@@ -41,10 +41,6 @@ source = "wezterm/*"
 mode = "copy"
 variants = [{ profile = "wsl" }]
 
-[dotfiles."/etc/wsl.conf"]
-source = "wsl-etc.ini"
-variants = [{ profile = "wsl" }]
-
 [dotfiles."~/winhome/.wslconfig"]
 source = "wsl-windows.ini"
 variants = [{ profile = "wsl" }]
