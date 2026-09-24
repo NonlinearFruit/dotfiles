@@ -17,6 +17,10 @@
 "~/.vimrc" = "vimrc.vim"
 "~/.config/wezterm/wezterm.lua" = "wezterm.lua"
 
+[dotfiles."~/scripts/xdg-open"]
+source = "scripts/open"
+variants = [{ profile = "wsl" }]
+
 [dotfiles."~/winhome/.config/glide/*"]
 source = "glide/*"
 mode = "copy"

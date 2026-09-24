@@ -3,7 +3,11 @@
 if is termux ; then
   termux-open "$@" # requires pkg install termux-api
 elif is wsl ; then
-  explorer.exe "$(wslpath -w "$@")"
+  if [[ "$1" == *://* || "$1" == mailto:* || "$1" == tel:* || "$1" == sms:* ]]; then
+    rundll32.exe url.dll,FileProtocolHandler "$1"  # explorer.exe treats ? as a wildcard
+  else
+    explorer.exe "$(wslpath -w "$1")"
+  fi
 elif is linux ; then
   xdg-open "$@"
 fi
