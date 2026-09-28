@@ -13,6 +13,9 @@ end
 
 return {
   "folke/lazydev.nvim",
+  dependencies = {
+    "mason-org/mason-lspconfig.nvim",
+  },
   ft = "lua",
   config = configure,
 }
