@@ -1,3 +1,6 @@
+[bootstrap.hooks]
+pre-packages = "sudo dnf update -y"
+
 [dotfiles]
 "~/.bash_aliases" = "bash-aliases.sh"
 "~/.bashrc" = "bashrc.sh"

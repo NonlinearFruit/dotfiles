@@ -7,10 +7,9 @@ not_found_auto_install = true
 "aqua:nushell/nushell" = "0.115.1"
 "aqua:tmux/tmux-builds" = "3.6b"
 # nu -c "plugin add $(mise which nu_plugin_emoji)"
-"cargo:nu_plugin_emoji" = "0.24.0"
+# "cargo:nu_plugin_emoji" = "0.24.0"
 # nu -c "plugin add $(mise which nu_plugin_query)"
-"cargo:nu_plugin_query" = "0.115.1"
-dotnet = "10.0.202"
+# "cargo:nu_plugin_query" = "0.115.1"
 go = "1.27.1"
 neovim = "nightly"
 node = "24.14.1"
@@ -40,3 +39,4 @@ rust = "1.98.1"
 "npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
 "pipx:git-filter-repo" = { version = "2.47.0", lazy = true, lazy_bins = ["git-filter-repo"] }
 "pipx:ramalama" = { version = "0.24.0", lazy = true, lazy_bins = ["ramalama"] }
+dotnet = { version = "10.0.202", lazy = true, lazy_bins = ["dotnet"] }

@@ -2,12 +2,7 @@
 
 # Install Nerd Font? (https://www.nerdfonts.com/font-downloads)
 
-# Gap
-MANAGER=apt
-if command -v dnf > /dev/null; then
-  MANAGER=dnf
-fi
-sudo $MANAGER install -y jq curl
+sudo dnf install -y curl
 mkdir -p ~/scripts ~/.local/share/applications ~/.local/share/icons/hicolor/48x48/apps
 
 # Git Jump
@@ -21,3 +16,7 @@ curl https://raw.githubusercontent.com/neovim/neovim/refs/heads/master/runtime/n
 
 # Keys
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
+
+# `!` suppresses Lazy's confirmation prompt
+# `restore` installs versions from lockfile
+nvim --headless "+Lazy! restore" +qa

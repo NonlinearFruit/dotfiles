@@ -9,7 +9,7 @@
   "filesystem": {
     "allow": [
       "~/.local/share/NuGet",
-      "~/.local/share/mise/installs",
+      "~/.local/share/mise",
       "~/.nuget",
       "~/.pi/agent/"
     ],

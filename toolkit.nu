@@ -25,15 +25,13 @@ A simple repo that elegantly manages my configs and scripts using `init.sh` and 
 ## Setup on fresh OS
 
 ```sh
-sudo dnf update -y
-curl -fsSL https://mise.run/bash | sh
 sudo dnf install -y git
-git clone https://github.com/NonlinearFruit/dotfiles ~/projects/dotfiles
+curl -fsSL https://mise.run/bash | sh
+mise bootstrap --from https://github.com/NonlinearFruit/dotfiles --from-dir ~/projects/dotfiles --force-dotfiles --yes
 cd ~/projects/dotfiles
-./init.sh common | sh
-mise dot apply --force --yes
+mise trust
 source bashrc.sh
-nvim
+./init.sh common | sh
 ```
 
 ### OS Specific Setup and Mappings
