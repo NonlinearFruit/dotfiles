@@ -5,7 +5,7 @@ not_found_auto_install = true
 "aqua:BurntSushi/ripgrep" = "15.2.0"
 "aqua:ajeetdsouza/zoxide" = "0.9.9"
 "aqua:nushell/nushell" = "0.115.1"
-"aqua:tmux/tmux-builds" = "3.6b"
+"aqua:tmux/tmux-builds" = "3.7c"
 # nu -c "plugin add $(mise which nu_plugin_emoji)"
 # "cargo:nu_plugin_emoji" = "0.24.0"
 # nu -c "plugin add $(mise which nu_plugin_query)"
@@ -31,11 +31,11 @@ rust = "1.98.1"
 "cargo:tokei" = { version = "14.0.0", lazy = true, lazy_bins = ["tokei"] }
 "cargo:tree-sitter-cli" = { version = "0.26.8", lazy = true, lazy_bins = ["tree-sitter"] }
 "dotnet:dotnet-outdated-tool" = { version = "4.7.1", lazy = true, lazy_bins = ["dotnet-outdated"] }
-"gitlab:gitlab-org/cli" = { version = "1.117.0", lazy = true, lazy_bins = ["glab"] }
+"gitlab:gitlab-org/cli" = { version = "1.120.0", lazy = true, lazy_bins = ["glab"] }
 "go:github.com/charmbracelet/vhs" = { version = "0.12.0", lazy = true, lazy_bins = ["vhs"] }
 "go:github.com/gohugoio/hugo" = { version = "0.166.0", tags = "extended", lazy = true, lazy_bins = ["hugo"] }
 "npm:@apify/mcpc" = { version = "0.3.0", lazy = true, lazy_bins = ["mcpc"] }
-"npm:@earendil-works/pi-coding-agent" = { version = "0.84.3", lazy = true, lazy_bins = ["pi"] }
+"npm:@earendil-works/pi-coding-agent" = { version = "1.0.2", lazy = true, lazy_bins = ["pi"] }
 "npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
 "pipx:git-filter-repo" = { version = "2.47.0", lazy = true, lazy_bins = ["git-filter-repo"] }
 "pipx:ramalama" = { version = "0.24.0", lazy = true, lazy_bins = ["ramalama"] }

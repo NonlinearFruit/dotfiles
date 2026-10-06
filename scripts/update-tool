@@ -1,0 +1,15 @@
+#!/usr/bin/env nu
+
+# Cleans up bash history file
+def main [] {
+  ^mise outdated --bump --json
+  | complete
+  | get stdout
+  | from json
+  | transpose tool details
+  | get details
+  | where $it.bump != $it.current
+  | select name requested current bump
+  | input list --fuzzy
+  | mise upgrade --bump $in.name
+}
