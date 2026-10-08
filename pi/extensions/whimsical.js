@@ -83,6 +83,7 @@ const messages = [
   "Glimmering...",
   "Glittering...",
   "Glurping...",
+  "Gobsmacking...",
   "Gonkulating...",
   "Grooving...",
   "Grumbling...",
