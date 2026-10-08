@@ -5,15 +5,6 @@
   "tuiMode": "regular",
   "packages": [
     {
-      "source": "git:github.com/JuliusBrussee/caveman",
-      "skills": [
-        "skills/caveman"
-      ],
-      "extensions": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
       "source": "git:github.com/mattpocock/skills",
       "skills": [
         "skills/engineering/code-review",
@@ -42,26 +33,6 @@
       "source": "git:github.com/multica-ai/andrej-karpathy-skills",
       "skills": [
         "skills/karpathy-guidelines"
-      ],
-      "extensions": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
-      "source": "git:github.com/mitsuhiko/agent-stuff",
-      "extensions": [
-        "extensions/whimsical.ts"
-      ],
-      "skills": [],
-      "themes": [],
-      "prompts": []
-    },
-    {
-      "source": "git:github.com/DietrichGebert/ponytail",
-      "skills": [
-        "skills/ponytail",
-        "skills/ponytail-audit",
-        "skills/ponytail-review"
       ],
       "extensions": [],
       "themes": [],
