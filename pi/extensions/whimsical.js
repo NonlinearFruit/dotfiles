@@ -1,4 +1,4 @@
-const messages = [
+const thinkingMessages = [
   // One word
   "Absconding...",
   "Absquatulating...",
@@ -458,13 +458,36 @@ const messages = [
   "Wooing the while loops...",
 ];
 
-function pickRandom() {
-  return messages[Math.floor(Math.random() * messages.length)];
+const startupMessages = [
+  "Somewhere, a semicolon decides the fate of nations.",
+  "All abstractions leak. Bring a towel.",
+  "If a tree falls in /dev/null, does it make a sound?",
+  "Another day, another diff.",
+  "The terminal is dark and full of terrors. It's dangerous to go alone.",
+  "The bug you cannot find is the one teaching you the most.",
+  "The best code is the code you didn't have to write.",
+  "A watched build never boils.",
+  "You either die a software engineer or you live long enough to see yourself become the project manager.",
+  "The code you wrote yesterday is the legacy you fight today.",
+  "In theory, theory and practice are the same. In practice, they're not.",
+  "The only way to go fast, is to go well.",
+  "99 reported bugs in the code, 99 reported bugs. Take one down, patch it around, 100 reported bugs in the code.",
+  "All code is guilty until proven innocent by the tests.",
+  "One small prompt for a man, one giant merge conflict for the team.",
+  "Keep your friends close, and your dependencies closer.",
+];
+
+function pick(list) {
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 export default function (pi) {
+  pi.on("session_start", async (_event, ctx) => {
+    ctx.ui.notify(pick(startupMessages), "info");
+  });
+
   pi.on("turn_start", async (_event, ctx) => {
-    ctx.ui.setWorkingMessage(pickRandom());
+    ctx.ui.setWorkingMessage(pick(thinkingMessages));
   });
 
   pi.on("turn_end", async (_event, ctx) => {
