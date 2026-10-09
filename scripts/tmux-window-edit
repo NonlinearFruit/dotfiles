@@ -10,10 +10,10 @@ def main [] {
   let tempfile = save-to-tempfile $current
   ^$env.EDITOR $tempfile
   let updated = get-windows-from-file $tempfile
-  close-unwanted $current $updated
-  reorder $current $updated
+  reorder $updated
   set-active $current $updated
   update-name $current $updated
+  close-unwanted $current $updated
   ignore
 }
 
@@ -50,28 +50,11 @@ def close-unwanted [current updated] {
   }
 }
 
-def reorder [current updated] {
-  $current
-  | where id in $updated.id
-  | enumerate
-  | where {|row|
-    $updated
-    | get --optional $row.index
-    | get --optional id
-    | $in != $row.item.id
-  }
-  | each {|row|
-    $updated
-    | get $row.index
-    | {
-      source: $row.item.id
-      target: $in.id
-    }
-  }
-  | insert id { transpose k v | get v | sort | to text }
-  | uniq-by id
-  | each {|it|
-    ^tmux swap-window -s $it.source -t $it.target
+def reorder [updated] {
+  $updated.id
+  | window 2
+  | each {|pair|
+    ^tmux move-window -a -s $pair.1 -t $pair.0
   }
 }
 
