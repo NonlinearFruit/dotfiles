@@ -24,7 +24,6 @@ rust = "1.98.1"
 "aqua:terrastruct/d2" = { version = "0.9.0", lazy = true, lazy_bins = ["d2"] }
 "cargo:cargo-binstall" = { version = "1.23.0", lazy = true, lazy_bins = ["cargo-binstall"] }
 "cargo:cargo-watch" = { version = "8.5.3", lazy = true, lazy_bins = ["cargo-watch"] }
-"cargo:deno" = { version = "2.7.14", lazy = true, lazy_bins = ["deno"] }
 "cargo:https://github.com/always-further/nono" = { version = "tag:v0.76.0", lazy = true, lazy_bins = ["nono"] }
 "cargo:https://github.com/asciinema/agg" = { version = "tag:v1.9.0", lazy = true, lazy_bins = ["agg"] }
 "cargo:procs" = { version = "0.14.11", lazy = true, lazy_bins = ["procs"] }

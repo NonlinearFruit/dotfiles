@@ -10,10 +10,6 @@
   description: Required by nono
   manager: dnf
 
-- cmd: cmake
-  description: Required by deno
-  manager: dnf
-
 - cmd: cronie
   description: cron for Fedora
   manager: dnf

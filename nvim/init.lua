@@ -75,9 +75,7 @@ local function setup_filetype_detection()
           local stat = vim.uv.fs_stat(path)
           if stat and stat.type == "file" then
             local content = vim.fn.readfile(path, "", 1)[1] or ""
-            if content:match("deno") then
-              return "javascript"
-            elseif content:match("bb") then
+            if content:match("bb") then
               return "clojure"
             end
           end
