@@ -2,6 +2,19 @@ import { visibleWidth, wrapTextWithAnsi } from "@earendil-works/pi-tui";
 
 const thinkingMessages = [
   // One word
+  "Conglobating...",
+  "Yarnspinning...",
+  "Yarnstorming...",
+  "Wishfulfilling...",
+  "Winterproofing...",
+  "Vernacularizing...",
+  "Overcaffeinating...",
+  "Algorithmicizing...",
+  "Anthropomorphizing...",
+  "Chromatofocusing...",
+  "Transcendentalizing...",
+  "Contradistinguishing...",
+  "Crosscontaminating...",
   "Absconding...",
   "Absquatulating...",
   "Amalgamating...",
