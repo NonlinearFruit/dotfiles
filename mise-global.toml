@@ -34,7 +34,7 @@ rust = "1.98.1"
 "go:github.com/charmbracelet/vhs" = { version = "0.12.0", lazy = true, lazy_bins = ["vhs"] }
 "go:github.com/gohugoio/hugo" = { version = "0.166.0", tags = "extended", lazy = true, lazy_bins = ["hugo"] }
 "npm:@apify/mcpc" = { version = "0.3.0", lazy = true, lazy_bins = ["mcpc"] }
-"npm:@earendil-works/pi-coding-agent" = { version = "1.0.2", lazy = true, lazy_bins = ["pi"] }
+"npm:@earendil-works/pi-coding-agent" = { version = "1.1.0", lazy = true, lazy_bins = ["pi"] }
 "npm:@getgrit/cli" = { version = "0.1.0-alpha.1743007075", lazy = true, lazy_bins = ["grit"] }
 "pipx:git-filter-repo" = { version = "2.47.0", lazy = true, lazy_bins = ["git-filter-repo"] }
 "pipx:ramalama" = { version = "0.24.0", lazy = true, lazy_bins = ["ramalama"] }
