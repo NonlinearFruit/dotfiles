@@ -3,6 +3,7 @@
   "enableInstallTelemetry": false,
   "showHardwareCursor": true,
   "tuiMode": "regular",
+  "quietStartup": true,
   "packages": [
     {
       "source": "git:github.com/mattpocock/skills",

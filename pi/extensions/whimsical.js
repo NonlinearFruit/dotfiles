@@ -1,3 +1,5 @@
+import { visibleWidth, wrapTextWithAnsi } from "@earendil-works/pi-tui";
+
 const thinkingMessages = [
   // One word
   "Absconding...",
@@ -565,9 +567,26 @@ function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
+// Mute the "Update Available"
+process.env.PI_SKIP_VERSION_CHECK = "1";
+
+function renderBanner(message, width, theme) {
+  const rule = theme.fg("warning", "─".repeat(width));
+  const centered = wrapTextWithAnsi(message, Math.max(1, width - 8)).map((line) => {
+    const pad = " ".repeat(Math.max(0, Math.floor((width - visibleWidth(line)) / 2)));
+    return pad + theme.bold(line);
+  });
+  return ["", rule, "", ...centered, "", rule, ""];
+}
+
 export default function (pi) {
   pi.on("session_start", async (_event, ctx) => {
-    ctx.ui.notify(pick(startupMessages), "info");
+    if (ctx.mode !== "tui") return;
+    const message = pick(startupMessages);
+    ctx.ui.setHeader((_tui, theme) => ({
+      render: (width) => renderBanner(message, width, theme),
+      invalidate() {},
+    }));
   });
 
   pi.on("turn_start", async (_event, ctx) => {
