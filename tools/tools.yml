@@ -26,10 +26,6 @@
   description: http client
   manager: dnf
 
-- cmd: jq
-  description: json query and manipulation tool
-  manager: dnf
-
 - cmd: figlet
   description: ascii font
   manager: dnf
