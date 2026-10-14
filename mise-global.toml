@@ -9,7 +9,7 @@ not_found_auto_install = true
 # nu -c "plugin add $(mise which nu_plugin_emoji)"
 # "cargo:nu_plugin_emoji" = "0.24.0"
 # nu -c "plugin add $(mise which nu_plugin_query)"
-# "cargo:nu_plugin_query" = "0.115.1"
+"cargo:nu_plugin_query" = "0.116.1"
 go = "1.27.1"
 neovim = "nightly"
 node = "24.14.1"
