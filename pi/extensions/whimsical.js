@@ -500,7 +500,7 @@ const startupMessages = [
   "If we wish to count lines of code, we should not regard them as 'lines produced' but as 'lines spent'.", // Edsger Dijkstra
   "90% of the functionality delivered now is better than 100% delivered never.", // Brian W. Kernighan
   "Simplicity before generality, use before reuse.", // Kevlin Henney
-  "The art of debugging is figuring out what you really told your program to do rather than what you thought you told it to do." // Andrew Singer
+  "The art of debugging is figuring out what you really told your program to do rather than what you thought you told it to do.", // Andrew Singer
   "A human organization is just as much an information system as any computer system. It is almost certainly more complex, but the same fundamental ideas apply. Things that are fundamentally difficult, like concurrency and coupling, are difficult in the real world of people, too.", // Dave Farley
   "The best reaction to “this is confusing, where are the docs” is to rewrite the feature to make it less confusing, not write more docs.", // Jeff Atwood
   "The most important property of a program is whether it accomplishes the intention of its user.", // C.A.R Hoare
@@ -515,7 +515,7 @@ const startupMessages = [
   "If you have too many special cases, you are doing it wrong.", // Craig Zerouni
   "The problem is, in software design, often the consequences of your decisions don't become apparent for years.", // Kent Beck
   "Simplicity does not precede complexity, but follows it", // Alan Perlis
-  "One broken window, left unrepaired for any substantial length of time, instills in the inhabitants of the building a sense of abandonment—a sense that the powers that be don't care about the building. So another window gets broken. People start littering. Graffiti appears. Serious structural damage begins. In a relatively short span of time, the building becomes damaged beyond the owner's desire to fix it, and the sense of abandonment becomes reality." // Andrew Hunt
+  "One broken window, left unrepaired for any substantial length of time, instills in the inhabitants of the building a sense of abandonment—a sense that the powers that be don't care about the building. So another window gets broken. People start littering. Graffiti appears. Serious structural damage begins. In a relatively short span of time, the building becomes damaged beyond the owner's desire to fix it, and the sense of abandonment becomes reality.", // Andrew Hunt
   "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity.", // Aaron Swartz
   "The earlier you catch defects, the cheaper they are to fix.", // Dave Farley
   "Pair programmers: Keep each other on task. Brainstorm refinements to the system. Clarify ideas. Take initiative when their partner is stuck, thus lowering frustration. Hold each other accountable to the team's practices.", // Kent Beck
