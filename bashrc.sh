@@ -64,6 +64,7 @@ if ! shopt -oq posix; then
     source /etc/bash_completion
   fi
 fi
+shopt -s no_empty_cmd_completion
 
 # Editor
 if command -v nvim > /dev/null; then
