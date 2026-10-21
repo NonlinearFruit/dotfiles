@@ -7,7 +7,6 @@
 # - multiline in tmux prompt
 # - graceful quit when following
 # - scrolling
-# - send message while popup is up
 # Requires:
 # - cargo install nu_plugin_emoji
 # - nu -c 'plugin add nu_plugin_emoji'
@@ -57,16 +56,19 @@ def post-message [server user message] {
 
 def follow-messages [server user limit] {
   let last_read = get-last-read $server $user
-  mut old_messages = list-messages $server $user $limit $last_read
-  print $old_messages
   loop {
-    let messages = list-messages $server $user $limit $last_read
-    if $messages != $old_messages {
-      clear
-      print $messages
-      $old_messages = $messages
+    let result = []
+    | tui split --vertical --sizes [1fr 3] [
+      (tui log --title chat)
+      (tui textbox --id message --title message --focus)
+    ]
+    | tui run --refresh 300ms {
+      list-messages $server $user $limit $last_read | lines
     }
-    sleep 300ms
+    if $result.action != submit { break }
+    if $result.values.message != "" {
+      post-message $server $user $result.values.message
+    }
   }
 }
 
