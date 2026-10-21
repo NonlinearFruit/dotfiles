@@ -4,6 +4,7 @@
   "showHardwareCursor": true,
   "tuiMode": "regular",
   "quietStartup": true,
+  "defaultTools": ["+codemode"],
   "packages": [
     {
       "source": "git:github.com/mattpocock/skills",
