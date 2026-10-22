@@ -1,0 +1,276 @@
+#!/usr/bin/env -S nvim -l
+
+local USAGE = [[
+tsq - run tree-sitter queries over files (uses nvim's parsers)
+
+Usage: tsq [options] <query | name | file.scm> [path...]
+
+  <query>      inline query, e.g. '(function_declaration name: (identifier) @n)'
+  <name>       named query from $TSQ_DIR (default ~/.config/tsq): "cs/async-void"
+               or "async-void" with -l cs. The language is the directory name.
+               A path to any .scm file works too (then pass -l).
+  path...      files or directories (default: cwd). Respects .gitignore via rg.
+
+Options:
+  -l, --lang LANG       parser/filetype to use (required for inline queries)
+  -c, --capture NAME    only report this capture (without the @)
+  -j, --json            output JSON lines instead of vimgrep
+  -r, --rewrite TMPL    replace the captured node with TMPL; $name inserts another
+                        capture's text, $$ is a literal $ (a bare $ is an error).
+                        Prints a diff. Defaults to the query's first capture.
+                        If matched nodes nest, the innermost wins; skipped
+                        outer ones are reported on stderr.
+  -w, --write           with --rewrite, write changes to the files
+      --selftest        run built-in checks (needs only nvim's bundled lua parser)
+  -h, --help
+
+Output is file:line:col:text (vimgrep), so it works with nvim -q -.
+Exit status is 0 if anything matched, 1 if nothing did, 2 on usage errors.
+Query directives that rewrite match data (#set!, #gsub!, ...) are ignored;
+predicates (#eq?, #match?, ...) work.
+]]
+
+local function die(msg, code)
+  io.stderr:write("tsq: " .. msg .. "\n")
+  os.exit(code or 2)
+end
+
+local function parse_args(argv)
+  local opts, positional = {}, {}
+  local i = 1
+  local function value(flag)
+    i = i + 1
+    return argv[i] or die(flag .. " needs a value")
+  end
+  while i <= #argv do
+    local a = argv[i]
+    if a == "-l" or a == "--lang" then opts.lang = value(a)
+    elseif a == "-c" or a == "--capture" then opts.capture = value(a)
+    elseif a == "-r" or a == "--rewrite" then opts.rewrite = value(a)
+    elseif a == "-j" or a == "--json" then opts.json = true
+    elseif a == "-w" or a == "--write" then opts.write = true
+    elseif a == "--selftest" then opts.selftest = true
+    elseif a == "-h" or a == "--help" then io.write(USAGE) os.exit(0)
+    else table.insert(positional, a) end
+    i = i + 1
+  end
+  return opts, positional
+end
+
+local function read_file(path)
+  local f = io.open(path, "rb")
+  if not f then return nil end
+  local content = f:read("*a")
+  f:close()
+  return content
+end
+
+-- nvim-treesitter registers these filetype->parser mappings, but plugins
+-- are not loaded under `nvim -l`.
+local LANG_ALIASES = { cs = "c_sharp", sh = "bash", js = "javascript", ts = "typescript" }
+
+local function resolve_lang(name)
+  return LANG_ALIASES[name] or vim.treesitter.language.get_lang(name) or name
+end
+
+local function query_dir()
+  return vim.env.TSQ_DIR or vim.fs.joinpath(vim.env.HOME, ".config", "tsq")
+end
+
+--- Returns query text and the language implied by its place in the library (or nil).
+local function load_query(spec, lang)
+  local library = query_dir()
+  local candidates = { spec, spec .. ".scm" }
+  if lang then table.insert(candidates, vim.fs.joinpath(library, lang, spec .. ".scm")) end
+  table.insert(candidates, vim.fs.joinpath(library, spec .. ".scm"))
+
+  for _, path in ipairs(candidates) do
+    local text = vim.fn.filereadable(path) == 1 and read_file(path)
+    if text then
+      local relative = vim.fs.relpath(library, path)
+      return text, relative and relative:match("^([^/]+)/")
+    end
+  end
+
+  if spec:match("^[%w_%-%./]+$") then die("no such query: " .. spec) end
+  return spec, nil
+end
+
+local function list_files(paths)
+  if vim.fn.executable("rg") == 0 then die("rg (ripgrep) is required") end
+  local cmd = vim.list_extend({ "rg", "--files", "--" }, paths)
+  local result = vim.system(cmd, { text = true }):wait()
+  if result.code > 1 then die("rg failed: " .. (result.stderr or "")) end
+  return vim.split(vim.trim(result.stdout), "\n", { trimempty = true })
+end
+
+local function file_lang(path)
+  local ft = vim.filetype.match({ filename = path })
+  return ft and resolve_lang(ft)
+end
+
+--- Collect { name, node } for each capture in each match.
+local function run_query(query, root, source, only_capture)
+  local results = {}
+  for _, match in query:iter_matches(root, source, 0, -1) do
+    local by_name = {}
+    for id, nodes in pairs(match) do
+      by_name[query.captures[id]] = nodes[#nodes]
+    end
+    for id, nodes in pairs(match) do
+      local name = query.captures[id]
+      if not only_capture or only_capture == name then
+        table.insert(results, { name = name, node = nodes[#nodes], match = by_name })
+      end
+    end
+  end
+  table.sort(results, function(a, b)
+    local ar, ac = a.node:start()
+    local br, bc = b.node:start()
+    if ar ~= br then return ar < br end
+    if ac ~= bc then return ac < bc end
+    return a.name < b.name
+  end)
+  return results
+end
+
+local function report(path, source, hit, json)
+  local row, col = hit.node:start()
+  local end_row, end_col = hit.node:end_()
+  local text = vim.treesitter.get_node_text(hit.node, source)
+  if json then
+    print(vim.json.encode({
+      file = path, capture = hit.name, text = text,
+      start = { row + 1, col + 1 }, ["end"] = { end_row + 1, end_col + 1 },
+    }))
+  else
+    print(("%s:%d:%d:%s"):format(path, row + 1, col + 1, vim.split(text, "\r?\n")[1]))
+  end
+end
+
+local function expand_template(template, hit, source)
+  local expanded = template:gsub("%$(%$?)([%w_]*)", function(escape, name)
+    if escape == "$" then return "$" .. name end
+    local node = hit.match[name]
+    if not node then die("rewrite refers to unknown capture $" .. name) end
+    return vim.treesitter.get_node_text(node, source)
+  end)
+  return expanded
+end
+
+--- Apply replacements, last first so offsets stay valid. When nodes nest the
+--- innermost wins; returns the result and the list of skipped (outer) hits.
+local function apply_rewrites(source, hits, template)
+  local edits = {}
+  for _, hit in ipairs(hits) do
+    local _, _, start_byte = hit.node:start()
+    local _, _, end_byte = hit.node:end_()
+    table.insert(edits, { start_byte, end_byte, expand_template(template, hit, source), hit })
+  end
+  table.sort(edits, function(a, b)
+    if a[1] ~= b[1] then return a[1] > b[1] end
+    return a[2] < b[2]
+  end)
+
+  local result, floor, skipped = source, math.huge, {}
+  for _, edit in ipairs(edits) do
+    if edit[2] <= floor then
+      result = result:sub(1, edit[1]) .. edit[3] .. result:sub(edit[2] + 1)
+      floor = edit[1]
+    else
+      table.insert(skipped, edit[4])
+    end
+  end
+  return result, skipped
+end
+
+--- Parse source and return the query's hits (empty if the source can't be parsed).
+local function search(source, lang, query, only_capture)
+  local parsed, parser = pcall(vim.treesitter.get_string_parser, source, lang)
+  if not parsed then return {} end
+  return run_query(query, parser:parse()[1]:root(), source, only_capture)
+end
+
+local function rewrite_file(path, source, hits, opts)
+  local rewritten, skipped = apply_rewrites(source, hits, opts.rewrite)
+  for _, hit in ipairs(skipped) do
+    local row, col = hit.node:start()
+    io.stderr:write(("tsq: %s:%d:%d: skipped, contains another match\n"):format(path, row + 1, col + 1))
+  end
+  if opts.write then
+    local f = assert(io.open(path, "wb"))
+    f:write(rewritten)
+    f:close()
+    io.stderr:write(("%s: %d match(es) rewritten\n"):format(path, #hits - #skipped))
+  else
+    io.write(("--- %s\n+++ %s\n"):format(path, path))
+    io.write(vim.text.diff(source, rewritten, { result_type = "unified" }))
+  end
+end
+
+local function selftest()
+  local lua_query = function(text) return vim.treesitter.query.parse("lua", text) end
+
+  local functions = lua_query("(function_declaration name: (identifier) @n)")
+  local source = "local function foo() end\r\nlocal function bar() end\n"
+  local hits = search(source, "lua", functions)
+  assert(#hits == 2, "expected 2 function hits")
+  assert(vim.treesitter.get_node_text(hits[2].node, source) == "bar", "hits sorted by position")
+
+  local prints = lua_query('(function_call name: (identifier) @fn (#eq? @fn "print")) @c')
+  local call_source = "print(1)\nother(2)\n"
+  local call_hits = search(call_source, "lua", prints, "c")
+  assert(#call_hits == 1, "predicate filters to print calls")
+  assert(apply_rewrites(call_source, call_hits, "log($fn)$$") == "log(print)$\nother(2)\n", "rewrite template")
+
+  local nested = lua_query("(function_call) @c")
+  local nested_source = "f(g(1))"
+  local rewritten, skipped = apply_rewrites(nested_source, search(nested_source, "lua", nested), "X")
+  assert(rewritten == "f(X)" and #skipped == 1, "innermost nested match wins")
+
+  assert(#search("local = = =", "lua", functions) == 0, "broken source has no hits")
+  print("tsq selftest ok")
+end
+
+local function main()
+  local opts, positional = parse_args(arg)
+  if opts.selftest then return selftest() end
+
+  local spec = table.remove(positional, 1)
+  if not spec then io.write(USAGE) os.exit(2) end
+  if opts.write and not opts.rewrite then die("--write needs --rewrite") end
+
+  local query_text, implied_lang = load_query(spec, opts.lang)
+  local lang_name = opts.lang or implied_lang
+  if not lang_name then die("can't tell the language: pass -l LANG") end
+  local lang = resolve_lang(lang_name)
+
+  local has_parser, parser_error = vim.treesitter.language.add(lang)
+  if not has_parser then
+    die(("no parser for '%s' (install it via nvim-treesitter): %s"):format(lang, parser_error or ""))
+  end
+  local ok, query = pcall(vim.treesitter.query.parse, lang, query_text)
+  if not ok then die(tostring(query)) end
+
+  local only_capture = opts.capture
+  if opts.rewrite and not only_capture then
+    only_capture = query.captures[1] or die("--rewrite needs a query with a capture")
+  end
+
+  local found = false
+  for _, path in ipairs(list_files(positional)) do
+    local source = file_lang(path) == lang and read_file(path)
+    local hits = source and search(source, lang, query, only_capture) or {}
+    if #hits > 0 then
+      found = true
+      if opts.rewrite then
+        rewrite_file(path, source, hits, opts)
+      else
+        for _, hit in ipairs(hits) do report(path, source, hit, opts.json) end
+      end
+    end
+  end
+  os.exit(found and 0 or 1)
+end
+
+main()

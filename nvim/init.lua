@@ -77,6 +77,8 @@ local function setup_filetype_detection()
             local content = vim.fn.readfile(path, "", 1)[1] or ""
             if content:match("bb") then
               return "clojure"
+            elseif content:match("nvim") then
+              return "lua"
             end
           end
         end,
