@@ -1,27 +1,89 @@
-#!/usr/bin/env -S nu --stdin
+#!/usr/bin/env -S nvim -l
 
-# ned: [n]vim s[ed]
-# A sed-ish way to use nvim
-@example "Edit stream" {echo "hello world" | ned "s/hello/hi"} --result "hi world"
-@example "Edit file and output result without modifying it" {echo "hello world" > test.txt; ned "s/hello/hi" -f test.txt} --result "hi world"
-@example "Edit file inplace with no output" {echo "hello world" > test.txt; ned -i "s/hello/hi" -f test.txt; cat test.txt} --result "hi world"
-def --wrapped main [
-  ...ex_cmds               # Params for nvim
-  --file (-f):string = "-" # Read from file instead of stdin
-  --in-place (-i)          # Modify file in place
-] {
-  if $in_place {
-    ^nvim ...(format $ex_cmds) '+x' $file -l /dev/null
-    | complete
-    | ignore
-  } else {
-    ^nvim ...(format $ex_cmds) '+%print' $file -l /dev/null
-  }
-}
+local USAGE = [[
+ned - [n]vim s[ed]; a sed-ish way to use nvim
 
-# Prefixing with a plus indicates that nvim should execute it as a cmd after
-# config and first file.
-def format [ex_cmds] {
-  $ex_cmds
-  | each { '+' + $in }
-}
+Usage: ned [options] <ex-cmd>...
+
+  ex-cmd       Ex commands run in order, e.g. 's/hello/hi' or '%g/^#/d'
+
+Options:
+  -f, --file FILE   read from FILE instead of stdin
+  -i, --in-place    write the result back to FILE instead of printing it
+  -h, --help
+
+Examples:
+  echo "hello world" | ned 's/hello/hi'
+  ned 's/hello/hi' -f test.txt
+  ned -i 's/hello/hi' -f test.txt
+]]
+
+local function die(msg)
+  io.stderr:write("ned: " .. msg .. "\n")
+  os.exit(1)
+end
+
+local function parse_args(argv)
+  local opts, ex_cmds = { file = "-" }, {}
+  local i = 1
+  local function value(flag)
+    i = i + 1
+    return argv[i] or die(flag .. " needs a value")
+  end
+  while i <= #argv do
+    local a = argv[i]
+    if a == "-f" or a == "--file" then opts.file = value(a)
+    elseif a == "-i" or a == "--in-place" then opts.in_place = true
+    elseif a == "-h" or a == "--help" then io.write(USAGE) os.exit(0)
+    else table.insert(ex_cmds, a) end
+    i = i + 1
+  end
+  return opts, ex_cmds
+end
+
+local function load_stdin()
+  local lines = vim.split(io.read("*a"), "\n", { plain = true })
+  if lines[#lines] == "" then table.remove(lines) end
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end
+
+local function load_buffer(file)
+  if file == "-" then return load_stdin() end
+  if vim.fn.filereadable(file) == 0 then die("no such file: " .. file) end
+  vim.cmd({ cmd = "edit", args = { file }, mods = { silent = true } })
+end
+
+--- Like `nvim +cmd`: a failing command is reported but doesn't stop the rest.
+--- Output from commands like :g/x/p goes to stdout.
+local function run_ex_cmds(ex_cmds)
+  for _, cmd in ipairs(ex_cmds) do
+    local ok, result = pcall(vim.api.nvim_exec2, cmd, { output = true })
+    if ok then
+      if result.output ~= "" then io.write(vim.trim(result.output), "\n") end
+    else
+      io.stderr:write(tostring(result):match("Vim%(%w+%):(.*)") or tostring(result), "\n")
+    end
+  end
+end
+
+local function print_buffer()
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  if #lines > 0 then io.write(table.concat(lines, "\n"), "\n") end
+end
+
+local function main()
+  local opts, ex_cmds = parse_args(arg)
+  if opts.in_place and opts.file == "-" then die("--in-place needs --file") end
+
+  vim.o.swapfile = false
+  load_buffer(opts.file)
+  run_ex_cmds(ex_cmds)
+
+  if opts.in_place then
+    vim.cmd({ cmd = "update", mods = { silent = true } })
+  else
+    print_buffer()
+  end
+end
+
+main()
