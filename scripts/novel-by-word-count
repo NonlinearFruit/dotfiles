@@ -1,0 +1,82 @@
+#!/usr/bin/env nu
+
+const BOOKS = [
+  [title                                         author                      words   source];
+  ["A Christmas Carol"                           "Charles Dickens"             28540 "https://www.gutenberg.org/cache/epub/46/pg46.txt"]
+  ["A Modest Proposal"                           "Jonathan Swift"               3417 "https://www.gutenberg.org/cache/epub/1080/pg1080.txt"]
+  ["A Song of Ice and Fire (5 books)"            "George R. R. Martin"       1736054 "https://writersdailypractice.com/writers-routines/george-rr-martin/a-song-of-ice-and-fire-word-count/"]
+  ["A Tale of Two Cities"                        "Charles Dickens"            135859 "https://www.gutenberg.org/cache/epub/98/pg98.txt"]
+  ["Adventures of Huckleberry Finn"              "Mark Twain"                 111070 "https://www.gutenberg.org/cache/epub/76/pg76.txt"]
+  ["Alice's Adventures in Wonderland"            "Lewis Carroll"               26464 "https://www.gutenberg.org/cache/epub/11/pg11.txt"]
+  ["Anna Karenina"                               "Leo Tolstoy"                349299 "https://www.gutenberg.org/cache/epub/1399/pg1399.txt"]
+  ["Bleak House"                                 "Charles Dickens"            353456 "https://www.gutenberg.org/cache/epub/1023/pg1023.txt"]
+  ["Clarissa"                                    "Samuel Richardson"          955484 "https://www.gutenberg.org/ebooks/search/?query=clarissa+harlowe"]
+  ["Crime and Punishment"                        "Fyodor Dostoevsky"          203589 "https://www.gutenberg.org/cache/epub/2554/pg2554.txt"]
+  ["David Copperfield"                           "Charles Dickens"            354758 "https://www.gutenberg.org/cache/epub/766/pg766.txt"]
+  ["Don Quixote"                                 "Miguel de Cervantes"        427190 "https://www.gutenberg.org/cache/epub/996/pg996.txt"]
+  ["Dracula"                                     "Bram Stoker"                160392 "https://www.gutenberg.org/cache/epub/345/pg345.txt"]
+  ["Dune"                                        "Frank Herbert"              185000 "https://writersdailypractice.com/writers-routines/frank-herbert/dune-word-count/"]
+  ["Essays of Montaigne"                         "Michel de Montaigne"        524365 "https://www.gutenberg.org/cache/epub/3600/pg3600.txt"]
+  ["Fahrenheit 451"                              "Ray Bradbury"                46118 "https://writersdailypractice.com/writers-routines/ray-bradbury/fahrenheit-451-word-count/"]
+  ["Frankenstein"                                "Mary Shelley"                74975 "https://www.gutenberg.org/cache/epub/84/pg84.txt"]
+  ["Great Expectations"                          "Charles Dickens"            184471 "https://www.gutenberg.org/cache/epub/1400/pg1400.txt"]
+  ["Grimms' Fairy Tales"                         "Jacob and Wilhelm Grimm"    101099 "https://www.gutenberg.org/cache/epub/2591/pg2591.txt"]
+  ["Gulliver's Travels"                          "Jonathan Swift"             105023 "https://www.gutenberg.org/cache/epub/829/pg829.txt"]
+  ["Harry Potter (all 7)"                        "J. K. Rowling"             1084170 "https://writersdailypractice.com/writers-routines/jk-rowling/word-count/"]
+  ["Heart of Darkness"                           "Joseph Conrad"               37911 "https://www.gutenberg.org/cache/epub/219/pg219.txt"]
+  ["In Search of Lost Time"                      "Marcel Proust"             1267069 "https://writersdailypractice.com/writers-routines/marcel-proust/word-count/"]
+  ["It"                                          "Stephen King"               445134 "https://writersdailypractice.com/writers-routines/stephen-king/it-word-count/"]
+  ["Jane Eyre"                                   "Charlotte Bronte"           185371 "https://www.gutenberg.org/cache/epub/1260/pg1260.txt"]
+  ["Les Misérables"                              "Victor Hugo"                564312 "https://www.gutenberg.org/cache/epub/135/pg135.txt"]
+  ["Little Women"                                "Louisa May Alcott"          186088 "https://www.gutenberg.org/cache/epub/514/pg514.txt"]
+  ["Middlemarch"                                 "George Eliot"               316325 "https://www.gutenberg.org/cache/epub/145/pg145.txt"]
+  ["Moby-Dick"                                   "Herman Melville"            212409 "https://www.gutenberg.org/cache/epub/2701/pg2701.txt"]
+  ["Of Mice and Men"                             "John Steinbeck"              30000 "https://en.wikipedia.org/wiki/Of_Mice_and_Men"]
+  ["Paradise Lost"                               "John Milton"                 80275 "https://www.gutenberg.org/cache/epub/26/pg26.txt"]
+  ["Pride and Prejudice"                         "Jane Austen"                127161 "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"]
+  ["Robinson Crusoe"                             "Daniel Defoe"               120898 "https://www.gutenberg.org/cache/epub/521/pg521.txt"]
+  ["The Adventures of Sherlock Holmes"           "Arthur Conan Doyle"         104379 "https://www.gutenberg.org/cache/epub/1661/pg1661.txt"]
+  ["The Adventures of Tom Sawyer"                "Mark Twain"                  70784 "https://www.gutenberg.org/cache/epub/74/pg74.txt"]
+  ["The Bible (KJV)"                             "various authors"            790393 "https://www.gutenberg.org/cache/epub/10/pg10.txt"]
+  ["The Brothers Karamazov"                      "Fyodor Dostoevsky"          350088 "https://www.gutenberg.org/cache/epub/28054/pg28054.txt"]
+  ["The Complete Works of William Shakespeare"   "William Shakespeare"        962814 "https://www.gutenberg.org/cache/epub/100/pg100.txt"]
+  ["The Count of Monte Cristo"                   "Alexandre Dumas"            460218 "https://www.gutenberg.org/cache/epub/1184/pg1184.txt"]
+  ["The Great Gatsby"                            "F. Scott Fitzgerald"         48089 "https://www.gutenberg.org/cache/epub/64317/pg64317.txt"]
+  ["The History of the Decline and Fall of the Roman Empire" "Edward Gibbon" 1550687 "https://www.gutenberg.org/cache/epub/25717/pg25717.txt"]
+  ["The Iliad"                                   "Homer"                      188413 "https://www.gutenberg.org/cache/epub/6130/pg6130.txt"]
+  ["The Lord of the Rings"                       "J. R. R. Tolkien"           467500 "https://writersdailypractice.com/writers-routines/jrr-tolkien/lord-of-the-rings-word-count/"]
+  ["The Metamorphosis"                           "Franz Kafka"                 21934 "https://www.gutenberg.org/cache/epub/5200/pg5200.txt"]
+  ["The Odyssey"                                 "Homer"                      128925 "https://www.gutenberg.org/cache/epub/1727/pg1727.txt"]
+  ["The Picture of Dorian Gray"                  "Oscar Wilde"                 78962 "https://www.gutenberg.org/cache/epub/174/pg174.txt"]
+  ["The Scarlet Letter"                          "Nathaniel Hawthorne"         83020 "https://www.gutenberg.org/cache/epub/33/pg33.txt"]
+  ["The Strange Case of Dr. Jekyll and Mr. Hyde" "Robert Louis Stevenson"      25626 "https://www.gutenberg.org/cache/epub/43/pg43.txt"]
+  ["The Three Musketeers"                        "Alexandre Dumas"            229386 "https://www.gutenberg.org/cache/epub/1257/pg1257.txt"]
+  ["The Time Machine"                            "H. G. Wells"                 32446 "https://www.gutenberg.org/cache/epub/35/pg35.txt"]
+  ["The War of the Worlds"                       "H. G. Wells"                 60022 "https://www.gutenberg.org/cache/epub/36/pg36.txt"]
+  ["The Yellow Wallpaper"                        "Charlotte Perkins Gilman"     6085 "https://www.gutenberg.org/cache/epub/1952/pg1952.txt"]
+  ["To Kill a Mockingbird"                       "Harper Lee"                 100000 "https://writersdailypractice.com/writers-routines/harper-lee/to-kill-a-mockingbird-word-count/"]
+  ["Treasure Island"                             "Robert Louis Stevenson"      68227 "https://www.gutenberg.org/cache/epub/120/pg120.txt"]
+  ["Ulysses"                                     "James Joyce"                264130 "https://www.gutenberg.org/cache/epub/4300/pg4300.txt"]
+  ["Walden"                                      "Henry David Thoreau"        115652 "https://www.gutenberg.org/cache/epub/205/pg205.txt"]
+  ["War and Peace"                               "Leo Tolstoy"                562645 "https://www.gutenberg.org/cache/epub/2600/pg2600.txt"]
+  ["Wuthering Heights"                           "Emily Bronte"               115884 "https://www.gutenberg.org/cache/epub/768/pg768.txt"]
+]
+
+# List the classic books whose word count is closest to your number
+def main [
+  number: int
+] {
+  $BOOKS
+  | sort-by {|book| $book.words - $number | math abs }
+  | first 3
+  | each {|book| $"($book.title) by ($book.author) \((abbreviate $book.words))" }
+  | to text
+}
+
+def abbreviate [words] {
+  if $words >= 1_000_000 {
+    $"~($words / 1_000_000 | into string --decimals 2)M"
+  } else {
+    $"~($words / 1_000 | math round)k"
+  }
+}
