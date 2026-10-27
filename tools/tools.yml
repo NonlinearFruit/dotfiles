@@ -62,7 +62,7 @@
   manager: dnf
 
 - cmd: clang-devel
-  description: A thing that rust (specifically tree-sitter) wants to have
+  description: A thing that rust (specifically tree-sitter and nono) wants to have
   manager: dnf
 
 - cmd: openssl-devel
