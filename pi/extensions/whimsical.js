@@ -574,6 +574,14 @@ const startupMessages = [
   "You either die a software engineer or you live long enough to see yourself become the project manager.", // Reddit
   "You haven't mastered a tool until you understand when it should not be used.", // Kelsey Hightower
 
+  // Extreme Programming Explained by Kent Beck
+  "Everything in software changes. The requirements change. The design changes. The business changes. The technology changes. The problem isn't change, because change is going to happen; the problem, rather, it's our inability to cope with change.",
+  "If you have trouble succeeding, fail.",
+  "Sacrificing quality is not effective as a means of control. Quality is not a control variable. Projects don't go faster by accepting lower quality. They don't go slower by demanding higher quality. Pushing quality higher often results in faster delivery; while lowering quality standards often results in later, less predictable delivery.",
+  "If I don't have to compute the right answers, I can make a system go as fast as you want.",
+  "Responsibility cannot be assigned; it can only be accepted. If someone tries to give you responsibility, only you can decide if you are responsible or if you aren't.",
+  "“In software development, “perfect” is a verb, not an adjective. There is no perfect process. There is no perfect design. There are no perfect stories. You can, however, perfect your process, your design, and your stories.",
+
   // Agile Manifesto
   "Individuals and interactions over processes and tools",
   "Working software over comprehensive documentation",
