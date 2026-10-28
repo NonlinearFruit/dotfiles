@@ -45,6 +45,7 @@ restore_color='\[\033[0m\]'
 light_cyan='\[\033[01;36m\]'
 light_gray='\[\033[00;37m\]'
 dark_gray='\[\033[01;30m\]'
+red='\[\033[00;31m\]'
 machine_context='\u@\h'
 machine="${dark_gray}$machine_context${restore_color}"
 location_context='\w'
@@ -54,7 +55,8 @@ if command -v git-prompt > /dev/null; then
 fi
 extra="${light_cyan}$extra_context${restore_color}"
 prompt=' $ '
-PS1="\n$machine:$location $extra\n$prompt"
+last_command_exit="\$(e=\$?; ((e)) && echo \":${red}\$e${restore_color}\")"
+PS1="\n$machine:$location$last_command_exit $extra\n$prompt"
 
 # Autocomplete
 if ! shopt -oq posix; then
