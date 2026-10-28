@@ -28,6 +28,10 @@ def query-lsb-api [query] {
   | $"https://read.lsbible.org/_next/data/($build_id)/index.json?($in)"
   | http get $in
   | get pageProps
+  | get __N_REDIRECT
+  | $"https://read.lsbible.org/_next/data/($build_id)($in).json"
+  | http get $in
+  | get pageProps
 }
 
 def is-standard-passage [] {
@@ -41,10 +45,17 @@ def format-passage [] {
   | get passages
   | get passageHtml
   | first
-  | query web --query '.prose, .block-quote, .poetry'
+  | query web --query '.ln' --as-html
+  | each {
+    str replace --all --regex '<sup[^>]*>.*?</sup>' ''
+    | query web --query '.ln'
+    | flatten
+    | str join ' '
+  }
   | flatten
   | where $it != '*'
-  | str join
+  | str join ' '
+  | str replace --all --regex ' +' ' '
 }
 
 def format-search-results [] {
