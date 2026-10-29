@@ -7,7 +7,7 @@
 
 <img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/NonlinearFruit/dotfiles/ci.yml">
 
-A simple repo that elegantly manages my configs and scripts using `init.sh` and `mise`
+A simple repo that elegantly manages my configs and scripts using `mise`
 
 ## Setup on fresh OS
 
@@ -18,14 +18,14 @@ mise bootstrap --from https://github.com/NonlinearFruit/dotfiles --from-dir ~/pr
 cd ~/projects/dotfiles
 mise trust
 source bashrc.sh
-./init.sh common | sh
+mise run setup common | sh
 ```
 
 ### OS Specific Setup and Mappings
 
 For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh`, then you can:
 ```sh
-./init.sh common termux | sh
+mise run setup common | sh
 mise dot apply --yes
 mise --env termux dot apply --yes
 ```
@@ -48,6 +48,7 @@ The actual dotfiles for various tools
 | nono |
 | nvim |
 | pi |
+| renovate |
 | termux |
 | tmux |
 | tools |
@@ -86,6 +87,7 @@ Helpful automation for various tasks
 | mob |  |
 | mp3 |  |
 | ned | [demo](.tapes/ned.gif) |
+| novel-by-word-count |  |
 | number-gossip |  |
 | nvim-list-servers |  |
 | nvim-plugins |  |
@@ -105,6 +107,8 @@ Helpful automation for various tasks
 | to-me |  |
 | to-vimgrep |  |
 | toggle-pair |  |
+| tsq |  |
+| update-tool |  |
 | vdocs |  |
 | who-is-smallest-of-them-all |  |
 | whos-where |  |

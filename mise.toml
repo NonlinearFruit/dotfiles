@@ -1,6 +1,11 @@
 [bootstrap.hooks]
 pre-packages = "sudo dnf update -y"
 
+[tasks.setup]
+description = "Print setups/<name>.sh for piping to sh"
+usage = 'arg "<name>" help="Setup name from setups/"'
+run = 'cat "setups/${usage_name?}.sh"'
+
 [dotfiles]
 "~/.bash_aliases" = "bash-aliases.sh"
 "~/.bashrc" = "bashrc.sh"
@@ -10,7 +15,6 @@ pre-packages = "sudo dnf update -y"
 "~/.config/glide/redirects.ts" = "glide/redirects.ts"
 "~/.config/glide/gnarly-*" = "glide/gnarly-*"
 "~/.config/glide/vanilla-*" = "glide/vanilla-*"
-"~/projects/privatefiles/init.sh" = "init.sh"
 "~/.config/mise/config.toml" = "mise-global.toml"
 "~/.config/nono/profiles/*" = "nono/*"
 "~/.config/nvim/*" = "nvim/*"

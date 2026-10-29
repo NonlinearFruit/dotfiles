@@ -20,7 +20,7 @@ $'
 
 <img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/NonlinearFruit/dotfiles/ci.yml">
 
-A simple repo that elegantly manages my configs and scripts using `init.sh` and `mise`
+A simple repo that elegantly manages my configs and scripts using `mise`
 
 ## Setup on fresh OS
 
@@ -31,14 +31,14 @@ mise bootstrap --from https://github.com/NonlinearFruit/dotfiles --from-dir ~/pr
 cd ~/projects/dotfiles
 mise trust
 source bashrc.sh
-./init.sh common | sh
+mise run setup common | sh
 ```
 
 ### OS Specific Setup and Mappings
 
 For configuration specific to a particular OS, create setup and mappings for it. For instance, if you have a `setups/termux.sh`, then you can:
 ```sh
-./init.sh common termux | sh
+mise run setup common | sh
 mise dot apply --yes
 mise --env termux dot apply --yes
 ```
@@ -85,7 +85,7 @@ Automation for initializing a fresh OS
 def get-configs [] {
   let not_configs = [
     README, toolkit
-    scripts, init,
+    scripts,
     setups
   ]
   ls
