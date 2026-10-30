@@ -17,8 +17,11 @@
       "/etc/gitconfig",
       "~/.cargo/bin",
       "~/.config/mise/config.toml",
+      "~/.config/nvim",
       "~/.dotnet",
       "~/.gitconfig",
+      "~/.local/share/nvim",
+      "~/projects/dotfiles/nvim/",
       "~/projects/dotfiles/pi/"
     ]
   },
@@ -30,6 +33,10 @@
       "NONO_PROFILE",
       "PATH",
       "TERM"
-    ]
+    ],
+    "set_vars": {
+      "XDG_CACHE_HOME": "/tmp/nono-xdg/cache",
+      "XDG_STATE_HOME": "/tmp/nono-xdg/state"
+    }
   }
 }
