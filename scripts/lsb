@@ -40,22 +40,55 @@ def is-standard-passage [] {
 
 def format-passage [] {
   let stdin = $in
-  plugin use query
-  $stdin
-  | get passages
-  | get passageHtml
-  | first
-  | query web --query '.ln' --as-html
-  | each {
-    str replace --all --regex '<sup[^>]*>.*?</sup>' ''
-    | query web --query '.ln'
-    | flatten
-    | str join ' '
+  let html = ($stdin | get passages | get passageHtml | first)
+  let idx = ($html | str index-of "<section")
+  let html = if $idx != null {
+    $html | str substring (0..($idx - 1))
+  } else {
+    $html
   }
-  | flatten
-  | where $it != '*'
-  | str join ' '
-  | str replace --all --regex ' +' ' '
+  let nl = (char nl)
+  # Strip the chapter heading, footnote/xref markers, and verse/chapter numbers
+  let html = ($html
+    | str replace --all --regex '<h3[^>]*>.*?</h3>' ''
+    | str replace --all --regex '<sup[^>]*class="[^"]*(note|fn|xref)[^"]*"[^>]*>.*?</sup>' ''
+    | str replace --all --regex '<sup class="vn">\d+</sup>' ''
+    | str replace --all --regex '<b class="chapnum">\d+</b>' ''
+  )
+  # Prose passages wrap verses in <div class="vpara"> paragraph blocks, while
+  # poetry wraps each line in <span class="ln ln-poem">. A passage can mix both
+  # (e.g. Proverbs 1:1 is prose, 1:2-4 is poetry), so always break before poetry
+  # lines and additionally insert paragraph breaks before prose blocks.
+  let has_vpara = ($html | str contains 'class="vpara"')
+  let separated = if $has_vpara {
+    # Paragraph break before each vpara block, plus a line break before each
+    # poetry line so mixed passages stay readable.
+    $html
+    | str replace --all --regex '<div class="vpara' ($nl + $nl + '<div class="vpara')
+    | str replace --all --regex '<span class="ln ln-poem' ($nl + '<span class="ln ln-poem')
+  } else {
+    # Break before each verse, and before each poetry line within a verse
+    $html
+    | str replace --all --regex '<span class="v[" ]' ($nl + '<span class="v')
+    | str replace --all --regex '<span class="ln ln-poem' ($nl + '<span class="ln ln-poem')
+  }
+  $separated
+  # Remove all remaining HTML tags
+  | str replace --all --regex '<[^>]+>' ''
+  # Clean up horizontal whitespace but preserve newlines
+  | str replace --all --regex '[ \t]+' ' '
+  # Trim each line
+  | split row (char nl)
+  | each { |line| $line | str trim }
+  | str join (char nl)
+  # Add space after punctuation when it abuts the next word (poetry lines are
+  # concatenated without separators once tags are stripped)
+  | str replace --all --regex '([,;:])([A-Za-z])' '$1 $2'
+  # Collapse 3+ consecutive newlines down to exactly 2 (paragraph break)
+  | str replace --all --regex '\n{3,}' ($nl + $nl)
+  | str replace --all "“" '"'
+  | str replace --all "”" '"'
+  | str trim
 }
 
 def format-search-results [] {
