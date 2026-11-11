@@ -1,7 +1,3 @@
--- Requires: (install with `./init.sh tools`)
--- cargo install ripgrep
--- cargo install fd-find
-
 local function configure()
   local telescope = require("telescope")
   telescope.load_extension("fzf")
