@@ -43,8 +43,8 @@ source = "vimrc.vim"
 mode = "copy"
 variants = [{ profile = "wsl" }]
 
-[dotfiles."~/winhome/.config/wezterm/*"]
-source = "wezterm/*"
+[dotfiles."~/winhome/.config/wezterm/wezterm.lua"]
+source = "wezterm.lua"
 mode = "copy"
 variants = [{ profile = "wsl" }]
 
