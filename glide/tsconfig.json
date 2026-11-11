@@ -2,6 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "types": ["./glide.d.ts"],
-    "lib": [ "es2015" ],
-  },
+    "lib": [ "es2015" ]
+  }
 }
